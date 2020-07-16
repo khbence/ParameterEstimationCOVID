@@ -67,11 +67,11 @@
     "stateDistibution": [
         {
             "value": "S",
-            "chance": 0.95999999999999996447
+            "chance": 0.99999900000000252476
         },
         {
             "value": "E",
-            "chance": 0.04000000000000000083
+            "chance": 0.00000099999999747524
         }
     ],
     "agentTypeDistribution": [
