@@ -40,7 +40,7 @@ class ParameterEstimation:
 
     def __agentModel(self, params) -> list:
         # self.__modifyConfigRandom(params[0])
-        sigmoidStr = self.__sigmoidParameters(params[0], params[1], 0, 5)
+        sigmoidStr = self.__sigmoidParameters(0.14929, 0.00228, params[0], params[1])
         files = self.__filePaths()
         agentOutput = os.popen('./covid -n {} -N {} -w {}{}{}'.format(self.n, self.N, self.length, sigmoidStr, files)).read()
         outDataFrame = pandas.read_csv(StringIO(agentOutput), sep='\t', index_col=False)
@@ -61,14 +61,14 @@ def main():
     p = ParameterEstimation('inputs/deterministic_41_148.txt', 1000000, 1, 21, False)
     params = OrderedDict()
     # params["E"] = ["real", (1e-7, 0.1)]
-    params["m"] = ["real", (0.001, 0.3)]
-    params["v"] = ["real", (0.0001, 0.003)]
-    # params["H"] = ["real", (-1, 1)]
-    # params["s"] = ["real", (1, 10)]
+    # params["m"] = ["real", (0.001, 0.3)]
+    # params["v"] = ["real", (0.0001, 0.003)]
+    params["H"] = ["real", (-0.5, 0.5)]
+    params["s"] = ["real", (2, 7)]
 
     nm = NelderMead(p.objFunction, params)
     #nm.initialize([(1e-6, 0.125, 0.001, 0, 5), (1e-5, 0.125, 0.001, 0, 5), (1e-6, 0.13, 0.001, 0, 5), (1e-6, 0.125, 0.002, 0, 5), (1e-6, 0.125, 0.001, 0.1, 5), (1e-6, 0.125, 0.001, 0, 6)])
-    nm.initialize([(0.14457, 0.00228), (0.13, 0.001), (0.125, 0.0005)])
+    nm.initialize([(0, 5), (-0.5, 5), (0.5, 7)])
     nm.minimize()
 
 if __name__ == "__main__":

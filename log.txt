@@ -1,0 +1,2 @@
+Best Point: Params:  m = 0.14929,   v = 0.00253, ObjValue: 0.3349305207963323 (H = 0, s = 5)
+Best Point: Params:  H = 0.02184,    s = 4.84991, ObjValue: 0.33241748430449275 (m, v as before best)
