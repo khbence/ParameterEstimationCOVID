@@ -4,6 +4,7 @@ from io import StringIO
 import numpy as np
 from nelder_mead import NelderMead
 from collections import OrderedDict
+import matplotlib.pyplot as plt
 
 class ParameterEstimation:
     refData = []
@@ -36,33 +37,35 @@ class ParameterEstimation:
         return ' -P inputs/transition_final.json -A inputs/agentTypes.json -L inputs/locationTypes.json -p inputs/parameters.json -c inputs/config/out/configRandom.json'
 
     def __agentModel(self, params) -> list:
-        print("Parameters: " + str(params))
-        self.__modifyConfigRandom(params[0])
-        sigmoidStr = self.__sigmoidParameters(params[1], params[2], params[3], params[4])
+        # self.__modifyConfigRandom(params[0])
+        sigmoidStr = self.__sigmoidParameters(params[0], params[1], 0, 5)
         files = self.__filePaths()
-        # print('./covid -n {} -N {} -w {}{}{}'.format(self.n, self.N, self.length, sigmoidStr, files))
         agentOutput = os.popen('./covid -n {} -N {} -w {}{}{}'.format(self.n, self.N, self.length, sigmoidStr, files)).read()
         outDataFrame = pandas.read_csv(StringIO(agentOutput), sep='\t', index_col=False)
         ret =  outDataFrame[['I1', 'I2', 'I3', 'I4', 'I5', 'I6']].sum(axis = 1)
+        print("calculated: " + str(ret))
         return ret.to_numpy() / self.n
     
     def objFunction(self, params):
-        ret = np.linalg.norm(self.__agentModel(params) - np.array(self.refData))
-        print("ERROR: " + str(ret))
+        agent = self.__agentModel(params)
+        plt.plot(self.refData, label = 'ref')
+        plt.plot(agent, label = 'agent')
+        plt.show()
+        ret = np.linalg.norm(agent - np.array(self.refData))
         return ret
 
 def main():
-    p = ParameterEstimation('inputs/deterministic_0_182.txt', 1000000, 1, 26)
+    p = ParameterEstimation('inputs/deterministic_41_148.txt', 1000000, 1, 21)
     params = OrderedDict()
-    params["E"] = ["real", (1e-8, 0.1)]
-    params["m"] = ["real", (0, 1)]
-    params["v"] = ["real", (0, 1)]
-    params["H"] = ["real", (0, 2)]
-    params["s"] = ["real", (0, 10)]
+    # params["E"] = ["real", (1e-7, 0.1)]
+    params["m"] = ["real", (0.001, 0.3)]
+    params["v"] = ["real", (0.0001, 0.003)]
+    # params["H"] = ["real", (-1, 1)]
+    # params["s"] = ["real", (1, 10)]
 
     nm = NelderMead(p.objFunction, params)
-    nm.initialize([(1e-6, 0.125, 0.001, 0, 5), (1e-5, 0.125, 0.001, 0, 5), (1e-6, 0.13, 0.001, 0, 5), (1e-6, 0.125, 0.002, 0, 5), (1e-6, 0.125, 0.001, 0.1, 5), (1e-6, 0.125, 0.001, 0, 6)])
-
+    #nm.initialize([(1e-6, 0.125, 0.001, 0, 5), (1e-5, 0.125, 0.001, 0, 5), (1e-6, 0.13, 0.001, 0, 5), (1e-6, 0.125, 0.002, 0, 5), (1e-6, 0.125, 0.001, 0.1, 5), (1e-6, 0.125, 0.001, 0, 6)])
+    nm.initialize([(0.125, 0.001), (0.13, 0.001), (0.125, 0.0005)])
     nm.minimize()
 
 if __name__ == "__main__":
