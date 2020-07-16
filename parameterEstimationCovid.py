@@ -10,12 +10,16 @@ def modifyConfigRandom(E):
     configRandomFileOut.write(data)
     configRandomFileOut.close()
 
+def sigmoidParameters(m, v, H, s) -> str:
+    return '-m {} -v {} -H {} -s {}'.format(m, v, H, s)
+
 def AgentModel(params) -> list:
     m = params[1]
     v = params[2]
     H = params[3]
     s = params[4]
     modifyConfigRandom(params[0])
+    sigmoidStr = sigmoidParameters(params[1], params[2], params[3], params[4])
     
 
 
