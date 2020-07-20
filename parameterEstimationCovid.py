@@ -4,7 +4,12 @@ from io import StringIO
 import numpy as np
 from nelder_mead import NelderMead
 from collections import OrderedDict
+import matplotlib as mp
 import matplotlib.pyplot as plt
+from matplotlib.animation import FuncAnimation, ImageMagickWriter
+import math
+
+# mp.use( 'tkagg' )
 
 class ParameterEstimation:
     refData = []
@@ -12,6 +17,9 @@ class ParameterEstimation:
     N : int
     length : int
     toPlot : bool
+
+    #plot
+    results = []
 
     def __init__(self, refFile, n, N, length, toPlot):
         with open(refFile) as f:
@@ -36,7 +44,7 @@ class ParameterEstimation:
         return ' -m {} -v {} -H {} -s {}'.format(m, v, H, s)
 
     def __filePaths(self) -> str:
-        return ' -P inputs/transition_final.json -A inputs/agentTypes.json -L inputs/locationTypes.json -p inputs/parameters.json -c inputs/config/out/configRandom.json'
+        return ' -P inputs/transition_final_dummy.json -A inputs/agentTypes.json -L inputs/locationTypes.json -p inputs/parameters_dummy.json -c inputs/config/out/configRandom.json'
 
     def __agentModel(self, params) -> list:
         # self.__modifyConfigRandom(params[0])
@@ -57,19 +65,46 @@ class ParameterEstimation:
         ret = np.linalg.norm(agent - np.array(self.refData))
         return ret
 
+    def update(self, idx):
+        self.line.set_ydate(self.results[idx])
+        return self.line, self.ax
+
+    def plotSerie(self, params, paramIdx, a, b, N):
+        fig, self.ax = plt.subplots()
+        fig.set_tight_layout(True)
+        #x = np.arange(41, 183, 1)
+        step = (a - b)/(N-1)
+        self.ax.plot(self.refData, label = 'ref')
+        self.line, = self.ax.plot(self.__agentModel(params), label = 'agent')
+        for i in range(0, N):
+            print(i)
+            params[paramIdx] = a + (i * step)
+            self.results.append(self.__agentModel(params))
+
+        anim = FuncAnimation(fig, self.update, frames=np.arange(0, N))
+        writer = ImageMagickWriter()
+        anim.save('out.gif', dpi = 80, writer = writer)
+
 def main():
-    p = ParameterEstimation('inputs/deterministic_41_148.txt', 1000000, 1, 21, False)
+    p = ParameterEstimation('inputs/deterministic_41_148.txt', 1000000, 1, 21, True)
+    #p.plotSerie([0.13071, 0.36390, -0.44021, 23.29303], 0, 0.0, 0.2, 2)
+    
+    
     params = OrderedDict()
     # params["E"] = ["real", (1e-7, 0.1)]
-    params["m"] = ["real", (0.001, 0.4)]
-    params["v"] = ["real", (0.0001, 0.005)]
-    params["H"] = ["real", (-0.5, 0.5)]
-    params["s"] = ["real", (2, 7)]
+    params["m"] = ["real", (0.001, 1.0)]
+    params["v"] = ["real", (0.001, 1.0)]
+    params["H"] = ["real", (-1, 1)]
+    params["s"] = ["real", (0, 100)]
 
     nm = NelderMead(p.objFunction, params)
     #nm.initialize([(1e-6, 0.125, 0.001, 0, 5), (1e-5, 0.125, 0.001, 0, 5), (1e-6, 0.13, 0.001, 0, 5), (1e-6, 0.125, 0.002, 0, 5), (1e-6, 0.125, 0.001, 0.1, 5), (1e-6, 0.125, 0.001, 0, 6)])
-    nm.initialize([(0.14929, 0.00253, 0.02184, 4.84991), (0.0011, 0.00011, -0.49, 2.1), (0.39, 0.0049, 0.49, 6.9), (0.15, 0.0002, 0, 5), (0.1, 0.001, -0.1, 4)])
-    nm.minimize()
+    nm.initialize([(0.13071, 0.36390, -0.44021, 23.29303)\
+            , (0.11647, 0.40097, -0.45841, 28.90947)\
+            , (0.15373, 0.40104, -0.40420, 14.50473)\
+            , (0.06295, 0.33903, -0.47588, 18.1148)\
+            , (0.06334, 0.29004, -0.600004, 16.30976)])
+    nm.minimize(n_iter=100)
 
 if __name__ == "__main__":
     main()
