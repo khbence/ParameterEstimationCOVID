@@ -1,0 +1,23 @@
+{
+    "rules":[
+        {
+            "name": "Close Nursery home",
+            "conditionType": "afterDays",
+            "threshold": 0,
+            "openAfter": 200,
+            "closeAfter": -1,
+            "locationTypesToClose": [
+                22
+            ]
+        },
+        {
+            "name": "Masks",
+            "conditionType": "afterDays",
+            "threshold": 0,
+            "openAfter": 200,
+            "closeAfter": -1,
+            "locationTypesToClose": [
+            ]
+        },
+    ]
+}
