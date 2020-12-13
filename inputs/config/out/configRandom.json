@@ -60,54 +60,18 @@
     ],
     "preCondDistibution": [
         {
-            "value": 3,
+            "value": "3",
             "chance": 1
         }
     ],
     "stateDistibution": [
         {
             "value": "S",
-            "chance": 0.998355120771187
+            "chance": 0.99960000000000004405
         },
         {
             "value": "E",
-            "chance": 0.000504750284749
-        },
-        {
-            "value": "I1",
-            "chance": 0.000247305718962
-        },
-        {
-            "value": "I2",
-            "chance": 0.000131205488739
-        },
-        {
-            "value": "I3",
-            "chance": 0.0000656027443485
-        },
-        {
-            "value": "I4",
-            "chance": 0.0000656027443485
-        },
-        {
-            "value": "I5",
-            "chance": 0.000000544872193
-        },
-        {
-            "value": "I6",
-            "chance": 0.000000226901451
-        },
-        {
-            "value": "I7",
-            "chance": 0.000000075669745
-        },
-        {
-            "value": "R",
-            "chance": 0.000629516109690
-        },
-        {
-            "value": "D",
-            "chance": 0.000000048694521
+            "chance": 0.00040000000000000002
         }
     ],
     "agentTypeDistribution": [
