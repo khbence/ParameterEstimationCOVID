@@ -1,0 +1,211 @@
+{
+    "irregulalLocationChance": 0.05,
+    "locationTypeDistibution": [
+        {
+            "value": 1,
+            "chance": 0.1
+        },
+        {
+            "value": 2,
+            "chance": 0.4
+        },
+        {
+            "value": 3,
+            "chance": 0.02
+        },
+        {
+            "value": 4,
+            "chance": 0.2
+        },
+        {
+            "value": 5,
+            "chance": 0.03
+        },
+        {
+            "value": 6,
+            "chance": 0.03
+        },
+        {
+            "value": 7,
+            "chance": 0.03
+        },
+        {
+            "value": 8,
+            "chance": 0.03
+        },
+        {
+            "value": 9,
+            "chance": 0.03
+        },
+        {
+            "value": 10,
+            "chance": 0.03
+        },
+        {
+            "value": 11,
+            "chance": 0.03
+        },
+        {
+            "value": 12,
+            "chance": 0.03
+        },
+        {
+            "value": 13,
+            "chance": 0.02
+        },
+        {
+            "value": 14,
+            "chance": 0.02
+        }
+    ],
+    "preCondDistibution": [
+        {
+            "value": "3",
+            "chance": 1
+        }
+    ],
+    "stateDistibution": [
+        {
+            "ageStart": 0,
+            "ageEnd": 200,
+            "distribution": [
+                {
+                    "value": "S",
+                    "chance": 0.994669712
+                },
+                {
+                    "value": "E",
+                    "chance": 0.0009355074281359010
+                },
+                {
+                    "value": "I1",
+                    "chance": 0.0010204581132579300 
+                },
+                {
+                    "value": "I2",
+                    "chance": 0.0004405851450077610 
+                },
+                {
+                    "value": "I3",
+                    "chance": 0.0003581988400491800 
+                },
+                {
+                    "value": "I4",
+                    "chance": 0.0003581988400491800 
+                },
+                {
+                    "value": "I5_h",
+                    "chance": 0.0000608850108762775 
+                },
+                {
+                    "value": "I6_h",
+                    "chance": 0.0000253543812983661 
+                },
+                {
+                    "value": "R_h",
+                    "chance": 0
+                },
+                {
+                    "value": "R",
+                    "chance": 0.0021215690874497200 
+                },
+                {
+                    "value": "D1",
+                    "chance": 0.0000095313530200446
+                },
+                {
+                    "value": "D2",
+                    "chance": 0
+                }
+            ]
+        },
+        {
+            "ageStart": 200,
+            "ageEnd": 1000,
+            "distribution": [
+                {
+                    "value": "S",
+                    "chance": 0.99960000000000004405
+                },
+                {
+                    "value": "E",
+                    "chance": 0.000195648905663827
+                },
+                {
+                    "value": "I1",
+                    "chance": 0.000171086453203937
+                },
+                {
+                    "value": "I2",
+                    "chance": 0.0000762152376846830
+                },
+                {
+                    "value": "I3",
+                    "chance": 0.0000762152376846830
+                },
+                {
+                    "value": "I4",
+                    "chance": 0.0000762152376846830
+                },
+                {
+                    "value": "I5_h",
+                    "chance": 0.00000265156347579970
+                },
+                {
+                    "value": "I6_h",
+                    "chance": 0.00000110419215564955
+                },
+                {
+                    "value": "R_h",
+                    "chance": 0.000000393409221211067
+                },
+                {
+                    "value": "R",
+                    "chance": 0.000299119048478177
+                },
+                {
+                    "value": "D1",
+                    "chance": 0.000000260386370533970
+                },
+                {
+                    "value": "D2",
+                    "chance": 0
+                }
+            ]
+        }
+    ],
+    "agentTypeDistribution": [
+        {
+            "value": 1,
+            "chance": 0.125
+        },
+        {
+            "value": 2,
+            "chance": 0.125
+        },
+        {
+            "value": 3,
+            "chance": 0.125
+        },
+        {
+            "value": 4,
+            "chance": 0.125
+        },
+        {
+            "value": 5,
+            "chance": 0.125
+        },
+        {
+            "value": 6,
+            "chance": 0.125
+        },
+        {
+            "value": 7,
+            "chance": 0.125
+        },
+        {
+            "value": 8,
+            "chance": 0.125
+        }
+    ]
+}
