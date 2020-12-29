@@ -24,6 +24,9 @@
 % Csatoltam egy mappát benne pár példaadattal, ez a kód jelen állapotában
 % futtatható.
 
+% Jelenleg a többi inputját, aki futtattja, hagyja figyelmen kívül, majd a
+% teljes automatizáláshoz készültek flag-ek csak.
+
 close all; clear all; clc;
 
 % Data input megadása:
@@ -48,4 +51,4 @@ Title = 'Simulation starts from 23rd of September';
 
 % Végül a függvény hívása:
 
-plotterpp(Strings,Scenarionames,Title)
+plotterpp(Strings,Scenarionames,Title,1,0)
