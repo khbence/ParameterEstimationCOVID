@@ -7,7 +7,7 @@ function [mean,standev] = organize(names)
 
     for i = 1 : N
 
-        [av,st] = processing(names(i,:));
+        [av,st] = processing(names{i});
         mean = [mean av];
         standev = [standev st];
 

@@ -31,23 +31,27 @@ close all; clear all; clc;
 
 % Data input megadása:
 
-sen1 = 'data1222/closureRulesssssssssssssssssssssssss_5_6_22_no_kij_';
-sen2 = 'data1222/closureRulessssssssssssssssss_5_6_22_szenteste_kij_';
-sen3 = 'data1222/closureRules_5_6_22_szenteste_kij_szilv_kij_6_open_';
-sen4 = 'data1222/closureRuless_5_6_22_teliszun_kij_szilv_kij_6_open_';
+sen1 = 'data_cont/maintain_all__';
+sen2 = 'data_cont/maintain_all_but_curfew_';
+sen3 = 'data_cont/maintain_all_but_5_';
+sen4 = 'data_cont/maintain_all_but_curfew5_';
+sen5 = 'data_cont/release_all_but22mask_';
+sen6 = 'data_cont/release_all_but22_';
 
-Strings = [sen1;sen2;sen3;sen4];
+Strings = {sen1;sen2;sen3;sen4;sen5;sen6};
 
 % Legend nevek megadása:
 
-Scenarionames = ['Lezárás        ';
-                 'Kar.           ';
-                 'Kar. + szil.   ';
-                 'T. szü. + szil.'];
+Scenarionames = {'Maszk+kijaras+5,6,22',
+                 'Maszk+5,6,22',
+                 'Maszk+kijaras+6,22',
+                 'Maszk+6,22',
+                 'Maszk+22',
+                 '22'};
              
 % Cím megadása:
              
-Title = 'Simulation starts from 23rd of September';
+Title = 'Jan 11 utáni korlátozások hatása. Kezdés: szept 23';
 
 % Végül a függvény hívása:
 

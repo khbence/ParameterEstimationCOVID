@@ -14,7 +14,7 @@ function plotter(txtnames,scenarionames,Title)
     
     hold on
     for i = 1 : length(data_av)
-        funplot(mean(i).s,standev(i).s,colors(i,:),w,scenarionames(i,:))
+        funplot(mean(i).s,standev(i).s,colors(i,:),w,scenarionames{i})
     end
     hold off
     xlim([0 length(data_av(1).s)-1])
@@ -28,7 +28,7 @@ function plotter(txtnames,scenarionames,Title)
     
     hold on
     for i = 1 : length(data_av)
-        funplot(mean(i).e,standev(i).e,colors(i,:),w,scenarionames(i,:))
+        funplot(mean(i).e,standev(i).e,colors(i,:),w,scenarionames{i})
     end
     hold off
     xlim([0 length(data_av(1).s)-1])
@@ -42,7 +42,7 @@ function plotter(txtnames,scenarionames,Title)
     
     hold on
     for i = 1 : length(data_av)
-        funplot(mean(i).i,standev(i).i,colors(i,:),w,scenarionames(i,:))
+        funplot(mean(i).i,standev(i).i,colors(i,:),w,scenarionames{i})
     end
     %data = readmatrix('data_long.txt');
     %plot(data,'Color',[0.6350 0.0780 0.1840],'LineWidth',1.5,'DisplayName','Data')
@@ -58,7 +58,7 @@ function plotter(txtnames,scenarionames,Title)
     
     hold on
     for i = 1 : length(data_av)
-        funplot(mean(i).r,standev(i).r,colors(i,:),w,scenarionames(i,:))
+        funplot(mean(i).r,standev(i).r,colors(i,:),w,scenarionames{i})
     end
     hold off
     xlim([0 length(data_av(1).s)-1])
@@ -72,7 +72,7 @@ function plotter(txtnames,scenarionames,Title)
         
     hold on
     for i = 1 : length(data_av)
-        funplot(mean(i).d,standev(i).d,colors(i,:),w,scenarionames(i,:))
+        funplot(mean(i).d,standev(i).d,colors(i,:),w,scenarionames{i})
     end
     hold off
     xlim([0 length(data_av(1).s)-1])
@@ -94,7 +94,7 @@ function plotter(txtnames,scenarionames,Title)
             var_sd(j) = var_sd(j) - standev(i).d(j-1);
         end
 
-        funplot(var_av,var_sd,colors(i,:),w,scenarionames(i,:))
+        funplot(var_av,var_sd,colors(i,:),w,scenarionames{i})
     end
     hold off
     xlim([0 length(data_av(1).s)-1])
@@ -110,7 +110,7 @@ function plotter(txtnames,scenarionames,Title)
     for i = 1 : length(data_av)
         seg1 = (-1*diff(mean(i).s))-diff(mean(i).do);
         seg2 = (-1*diff(standev(i).s))-diff(standev(i).do);
-        funplot(seg1,seg2,colors(i,:),w,scenarionames(i,:))
+        funplot(seg1,seg2,colors(i,:),w,scenarionames{i})
     end
     hold off
     xlim([0 length(data_av(1).s)-1])
@@ -124,7 +124,7 @@ function plotter(txtnames,scenarionames,Title)
         
     hold on
     for i = 1 : length(data_av)
-        funplot(mean(i).kt,standev(i).kt,colors(i,:),w,scenarionames(i,:))
+        funplot(mean(i).kt,standev(i).kt,colors(i,:),w,scenarionames{i})
     end
     hold off
     xlim([0 length(data_av(1).s)-1])
@@ -138,7 +138,7 @@ function plotter(txtnames,scenarionames,Title)
     
     hold on
     for i = 1 : length(data_av)
-        funplot(mean(i).ei,standev(i).ei,colors(i,:),w,scenarionames(i,:))
+        funplot(mean(i).ei,standev(i).ei,colors(i,:),w,scenarionames{i})
     end
     %data = readmatrix('data_long.txt');
     %plot(data,'Color',[0.6350 0.0780 0.1840],'LineWidth',1.5,'DisplayName','Data')
@@ -158,7 +158,7 @@ function plotter(txtnames,scenarionames,Title)
     
     hold on
     for i = 1 : length(data_av)
-        funplot(mean(i).k,standev(i).k,colors(i,:),w,scenarionames(i,:))
+        funplot(mean(i).k,standev(i).k,colors(i,:),w,scenarionames{i})
     end
     hold off
     xlim([0 length(data_av(1).s)-1])
@@ -172,7 +172,7 @@ function plotter(txtnames,scenarionames,Title)
     
     hold on
     for i = 1 : length(data_av)
-        funplot(mean(i).i6,standev(i).i6,colors(i,:),w,scenarionames(i,:))
+        funplot(mean(i).i6,standev(i).i6,colors(i,:),w,scenarionames{i})
     end
     hold off
     xlim([0 length(data_av(1).s)-1])
@@ -186,7 +186,7 @@ function plotter(txtnames,scenarionames,Title)
     
     hold on
     for i = 1 : length(data_av)
-        funplot(mean(i).t,standev(i).t,colors(i,:),w,scenarionames(i,:))
+        funplot(mean(i).t,standev(i).t,colors(i,:),w,scenarionames{i})
     end
     hold off
     xlim([0 length(data_av(1).s)-1])
@@ -200,7 +200,7 @@ function plotter(txtnames,scenarionames,Title)
     
     hold on
     for i = 1 : length(data_av)
-        funplot(mean(i).p1,standev(i).p1,colors(i,:),w,scenarionames(i,:))
+        funplot(mean(i).p1,standev(i).p1,colors(i,:),w,scenarionames{i})
     end
     hold off
     xlim([0 length(data_av(1).s)-1])
@@ -214,7 +214,7 @@ function plotter(txtnames,scenarionames,Title)
     
     hold on
     for i = 1 : length(data_av)
-        funplot(mean(i).p2,standev(i).p2,colors(i,:),w,scenarionames(i,:))
+        funplot(mean(i).p2,standev(i).p2,colors(i,:),w,scenarionames{i})
     end
     hold off
     xlim([0 length(data_av(1).s)-1])
@@ -228,7 +228,7 @@ function plotter(txtnames,scenarionames,Title)
     
     hold on
     for i = 1 : length(data_av)
-        funplot((mean(i).p2)./mean(i).t,(standev(i).p2)./standev(i).t,colors(i,:),w,scenarionames(i,:))
+        funplot((mean(i).p2)./mean(i).t,(standev(i).p2)./standev(i).t,colors(i,:),w,scenarionames{i})
     end
     hold off
     xlim([0 length(data_av(1).s)-1])
@@ -242,7 +242,7 @@ function plotter(txtnames,scenarionames,Title)
     
     hold on
     for i = 1 : length(data_av)
-        funplot(mean(i).q,standev(i).q,colors(i,:),w,scenarionames(i,:))
+        funplot(mean(i).q,standev(i).q,colors(i,:),w,scenarionames{i})
     end
     hold off
     xlim([0 length(data_av(1).s)-1])
@@ -256,7 +256,7 @@ function plotter(txtnames,scenarionames,Title)
     
     hold on
     for i = 1 : length(data_av)
-        funplot(mean(i).qt,standev(i).qt,colors(i,:),w,scenarionames(i,:))
+        funplot(mean(i).qt,standev(i).qt,colors(i,:),w,scenarionames{i})
     end
     hold off
     xlim([0 length(data_av(1).s)-1])
@@ -270,7 +270,7 @@ function plotter(txtnames,scenarionames,Title)
     
     hold on
     for i = 1 : length(data_av)
-        funplot(mean(i).nq,standev(i).nq,colors(i,:),w,scenarionames(i,:))
+        funplot(mean(i).nq,standev(i).nq,colors(i,:),w,scenarionames{i})
     end
     hold off
     xlim([0 length(data_av(1).s)-1])
