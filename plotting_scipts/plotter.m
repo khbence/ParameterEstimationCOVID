@@ -228,7 +228,7 @@ function plotter(txtnames,scenarionames,Title)
     
     hold on
     for i = 1 : length(data_av)
-        funplot((mean(i).p1)./mean(i).t,(standev(i).p1)./standev(i).t,colors(i,:),w,scenarionames(i,:))
+        funplot((mean(i).p2)./mean(i).t,(standev(i).p2)./standev(i).t,colors(i,:),w,scenarionames(i,:))
     end
     hold off
     xlim([0 length(data_av(1).s)-1])
