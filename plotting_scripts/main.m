@@ -31,27 +31,23 @@ close all; clear all; clc;
 
 % Data input megadása:
 
-sen1 = 'data_cont/maintain_all__';
-sen2 = 'data_cont/maintain_all_but_curfew_';
-sen3 = 'data_cont/maintain_all_but_5_';
-sen4 = 'data_cont/maintain_all_but_curfew5_';
-sen5 = 'data_cont/release_all_but22mask_';
-sen6 = 'data_cont/release_all_but22_';
+sen1 = 'data0105/closureRules_from_jan5_default_';
+sen2 = 'data0105/closureRules_from_jan5_highschoolopen_';
+sen3 = 'data0105/closureRules_from_jan5_highschoolopennocurfew5open_';
+sen4 = 'data0105/closureRules_from_jan5_highschoolopennocurfew_';
 
-Strings = {sen1;sen2;sen3;sen4;sen5;sen6};
+Strings = {sen1;sen2;sen3;sen4};
 
 % Legend nevek megadása:
 
-Scenarionames = {'Maszk+kijaras+5,6,22',
-                 'Maszk+5,6,22',
-                 'Maszk+kijaras+6,22',
-                 'Maszk+6,22',
-                 'Maszk+22',
-                 '22'};
+Scenarionames = {'Default',
+                 'Open',
+                 'Open, no curfew (5o)',
+                 'Open, no curfew'};
              
 % Cím megadása:
              
-Title = 'Jan 11 utáni korlátozások hatása. Kezdés: szept 23';
+Title = 'Simulations starts from 23rd of September';
 
 % Végül a függvény hívása:
 
