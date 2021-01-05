@@ -281,5 +281,38 @@ function plotter(txtnames,scenarionames,Title)
     legend('Location','best')
     
     sgtitle(Title)
+    
+%     figure('Name','Plots3','NumberTitle','off')
+%         
+%     hold on
+%     for i = 1 : length(data_av)
+%         funplot(mean(i).d,standev(i).d,colors(i,:),3,scenarionames{i})
+%     end
+%     %data = readmatrix('data0105/Dead_cumulative_Szeged_szept23tol.txt');
+%     data = readmatrix('data0105/Dead_cumulative_Szeged_kornyek_atlag_szept23tol.txt');
+%     plot(data,'Color',[0 0 0],'LineWidth',3,'DisplayName','Valós adat')
+%     hold off
+%     xlim([0 length(data_av(1).s)-1])
+%     ylim([0 inf])
+%     xlabel('Idő [Nap]','fontsize',18,'fontweight','bold')
+%     ylabel('Ágensek száma','fontsize',18,'fontweight','bold')
+%     set(gca,'fontsize',18,'fontweight','bold')
+%     title('Összes elhalálozás','fontsize',18,'fontweight','bold')
+%     legend('Location','best','fontsize',18,'fontweight','bold')
+%     
+%     figure('Name','Plots4','NumberTitle','off')
+%         
+%     hold on
+%     for i = 1 : length(data_av)
+%         funplot(mean(i).kt,standev(i).kt,colors(i,:),3,scenarionames{i})
+%     end
+%     hold off
+%     xlim([0 length(data_av(1).s)-1])
+%     ylim([0 inf])
+%     xlabel('Idő [Nap]','fontsize',18,'fontweight','bold')
+%     ylabel('Ágensek száma','fontsize',18,'fontweight','bold')
+%     set(gca,'fontsize',18,'fontweight','bold')
+%     title('Kórházban tartózkodók száma','fontsize',18,'fontweight','bold')
+%     legend('Location','best','fontsize',18,'fontweight','bold')
 
 end

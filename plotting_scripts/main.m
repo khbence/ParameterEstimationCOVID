@@ -31,19 +31,17 @@ close all; clear all; clc;
 
 % Data input megadása:
 
-sen1 = 'data0105/closureRules_from_jan5_default_';
-sen2 = 'data0105/closureRules_from_jan5_highschoolopen_';
-sen3 = 'data0105/closureRules_from_jan5_highschoolopennocurfew5open_';
-sen4 = 'data0105/closureRules_from_jan5_highschoolopennocurfew_';
+sen1 = 'data0105/closureRules_from_jan5_nochange_';
+sen2 = 'data0105/closureRules_from_jan5_highschoolopennocurfew5open_';
+sen3 = 'data0105/closureRules_from_jan5_default_';
 
-Strings = {sen1;sen2;sen3;sen4};
+Strings = {sen1;sen2;sen3};
 
 % Legend nevek megadása:
 
-Scenarionames = {'Default',
-                 'Open',
-                 'Open, no curfew (5o)',
-                 'Open, no curfew'};
+Scenarionames = {'Nov. 11-ei korlátozás nélkül',
+                 'Január 5-ei feloldással',
+                 'Január 5-ei feloldás nélkül'};
              
 % Cím megadása:
              
