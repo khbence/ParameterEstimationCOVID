@@ -31,9 +31,9 @@ close all; clear all; clc;
 
 % Data input megadása:
 
-sen1 = 'data0105/closureRules_from_jan5_nochange_';
-sen2 = 'data0105/closureRules_from_jan5_highschoolopennocurfew5open_';
-sen3 = 'data0105/closureRules_from_jan5_default_';
+sen1 = 'data/data0105/closureRules_from_jan5_nochange_';
+sen2 = 'data/data0105/closureRules_from_jan5_highschoolopennocurfew5open_';
+sen3 = 'data/data0105/closureRules_from_jan5_default_';
 
 Strings = {sen1;sen2;sen3};
 
