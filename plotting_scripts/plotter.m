@@ -7,11 +7,10 @@ function plotter(txtnames,scenarionames,Title)
     [mean,standev] = organize(txtnames);
 
     data_av = mean;
-
-    figure('Name','Plots1','NumberTitle','off')
-
-    subplot(3,3,1)
     
+    figure('Name','Plots1','NumberTitle','off')
+    
+    subplot(3,3,1)
     hold on
     minvar = min(mean(1).s-standev(1).s);
     for i = 1 : length(data_av)
@@ -30,7 +29,6 @@ function plotter(txtnames,scenarionames,Title)
     legend('Location','best')
     
     subplot(3,3,2)
-    
     hold on
     for i = 1 : length(data_av)
         funplot(mean(i).e,standev(i).e,colors(i,:),w,scenarionames{i})
@@ -44,7 +42,6 @@ function plotter(txtnames,scenarionames,Title)
     legend('Location','best')
     
     subplot(3,3,3)
-    
     hold on
     for i = 1 : length(data_av)
         funplot(mean(i).i,standev(i).i,colors(i,:),w,scenarionames{i})
@@ -59,8 +56,22 @@ function plotter(txtnames,scenarionames,Title)
     title('Infectious')
     legend('Location','best')
     
-    subplot(3,3,5)
+    subplot(3,3,4)
+    hold on
+    for i = 1 : length(data_av)
+        funplot(mean(i).ei,standev(i).ei,colors(i,:),w,scenarionames{i})
+    end
+    %data = readmatrix('data_long.txt');
+    %plot(data,'Color',[0.6350 0.0780 0.1840],'LineWidth',1.5,'DisplayName','Data')
+    hold off
+    xlim([0 length(data_av(1).s)-1])
+    ylim([0 inf])
+    xlabel('Time [Days]')
+    ylabel('No. of agents')
+    title('Infected')
+    legend('Location','best')
     
+    subplot(3,3,5)
     hold on
     for i = 1 : length(data_av)
         funplot(mean(i).r,standev(i).r,colors(i,:),w,scenarionames{i})
@@ -74,7 +85,6 @@ function plotter(txtnames,scenarionames,Title)
     legend('Location','best')
     
     subplot(3,3,6)
-        
     hold on
     for i = 1 : length(data_av)
         funplot(mean(i).d,standev(i).d,colors(i,:),w,scenarionames{i})
@@ -87,8 +97,22 @@ function plotter(txtnames,scenarionames,Title)
     title('Deaths (cumulative)')
     legend('Location','best')
     
-    subplot(3,3,8)
+    subplot(3,3,7)
+    hold on
+    for i = 1 : length(data_av)
+        seg1 = (-1*diff(mean(i).s))-diff(mean(i).do);
+        seg2 = (-1*diff(standev(i).s))-diff(standev(i).do);
+        funplot(seg1,seg2,colors(i,:),w,scenarionames{i})
+    end
+    hold off
+    xlim([0 length(data_av(1).s)-1])
+    ylim([0 inf])
+    xlabel('Time [Days]')
+    ylabel('No. of agents')
+    title('New exposed')
+    legend('Location','best')
     
+    subplot(3,3,8)
     hold on
     for i = 1 : length(data_av)
         var_av = mean(i).d;
@@ -109,75 +133,14 @@ function plotter(txtnames,scenarionames,Title)
     title('Deaths (new cases)')
     legend('Location','best')
     
-    subplot(3,3,7)
-        
-    hold on
-    for i = 1 : length(data_av)
-        seg1 = (-1*diff(mean(i).s))-diff(mean(i).do);
-        seg2 = (-1*diff(standev(i).s))-diff(standev(i).do);
-        funplot(seg1,seg2,colors(i,:),w,scenarionames{i})
-    end
-    hold off
-    xlim([0 length(data_av(1).s)-1])
-    ylim([0 inf])
-    xlabel('Time [Days]')
-    ylabel('No. of agents')
-    title('New exposed')
-    legend('Location','best')
-    
-    subplot(3,3,4)
-    
-    hold on
-    for i = 1 : length(data_av)
-        funplot(mean(i).ei,standev(i).ei,colors(i,:),w,scenarionames{i})
-    end
-    %data = readmatrix('data_long.txt');
-    %plot(data,'Color',[0.6350 0.0780 0.1840],'LineWidth',1.5,'DisplayName','Data')
-    hold off
-    xlim([0 length(data_av(1).s)-1])
-    ylim([0 inf])
-    xlabel('Time [Days]')
-    ylabel('No. of agents')
-    title('Infected')
-    legend('Location','best')
-    
-    sgtitle(Title)
+    sgtitle(append(Title,' (SEIR-related figures)'))
     
     figure('Name','Plots2','NumberTitle','off')
     
-    subplot(3,3,5)
-    
+    subplot(2,2,1)
     hold on
     for i = 1 : length(data_av)
-        funplot(mean(i).k,standev(i).k,colors(i,:),w,scenarionames{i})
-    end
-    hold off
-    xlim([0 length(data_av(1).s)-1])
-    ylim([0 inf])
-    xlabel('Time [Days]')
-    ylabel('No. of agents')
-    title('Infectious in hospital')
-    legend('Location','best')
-    
-    subplot(3,3,6)
-    
-    hold on
-    for i = 1 : length(data_av)
-        funplot(mean(i).i6,standev(i).i6,colors(i,:),w,scenarionames{i})
-    end
-    hold off
-    xlim([0 length(data_av(1).s)-1])
-    ylim([0 inf])
-    xlabel('Time [Days]')
-    ylabel('No. of agents')
-    title('Intensive care')
-    legend('Location','best')
-    
-    subplot(3,3,1)
-    
-    hold on
-    for i = 1 : length(data_av)
-        funplot(mean(i).t,standev(i).t,colors(i,:),w,scenarionames{i})
+        funplot(mean(i).t+mean(i).p2,standev(i).t+standev(i).p2,colors(i,:),w,scenarionames{i})
     end
     hold off
     xlim([0 length(data_av(1).s)-1])
@@ -187,25 +150,10 @@ function plotter(txtnames,scenarionames,Title)
     title('Number of new tests')
     legend('Location','best')
     
-%     subplot(3,3,2)
-%     
-%     hold on
-%     for i = 1 : length(data_av)
-%         funplot(mean(i).p1,standev(i).p1,colors(i,:),w,scenarionames{i})
-%     end
-%     hold off
-%     xlim([0 length(data_av(1).s)-1])
-%     ylim([0 inf])
-%     xlabel('Time [Days]')
-%     ylabel('No. of agents')
-%     title('Positive tests')
-%     legend('Location','best')
-    
-    subplot(3,3,2)
-    
+    subplot(2,2,2)
     hold on
     for i = 1 : length(data_av)
-        funplot(mean(i).p2,standev(i).p2,colors(i,:),w,scenarionames{i})
+        funplot(mean(i).p1+mean(i).p2,standev(i).p1+standev(i).p2,colors(i,:),w,scenarionames{i})
     end
     hold off
     xlim([0 length(data_av(1).s)-1])
@@ -215,27 +163,42 @@ function plotter(txtnames,scenarionames,Title)
     title('Number of new, positive tests')
     legend('Location','best')
     
-    subplot(3,3,3)
-    
+    subplot(2,2,3)
     hold on    
-    maxvar = max((mean(1).p2)./mean(1).t);
+    maxvar = max((mean(1).p1+mean(1).p2)./(mean(1).t+mean(1).p2));
     for i = 1 : length(data_av)
-        funplot((mean(i).p2)./mean(i).t,(standev(i).p2)./standev(i).t,colors(i,:),w,scenarionames{i})
+        funplot((mean(i).p1+mean(i).p2)./(mean(i).t+mean(i).p2),(standev(i).p1+standev(i).p2)./(standev(i).t+standev(i).p2),colors(i,:),w,scenarionames{i})
         
-        if maxvar < max((mean(i).p2)./mean(i).t)
-            maxvar = max((mean(i).p2)./mean(i).t);
+        if maxvar < max((mean(i).p1+mean(i).p2)./(mean(i).t+mean(i).p2))
+            maxvar = max((mean(i).p1+mean(i).p2)./(mean(i).t+mean(i).p2));
         end
     end
     hold off
     xlim([0 length(data_av(1).s)-1])
     ylim([0 maxvar+0.01])
     xlabel('Time [Days]')
-    ylabel('No. of agents')
+    ylabel('Ratio')
     title('Ratio of new, positive tests')
+    legend('Location','best')    
+    
+    sgtitle(append(Title,' (Testing figures)'))
+    
+    figure('Name','Plots3','NumberTitle','off')
+    
+    subplot(2,2,4)
+    hold on
+    for i = 1 : length(data_av)
+        funplot(mean(i).ktnc,standev(i).ktnc,colors(i,:),w,scenarionames{i})
+    end
+    hold off
+    xlim([0 length(data_av(1).s)-1])
+    ylim([0 inf])
+    xlabel('Time [Days]')
+    ylabel('No. of agents')
+    title('Hospital total (non-COVID included)')
     legend('Location','best')
     
-    subplot(3,3,4)
-        
+    subplot(2,2,3)
     hold on
     for i = 1 : length(data_av)
         funplot(mean(i).kt,standev(i).kt,colors(i,:),w,scenarionames{i})
@@ -248,8 +211,37 @@ function plotter(txtnames,scenarionames,Title)
     title('Hospital total')
     legend('Location','best')
     
-    subplot(3,3,7)
+    subplot(2,2,2)
+    hold on
+    for i = 1 : length(data_av)
+        funplot(mean(i).k,standev(i).k,colors(i,:),w,scenarionames{i})
+    end
+    hold off
+    xlim([0 length(data_av(1).s)-1])
+    ylim([0 inf])
+    xlabel('Time [Days]')
+    ylabel('No. of agents')
+    title('Infectious in hospital')
+    legend('Location','best')
     
+    subplot(2,2,1)
+    hold on
+    for i = 1 : length(data_av)
+        funplot(mean(i).i6,standev(i).i6,colors(i,:),w,scenarionames{i})
+    end
+    hold off
+    xlim([0 length(data_av(1).s)-1])
+    ylim([0 inf])
+    xlabel('Time [Days]')
+    ylabel('No. of agents')
+    title('Intensive care')
+    legend('Location','best')
+    
+    sgtitle(append(Title,' (Hospitalization figures)'))
+    
+    figure('Name','Plots4','NumberTitle','off')
+    
+    subplot(2,2,1)
     hold on
     for i = 1 : length(data_av)
         funplot(mean(i).q,standev(i).q,colors(i,:),w,scenarionames{i})
@@ -262,22 +254,7 @@ function plotter(txtnames,scenarionames,Title)
     title('Quarantined')
     legend('Location','best')
     
-    subplot(3,3,8)
-    
-    hold on
-    for i = 1 : length(data_av)
-        funplot(mean(i).qt,standev(i).qt,colors(i,:),w,scenarionames{i})
-    end
-    hold off
-    xlim([0 length(data_av(1).s)-1])
-    ylim([0 inf])
-    xlabel('Time [Days]')
-    ylabel('No. of agents')
-    title('Quarantined AND infected')
-    legend('Location','best')
-    
-    subplot(3,3,9)
-    
+    subplot(2,2,2)
     hold on
     for i = 1 : length(data_av)
         funplot(mean(i).nq,standev(i).nq,colors(i,:),w,scenarionames{i})
@@ -290,7 +267,33 @@ function plotter(txtnames,scenarionames,Title)
     title('NOT Quarantined AND infected')
     legend('Location','best')
     
-    sgtitle(Title)
+    subplot(2,2,3)
+    hold on
+    for i = 1 : length(data_av)
+        funplot(mean(i).q-mean(i).qt,standev(i).q-standev(i).qt,colors(i,:),w,scenarionames{i})
+    end
+    hold off
+    xlim([0 length(data_av(1).s)-1])
+    ylim([0 inf])
+    xlabel('Time [Days]')
+    ylabel('No. of agents')
+    title('Quarantined AND NOT infected')
+    legend('Location','best')
+    
+    subplot(2,2,4)
+    hold on
+    for i = 1 : length(data_av)
+        funplot(mean(i).qt,standev(i).qt,colors(i,:),w,scenarionames{i})
+    end
+    hold off
+    xlim([0 length(data_av(1).s)-1])
+    ylim([0 inf])
+    xlabel('Time [Days]')
+    ylabel('No. of agents')
+    title('Quarantined AND infected')
+    legend('Location','best')
+    
+    sgtitle(append(Title,' (Quarantine figures)'))
     
 %     figure('Name','Plots3','NumberTitle','off')
 %         
