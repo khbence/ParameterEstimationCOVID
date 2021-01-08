@@ -40,8 +40,8 @@ Strings = {sen1;sen2;sen3};
 % Legend nevek megadása:
 
 Scenarionames = {'Nov. 11-ei korlátozás nélkül',
-                 'Január 5-ei feloldással',
-                 'Január 5-ei feloldás nélkül'};
+                 'Januári feloldással',
+                 'Januári feloldás nélkül'};
              
 % Cím megadása:
              
