@@ -333,4 +333,5 @@ function plotter_std(txtnames,scenarionames,Title,flag)
     else
         fprintf("You used something other than 0 or 1 for a binary flag!\n")
     end
+    
 end
