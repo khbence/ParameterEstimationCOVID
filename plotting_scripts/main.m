@@ -20,4 +20,4 @@ Title = 'Valami cim';
 
 % Végül a függvény hívása:
 
-plotterpp(Strings,[],[],Scenarionames,Title,1,0,0)
+plotterpp(Strings,[],[],Scenarionames,Title,1,0,0) % A két empty majd a két másik outputhoz lesz, illetve a flag-ek maradjanak egyelőre így.
