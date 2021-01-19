@@ -2,3 +2,5 @@ covid
 paramsEnv/
 .vscode
 plotting_scripts/data/
+plotting_scripts/tester_contact.m
+plotting_scripts/outagentstat_contact.m
