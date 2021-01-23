@@ -9,7 +9,7 @@ function plotter_std(txtnames,scenarionames,Title,flag)
 
         data_av = mean;
 
-        figure('Name','Plots1','NumberTitle','off')
+        figure('Name','Plots1_std','NumberTitle','off')
 
         subplot(3,3,1)
         hold on
@@ -136,7 +136,7 @@ function plotter_std(txtnames,scenarionames,Title,flag)
 
         sgtitle(append('SEIR-related (',Title,')'))
 
-        figure('Name','Plots2','NumberTitle','off')
+        figure('Name','Plots2_std','NumberTitle','off')
 
         subplot(2,2,1)
         hold on
@@ -184,7 +184,7 @@ function plotter_std(txtnames,scenarionames,Title,flag)
 
         sgtitle(append('Testing (',Title,')'))
 
-        figure('Name','Plots3','NumberTitle','off')
+        figure('Name','Plots3_std','NumberTitle','off')
 
         subplot(2,2,4)
         hold on
@@ -240,7 +240,7 @@ function plotter_std(txtnames,scenarionames,Title,flag)
 
         sgtitle(append('Hospitalization (',Title,')'))
 
-        figure('Name','Plots4','NumberTitle','off')
+        figure('Name','Plots4_std','NumberTitle','off')
 
         subplot(2,2,1)
         hold on

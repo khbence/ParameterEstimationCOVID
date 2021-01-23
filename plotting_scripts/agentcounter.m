@@ -1,6 +1,6 @@
-function count = agentcounter(input)
+function count = agentcounter(input,agents,locations)
 
-    AgentStat = statreadprocfun(input);
+    AgentStat = statreadprocfun(input,agents,locations);
 
     N = length(AgentStat);
 
@@ -89,8 +89,8 @@ function count = agentcounter(input)
         I2(i) = strcmp(AgentStat(i).worstState_name,'I2');
         I3(i) = strcmp(AgentStat(i).worstState_name,'I3');
         I4(i) = strcmp(AgentStat(i).worstState_name,'I4');
-        I5(i) = strcmp(AgentStat(i).worstState_name,'I5_hospital');
-        I6(i) = strcmp(AgentStat(i).worstState_name,'I6_hospital');
+        I5(i) = strcmp(AgentStat(i).worstState_name,'I5_h');
+        I6(i) = strcmp(AgentStat(i).worstState_name,'I6_h');
     end
     
     D1 = sum(D1);
@@ -127,59 +127,23 @@ function count = agentcounter(input)
     
     count.locationtype = Locationtype_counter;
     
-    % Infection number (time-dependent):
-    
-    var = zeros(length(AgentStat),1);
-    for i = 1 : length(AgentStat)
-        var(i) = AgentStat(i).infectionTime;
-    end
-    
-    seg = var < 10000;
-    
-    seg = seg.*var;
-    seg = max(seg);
-    seg = round(seg);
-    
-    Infection_counter_t = zeros(seg+1,1);
-    
-    for i = 1 : N
-        if AgentStat(i).infectionTime < 10000
-            Infection_counter_t(double(int64(AgentStat(i).infectionTime))+1) = Infection_counter_t(double(int64(AgentStat(i).infectionTime))+1) + 1;
-        end
-    end
-    
-    count.infectiontimes = Infection_counter_t;
-    
     % Infection number:
     
     count.infections = [N; 185386-N];
     
-    % Diagnosis number (time-dependent):
-
-    var = zeros(length(AgentStat),1);
-    for i = 1 : length(AgentStat)
-        var(i) = AgentStat(i).diagnosisTime;
-    end
+    % Diagnosis number:
     
-    seg = var;
-    seg = max(seg);
-    seg = round(seg);
-    
-    Diagnosis_counter_t = zeros(seg,1);
+    Diagnosis_counter_t = 0;
     
     for i = 1 : N
         if AgentStat(i).diagnosisTime ~= 0
-            Diagnosis_counter_t(double(int64(AgentStat(i).diagnosisTime))) = Diagnosis_counter_t(double(int64(AgentStat(i).diagnosisTime))) + 1;
+            Diagnosis_counter_t = Diagnosis_counter_t + 1;
         end
     end
     
-    count.diagnosistimes = [0;Diagnosis_counter_t];
-    
-    % Diagnosis number:
-    
     var = sum(Diagnosis_counter_t);
     
-    count.diagnosises = [var; N-var];
+    count.diagnoses = [var; N-var];
 
     % Precondition halál összefüggés:
     

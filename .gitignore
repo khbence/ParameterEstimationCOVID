@@ -4,3 +4,6 @@ paramsEnv/
 plotting_scripts/data/
 plotting_scripts/tester_contact.m
 plotting_scripts/tester_outagentstat.m
+plotting_scripts/agents0.json
+plotting_scripts/locations0.json
+plotting_scripts/tester_std.m

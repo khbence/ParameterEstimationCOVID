@@ -1,18 +1,12 @@
-function output = statreadprocfun(stat_name)
+function output = statreadprocfun(stat_name,agents,locations)
 
-    fname = 'locations0.json';
-    locations = jsondecode(fileread(fname));
-    locations = locations.places;
-    fname = 'agents0.json';
-    agents = jsondecode(fileread(fname));
-    agents = agents.people;
-    fname = 'locationTypes.json';
-    locationtype = jsondecode(fileread(fname));
-    locationtypes = locationtype.types;
-    locationtype = rmfield(locationtype, 'types');
-    fname = 'agentTypes.json';
-    agenttypes = jsondecode(fileread(fname));
-    agenttypes = agenttypes.types;
+%     fname = 'locationTypes.json';
+%     locationtype = jsondecode(fileread(fname));
+%     locationtypes = locationtype.types;
+%     locationtype = rmfield(locationtype, 'types');
+%     fname = 'agentTypes.json';
+%     agenttypes = jsondecode(fileread(fname));
+%     agenttypes = agenttypes.types;
 
     fname = stat_name;
     AgentStat = jsondecode(fileread(fname));
