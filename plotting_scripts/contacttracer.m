@@ -1,4 +1,4 @@
-function output = contacttracer(inflist,agentstat)
+function output = contacttracer(inflist,agentstat,agents,locations)
 
     contactdata = contactorganizer(inflist);
 
@@ -7,7 +7,7 @@ function output = contacttracer(inflist,agentstat)
     averagear = zeros(maxday+1,1);
     maxar = zeros(maxday+1,1);
 
-    AgentStat = statreadprocfun(agentstat);
+    AgentStat = statreadprocfun(agentstat,agents,locations);
 
     tracer = traceinit(AgentStat);
 

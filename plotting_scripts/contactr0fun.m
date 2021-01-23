@@ -1,7 +1,7 @@
-function output = contactr0fun(inflist,agentstat)
+function output = contactr0fun(inflist,agentstat,agents,locations)
 
     contactdata = contactorganizer(inflist);
-    AgentStat = statreadprocfun(agentstat);
+    AgentStat = statreadprocfun(agentstat,agents,locations);
     
     var = zeros(length(AgentStat),1);
     for i = 1 : length(AgentStat)
@@ -27,5 +27,17 @@ function output = contactr0fun(inflist,agentstat)
 
     output.eloszlas = var;
     output.r0 = mean(var(:,2));
+    
+    summer = 0;
+    iterer = 0;
+    
+    for i = 1 : length(var)
+        if var(i,2) ~= 0
+            summer = summer + var(i,2);
+            iterer = iterer + 1;
+        end
+    end
+    
+    output.r0mod = summer/iterer;
     
 end

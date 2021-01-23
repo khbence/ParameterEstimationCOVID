@@ -16,7 +16,7 @@ function output = contactorganizer(input)
 
         cell_ar{i,1} = (((list(i))*10)/60)/24;
 
-        var = contactreader(append('data1110/infectiouslist_11_10/11_10_infectiousList_',num2str(list(i)),'.txt'));
+        var = contactreader(append(input,num2str(list(i)),'.txt'));
 
         cell_ar{i,2} = var;
 
