@@ -29,7 +29,7 @@ Scenarionames = {'q1',
                  'q3'};
              
 % Cím megadása:
-             
+
 Title = 'Valami cim';
 
 % Végül a függvény hívása:

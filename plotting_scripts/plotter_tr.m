@@ -7,7 +7,7 @@ function output = plotter_tr(tr_ip,agst_ip,scenarionames,Title,flag)
         agents = jsondecode(fileread('agents0.json'));
         agents = agents.people;
         
-        output = traceorganize(tr_ip,agst_ip,agents,locations);
+        output = tracepostprocess(tr_ip,agst_ip,agents,locations);
         
     elseif flag == 0
         fprintf("Contact tracing input processing was not requested!\n")
