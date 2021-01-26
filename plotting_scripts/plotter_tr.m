@@ -45,8 +45,10 @@ function output = plotter_tr(tr_ip,agst_ip,scenarionames,Title,flag)
         
     elseif flag == 0
         fprintf("Contact tracing input processing was not requested!\n")
+        output = 'Contact tracing input processing was not requested!';
     else
         fprintf("You used something other than 0 or 1 for a binary flag!\n")
+        output = 'Contact tracing input processing was not requested!';
     end
     
 end

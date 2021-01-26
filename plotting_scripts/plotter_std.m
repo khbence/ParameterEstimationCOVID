@@ -133,6 +133,19 @@ function plotter_std(txtnames,scenarionames,Title,flag)
         ylabel('No. of agents')
         title('Deaths (new cases)')
         legend('Location','best')
+        
+        subplot(3,3,9)
+        hold on
+        for i = 1 : length(data_av)
+            funplot(mean(i).mu,standev(i).mu,colors(i,:),w,scenarionames{i})
+        end
+        hold off
+        xlim([0 length(data_av(1).s)-1])
+        ylim([0 inf])
+        xlabel('Time [Days]')
+        ylabel('Ratio (%)')
+        title('Ratio of the mutant virus')
+        legend('Location','best')
 
         sgtitle(append('SEIR-related (',Title,')'))
 

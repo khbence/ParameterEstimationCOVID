@@ -87,4 +87,9 @@ function [average, standev] = funproc(input)
     average.do = av;
     standev.do = stdev;
     
+    [av, stdev] = funavdev(input,norm,{'mu'});
+    
+    average.mu = av;
+    standev.mu = stdev;
+    
 end

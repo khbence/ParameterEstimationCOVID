@@ -32,5 +32,6 @@ function output = funread(file)
     output.q = data(:,17);
     output.qt = data(:,18);
     output.nq = data(:,19);
+    output.mu = data(:,20);
 
 end
