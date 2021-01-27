@@ -19,11 +19,12 @@ function plotter_agst(jsonnames,scenarionames,Title,flag)
         
         subplot(2,3,2)
         
-        bar_precond = categorical({'Healthy','Diabetes','CV','Chronickidney','COP'});
-        bar_precond = reordercats(bar_precond,{'Healthy','Diabetes','CV','Chronickidney','COP'});
+        bar_precond = categorical({'Healthy','Diabetes','Cardiovascular','Kidney','Obst. pulmonary'});
+        bar_precond = reordercats(bar_precond,{'Healthy','Diabetes','Cardiovascular','Kidney','Obst. pulmonary'});
         h = bar(bar_precond,data.av.precond);
         set(h, {'DisplayName'}, scenarionames)
         legend('Location','best')
+        xlabel('COVID-related chronic illnesses')
         ylabel('Number of agents')
         title('Precond. distr. of the inf. population')
         
@@ -48,7 +49,7 @@ function plotter_agst(jsonnames,scenarionames,Title,flag)
         set(h, {'DisplayName'}, scenarionames)
         legend('Location','best')
         ylabel('Number of agents')
-        title('State distr.')
+        title('Worst state distr.')
         
         subplot(2,3,5)
         
@@ -70,7 +71,7 @@ function plotter_agst(jsonnames,scenarionames,Title,flag)
         ylabel('Number of agents')
         title('Diagnosed - Not diagnosed agents')
         
-        sgtitle(append(Title,' (Statistics no.1)'))
+        sgtitle(append(Title,' (Statistics-1 of the infected population)'))
         
         figure('Name','Plots2_agst','NumberTitle','off')
         
@@ -94,7 +95,7 @@ function plotter_agst(jsonnames,scenarionames,Title,flag)
         ylabel('Number of agents')
         title('Location type distribution of the infected population')
         
-        sgtitle(append(Title,' (Statistics no.2)'))
+        sgtitle(append(Title,' (Statistics-2 of the infected population)'))
         
     elseif flag == 0
         fprintf("Agentstat input processing was not requested!\n")

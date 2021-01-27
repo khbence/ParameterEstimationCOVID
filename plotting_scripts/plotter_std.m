@@ -147,7 +147,7 @@ function plotter_std(txtnames,scenarionames,Title,flag)
         title('Ratio of the mutant virus')
         legend('Location','best')
 
-        sgtitle(append('SEIR-related (',Title,')'))
+        sgtitle(append('SEIRD-related (',Title,')'))
 
         figure('Name','Plots2_std','NumberTitle','off')
 
