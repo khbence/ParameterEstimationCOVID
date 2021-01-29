@@ -1,6 +1,6 @@
 # Plotting scripts
 
-To run the scripts, and evaluate the data coming from the simulator, one should use the *plotterpp(std_ip, agst_ip, tr_ip, scen_names, title, std_flag, agst_flag, tr_flag)* function. An example for its usage can be seen in the *main.m* file. Now let's list its inputs:
+To run the scripts, and evaluate the data coming from the simulator, one should use the *fun_plotter_main(std_ip, agst_ip, tr_ip, scen_names, title, std_flag, agst_flag, tr_flag)* function. An example for its usage can be seen in the *main.m* file. Now let's list its inputs:
 
   - *std_ip* : a cell array of strings, which contains the file names and paths of the standard outputs
   - *agst_ip* : a cell array of strings, which contains the file names and paths of the agentstat outputs

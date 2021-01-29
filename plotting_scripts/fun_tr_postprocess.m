@@ -1,6 +1,6 @@
-function output = tracepostprocess(tr_ip,agst_ip,agents,locations)
+function output = fun_tr_postprocess(tr_ip,agst_ip,agents,locations)
 
-    var = traceorganize(tr_ip,agst_ip,agents,locations);
+    var = fun_tr_organize(tr_ip,agst_ip,agents,locations);
     
     N = length(var);
     M = length(var(1).tracer);

@@ -1,4 +1,4 @@
-function output = contactreader(input)
+function output = fun_tr_reader(input)
 
     data = readmatrix(input,delimitedTextImportOptions);
 

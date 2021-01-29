@@ -1,4 +1,4 @@
-function [mean, standev] = funavdev(input,norm,varname)
+function [mean, standev] = fun_std_avdev(input,norm,varname)
 
     N = length(input);
     M = length(input(1).s);

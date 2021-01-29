@@ -20,6 +20,6 @@ Scenarionames = {'q1',
 Title = 'Valami cim';
 
 % Végül a függvény hívása:
-output = plotterpp(std_ip,agst_ip,tr_ip,Scenarionames,Title,1,1,1);
+output = fun_plotter_main(std_ip,agst_ip,tr_ip,Scenarionames,Title,1,1,1);
 
 clearvars agst_ip Scenarionames std_ip Title tr_ip

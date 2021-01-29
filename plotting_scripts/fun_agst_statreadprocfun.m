@@ -1,4 +1,4 @@
-function output = statreadprocfun(stat_name,agents,locations)
+function output = fun_agst_statreadprocfun(stat_name,agents,locations)
 
 %     fname = 'locationTypes.json';
 %     locationtype = jsondecode(fileread(fname));

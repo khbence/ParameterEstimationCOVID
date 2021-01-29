@@ -1,4 +1,4 @@
-function output = contactorganizer(input)
+function output = fun_tr_contactorganizer(input)
 
     list = dir(append(input,'*'));
     list = (extractfield(list,'name'))';
@@ -16,7 +16,7 @@ function output = contactorganizer(input)
 
         cell_ar{i,1} = (((list(i))*10)/60)/24;
 
-        var = contactreader(append(input,num2str(list(i)),'.txt'));
+        var = fun_tr_reader(append(input,num2str(list(i)),'.txt'));
 
         cell_ar{i,2} = var;
 
@@ -24,7 +24,7 @@ function output = contactorganizer(input)
     
     for i = 1 : length(cell_ar)
     
-        cell_ar{i,3} = cut(cell_ar{i,1});
+        cell_ar{i,3} = fun_tr_cutter(cell_ar{i,1});
     
     end
     

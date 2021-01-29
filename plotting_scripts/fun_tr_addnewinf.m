@@ -1,4 +1,4 @@
-function output = addnewinf(index,contactdata,tracer)
+function output = fun_tr_addnewinf(index,contactdata,tracer)
 
     for i = 1 : length(index)
 

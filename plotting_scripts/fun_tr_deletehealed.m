@@ -1,4 +1,4 @@
-function output = deletehealed(AgentStat,tracer,day)
+function output = fun_tr_deletehealed(AgentStat,tracer,day)
 
     vartracer = tracer(:,1);
     

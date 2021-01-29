@@ -1,4 +1,4 @@
-function output = addinfevents(index,contactdata,tracer)
+function output = fun_tr_addinfevents(index,contactdata,tracer)
 
     for i = 1 : length(index)
 

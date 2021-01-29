@@ -1,7 +1,7 @@
-function output = contactr0fun(inflist,agentstat,agents,locations)
+function output = fun_tr_contactr0fun(inflist,agentstat,agents,locations)
 
-    contactdata = contactorganizer(inflist);
-    AgentStat = statreadprocfun(agentstat,agents,locations);
+    contactdata = fun_tr_contactorganizer(inflist);
+    AgentStat = fun_agst_statreadprocfun(agentstat,agents,locations);
     
     var = zeros(length(AgentStat),1);
     for i = 1 : length(AgentStat)

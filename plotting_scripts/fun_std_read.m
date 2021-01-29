@@ -1,4 +1,4 @@
-function output = funread(file)
+function output = fun_std_read(file)
 
     data = readmatrix(file);
     % var = data(end-3:end,:);

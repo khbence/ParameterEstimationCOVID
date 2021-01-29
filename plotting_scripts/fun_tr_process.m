@@ -1,4 +1,4 @@
-function output = traceprocess(samplename,samplename2,agents,locations)
+function output = fun_tr_process(samplename,samplename2,agents,locations)
 
     list = dir(append(string(samplename),'*'));
     list = (extractfield(list,'name'))';
@@ -41,8 +41,8 @@ function output = traceprocess(samplename,samplename2,agents,locations)
         ip1 = seged;
         ip2 = append(string(samplename2),num2str(iter_ar2(i)),'.json');
         
-        struct1 = contactr0fun(ip1,ip2,agents,locations);
-        struct2 = contacttracer(ip1,ip2,agents,locations);
+        struct1 = fun_tr_contactr0fun(ip1,ip2,agents,locations);
+        struct2 = fun_tr_contacttracer(ip1,ip2,agents,locations);
         
         struct_ar1 = [struct_ar1 struct1];
         struct_ar2 = [struct_ar2 struct2];

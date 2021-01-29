@@ -1,4 +1,4 @@
-function output = agstprocess(samplename,agents,locations)
+function output = fun_agst_process(samplename,agents,locations)
 
     list = dir(append(samplename,'*'));
     list = (extractfield(list,'name'))';
@@ -15,7 +15,7 @@ function output = agstprocess(samplename,agents,locations)
 
     for i = 1 : length(iter_ar)
 
-        struct_ar = [struct_ar agentcounter(append(samplename,num2str(iter_ar(i)),'.json'),agents,locations)];
+        struct_ar = [struct_ar fun_agst_agentcounter(append(samplename,num2str(iter_ar(i)),'.json'),agents,locations)];
         
     end
     

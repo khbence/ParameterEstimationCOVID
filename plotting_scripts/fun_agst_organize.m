@@ -1,4 +1,4 @@
-function output = agstorganize(samplenames)
+function output = fun_agst_organize(samplenames)
 
     N = length(samplenames);
     
@@ -11,7 +11,7 @@ function output = agstorganize(samplenames)
     
     for i = 1 : N
         
-        finvar = [finvar agstprocess(samplenames{i},agents,locations)];
+        finvar = [finvar fun_agst_process(samplenames{i},agents,locations)];
         
     end
     

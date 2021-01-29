@@ -1,4 +1,4 @@
-function output = cut(input)
+function output = fun_tr_cutter(input)
 
     var = round(input);
     

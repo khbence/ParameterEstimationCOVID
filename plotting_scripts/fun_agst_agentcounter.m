@@ -1,6 +1,6 @@
-function count = agentcounter(input,agents,locations)
+function count = fun_agst_agentcounter(input,agents,locations)
 
-    AgentStat = statreadprocfun(input,agents,locations);
+    AgentStat = fun_agst_statreadprocfun(input,agents,locations);
 
     N = length(AgentStat);
 

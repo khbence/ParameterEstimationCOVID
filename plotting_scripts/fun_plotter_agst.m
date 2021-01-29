@@ -1,8 +1,8 @@
-function plotter_agst(jsonnames,scenarionames,Title,flag)
+function fun_plotter_agst(jsonnames,scenarionames,Title,flag)
 
     if flag == 1
         
-        data = agstorganize(jsonnames);
+        data = fun_agst_organize(jsonnames);
         
         figure('Name','Plots1_agst','NumberTitle','off')
         

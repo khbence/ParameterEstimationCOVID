@@ -1,11 +1,11 @@
-function plotter_std(txtnames,scenarionames,Title,flag)
+function fun_plotter_std(txtnames,scenarionames,Title,flag)
 
     if flag == 1
         w = 1.5;
 
         colors = [[1 0 0];[0 1 0];[0 0 1];[0 0 0];[1 0 1];[0 1 1];[0 0.4470 0.7410];[0.9290 0.6940 0.1250]];
 
-        [mean,standev] = organize(txtnames);
+        [mean,standev] = fun_std_organize(txtnames);
 
         data_av = mean;
 

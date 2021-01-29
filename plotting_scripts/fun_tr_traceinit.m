@@ -1,4 +1,4 @@
-function output = traceinit(AgentStat)
+function output = fun_tr_traceinit(AgentStat)
 
     sum = 0;
 

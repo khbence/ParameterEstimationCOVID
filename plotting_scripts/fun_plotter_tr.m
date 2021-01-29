@@ -1,4 +1,4 @@
-function output = plotter_tr(tr_ip,agst_ip,scenarionames,Title,flag)
+function output = fun_plotter_tr(tr_ip,agst_ip,scenarionames,Title,flag)
 
     if flag == 1
         
@@ -11,7 +11,7 @@ function output = plotter_tr(tr_ip,agst_ip,scenarionames,Title,flag)
         agents = jsondecode(fileread('agents0.json'));
         agents = agents.people;
         
-        output = tracepostprocess(tr_ip,agst_ip,agents,locations);
+        output = fun_tr_postprocess(tr_ip,agst_ip,agents,locations);
         
         figure('Name','Plots1_tr','NumberTitle','off')
         

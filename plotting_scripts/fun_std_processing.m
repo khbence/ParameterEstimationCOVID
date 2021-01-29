@@ -1,4 +1,4 @@
-function [average, standev] = processing(samplename)
+function [average, standev] = fun_std_processing(samplename)
     
     list = dir(append(samplename,'*'));
     list = (extractfield(list,'name'))';
@@ -15,10 +15,10 @@ function [average, standev] = processing(samplename)
 
     for i = 1 : length(iter_ar)
 
-        struct_ar = [struct_ar funread(append(samplename,num2str(iter_ar(i)),'.txt'))];
+        struct_ar = [struct_ar fun_std_read(append(samplename,num2str(iter_ar(i)),'.txt'))];
         
     end
     
-    [average, standev] = funproc(struct_ar);
+    [average, standev] = fun_std_proc(struct_ar);
 
 end
