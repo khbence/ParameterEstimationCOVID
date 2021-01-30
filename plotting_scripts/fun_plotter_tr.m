@@ -2,6 +2,8 @@ function output = fun_plotter_tr(tr_ip,agst_ip,scenarionames,Title,flag)
 
     if flag == 1
         
+        av_mu = 1;
+        
         w = 1.5;
 
         colors = [[1 0 0];[0 1 0];[0 0 1];[0 0 0];[1 0 1];[0 1 1];[0 0.4470 0.7410];[0.9290 0.6940 0.1250]];
@@ -18,7 +20,7 @@ function output = fun_plotter_tr(tr_ip,agst_ip,scenarionames,Title,flag)
         subplot(1,2,1)
         hold on
         for i = 1 : length(output)
-            funplot(output(i).tracer.average.av,output(i).tracer.average.std,colors(i,:),w,scenarionames{i})
+            funplot(av_mu*output(i).tracer.average.av,av_mu*output(i).tracer.average.std,colors(i,:),w,scenarionames{i})
         end
         hold off
         xlim([0 length(output(1).tracer.average.av)-1])
@@ -31,7 +33,7 @@ function output = fun_plotter_tr(tr_ip,agst_ip,scenarionames,Title,flag)
         subplot(1,2,2)
         hold on
         for i = 1 : length(output)
-            funplot(output(i).tracer.maximum.av,output(i).tracer.maximum.std,colors(i,:),w,scenarionames{i})
+            funplot(av_mu*output(i).tracer.maximum.av,av_mu*output(i).tracer.maximum.std,colors(i,:),w,scenarionames{i})
         end
         hold off
         xlim([0 length(output(1).tracer.average.av)-1])
