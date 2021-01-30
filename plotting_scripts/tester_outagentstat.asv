@@ -1,0 +1,52 @@
+clear all; close all; clc;
+
+locations = jsondecode(fileread('locations0.json'));
+locations = locations.places;
+agents = jsondecode(fileread('agents0.json'));
+agents = agents.people;
+
+locationtypes = jsondecode(fileread('locationTypes.json'));
+locationtypes = locationtypes.types;
+agenttypes = jsondecode(fileread('agentTypes.json'));
+agenttypes = agenttypes.types;
+
+example = fun_agst_statreadprocfun('data/dataexample/outagent_01_18/outagent_q1_11.json',agents,locations);
+%%
+
+k = 1;
+
+for i = 1 : length(example)
+    
+    if example(i).loc_ID ~= '-1'
+        
+        example2(k).ID = example(i).ID;
+        example2(k).InfectionLoc = example(i).InfectionLoc;
+        
+        N = length(agents(example(i).ID+1).locations);
+        
+        for j = 1 : N
+            
+            if agents(example(i).ID+1).locations(j).typeID == 4 || agents(example(i).ID+1).locations(j).typeID == 13
+                
+                example2(k).WorkPlace = agents(example(i).ID+1).locations.locID;
+                
+            end
+            
+        end
+        
+        k = k + 1;
+        
+    end
+    
+end
+
+% samplenames = {'data/dataexample/outagent_01_18/outagent_q1_',
+%                'data/dataexample/outagent_01_18/outagent_q2_',
+%                'data/dataexample/outagent_01_18/outagent_q3_'};
+% scennames = {'q1',
+%              'q2',
+%              'q3'};
+%          
+% Title = 'Valami cim';
+% 
+% fun_plotter_agst(samplenames,scennames,Title,1)

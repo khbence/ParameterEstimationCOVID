@@ -36,13 +36,13 @@ function output = fun_agst_statreadprocfun(stat_name,agents,locations)
 %         AgentStat(i).loc_type = 3;
 %         end
         if AgentStat(i).InfectionLoc ~= 0
-            AgentStat(i).loc_ID = locations{AgentStat(i).InfectionLoc,1}.ID;
-            AgentStat(i).loc_type = locations{AgentStat(i).InfectionLoc,1}.type;
-            AgentStat(i).loc_area = locations{AgentStat(i).InfectionLoc,1}.area;
-            AgentStat(i).loc_capacity = locations{AgentStat(i).InfectionLoc,1}.capacity;
-            AgentStat(i).loc_infectious = locations{AgentStat(i).InfectionLoc,1}.infectious;
-            AgentStat(i).loc_age = locations{AgentStat(i).InfectionLoc,1}.ageInter;
-            AgentStat(i).loc_coord = locations{AgentStat(i).InfectionLoc,1}.coordinates;
+            AgentStat(i).loc_ID = locations{AgentStat(i).InfectionLoc+1,1}.ID;
+            AgentStat(i).loc_type = locations{AgentStat(i).InfectionLoc+1,1}.type;
+            AgentStat(i).loc_area = locations{AgentStat(i).InfectionLoc+1,1}.area;
+            AgentStat(i).loc_capacity = locations{AgentStat(i).InfectionLoc+1,1}.capacity;
+            AgentStat(i).loc_infectious = locations{AgentStat(i).InfectionLoc+1,1}.infectious;
+            AgentStat(i).loc_age = locations{AgentStat(i).InfectionLoc+1,1}.ageInter;
+            AgentStat(i).loc_coord = locations{AgentStat(i).InfectionLoc+1,1}.coordinates;
         else
             AgentStat(i).loc_ID = '-1';
             AgentStat(i).loc_type = -1;
