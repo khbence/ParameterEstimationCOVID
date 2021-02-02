@@ -1,4 +1,4 @@
-function output = fun_agst_agentnormc(agents)
+function output = fun_agst_agentnormc(agents,scennum)
 
     N = length(agents);
     
@@ -49,5 +49,17 @@ function output = fun_agst_agentnormc(agents)
         output.typeID(agents(i).typeID) = output.typeID(agents(i).typeID) + 1;
         
     end
+    
+    for i = 2 : scennum
+        
+        output.ages(:,i) = output.ages(:,1);
+        output.precond(:,i) = output.precond(:,1);
+        output.typeID(:,i) = output.typeID(:,1);
+        
+    end
 
+    output.ages = output.ages';
+    output.precond = output.precond';
+    output.typeID = output.typeID';
+    
 end

@@ -1,19 +1,24 @@
-function output = fun_agst_organize(samplenames)
+function [output,agents,itbool] = fun_agst_organize(samplenames,agents,locations,clog)
 
     N = length(samplenames);
     
-    locations = jsondecode(fileread('locations0.json'));
-    locations = locations.places;
-    agents = jsondecode(fileread('agents0.json'));
-    agents = agents.people;
-    
     finvar = [];
+    itbool = [];
     
     for i = 1 : N
         
-        finvar = [finvar fun_agst_process(samplenames{i},agents,locations)];
+        finvar_seged = fun_agst_process(samplenames{i},agents,locations,clog);
+        
+        if sum(finvar_seged.av.age) ~= 0
+            finvar = [finvar finvar_seged];
+            itbool = [itbool 1];
+        else
+            itbool = [itbool 0];
+        end
         
     end
+    
+    N = length(finvar);
     
     for i = 1 : N
         
