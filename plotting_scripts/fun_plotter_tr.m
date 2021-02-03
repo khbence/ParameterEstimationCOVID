@@ -44,6 +44,8 @@ function output = fun_plotter_tr(tr_ip,agst_ip,scenarionames,Title,flag)
         legend('Location','best')
         
         sgtitle(append('Infection tracing time series (',Title,')'))
+
+        fprintf(append("Contact tracing input successfully processed!\n"))
         
     elseif flag == 0
         fprintf("Contact tracing input processing was not requested!\n")

@@ -308,6 +308,25 @@ function fun_plotter_std(txtnames,scenarionames,Title,flag)
         legend('Location','best')
 
         sgtitle(append('Quarantine (',Title,')'))
+        
+        figure('Name','PlotsX_std','NumberTitle','off')
+        hold on
+        for i = 1 : length(data_av)
+            epxosed1 = (-1*diff(mean(i).s))-diff(mean(i).do);
+            epxosed2 = (-1*diff(standev(i).s))-diff(standev(i).do);
+            ifnectious1 = mean(i).i;
+            ifnectious2 = standev(i).i;
+            ifnectious1(1) = [];
+            ifnectious2(1) = [];
+            funplot(epxosed1./ifnectious1,epxosed2./ifnectious2,colors(i,:),w,scenarionames{i})
+        end
+        hold off
+        xlim([0 length(data_av(1).s)-1])
+        ylim([0 inf])
+        xlabel('Time [Days]')
+        ylabel('No. of agents')
+        title('New exposed')
+        legend('Location','best')
 
     %     figure('Name','Plots3','NumberTitle','off')
     %         
@@ -341,6 +360,7 @@ function fun_plotter_std(txtnames,scenarionames,Title,flag)
     %     set(gca,'fontsize',18,'fontweight','bold')
     %     title('Kórházban tartózkodók száma','fontsize',18,'fontweight','bold')
     %     legend('Location','best','fontsize',18,'fontweight','bold')
+        fprintf("Standard input successfully processed!\n")
     elseif flag == 0
         fprintf("Standard input processing was not requested!\n")
     else
