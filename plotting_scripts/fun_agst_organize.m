@@ -41,6 +41,12 @@ function [output,agents,itbool] = fun_agst_organize(samplenames,agents,locations
         
     end
     
-    output = fin_var_re;
+    existbool = exist('fin_var_re','var');
+    
+    if existbool
+        output = fin_var_re;
+    else
+        output = 0;
+    end
 
 end

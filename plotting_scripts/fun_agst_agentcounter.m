@@ -8,21 +8,21 @@ function count = fun_agst_agentcounter(input,agents,locations,clog)
         count = fun_agst_agentcountercount(AgentStat);
     end
     
-    if clog == 1 && deceased ~= 0
+    if clog == 1 && ~(isequaln(deceased,0))
         count = fun_agst_agentcountercount(deceased);
-    elseif clog == 1 && deceased == 0
+    elseif clog == 1 && isequaln(deceased,0)
         count = 0;
     end
     
-    if clog == 2 && quarantined ~= 0
+    if clog == 2 && ~(isequaln(quarantined,0))
         count = fun_agst_agentcountercount(quarantined);
-    elseif clog == 2 && quarantined == 0
+    elseif clog == 2 && isequaln(quarantined,0)
         count = 0;
     end
     
-    if clog == 3 && elders ~= 0
+    if clog == 3 && ~(isequaln(elders,0))
         count = fun_agst_agentcountercount(elders);
-    elseif clog == 3 && elders == 0
+    elseif clog == 3 && isequaln(elders,0)
         count = 0;
     end
     

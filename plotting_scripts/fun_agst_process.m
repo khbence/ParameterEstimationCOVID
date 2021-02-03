@@ -17,7 +17,7 @@ function output = fun_agst_process(samplename,agents,locations,clog)
 
         countvar = fun_agst_agentcounter(append(samplename,num2str(iter_ar(i)),'.json'),agents,locations,clog);
         
-        if countvar ~= 0
+        if ~(isequaln(countvar,0))
             struct_ar = [struct_ar countvar];
         end
         

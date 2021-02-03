@@ -155,7 +155,7 @@ function fun_plotter_agst(jsonnames,scenarionames,Title,flag,agents,locations,cl
 
             sgtitle(append(Title,' (Statistics-3 of the infected population) ',spectitle))
         else
-            fprintf(append('Agent statistics cannot be processed for the ',spectitle,', because there were no agents to start with!'));
+            fprintf(append('Agent statistics cannot be processed for the ',spectitle,', because there were no agents to start with!\n'));
         end
             
     elseif flag == 0

@@ -4,9 +4,9 @@ close all; clear all; clc;
 std_ip = {'data/dataexample/outputs_01_18/q1_',
           'data/dataexample/outputs_01_18/q2_',
           'data/dataexample/outputs_01_18/q3_'};
-std_ip = {'data/data0201/output_byrelation2_',
-          'data/data0201/output_government_',
-          'data/data0201/output_v_bydanger_'};    
+% std_ip = {'data/data0201/output_byrelation2_',
+%           'data/data0201/output_government_',
+%           'data/data0201/output_v_bydanger_'};    
 % Agentstat input:     
 agst_ip = {'data/dataexample/outagent_01_18/outagent_q1_',
            'data/dataexample/outagent_01_18/outagent_q2_',
@@ -23,6 +23,6 @@ Scenarionames = {'Critical workplaces order',
 Title = 'Vaccination test';
 
 % Végül a függvény hívása:
-output = fun_plotter_main(std_ip,agst_ip,tr_ip,Scenarionames,Title,1,0,0);
+output = fun_plotter_main(std_ip,agst_ip,tr_ip,Scenarionames,Title,1,1,1);
 
 clearvars agst_ip Scenarionames std_ip Title tr_ip
