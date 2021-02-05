@@ -1,6 +1,9 @@
 function fun_plotter_std(txtnames,scenarionames,Title,flag)
 
     if flag == 1
+        
+        fprintf('Standard input data processing started!\n');
+        
         w = 1.5;
 
         colors = [[1 0 0];[0 1 0];[0 0 1];[0 0 0];[1 0 1];[0 1 1];[0 0.4470 0.7410];[0.9290 0.6940 0.1250]];
@@ -8,6 +11,8 @@ function fun_plotter_std(txtnames,scenarionames,Title,flag)
         [mean,standev] = fun_std_organize(txtnames);
 
         data_av = mean;
+        
+        fprintf('Standard input data processed!\n');
 
         figure('Name','Plots1_std','NumberTitle','off')
 
@@ -460,6 +465,7 @@ function fun_plotter_std(txtnames,scenarionames,Title,flag)
     %     set(gca,'fontsize',18,'fontweight','bold')
     %     title('Kórházban tartózkodók száma','fontsize',18,'fontweight','bold')
     %     legend('Location','best','fontsize',18,'fontweight','bold')
+    
         fprintf("Standard input successfully processed!\n")
     elseif flag == 0
         fprintf("Standard input processing was not requested!\n")
