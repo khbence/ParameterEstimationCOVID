@@ -316,8 +316,8 @@ function fun_plotter_std(txtnames,scenarionames,Title,flag)
             epxosed2 = (-1*diff(standev(i).s))-diff(standev(i).do);
             ifnectious1 = mean(i).i;
             ifnectious2 = standev(i).i;
-            ifnectious1(1) = [];
-            ifnectious2(1) = [];
+            ifnectious1(end) = [];
+            ifnectious2(end) = [];
             funplot(epxosed1./ifnectious1,epxosed2./ifnectious2,colors(i,:),w,scenarionames{i})
         end
         hold off
