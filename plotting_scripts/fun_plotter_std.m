@@ -124,7 +124,7 @@ function fun_plotter_std(txtnames,scenarionames,Title,flag)
                 var_sd(j) = var_sd(j) - standev(i).d(j-1);
             end
 
-            funplot(var_av,var_sd,colors(i,:),w,scenarionames{i})
+            funplot(var_av(2:end),var_sd(2:end),colors(i,:),w,scenarionames{i})
         end
         hold off
         xlim([0 length(data_av(1).s)-1])
@@ -151,10 +151,12 @@ function fun_plotter_std(txtnames,scenarionames,Title,flag)
 
         figure('Name','Plots2_std','NumberTitle','off')
 
-        subplot(2,2,1)
+        subplot(2,3,1)
         hold on
         for i = 1 : length(data_av)
-            funplot(mean(i).t+mean(i).p2,standev(i).t+standev(i).p2,colors(i,:),w,scenarionames{i})
+            seg1 = mean(i).t+mean(i).p2;
+            seg2 = standev(i).t+standev(i).p2;
+            funplot(seg1(3:end),seg2(3:end),colors(i,:),w,scenarionames{i})
         end
         hold off
         xlim([0 length(data_av(1).s)-1])
@@ -164,10 +166,12 @@ function fun_plotter_std(txtnames,scenarionames,Title,flag)
         title('Number of new tests')
         legend('Location','best')
 
-        subplot(2,2,2)
+        subplot(2,3,4)
         hold on
         for i = 1 : length(data_av)
-            funplot(mean(i).p1+mean(i).p2,standev(i).p1+standev(i).p2,colors(i,:),w,scenarionames{i})
+            seg1 = mean(i).p1+mean(i).p2;
+            seg2 = standev(i).p1+standev(i).p2;
+            funplot(seg1(3:end),seg2(3:end),colors(i,:),w,scenarionames{i})
         end
         hold off
         xlim([0 length(data_av(1).s)-1])
@@ -177,11 +181,13 @@ function fun_plotter_std(txtnames,scenarionames,Title,flag)
         title('Number of new, positive tests')
         legend('Location','best')
 
-        subplot(2,2,3)
+        subplot(2,3,[2 3])
         hold on    
         maxvar = max((mean(1).p1+mean(1).p2)./(mean(1).t+mean(1).p2));
         for i = 1 : length(data_av)
-            funplot((mean(i).p1+mean(i).p2)./(mean(i).t+mean(i).p2),(standev(i).p1+standev(i).p2)./(standev(i).t+standev(i).p2),colors(i,:),w,scenarionames{i})
+            seg1 = (mean(i).p1+mean(i).p2)./(mean(i).t+mean(i).p2);
+            seg2 = (standev(i).p1+standev(i).p2)./(standev(i).t+standev(i).p2);
+            funplot(seg1(3:end),seg2(3:end),colors(i,:),w,scenarionames{i})
 
             if maxvar < max((mean(i).p1+mean(i).p2)./(mean(i).t+mean(i).p2))
                 maxvar = max((mean(i).p1+mean(i).p2)./(mean(i).t+mean(i).p2));
@@ -193,7 +199,33 @@ function fun_plotter_std(txtnames,scenarionames,Title,flag)
         xlabel('Time [Days]')
         ylabel('Ratio')
         title('Ratio of new, positive tests')
-        legend('Location','best')    
+        legend('Location','best')
+        
+        subplot(2,3,5)
+        hold on
+        for i = 1 : length(data_av)
+            funplot(cumsum(mean(i).t+mean(i).p2),cumsum(standev(i).t+standev(i).p2),colors(i,:),w,scenarionames{i})
+        end
+        hold off
+        xlim([0 length(data_av(1).s)-1])
+        ylim([0 inf])
+        xlabel('Time [Days]')
+        ylabel('No. of agents')
+        title('Number of tests (cumulative)')
+        legend('Location','best')
+
+        subplot(2,3,6)
+        hold on
+        for i = 1 : length(data_av)
+            funplot(cumsum(mean(i).p1+mean(i).p2),cumsum(standev(i).p1+standev(i).p2),colors(i,:),w,scenarionames{i})
+        end
+        hold off
+        xlim([0 length(data_av(1).s)-1])
+        ylim([0 inf])
+        xlabel('Time [Days]')
+        ylabel('No. of agents')
+        title('Number of positive tests (cumulative)')
+        legend('Location','best')
 
         sgtitle(append('Testing (',Title,')'))
 
@@ -309,25 +341,93 @@ function fun_plotter_std(txtnames,scenarionames,Title,flag)
 
         sgtitle(append('Quarantine (',Title,')'))
         
-        figure('Name','PlotsX_std','NumberTitle','off')
+        figure('Name','Plots5_std','NumberTitle','off')
+        
+        subplot(1,2,1)
         hold on
         for i = 1 : length(data_av)
-            epxosed1 = (-1*diff(mean(i).s))-diff(mean(i).do);
-            epxosed2 = (-1*diff(standev(i).s))-diff(standev(i).do);
-            ifnectious1 = mean(i).i;
-            ifnectious2 = standev(i).i;
-            ifnectious1(end) = [];
-            ifnectious2(end) = [];
-            funplot(epxosed1./ifnectious1,epxosed2./ifnectious2,colors(i,:),w,scenarionames{i})
+            funplot(diff(mean(i).s),diff(standev(i).s),colors(i,:),w,scenarionames{i})
         end
         hold off
         xlim([0 length(data_av(1).s)-1])
-        ylim([0 inf])
         xlabel('Time [Days]')
         ylabel('No. of agents')
-        title('New exposed')
+        title('Susceptible (derivative)')
         legend('Location','best')
-
+        
+        subplot(1,2,2)
+        hold on
+        for i = 1 : length(data_av)
+            funplot(diff(mean(i).r),diff(standev(i).r),colors(i,:),w,scenarionames{i})
+        end
+        hold off
+        xlim([0 length(data_av(1).s)-1])
+        xlabel('Time [Days]')
+        ylabel('No. of agents')
+        title('Recovered (derivative)')
+        legend('Location','best')
+        
+        sgtitle(append('Susceptible and recovered change rate (',Title,')'))
+        
+        figure('Name','Plots6_std','NumberTitle','off')
+        
+        subplot(2,2,1)
+        hold on
+        for i = 1 : length(data_av)
+            funplot(mean(i).do,standev(i).do,colors(i,:),w,scenarionames{i})
+        end
+        hold off
+        xlim([0 length(data_av(1).s)-1])
+        xlabel('Time [Days]')
+        ylabel('No. of agents')
+        title('Deaths (cumulative)')
+        legend('Location','best')
+        
+        subplot(2,2,2)
+        hold on
+        for i = 1 : length(data_av)
+            funplot(diff(mean(i).do),diff(standev(i).do),colors(i,:),w,scenarionames{i})
+        end
+        hold off
+        xlim([0 length(data_av(1).s)-1])
+        xlabel('Time [Days]')
+        ylabel('No. of agents')
+        title('Deaths (new cases)')
+        legend('Location','best')
+        
+        subplot(2,2,[3 4])
+        hold on
+        for i = 1 : length(data_av)
+            funplot(mean(i).h,standev(i).h,colors(i,:),w,scenarionames{i})
+        end
+        hold off
+        xlim([0 length(data_av(1).s)-1])
+        xlabel('Time [Days]')
+        ylabel('No. of agents')
+        title('Hospitalization')
+        legend('Location','best')
+        
+        sgtitle(append('Not COVID-related results (',Title,')'))
+        
+    %     figure('Name','PlotsX_std','NumberTitle','off')
+    %     hold on
+    %     for i = 1 : length(data_av)
+    %         epxosed1 = (-1*diff(mean(i).s))-diff(mean(i).do);
+    %         epxosed2 = (-1*diff(standev(i).s))-diff(standev(i).do);
+    %         ifnectious1 = mean(i).i;
+    %         ifnectious2 = standev(i).i;
+    %         ifnectious1(end) = [];
+    %         ifnectious2(end) = [];
+    %         funplot(epxosed1./ifnectious1,epxosed2./ifnectious2,colors(i,:),w,scenarionames{i})
+    %     end
+    %     hold off
+    %     xlim([0 length(data_av(1).s)-1])
+    %     ylim([0 inf])
+    %     xlabel('Time [Days]')
+    %     ylabel('No. of agents')
+    %     title('New exposed')
+    %     legend('Location','best')
+    %
     %     figure('Name','Plots3','NumberTitle','off')
     %         
     %     hold on
