@@ -28,6 +28,6 @@ Scenarionames = {'Gov-def. order'};
 Title = 'Goverment vaccination priority';
 
 % Végül a függvény hívása:
-output = fun_plotter_main(std_ip,agst_ip,tr_ip,Scenarionames,Title,1,0,0);
+output = fun_plotter_main(std_ip,agst_ip,tr_ip,Scenarionames,Title,1,1,1);
 
 clearvars agst_ip Scenarionames std_ip Title tr_ip

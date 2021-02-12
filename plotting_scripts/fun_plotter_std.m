@@ -414,24 +414,24 @@ function fun_plotter_std(txtnames,scenarionames,Title,flag)
         
         sgtitle(append('Not COVID-related results (',Title,')'))
         
-    %     figure('Name','PlotsX_std','NumberTitle','off')
-    %     hold on
-    %     for i = 1 : length(data_av)
-    %         epxosed1 = (-1*diff(mean(i).s))-diff(mean(i).do);
-    %         epxosed2 = (-1*diff(standev(i).s))-diff(standev(i).do);
-    %         ifnectious1 = mean(i).i;
-    %         ifnectious2 = standev(i).i;
-    %         ifnectious1(end) = [];
-    %         ifnectious2(end) = [];
-    %         funplot(epxosed1./ifnectious1,epxosed2./ifnectious2,colors(i,:),w,scenarionames{i})
-    %     end
-    %     hold off
-    %     xlim([0 length(data_av(1).s)-1])
-    %     ylim([0 inf])
-    %     xlabel('Time [Days]')
-    %     ylabel('No. of agents')
-    %     title('New exposed')
-    %     legend('Location','best')
+        figure('Name','PlotsX_std','NumberTitle','off')
+        hold on
+        for i = 1 : length(data_av)
+            epxosed1 = (-1*diff(mean(i).s))-diff(mean(i).do);
+            epxosed2 = (-1*diff(standev(i).s))-diff(standev(i).do);
+            ifnectious1 = mean(i).i;
+            ifnectious2 = standev(i).i;
+            ifnectious1(end) = [];
+            ifnectious2(end) = [];
+            funplot(epxosed1./ifnectious1,epxosed2./ifnectious2,colors(i,:),w,scenarionames{i})
+        end
+        hold off
+        xlim([0 length(data_av(1).s)-1])
+        ylim([0 inf])
+        xlabel('Time [Days]')
+        ylabel('No. of agents')
+        title('New exposed and currnet infectious ratio')
+        legend('Location','best')
     %
     %     figure('Name','Plots3','NumberTitle','off')
     %         
