@@ -10,8 +10,11 @@ tr_ip = {'data/data0203/dumplist_02_03/dumplist_'};
 Scenarionames = {'Gov-def. order'};
 % Cím megadása:
 Title = 'Goverment vaccination priority';
+% Plot határok bejelölése:
+Measures = {"Kij. korl.",7;
+            "Oltás",63};
 
 % Végül a függvény hívása:
-output = fun_plotter_main(std_ip,agst_ip,tr_ip,Scenarionames,Title,1,0,0);
+output = fun_plotter_main(std_ip,agst_ip,tr_ip,Scenarionames,Title,Measures,1,0,0);
 
 clearvars agst_ip Scenarionames std_ip Title tr_ip

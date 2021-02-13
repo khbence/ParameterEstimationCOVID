@@ -1,8 +1,11 @@
-function fun_plotter_std(txtnames,scenarionames,Title,flag)
+function fun_plotter_std(txtnames,scenarionames,Title,Measures,flag)
 
     if flag == 1
         
         fprintf('Standard input data processing started!\n');
+        
+        measdim = size(Measures);
+        measdim = measdim(1);
         
         w = 1.5;
 
@@ -26,6 +29,9 @@ function fun_plotter_std(txtnames,scenarionames,Title,flag)
                 minvar = min(mean(i).s-standev(i).s);
             end
         end
+        for i = 1 : measdim
+            xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
+        end
         hold off
         xlim([0 length(data_av(1).s)-1])
         ylim([minvar-1000 inf])
@@ -39,6 +45,9 @@ function fun_plotter_std(txtnames,scenarionames,Title,flag)
         for i = 1 : length(data_av)
             funplot(mean(i).e,standev(i).e,colors(i,:),w,scenarionames{i})
         end
+        for i = 1 : measdim
+            xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
+        end
         hold off
         xlim([0 length(data_av(1).s)-1])
         ylim([0 inf])
@@ -51,6 +60,9 @@ function fun_plotter_std(txtnames,scenarionames,Title,flag)
         hold on
         for i = 1 : length(data_av)
             funplot(mean(i).i,standev(i).i,colors(i,:),w,scenarionames{i})
+        end
+        for i = 1 : measdim
+            xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
         end
         %data = readmatrix('data_long.txt');
         %plot(data,'Color',[0.6350 0.0780 0.1840],'LineWidth',1.5,'DisplayName','Data')
@@ -67,6 +79,9 @@ function fun_plotter_std(txtnames,scenarionames,Title,flag)
         for i = 1 : length(data_av)
             funplot(mean(i).ei,standev(i).ei,colors(i,:),w,scenarionames{i})
         end
+        for i = 1 : measdim
+            xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
+        end
         %data = readmatrix('data_long.txt');
         %plot(data,'Color',[0.6350 0.0780 0.1840],'LineWidth',1.5,'DisplayName','Data')
         hold off
@@ -82,6 +97,9 @@ function fun_plotter_std(txtnames,scenarionames,Title,flag)
         for i = 1 : length(data_av)
             funplot(mean(i).r,standev(i).r,colors(i,:),w,scenarionames{i})
         end
+        for i = 1 : measdim
+            xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
+        end
         hold off
         xlim([0 length(data_av(1).s)-1])
         ylim([0 inf])
@@ -94,6 +112,9 @@ function fun_plotter_std(txtnames,scenarionames,Title,flag)
         hold on
         for i = 1 : length(data_av)
             funplot(mean(i).d,standev(i).d,colors(i,:),w,scenarionames{i})
+        end
+        for i = 1 : measdim
+            xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
         end
         hold off
         xlim([0 length(data_av(1).s)-1])
@@ -109,6 +130,9 @@ function fun_plotter_std(txtnames,scenarionames,Title,flag)
             seg1 = (-1*diff(mean(i).s))-diff(mean(i).do);
             seg2 = (-1*diff(standev(i).s))-diff(standev(i).do);
             funplot(seg1,seg2,colors(i,:),w,scenarionames{i})
+        end
+        for i = 1 : measdim
+            xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
         end
         hold off
         xlim([0 length(data_av(1).s)-1])
@@ -131,6 +155,9 @@ function fun_plotter_std(txtnames,scenarionames,Title,flag)
 
             funplot(var_av,var_sd,colors(i,:),w,scenarionames{i})
         end
+        for i = 1 : measdim
+            xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
+        end
         hold off
         xlim([0 length(data_av(1).s)-1])
         ylim([0 inf])
@@ -143,6 +170,9 @@ function fun_plotter_std(txtnames,scenarionames,Title,flag)
         hold on
         for i = 1 : length(data_av)
             funplot(mean(i).mu,standev(i).mu,colors(i,:),w,scenarionames{i})
+        end
+        for i = 1 : measdim
+            xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
         end
         hold off
         xlim([0 length(data_av(1).s)-1])
@@ -163,6 +193,9 @@ function fun_plotter_std(txtnames,scenarionames,Title,flag)
             seg2 = standev(i).t+standev(i).p2;
             funplot(seg1,seg2,colors(i,:),w,scenarionames{i})
         end
+        for i = 1 : measdim
+            xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
+        end
         hold off
         xlim([0 length(data_av(1).s)-1])
         ylim([0 inf])
@@ -177,6 +210,9 @@ function fun_plotter_std(txtnames,scenarionames,Title,flag)
             seg1 = mean(i).p1+mean(i).p2;
             seg2 = standev(i).p1+standev(i).p2;
             funplot(seg1,seg2,colors(i,:),w,scenarionames{i})
+        end
+        for i = 1 : measdim
+            xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
         end
         hold off
         xlim([0 length(data_av(1).s)-1])
@@ -198,6 +234,9 @@ function fun_plotter_std(txtnames,scenarionames,Title,flag)
                 maxvar = max((mean(i).p1+mean(i).p2)./(mean(i).t+mean(i).p2));
             end
         end
+        for i = 1 : measdim
+            xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
+        end
         hold off
         xlim([0 length(data_av(1).s)-1])
         ylim([0 maxvar+0.01])
@@ -211,6 +250,9 @@ function fun_plotter_std(txtnames,scenarionames,Title,flag)
         for i = 1 : length(data_av)
             funplot(cumsum(mean(i).t+mean(i).p2),cumsum(standev(i).t+standev(i).p2),colors(i,:),w,scenarionames{i})
         end
+        for i = 1 : measdim
+            xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
+        end
         hold off
         xlim([0 length(data_av(1).s)-1])
         ylim([0 inf])
@@ -223,6 +265,9 @@ function fun_plotter_std(txtnames,scenarionames,Title,flag)
         hold on
         for i = 1 : length(data_av)
             funplot(cumsum(mean(i).p1+mean(i).p2),cumsum(standev(i).p1+standev(i).p2),colors(i,:),w,scenarionames{i})
+        end
+        for i = 1 : measdim
+            xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
         end
         hold off
         xlim([0 length(data_av(1).s)-1])
@@ -241,6 +286,9 @@ function fun_plotter_std(txtnames,scenarionames,Title,flag)
         for i = 1 : length(data_av)
             funplot(mean(i).ktnc,standev(i).ktnc,colors(i,:),w,scenarionames{i})
         end
+        for i = 1 : measdim
+            xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
+        end
         hold off
         xlim([0 length(data_av(1).s)-1])
         ylim([0 inf])
@@ -253,6 +301,9 @@ function fun_plotter_std(txtnames,scenarionames,Title,flag)
         hold on
         for i = 1 : length(data_av)
             funplot(mean(i).kt,standev(i).kt,colors(i,:),w,scenarionames{i})
+        end
+        for i = 1 : measdim
+            xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
         end
         hold off
         xlim([0 length(data_av(1).s)-1])
@@ -267,6 +318,9 @@ function fun_plotter_std(txtnames,scenarionames,Title,flag)
         for i = 1 : length(data_av)
             funplot(mean(i).k,standev(i).k,colors(i,:),w,scenarionames{i})
         end
+        for i = 1 : measdim
+            xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
+        end
         hold off
         xlim([0 length(data_av(1).s)-1])
         ylim([0 inf])
@@ -279,6 +333,9 @@ function fun_plotter_std(txtnames,scenarionames,Title,flag)
         hold on
         for i = 1 : length(data_av)
             funplot(mean(i).i6,standev(i).i6,colors(i,:),w,scenarionames{i})
+        end
+        for i = 1 : measdim
+            xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
         end
         hold off
         xlim([0 length(data_av(1).s)-1])
@@ -297,6 +354,9 @@ function fun_plotter_std(txtnames,scenarionames,Title,flag)
         for i = 1 : length(data_av)
             funplot(mean(i).q,standev(i).q,colors(i,:),w,scenarionames{i})
         end
+        for i = 1 : measdim
+            xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
+        end
         hold off
         xlim([0 length(data_av(1).s)-1])
         ylim([0 inf])
@@ -309,6 +369,9 @@ function fun_plotter_std(txtnames,scenarionames,Title,flag)
         hold on
         for i = 1 : length(data_av)
             funplot(mean(i).nq,standev(i).nq,colors(i,:),w,scenarionames{i})
+        end
+        for i = 1 : measdim
+            xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
         end
         hold off
         xlim([0 length(data_av(1).s)-1])
@@ -323,6 +386,9 @@ function fun_plotter_std(txtnames,scenarionames,Title,flag)
         for i = 1 : length(data_av)
             funplot(mean(i).q-mean(i).qt,standev(i).q-standev(i).qt,colors(i,:),w,scenarionames{i})
         end
+        for i = 1 : measdim
+            xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
+        end
         hold off
         xlim([0 length(data_av(1).s)-1])
         ylim([0 inf])
@@ -335,6 +401,9 @@ function fun_plotter_std(txtnames,scenarionames,Title,flag)
         hold on
         for i = 1 : length(data_av)
             funplot(mean(i).qt,standev(i).qt,colors(i,:),w,scenarionames{i})
+        end
+        for i = 1 : measdim
+            xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
         end
         hold off
         xlim([0 length(data_av(1).s)-1])
@@ -353,6 +422,9 @@ function fun_plotter_std(txtnames,scenarionames,Title,flag)
         for i = 1 : length(data_av)
             funplot(diff(mean(i).s),diff(standev(i).s),colors(i,:),w,scenarionames{i})
         end
+        for i = 1 : measdim
+            xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
+        end
         hold off
         xlim([0 length(data_av(1).s)-1])
         xlabel('Time [Days]')
@@ -364,6 +436,9 @@ function fun_plotter_std(txtnames,scenarionames,Title,flag)
         hold on
         for i = 1 : length(data_av)
             funplot(diff(mean(i).r),diff(standev(i).r),colors(i,:),w,scenarionames{i})
+        end
+        for i = 1 : measdim
+            xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
         end
         hold off
         xlim([0 length(data_av(1).s)-1])
@@ -381,6 +456,9 @@ function fun_plotter_std(txtnames,scenarionames,Title,flag)
         for i = 1 : length(data_av)
             funplot(mean(i).do,standev(i).do,colors(i,:),w,scenarionames{i})
         end
+        for i = 1 : measdim
+            xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
+        end
         hold off
         xlim([0 length(data_av(1).s)-1])
         xlabel('Time [Days]')
@@ -393,6 +471,9 @@ function fun_plotter_std(txtnames,scenarionames,Title,flag)
         for i = 1 : length(data_av)
             funplot(diff(mean(i).do),diff(standev(i).do),colors(i,:),w,scenarionames{i})
         end
+        for i = 1 : measdim
+            xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
+        end
         hold off
         xlim([0 length(data_av(1).s)-1])
         xlabel('Time [Days]')
@@ -404,6 +485,9 @@ function fun_plotter_std(txtnames,scenarionames,Title,flag)
         hold on
         for i = 1 : length(data_av)
             funplot(mean(i).h,standev(i).h,colors(i,:),w,scenarionames{i})
+        end
+        for i = 1 : measdim
+            xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
         end
         hold off
         xlim([0 length(data_av(1).s)-1])
@@ -424,6 +508,9 @@ function fun_plotter_std(txtnames,scenarionames,Title,flag)
             ifnectious1(end) = [];
             ifnectious2(end) = [];
             funplot(epxosed1./ifnectious1,epxosed2./ifnectious2,colors(i,:),w,scenarionames{i})
+        end
+        for i = 1 : measdim
+            xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
         end
         hold off
         xlim([0 length(data_av(1).s)-1])
@@ -447,6 +534,9 @@ function fun_plotter_std(txtnames,scenarionames,Title,flag)
                 minvar = min(mean(i).s-standev(i).s);
             end
         end
+        for i = 1 : measdim
+            xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
+        end
         hold off
         xlim([0 length(data_av(1).s)-1])
         ylim([minvar-1000 inf])
@@ -459,6 +549,9 @@ function fun_plotter_std(txtnames,scenarionames,Title,flag)
         hold on
         for i = 1 : length(data_av)
             funplot(mean(i).e,standev(i).e,colors(i,:),w,scenarionames{i})
+        end
+        for i = 1 : measdim
+            xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
         end
         hold off
         xlim([0 length(data_av(1).s)-1])
@@ -473,6 +566,9 @@ function fun_plotter_std(txtnames,scenarionames,Title,flag)
         for i = 1 : length(data_av)
             funplot(mean(i).i,standev(i).i,colors(i,:),w,scenarionames{i})
         end
+        for i = 1 : measdim
+            xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
+        end
         hold off
         xlim([0 length(data_av(1).s)-1])
         ylim([0 inf])
@@ -485,6 +581,9 @@ function fun_plotter_std(txtnames,scenarionames,Title,flag)
         hold on
         for i = 1 : length(data_av)
             funplot(mean(i).r,standev(i).r,colors(i,:),w,scenarionames{i})
+        end
+        for i = 1 : measdim
+            xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
         end
         hold off
         xlim([0 length(data_av(1).s)-1])
@@ -504,6 +603,9 @@ function fun_plotter_std(txtnames,scenarionames,Title,flag)
             seg1 = (-1*diff(mean(i).s))-diff(mean(i).do);
             seg2 = (-1*diff(standev(i).s))-diff(standev(i).do);
             funplot(seg1,seg2,colors(i,:),w,scenarionames{i})
+        end
+        for i = 1 : measdim
+            xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
         end
         hold off
         xlim([0 length(data_av(1).s)-1])
@@ -526,6 +628,9 @@ function fun_plotter_std(txtnames,scenarionames,Title,flag)
 
             funplot(var_av,var_sd,colors(i,:),w,scenarionames{i})
         end
+        for i = 1 : measdim
+            xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
+        end
         hold off
         xlim([0 length(data_av(1).s)-1])
         ylim([0 inf])
@@ -538,6 +643,9 @@ function fun_plotter_std(txtnames,scenarionames,Title,flag)
         hold on
         for i = 1 : length(data_av)
             funplot(mean(i).k,standev(i).k,colors(i,:),w,scenarionames{i})
+        end
+        for i = 1 : measdim
+            xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
         end
         hold off
         xlim([0 length(data_av(1).s)-1])
@@ -554,6 +662,9 @@ function fun_plotter_std(txtnames,scenarionames,Title,flag)
             seg2 = standev(i).t+standev(i).p2;
             funplot(seg1,seg2,colors(i,:),w,scenarionames{i})
         end
+        for i = 1 : measdim
+            xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
+        end
         hold off
         xlim([0 length(data_av(1).s)-1])
         ylim([0 inf])
@@ -568,6 +679,9 @@ function fun_plotter_std(txtnames,scenarionames,Title,flag)
             seg1 = mean(i).p1+mean(i).p2;
             seg2 = standev(i).p1+standev(i).p2;
             funplot(seg1,seg2,colors(i,:),w,scenarionames{i})
+        end
+        for i = 1 : measdim
+            xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
         end
         hold off
         xlim([0 length(data_av(1).s)-1])
@@ -589,6 +703,9 @@ function fun_plotter_std(txtnames,scenarionames,Title,flag)
                 maxvar = max((mean(i).p1+mean(i).p2)./(mean(i).t+mean(i).p2));
             end
         end
+        for i = 1 : measdim
+            xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
+        end
         hold off
         xlim([0 length(data_av(1).s)-1])
         ylim([0 maxvar+0.01])
@@ -606,6 +723,9 @@ function fun_plotter_std(txtnames,scenarionames,Title,flag)
         for i = 1 : length(data_av)
             funplot(mean(i).ktnc,standev(i).ktnc,colors(i,:),w,scenarionames{i})
         end
+        for i = 1 : measdim
+            xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
+        end
         hold off
         xlim([0 length(data_av(1).s)-1])
         ylim([0 inf])
@@ -618,6 +738,9 @@ function fun_plotter_std(txtnames,scenarionames,Title,flag)
         hold on
         for i = 1 : length(data_av)
             funplot(mean(i).kt,standev(i).kt,colors(i,:),w,scenarionames{i})
+        end
+        for i = 1 : measdim
+            xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
         end
         hold off
         xlim([0 length(data_av(1).s)-1])
@@ -632,6 +755,9 @@ function fun_plotter_std(txtnames,scenarionames,Title,flag)
         for i = 1 : length(data_av)
             funplot(mean(i).i6,standev(i).i6,colors(i,:),w,scenarionames{i})
         end
+        for i = 1 : measdim
+            xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
+        end
         hold off
         xlim([0 length(data_av(1).s)-1])
         ylim([0 inf])
@@ -644,6 +770,9 @@ function fun_plotter_std(txtnames,scenarionames,Title,flag)
         hold on
         for i = 1 : length(data_av)
             funplot(mean(i).q,standev(i).q,colors(i,:),w,scenarionames{i})
+        end
+        for i = 1 : measdim
+            xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
         end
         hold off
         xlim([0 length(data_av(1).s)-1])
@@ -658,6 +787,9 @@ function fun_plotter_std(txtnames,scenarionames,Title,flag)
         for i = 1 : length(data_av)
             funplot(mean(i).nq,standev(i).nq,colors(i,:),w,scenarionames{i})
         end
+        for i = 1 : measdim
+            xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
+        end
         hold off
         xlim([0 length(data_av(1).s)-1])
         ylim([0 inf])
@@ -670,6 +802,9 @@ function fun_plotter_std(txtnames,scenarionames,Title,flag)
         hold on
         for i = 1 : length(data_av)
             funplot(mean(i).qt,standev(i).qt,colors(i,:),w,scenarionames{i})
+        end
+        for i = 1 : measdim
+            xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
         end
         hold off
         xlim([0 length(data_av(1).s)-1])

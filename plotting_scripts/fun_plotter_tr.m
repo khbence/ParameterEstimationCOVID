@@ -1,10 +1,13 @@
-function output = fun_plotter_tr(tr_ip,agst_ip,scenarionames,Title,flag)
+function output = fun_plotter_tr(tr_ip,agst_ip,scenarionames,Title,Measures,flag)
 
     if flag == 1
         
         av_mu = 1;
         
         w = 1.5;
+        
+        measdim = size(Measures);
+        measdim = measdim(1);
 
         colors = [[1 0 0];[0 1 0];[0 0 1];[0 0 0];[1 0 1];[0 1 1];[0 0.4470 0.7410];[0.9290 0.6940 0.1250]];
         
@@ -22,6 +25,9 @@ function output = fun_plotter_tr(tr_ip,agst_ip,scenarionames,Title,flag)
         for i = 1 : length(output)
             funplot(av_mu*output(i).tracer.average.av,av_mu*output(i).tracer.average.std,colors(i,:),w,scenarionames{i})
         end
+        for i = 1 : measdim
+            xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
+        end
         hold off
         xlim([0 length(output(1).tracer.average.av)-1])
         ylim([0 inf])
@@ -34,6 +40,9 @@ function output = fun_plotter_tr(tr_ip,agst_ip,scenarionames,Title,flag)
         hold on
         for i = 1 : length(output)
             funplot(av_mu*output(i).tracer.maximum.av,av_mu*output(i).tracer.maximum.std,colors(i,:),w,scenarionames{i})
+        end
+        for i = 1 : measdim
+            xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
         end
         hold off
         xlim([0 length(output(1).tracer.average.av)-1])
