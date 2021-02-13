@@ -14,12 +14,20 @@ function output = fun_tr_contactr0fun(inflist,agentstat,agents,locations)
     
     for i = 1 : length(contactdata)
         
-        seged = contactdata{i,2}{1,3};
-        hossz = length(seged);
+        dim1 = size(contactdata{i,2});
+        dim1 = dim1(1);
         
-        for j = 1 : hossz
+        for j = 1 : dim1
             
-            var(find(var(:,1) == seged(j)),2) = var(find(var(:,1) == seged(j)),2) + (1/hossz);
+            seged = contactdata{i,2}{j,3};
+            hossz = length(seged);
+            infnum = length(contactdata{i,2}{j,2});
+
+            for k = 1 : hossz
+
+                var(find(var(:,1) == seged(k)),2) = var(find(var(:,1) == seged(k)),2) + (infnum/hossz);
+
+            end
             
         end
         

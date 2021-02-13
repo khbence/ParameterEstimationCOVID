@@ -15,8 +15,6 @@ function output = fun_tr_contacttracer(inflist,agentstat,agents,locations)
     
         index = fun_tr_indexarcreator(contactdata,i);
 
-        tracer = fun_tr_addnewinf(index,contactdata,tracer);
-
         tracer = fun_tr_addinfevents(index,contactdata,tracer);
 
         av = mean(tracer(:,2));
@@ -26,6 +24,8 @@ function output = fun_tr_contacttracer(inflist,agentstat,agents,locations)
         maxar(i+1) = maxinf;
 
         tracer(:,2) = 0;
+        
+        tracer = fun_tr_addnewinf(index,contactdata,tracer);
 
         if i ~= maxday
             tracer = fun_tr_deletehealed(AgentStat,tracer,i+1);
