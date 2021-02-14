@@ -1,7 +1,7 @@
 close all; clear all; clc;
 
 % Standard input:
-std_ip = {'data_new3/all_m1.6__'};
+std_ip = {'data/data0203/outputs_02_03/standard_output_'};
 % Agentstat input:
 agst_ip = {'data/data0203/outagent_02_03/outagent_'};
 % Trace input:
