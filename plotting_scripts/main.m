@@ -15,6 +15,6 @@ Measures = {"Kij. korl.",7;
             "Oltás",63};
 
 % Végül a függvény hívása:
-output = fun_plotter_main(std_ip,agst_ip,tr_ip,Scenarionames,Title,Measures,1,0,0);
+output = fun_plotter_main(std_ip,agst_ip,tr_ip,Scenarionames,Title,Measures,1,0,1);
 
-clearvars agst_ip Scenarionames std_ip Title tr_ip
+clearvars agst_ip Scenarionames std_ip Title tr_ip Measures

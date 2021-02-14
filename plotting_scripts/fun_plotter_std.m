@@ -503,8 +503,8 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,flag)
         for i = 1 : length(data_av)
             epxosed1 = (-1*diff(mean(i).s))-diff(mean(i).do);
             epxosed2 = (-1*diff(standev(i).s))-diff(standev(i).do);
-            ifnectious1 = mean(i).i;
-            ifnectious2 = standev(i).i;
+            ifnectious1 = mean(i).ei;
+            ifnectious2 = standev(i).ei;
             ifnectious1(end) = [];
             ifnectious2(end) = [];
             funplot(epxosed1./ifnectious1,epxosed2./ifnectious2,colors(i,:),w,scenarionames{i})
