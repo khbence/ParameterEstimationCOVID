@@ -2,6 +2,16 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,flag)
 
     if flag == 1
         
+        fprintf('Getting Hungarian data (korona_hun)...')
+        hundata = GetGoogleSpreadsheet('1e4VEZL1xvsALoOIq9V2SQuICeQrT5MtWfBm32ad7i8Q');
+        %col 20: number of ppl in hospital
+        %col 21: number of ppl on ventilators
+        numAgents = 179530;
+        hunPopulation = 9770000;
+        dates = datetime(hundata(2:end,1),'InputFormat','yyyy-MM-dd');
+        startdate = find(dates==datestr('2020-09-23'))+1;
+        fprintf('Done.\n')
+        
         fprintf('Standard input data processing started!\n');
         
         measdim = size(Measures);
@@ -116,6 +126,8 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,flag)
         for i = 1 : measdim
             xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
         end
+        rdata = str2double(hundata(startdate:end,4))-str2double(hundata(startdate,4));
+        funplot_realdata(rdata,numAgents,hunPopulation,w);
         hold off
         xlim([0 length(data_av(1).s)-1])
         ylim([0 inf])
@@ -196,6 +208,8 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,flag)
         for i = 1 : measdim
             xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
         end
+        rdata = str2double(hundata(startdate:end,16));
+        funplot_realdata(rdata,numAgents,hunPopulation,w);
         hold off
         xlim([0 length(data_av(1).s)-1])
         ylim([0 inf])
@@ -214,6 +228,8 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,flag)
         for i = 1 : measdim
             xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
         end
+        rdata = str2double(hundata(startdate:end,3));
+        funplot_realdata(rdata,numAgents,hunPopulation,w);
         hold off
         xlim([0 length(data_av(1).s)-1])
         ylim([0 inf])
@@ -305,6 +321,8 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,flag)
         for i = 1 : measdim
             xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
         end
+        rdata = str2double(hundata(startdate:end,20));
+        funplot_realdata(rdata,numAgents,hunPopulation,w);
         hold off
         xlim([0 length(data_av(1).s)-1])
         ylim([0 inf])
