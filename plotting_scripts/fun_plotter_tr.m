@@ -29,6 +29,8 @@ function output = fun_plotter_tr(tr_ip,agst_ip,scenarionames,Title,Measures,Star
             xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
         end
         hold off
+        grid on
+        grid minor
         xlim([0 length(output(1).tracer.average.av)-1])
         ylim([0 inf])
         xlabel('Time [Days]')
@@ -46,6 +48,8 @@ function output = fun_plotter_tr(tr_ip,agst_ip,scenarionames,Title,Measures,Star
             xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
         end
         hold off
+        grid on
+        grid minor
         xlim([0 length(output(1).tracer.average.av)-1])
         ylim([0 inf])
         xlabel('Time [Days]')

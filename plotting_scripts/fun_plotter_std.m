@@ -45,6 +45,8 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,flag,rd
             xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
         end
         hold off
+        grid on
+        grid minor
         xlim([0 length(data_av(1).s)-1])
         ylim([minvar-1000 inf])
         xlabel('Time [Days]')
@@ -62,6 +64,8 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,flag,rd
             xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
         end
         hold off
+        grid on
+        grid minor
         xlim([0 length(data_av(1).s)-1])
         ylim([0 inf])
         xlabel('Time [Days]')
@@ -81,6 +85,8 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,flag,rd
         %data = readmatrix('data_long.txt');
         %plot(data,'Color',[0.6350 0.0780 0.1840],'LineWidth',1.5,'DisplayName','Data')
         hold off
+        grid on
+        grid minor
         xlim([0 length(data_av(1).s)-1])
         ylim([0 inf])
         xlabel('Time [Days]')
@@ -100,6 +106,8 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,flag,rd
         %data = readmatrix('data_long.txt');
         %plot(data,'Color',[0.6350 0.0780 0.1840],'LineWidth',1.5,'DisplayName','Data')
         hold off
+        grid on
+        grid minor
         xlim([0 length(data_av(1).s)-1])
         ylim([0 inf])
         xlabel('Time [Days]')
@@ -117,6 +125,8 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,flag,rd
             xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
         end
         hold off
+        grid on
+        grid minor
         xlim([0 length(data_av(1).s)-1])
         ylim([0 inf])
         xlabel('Time [Days]')
@@ -138,6 +148,8 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,flag,rd
             funplot_realdata(rdata,numAgents,hunPopulation,w);
         end
         hold off
+        grid on
+        grid minor
         xlim([0 length(data_av(1).s)-1])
         ylim([0 inf])
         xlabel('Time [Days]')
@@ -157,6 +169,8 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,flag,rd
             xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
         end
         hold off
+        grid on
+        grid minor
         xlim([0 length(data_av(1).s)-1])
         ylim([0 inf])
         xlabel('Time [Days]')
@@ -182,6 +196,8 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,flag,rd
             xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
         end
         hold off
+        grid on
+        grid minor
         xlim([0 length(data_av(1).s)-1])
         ylim([0 inf])
         xlabel('Time [Days]')
@@ -199,6 +215,8 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,flag,rd
             xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
         end
         hold off
+        grid on
+        grid minor
         xlim([0 length(data_av(1).s)-1])
         ylim([0 inf])
         xlabel('Time [Days]')
@@ -226,6 +244,8 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,flag,rd
             funplot_realdata(rdata,numAgents,hunPopulation,w);
         end
         hold off
+        grid on
+        grid minor
         xlim([0 length(data_av(1).s)-1])
         ylim([0 inf])
         xlabel('Time [Days]')
@@ -249,6 +269,8 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,flag,rd
             funplot_realdata(rdata,numAgents,hunPopulation,w);
         end
         hold off
+        grid on
+        grid minor
         xlim([0 length(data_av(1).s)-1])
         ylim([0 inf])
         xlabel('Time [Days]')
@@ -273,6 +295,8 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,flag,rd
             xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
         end
         hold off
+        grid on
+        grid minor
         xlim([0 length(data_av(1).s)-1])
         ylim([0 maxvar+0.01])
         xlabel('Time [Days]')
@@ -290,6 +314,8 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,flag,rd
             xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
         end
         hold off
+        grid on
+        grid minor
         xlim([0 length(data_av(1).s)-1])
         ylim([0 inf])
         xlabel('Time [Days]')
@@ -307,6 +333,8 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,flag,rd
             xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
         end
         hold off
+        grid on
+        grid minor
         xlim([0 length(data_av(1).s)-1])
         ylim([0 inf])
         xlabel('Time [Days]')
@@ -328,6 +356,8 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,flag,rd
             xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
         end
         hold off
+        grid on
+        grid minor
         xlim([0 length(data_av(1).s)-1])
         ylim([0 inf])
         xlabel('Time [Days]')
@@ -349,6 +379,8 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,flag,rd
             funplot_realdata(rdata,numAgents,hunPopulation,w);
         end
         hold off
+        grid on
+        grid minor
         xlim([0 length(data_av(1).s)-1])
         ylim([0 inf])
         xlabel('Time [Days]')
@@ -366,6 +398,8 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,flag,rd
             xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
         end
         hold off
+        grid on
+        grid minor
         xlim([0 length(data_av(1).s)-1])
         ylim([0 inf])
         xlabel('Time [Days]')
@@ -383,6 +417,8 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,flag,rd
             xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
         end
         hold off
+        grid on
+        grid minor
         xlim([0 length(data_av(1).s)-1])
         ylim([0 inf])
         xlabel('Time [Days]')
@@ -404,6 +440,8 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,flag,rd
             xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
         end
         hold off
+        grid on
+        grid minor
         xlim([0 length(data_av(1).s)-1])
         ylim([0 inf])
         xlabel('Time [Days]')
@@ -421,6 +459,8 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,flag,rd
             xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
         end
         hold off
+        grid on
+        grid minor
         xlim([0 length(data_av(1).s)-1])
         ylim([0 inf])
         xlabel('Time [Days]')
@@ -438,6 +478,8 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,flag,rd
             xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
         end
         hold off
+        grid on
+        grid minor
         xlim([0 length(data_av(1).s)-1])
         ylim([0 inf])
         xlabel('Time [Days]')
@@ -455,6 +497,8 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,flag,rd
             xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
         end
         hold off
+        grid on
+        grid minor
         xlim([0 length(data_av(1).s)-1])
         ylim([0 inf])
         xlabel('Time [Days]')
@@ -476,6 +520,8 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,flag,rd
             xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
         end
         hold off
+        grid on
+        grid minor
         xlim([0 length(data_av(1).s)-1])
         xlabel('Time [Days]')
         dateaxis('x',2,StartDate)
@@ -492,6 +538,8 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,flag,rd
             xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
         end
         hold off
+        grid on
+        grid minor
         xlim([0 length(data_av(1).s)-1])
         xlabel('Time [Days]')
         dateaxis('x',2,StartDate)
@@ -512,6 +560,8 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,flag,rd
             xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
         end
         hold off
+        grid on
+        grid minor
         xlim([0 length(data_av(1).s)-1])
         xlabel('Time [Days]')
         dateaxis('x',2,StartDate)
@@ -528,6 +578,8 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,flag,rd
             xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
         end
         hold off
+        grid on
+        grid minor
         xlim([0 length(data_av(1).s)-1])
         xlabel('Time [Days]')
         dateaxis('x',2,StartDate)
@@ -544,6 +596,8 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,flag,rd
             xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
         end
         hold off
+        grid on
+        grid minor
         xlim([0 length(data_av(1).s)-1])
         xlabel('Time [Days]')
         dateaxis('x',2,StartDate)
@@ -568,12 +622,14 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,flag,rd
             xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
         end
         hold off
+        grid on
+        grid minor
         xlim([0 length(data_av(1).s)-1])
         ylim([0 inf])
         xlabel('Time [Days]')
         dateaxis('x',2,StartDate)
         ylabel('No. of agents')
-        title('New exposed and current infectious ratio')
+        title('New exposed and current infected ratio')
         legend('Location','best')
     
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Publication figures below this line %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -594,6 +650,8 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,flag,rd
             xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
         end
         hold off
+        grid on
+        grid minor
         xlim([0 length(data_av(1).s)-1])
         ylim([minvar-1000 inf])
         xlabel('Time [Days]')
@@ -611,6 +669,8 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,flag,rd
             xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
         end
         hold off
+        grid on
+        grid minor
         xlim([0 length(data_av(1).s)-1])
         ylim([0 inf])
         xlabel('Time [Days]')
@@ -628,6 +688,8 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,flag,rd
             xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
         end
         hold off
+        grid on
+        grid minor
         xlim([0 length(data_av(1).s)-1])
         ylim([0 inf])
         xlabel('Time [Days]')
@@ -645,6 +707,8 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,flag,rd
             xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
         end
         hold off
+        grid on
+        grid minor
         xlim([0 length(data_av(1).s)-1])
         ylim([0 inf])
         xlabel('Time [Days]')
@@ -668,6 +732,8 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,flag,rd
             xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
         end
         hold off
+        grid on
+        grid minor
         xlim([0 length(data_av(1).s)-1])
         ylim([0 inf])
         xlabel('Time [Days]')
@@ -693,6 +759,8 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,flag,rd
             xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
         end
         hold off
+        grid on
+        grid minor
         xlim([0 length(data_av(1).s)-1])
         ylim([0 inf])
         xlabel('Time [Days]')
@@ -710,6 +778,8 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,flag,rd
             xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
         end
         hold off
+        grid on
+        grid minor
         xlim([0 length(data_av(1).s)-1])
         ylim([0 inf])
         xlabel('Time [Days]')
@@ -729,6 +799,8 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,flag,rd
             xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
         end
         hold off
+        grid on
+        grid minor
         xlim([0 length(data_av(1).s)-1])
         ylim([0 inf])
         xlabel('Time [Days]')
@@ -748,6 +820,8 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,flag,rd
             xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
         end
         hold off
+        grid on
+        grid minor
         xlim([0 length(data_av(1).s)-1])
         ylim([0 inf])
         xlabel('Time [Days]')
@@ -772,11 +846,13 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,flag,rd
             xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
         end
         hold off
+        grid on
+        grid minor
         xlim([0 length(data_av(1).s)-1])
         ylim([0 maxvar+0.01])
         xlabel('Time [Days]')
         dateaxis('x',2,StartDate)
-        ylabel('Ratio')
+        ylabel('Ratio (%)')
         title('Ratio of new, positive tests')
         legend('Location','best')
         
@@ -793,6 +869,8 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,flag,rd
             xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
         end
         hold off
+        grid on
+        grid minor
         xlim([0 length(data_av(1).s)-1])
         ylim([0 inf])
         xlabel('Time [Days]')
@@ -810,6 +888,8 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,flag,rd
             xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
         end
         hold off
+        grid on
+        grid minor
         xlim([0 length(data_av(1).s)-1])
         ylim([0 inf])
         xlabel('Time [Days]')
@@ -827,6 +907,8 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,flag,rd
             xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
         end
         hold off
+        grid on
+        grid minor
         xlim([0 length(data_av(1).s)-1])
         ylim([0 inf])
         xlabel('Time [Days]')
@@ -844,6 +926,8 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,flag,rd
             xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
         end
         hold off
+        grid on
+        grid minor
         xlim([0 length(data_av(1).s)-1])
         ylim([0 inf])
         xlabel('Time [Days]')
@@ -861,6 +945,8 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,flag,rd
             xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
         end
         hold off
+        grid on
+        grid minor
         xlim([0 length(data_av(1).s)-1])
         ylim([0 inf])
         xlabel('Time [Days]')
@@ -878,6 +964,8 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,flag,rd
             xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
         end
         hold off
+        grid on
+        grid minor
         xlim([0 length(data_av(1).s)-1])
         ylim([0 inf])
         xlabel('Time [Days]')
