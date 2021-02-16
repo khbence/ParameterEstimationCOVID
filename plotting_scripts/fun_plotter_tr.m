@@ -1,4 +1,4 @@
-function output = fun_plotter_tr(tr_ip,agst_ip,scenarionames,Title,Measures,flag)
+function output = fun_plotter_tr(tr_ip,agst_ip,scenarionames,Title,Measures,StartDate,flag)
 
     if flag == 1
         
@@ -32,6 +32,7 @@ function output = fun_plotter_tr(tr_ip,agst_ip,scenarionames,Title,Measures,flag
         xlim([0 length(output(1).tracer.average.av)-1])
         ylim([0 inf])
         xlabel('Time [Days]')
+        dateaxis('x',2,StartDate)
         ylabel('No. of infection events')
         title('Average infection tracing time series')
         legend('Location','best')
@@ -48,6 +49,7 @@ function output = fun_plotter_tr(tr_ip,agst_ip,scenarionames,Title,Measures,flag
         xlim([0 length(output(1).tracer.average.av)-1])
         ylim([0 inf])
         xlabel('Time [Days]')
+        dateaxis('x',2,StartDate)
         ylabel('No. of infection events')
         title('Maximum infection tracing time series')
         legend('Location','best')
