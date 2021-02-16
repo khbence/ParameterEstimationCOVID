@@ -1,20 +1,20 @@
 close all; clear all; clc;
 
 % Standard input:
-std_ip = {'data/data0203/outputs_02_03/standard_output_'};
+std_ip = {'data/article/default/default_'};
 % Agentstat input:
 agst_ip = {'data/data0203/outagent_02_03/outagent_'};
 % Trace input:
 tr_ip = {'data/data0203/dumplist_02_03/dumplist_'};
 % Legend nevek megadása:
-Scenarionames = {'Gov-def. order'};
+Scenarionames = {'Default'};
 % Cím megadása:
-Title = 'Goverment vaccination priority';
+Title = 'Default simulation';
 % Plot határok bejelölése:
-Measures = {{'Kij. korl.','Nov. 11.'},7;
-            {'Oltás','Dec. 6.'},63};
+Measures = {{'Restr.','Nov. 11.'},49;
+            {'Vacci.','Dec. 28.'},96};
 % Kezdődátum megadása:
-StartDate = '12/12/20';
+StartDate = '09/23/20'; % mm/dd/yy
 
 % Végül a függvény hívása:
 output = fun_plotter_main(std_ip,agst_ip,tr_ip,Scenarionames,Title,Measures,StartDate,1,0,0,1);
