@@ -9,7 +9,7 @@ tr_ip = {'data/data0203/dumplist_02_03/dumplist_'};
 % Legend nevek megadása:
 Scenarionames = {'Gov-def. order'};
 % Cím megadása:
-Title = 'Goverment vaccination priority';
+Title = 'Goverment vaccination priority'; % xlabel(append('Time [days] (Simulation starts from: ',<input>,')'))
 % Plot határok bejelölése:
 Measures = {"Kij. korl.",7;
             "Oltás",63};
