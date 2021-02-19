@@ -8,14 +8,12 @@ function output = fun_agst_process(samplename,agents,locations,clog)
     list = split(list,'.');
     list(:,2) = [];
     list = str2double(list);
-
-    iter_ar = min(list):max(list);
     
     struct_ar = [];
 
-    for i = 1 : length(iter_ar)
+    for i = 1 : length(list)
 
-        countvar = fun_agst_agentcounter(append(samplename,num2str(iter_ar(i)),'.json'),agents,locations,clog);
+        countvar = fun_agst_agentcounter(append(samplename,num2str(list(i)),'.json'),agents,locations,clog);
         
         if ~(isequaln(countvar,0))
             struct_ar = [struct_ar countvar];
