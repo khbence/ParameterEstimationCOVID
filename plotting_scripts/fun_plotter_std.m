@@ -19,7 +19,7 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,flag,rd
         measdim = size(Measures);
         measdim = measdim(1);
         
-        w = 1.5;
+        w = 1.5; % line width
 
         colors = [[1 0 0];[0 1 0];[0 0 1];[0 0 0];[1 0 1];[0 1 1];[0 0.4470 0.7410];[0.9290 0.6940 0.1250]];
 
@@ -634,7 +634,7 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,flag,rd
     
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Publication figures below this line %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-        figure('Name','Publication_figure_1','NumberTitle','off')
+        FIGH = figure('Name','Publication_figure_1','NumberTitle','off','Position',get(0,'Screensize'));
         
         subplot(2,2,1)
         hold on
@@ -719,7 +719,11 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,flag,rd
         
         sgtitle(append('SEIR-figures (',Title,')'))
         
-        figure('Name','Publication_figure_2','NumberTitle','off')
+        F = getframe(FIGH);
+        imwrite(F.cdata,'data/images/SEIR-fig.jpg','jpg')
+        savefig('data/images/SEIR-fig.fig')
+        
+        FIGH = figure('Name','Publication_figure_2','NumberTitle','off','Position',get(0,'Screensize'));
         
         subplot(2,3,1)
         hold on
@@ -858,7 +862,11 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,flag,rd
         
         sgtitle(append('2^n^d set of figures (',Title,')'))
         
-        figure('Name','Publication_figure_3','NumberTitle','off')
+        F = getframe(FIGH);
+        imwrite(F.cdata,'data/images/2ndset-fig.jpg','jpg')
+        savefig('data/images/2ndset-fig.fig')
+        
+        FIGH = figure('Name','Publication_figure_3','NumberTitle','off','Position',get(0,'Screensize'));
         
         subplot(2,3,1)
         hold on
@@ -975,6 +983,10 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,flag,rd
         legend('Location','best')
         
         sgtitle(append('3^r^d set of figures (',Title,')'))
+        
+        F = getframe(FIGH);
+        imwrite(F.cdata,'data/images/3rdset-fig.jpg','jpg')
+        savefig('data/images/3rdset-fig.fig')
     
         fprintf("Standard input successfully processed!\n")
     elseif flag == 0
