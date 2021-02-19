@@ -5,6 +5,7 @@ function output = fun_plotter_tr(tr_ip,agst_ip,scenarionames,Title,Measures,Star
         av_mu = 1;
         
         w = 1.5;
+        angle = 30;
         
         measdim = size(Measures);
         measdim = measdim(1);
@@ -35,6 +36,7 @@ function output = fun_plotter_tr(tr_ip,agst_ip,scenarionames,Title,Measures,Star
         ylim([0 inf])
         xlabel('Time [Days]')
         dateaxis('x',2,StartDate)
+        xtickangle(angle)
         ylabel('No. of infection events')
         title('Average infection tracing time series')
         legend('Location','best')
@@ -54,6 +56,7 @@ function output = fun_plotter_tr(tr_ip,agst_ip,scenarionames,Title,Measures,Star
         ylim([0 inf])
         xlabel('Time [Days]')
         dateaxis('x',2,StartDate)
+        xtickangle(angle)
         ylabel('No. of infection events')
         title('Maximum infection tracing time series')
         legend('Location','best')
