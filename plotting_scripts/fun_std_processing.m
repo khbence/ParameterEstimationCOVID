@@ -8,14 +8,12 @@ function [average, standev] = fun_std_processing(samplename)
     list = split(list,'.');
     list(:,2) = [];
     list = str2double(list);
-
-    iter_ar = min(list):max(list);
     
     struct_ar = [];
 
-    for i = 1 : length(iter_ar)
+    for i = 1 : length(list)
 
-        struct_ar = [struct_ar fun_std_read(append(samplename,num2str(iter_ar(i)),'.txt'))];
+        struct_ar = [struct_ar fun_std_read(append(samplename,num2str(list(i)),'.txt'))];
         
     end
     
