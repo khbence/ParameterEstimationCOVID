@@ -33,5 +33,6 @@ function output = fun_std_read(file)
     output.qt = data(:,18);
     output.nq = data(:,19);
     output.mu = data(:,20);
+    output.ho = data(:,21);
 
 end
