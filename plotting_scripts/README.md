@@ -16,3 +16,9 @@ To run the scripts, and evaluate the data coming from the simulator, one should 
 
 **Note:** each flag is expected to be a 0 or 1 value, otherwise the user will get a "You used something other than 0 or 1 for a binary flag!" message. In case of a 0 value a "*type of input* was not requested!" message will be displayed. Also the number of scenarios are limited to 8, that can be plotted each time.
 
+There are 3 kind of inputs for the plotting scripts, the Standard input, the Agent-dependent input and the Contact tracing input. There are conventions how to name these files while running simulations. These conventions can be seen below:
+
+  - Standard input: <some arbitrary user defined name>_<simulation count>.txt --> the user defined name must contain equal number of '_' characters
+  - Agent dependent input: <some arbitrary user defined name>_<simulation count>.json --> the user defined name must contain equal number of '_' characters
+  - Contact tracing input: this is defined by a folder for each round, the folder name must be <some arbitrary user defined name>_<simulation count> --> the user defined name must contain equal number of '_' characters
+
