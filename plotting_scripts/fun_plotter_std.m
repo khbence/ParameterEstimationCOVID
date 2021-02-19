@@ -700,13 +700,8 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,flag,rd
         
         subplot(2,2,1)
         hold on
-        minvar = min(mean(1).s-standev(1).s);
         for i = 1 : length(data_av)
             funplot(mean(i).s,standev(i).s,colors(i,:),w,scenarionames{i})
-
-            if minvar > min(mean(i).s)
-                minvar = min(mean(i).s-standev(i).s);
-            end
         end
         for i = 1 : measdim
             xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
@@ -715,7 +710,7 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,flag,rd
         grid on
         grid minor
         xlim([0 length(data_av(1).s)-1])
-        ylim([minvar-1000 inf])
+        ylim([186000/2 186000])
         xlabel('Time [Days]')
         dateaxis('x',2,StartDate)
         xtickangle(angle)
