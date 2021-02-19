@@ -1,23 +1,24 @@
-function output = fun_plotter_tr(tr_ip,agst_ip,scenarionames,Title,Measures,StartDate,flag)
+function output = fun_plotter_tr(tr_ip,agst_ip,scenarionames,Title,Measures,StartDate,flag,agents,locations)
 
     if flag == 1
         
         av_mu = 1;
         
         w = 1.5;
-        angle = 30;
+        angle = 45;
         
         measdim = size(Measures);
         measdim = measdim(1);
 
         colors = [[1 0 0];[0 1 0];[0 0 1];[0 0 0];[1 0 1];[0 1 1];[0 0.4470 0.7410];[0.9290 0.6940 0.1250]];
         
-        locations = jsondecode(fileread('locations0.json'));
-        locations = locations.places;
-        agents = jsondecode(fileread('agents0.json'));
-        agents = agents.people;
         
         output = fun_tr_postprocess(tr_ip,agst_ip,agents,locations);
+        
+        dps = 14;
+        divnum = mod(length(output(1).tracer.average.av),dps);
+        newmax = length(output(1).tracer.average.av)-divnum;
+        xlim_def = 0:dps:newmax-1;
         
         figure('Name','Plots1_tr','NumberTitle','off')
         
@@ -37,6 +38,7 @@ function output = fun_plotter_tr(tr_ip,agst_ip,scenarionames,Title,Measures,Star
         xlabel('Time [Days]')
         dateaxis('x',2,StartDate)
         xtickangle(angle)
+        xticks(xlim_def)
         ylabel('No. of infection events')
         title('Average infection tracing time series')
         legend('Location','best')
@@ -57,6 +59,7 @@ function output = fun_plotter_tr(tr_ip,agst_ip,scenarionames,Title,Measures,Star
         xlabel('Time [Days]')
         dateaxis('x',2,StartDate)
         xtickangle(angle)
+        xticks(xlim_def)
         ylabel('No. of infection events')
         title('Maximum infection tracing time series')
         legend('Location','best')
