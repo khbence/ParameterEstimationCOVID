@@ -1,27 +1,24 @@
-function output = fun_tr_contactr0fun(inflist,agentstat,agents,locations)
-
-    contactdata = fun_tr_contactorganizer(inflist);
-    AgentStat = fun_agst_statreadprocfun(agentstat,agents,locations);
+function output = fun_tr_contactr0fun(inflist,agentstat)
     
-    var = zeros(length(AgentStat),1);
-    for i = 1 : length(AgentStat)
+    var = zeros(length(agentstat),1);
+    for i = 1 : length(agentstat)
         
-        var(i) = AgentStat(i).ID;
+        var(i) = agentstat(i).ID;
         
     end
     
     var(:,2) = 0;
     
-    for i = 1 : length(contactdata)
+    for i = 1 : length(inflist)
         
-        dim1 = size(contactdata{i,2});
+        dim1 = size(inflist{i,2});
         dim1 = dim1(1);
         
         for j = 1 : dim1
             
-            seged = contactdata{i,2}{j,3};
+            seged = inflist{i,2}{j,3};
             hossz = length(seged);
-            infnum = length(contactdata{i,2}{j,2});
+            infnum = length(inflist{i,2}{j,2});
 
             for k = 1 : hossz
 

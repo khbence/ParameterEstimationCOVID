@@ -37,8 +37,11 @@ function output = fun_tr_process(samplename,samplename2,agents,locations)
         ip1 = seged;
         ip2 = append(string(samplename2),num2str(list2(i)),'.json');
         
-        struct1 = fun_tr_contactr0fun(ip1,ip2,agents,locations);
-        struct2 = fun_tr_contacttracer(ip1,ip2,agents,locations);
+        ip1 = fun_tr_contactorganizer(ip1);
+        ip2 = fun_agst_statreadprocfun(ip2,agents,locations);
+        
+        struct1 = fun_tr_contactr0fun(ip1,ip2);
+        struct2 = fun_tr_contacttracer(ip1,ip2);
         
         struct_ar1 = [struct_ar1 struct1];
         struct_ar2 = [struct_ar2 struct2];
