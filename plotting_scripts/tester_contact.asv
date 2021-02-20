@@ -1,0 +1,53 @@
+close all; clear all; clc;
+
+
+
+% locations = jsondecode(fileread('locations0.json'));
+% locations = locations.places;
+% agents = jsondecode(fileread('agents0.json'));
+% agents = agents.people;
+% 
+% tr_ip = {'data/dataexample/dumplist_01_18/dumplist_q1_',
+%          'data/dataexample/dumplist_01_18/dumplist_q2_',
+%          'data/dataexample/dumplist_01_18/dumplist_q3_'};
+% 
+% agst_ip = {'data/dataexample/outagent_01_18/outagent_q1_',
+%            'data/dataexample/outagent_01_18/outagent_q2_',
+%            'data/dataexample/outagent_01_18/outagent_q3_'};
+% 
+% result = traceorganize(tr_ip,agst_ip,agents,locations);
+
+% locations = jsondecode(fileread('locations0.json'));
+% locations = locations.places;
+% agents = jsondecode(fileread('agents0.json'));
+% agents = agents.people;
+% 
+% outputty = contactr0fun('data/dataexample/dumplist_01_18/dumplist_q1_11/q1_11_infectiousList_','data/dataexample/outagent_01_18/outagent_q1_11.json',agents,locations);
+% 
+% var = outputty.eloszlas(:,2);
+% 
+% figure;
+% histogram(var)
+% idx = var > 0;
+% figure;
+% histogram(var(idx))
+%  
+% output = contacttracer('data/dataexample/dumplist_01_18/dumplist_q1_11/q1_11_infectiousList_','data/dataexample/outagent_01_18/outagent_q1_11.json',agents,locations);
+% 
+% average = output.average;
+% maximums = output.maximuminfections;
+% 
+% t = 0:length(average)-1;
+% 
+% figure
+% plot(t,average,'LineWidth',1.5)
+% xlim([0 length(average)-1])
+% xlabel('Time [days]')
+% ylabel('Infections')
+% title('Average infections per capita per day')
+% figure
+% plot(t,maximums,'LineWidth',1.5)
+% xlim([0 length(average)-1])
+% xlabel('Time [days]')
+% title('Record infections per day')
+% ylabel('Infections')
