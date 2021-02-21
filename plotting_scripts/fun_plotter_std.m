@@ -11,6 +11,8 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,flag,rd
             hunPopulation = 9770000;
             dates = datetime(hundata(2:end,1),'InputFormat','yyyy-MM-dd');
             startdate = find(dates==datestr('2020-09-23'))+1;
+            %Cumulative dead in Szeged, starting sept 23
+            szdead = [1,1,3,3,3,4,4,4,4,5,6,6,7,8,8,8,8,10,10,10,11,11,11,12,12,12,14,14,16,16,16,17,17,18,19,20,21,22,23,23,23,26,27,28,28,30,31,32,32,33,33,34,35,37,38,40,40,40,41,41,43,45,47,52,56,59,62,65,68,70,71,73,75,76,79,82,85,88,89,91,93,94,96,98,99,103,104,108,112,117,118,123,126,127,129,131,134,140,142,144,148,149,150,152,155,157,158,160,166,168,169,172,174,174,176,178,180,181,183,184,185,185,186,186,191,192,193,193,193,193,195,196,196,197,197,198,200,202,202];
             fprintf('Done.\n')
         end
         
@@ -22,7 +24,7 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,flag,rd
         w = 1.5; % line width
         angle = 45;
 
-        colors = [[1 0 0];[0 1 0];[0 0 1];[0 0 0];[1 0 1];[0 1 1];[0 0.4470 0.7410];[0.9290 0.6940 0.1250]];
+        colors = [[1 0 0];[0 1 0];[0 0 1];[0 0 0];[1 0 1];[0 1 1];[0 0.4470 0.7410];[0.9290 0.6940 0.1250];[0.4490 0.9240 0.1250]];
 
         [mean,standev] = fun_std_organize(txtnames);
 
@@ -162,6 +164,8 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,flag,rd
         if rdata_flag
             rdata = str2double(hundata(startdate:end,4))-str2double(hundata(startdate,4));
             funplot_realdata(rdata,numAgents,hunPopulation,w);
+            szdead_len = numel(szdead);
+            plot(0:szdead_len-1,szdead,'Color',[255/255,69/255,50/255],'LineWidth',w,'DisplayName','Szeged data');
         end
         hold off
         grid on
@@ -322,6 +326,10 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,flag,rd
         for i = 1 : measdim
             xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
         end
+        if rdata_flag
+            rdata = str2double(hundata(startdate:end,3))./str2double(hundata(startdate:end,16));
+            funplot_realdata(rdata,1,1,w);
+        end
         hold off
         grid on
         grid minor
@@ -343,6 +351,11 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,flag,rd
         for i = 1 : measdim
             xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
         end
+        if rdata_flag
+            rdata = cumsum(str2double(hundata(startdate:end,16)));
+            funplot_realdata(rdata,numAgents,hunPopulation,w);
+        end
+        
         hold off
         grid on
         grid minor
@@ -363,6 +376,10 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,flag,rd
         end
         for i = 1 : measdim
             xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
+        end
+        if rdata_flag
+            rdata = cumsum(str2double(hundata(startdate:end,3)));
+            funplot_realdata(rdata,numAgents,hunPopulation,w);
         end
         hold off
         grid on
