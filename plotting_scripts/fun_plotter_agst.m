@@ -1,8 +1,12 @@
-function fun_plotter_agst(jsonnames,scenarionames,Title,flag,agents,locations,clog,spectitle)
+function fun_plotter_agst(jsonnames,scenarionames,Title,agents,locations,clog,spectitle,Path)
         
     scennum = length(scenarionames);
 
     [data,agents,itbool] = fun_agst_organize(jsonnames,agents,locations,clog);
+    
+    if ~exist(Path, 'dir')
+        mkdir(Path)
+    end
 
     if sum(itbool) ~= 0
 
@@ -19,7 +23,7 @@ function fun_plotter_agst(jsonnames,scenarionames,Title,flag,agents,locations,cl
 
         scenarionames(indeces2bedeleted) = [];
 
-        figure('Name','Plots1_agst','NumberTitle','off')
+        FIGH = figure('Name','Plots1_agst','NumberTitle','off','Position',get(0,'Screensize'));
 
         subplot(2,2,1)
 
@@ -66,8 +70,13 @@ function fun_plotter_agst(jsonnames,scenarionames,Title,flag,agents,locations,cl
         title('Precondition distribution (normed with category size)')
 
         sgtitle(append(Title,' (Statistics-1 of the infected population) ',spectitle))
+        
+        F = getframe(FIGH);
+        mkdir(append(Path,'/ags'))
+        imwrite(F.cdata,append(Path,'/ags/ags_',spectitle,'-1.jpg'),'jpg')
+        savefig(append(Path,'/ags/ags_',spectitle,'-1.fig'))
 
-        figure('Name','Plots2_agst','NumberTitle','off')
+        FIGH = figure('Name','Plots2_agst','NumberTitle','off','Position',get(0,'Screensize'));
 
         subplot(2,2,1)
 
@@ -115,8 +124,12 @@ function fun_plotter_agst(jsonnames,scenarionames,Title,flag,agents,locations,cl
         title('Diagnosed - Not diagnosed agents')
 
         sgtitle(append(Title,' (Statistics-2 of the infected population) ',spectitle))
+        
+        F = getframe(FIGH);
+        imwrite(F.cdata,append(Path,'/ags/ags_',spectitle,'-2.jpg'),'jpg')
+        savefig(append(Path,'/ags/ags_',spectitle,'-2.fig'))
 
-        figure('Name','Plots3_agst','NumberTitle','off')
+        FIGH = figure('Name','Plots3_agst','NumberTitle','off','Position',get(0,'Screensize'));
 
         subplot(2,2,1)
 
@@ -152,6 +165,10 @@ function fun_plotter_agst(jsonnames,scenarionames,Title,flag,agents,locations,cl
         title('Infection locations')
 
         sgtitle(append(Title,' (Statistics-3 of the infected population) ',spectitle))
+        
+        F = getframe(FIGH);
+        imwrite(F.cdata,append(Path,'/ags/ags_',spectitle,'-3.jpg'),'jpg')
+        savefig(append(Path,'/ags/ags_',spectitle,'-3.fig'))
 
         fprintf(append("Agent statistics input successfully processed! (",spectitle,")\n"))
     else

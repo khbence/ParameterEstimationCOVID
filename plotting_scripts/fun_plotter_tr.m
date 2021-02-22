@@ -1,4 +1,4 @@
-function output = fun_plotter_tr(tr_ip,agst_ip,scenarionames,Title,Measures,StartDate,flag,agents,locations)
+function output = fun_plotter_tr(tr_ip,agst_ip,scenarionames,Title,Measures,StartDate,flag,agents,locations,Path)
 
     if flag == 1
         
@@ -20,7 +20,18 @@ function output = fun_plotter_tr(tr_ip,agst_ip,scenarionames,Title,Measures,Star
         newmax = length(output(1).tracer.average.av)-divnum;
         xlim_def = 0:dps:newmax;
         
-        figure('Name','Plots1_tr','NumberTitle','off')
+        if ~exist(Path, 'dir')
+            mkdir(Path)
+        end
+        
+        detfl = 1;
+        
+        if detfl == 1
+        deterdata = readmatrix('data/Szeged_data_determ.csv');
+        deterdata(:,end) = []; % 1->infected 2->newexposed 3->I56(Rh) 4->R 5->D 6->newD 7->S 8->exposed  9->R0 10->Rc
+        end
+        
+        FIGH = figure('Name','Plots1_tr','NumberTitle','off','Position',get(0,'Screensize'));
         
         subplot(1,2,1)
         hold on
@@ -29,6 +40,9 @@ function output = fun_plotter_tr(tr_ip,agst_ip,scenarionames,Title,Measures,Star
         end
         for i = 1 : measdim
             xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
+        end
+        if detfl == 1
+        plot(deterdata(:,10),'Color',[0.6350 0.0780 0.1840],'LineWidth',1.5,'DisplayName','Deterministic')
         end
         hold off
         grid on
@@ -66,8 +80,13 @@ function output = fun_plotter_tr(tr_ip,agst_ip,scenarionames,Title,Measures,Star
         
         sgtitle(append('Infection tracing time series (',Title,')'))
         
+        F = getframe(FIGH);
+        mkdir(append(Path,'/ctr'))
+        imwrite(F.cdata,append(Path,'/ctr/ctr-1.jpg'),'jpg')
+        savefig(append(Path,'/ctr/ctr-1.fig'))
+        
         for i = 1 : length(output)
-            figure('Name',append('Plots',num2str(i+1),'_tr'),'NumberTitle','off')
+            FIGH = figure('Name',append('Plots',num2str(i+1),'_tr'),'NumberTitle','off','Position',get(0,'Screensize'));
             histogram('BinCounts',output(i).r0fun.eloszlas,'BinEdges',output(i).r0fun.eloszlasX)
             grid on
             grid minor
@@ -75,6 +94,9 @@ function output = fun_plotter_tr(tr_ip,agst_ip,scenarionames,Title,Measures,Star
             ylabel('Counts')
             set(gca,'YScale','log')
             title(append('Mean infection event distribution of the ',scenarionames{i},' scenario'))
+            F = getframe(FIGH);
+            imwrite(F.cdata,append(Path,'/std/std-',num2str(i+1),'.jpg'),'jpg')
+            savefig(append(Path,'/std/std-',num2str(i+1),'.fig'))
         end
         
         output = output.r0fun;

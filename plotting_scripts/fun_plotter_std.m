@@ -1,4 +1,4 @@
-function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,flag,rdata_flag)
+function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,flag,rdata_flag,Path)
 
     if flag == 1
         
@@ -35,9 +35,18 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,flag,rd
         newmax = length(data_av(1).s)-divnum;
         xlim_def = 0:dps:newmax;
         
+        mkdir(Path)
+        
+        detfl = 1;
+        
+        if detfl == 1
+        deterdata = readmatrix('data/Szeged_data_determ.csv');
+        deterdata(:,end) = []; % 1->infected 2->newexposed 3->I56(Rh) 4->R 5->D 6->newD 7->S 8->exposed  9->R0 10->Rc
+        end
+        
         fprintf('Standard input data processed!\n');
 
-        figure('Name','Plots1_std','NumberTitle','off')
+        FIGH = figure('Name','Plots1_std','NumberTitle','off','Position',get(0,'Screensize'));
 
         subplot(3,3,1)
         hold on
@@ -51,6 +60,9 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,flag,rd
         end
         for i = 1 : measdim
             xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
+        end
+        if detfl == 1
+        plot(deterdata(:,7),'Color',[0.6350 0.0780 0.1840],'LineWidth',1.5,'DisplayName','Deterministic')
         end
         hold off
         grid on
@@ -72,6 +84,9 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,flag,rd
         end
         for i = 1 : measdim
             xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
+        end
+        if detfl == 1
+        plot(deterdata(:,8),'Color',[0.6350 0.0780 0.1840],'LineWidth',1.5,'DisplayName','Deterministic')
         end
         hold off
         grid on
@@ -117,8 +132,9 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,flag,rd
         for i = 1 : measdim
             xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
         end
-        %data = readmatrix('data_long.txt');
-        %plot(data,'Color',[0.6350 0.0780 0.1840],'LineWidth',1.5,'DisplayName','Data')
+        if detfl == 1
+        plot(deterdata(:,1),'Color',[0.6350 0.0780 0.1840],'LineWidth',1.5,'DisplayName','Deterministic')
+        end
         hold off
         grid on
         grid minor
@@ -139,6 +155,9 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,flag,rd
         end
         for i = 1 : measdim
             xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
+        end
+        if detfl == 1
+        plot(deterdata(:,4),'Color',[0.6350 0.0780 0.1840],'LineWidth',1.5,'DisplayName','Deterministic')
         end
         hold off
         grid on
@@ -167,6 +186,9 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,flag,rd
             szdead_len = numel(szdead);
             plot(0:szdead_len-1,szdead,'Color',[255/255,69/255,50/255],'LineWidth',w,'DisplayName','Szeged data');
         end
+        if detfl == 1
+        plot(deterdata(:,5),'Color',[0.6350 0.0780 0.1840],'LineWidth',1.5,'DisplayName','Deterministic')
+        end
         hold off
         grid on
         grid minor
@@ -189,6 +211,9 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,flag,rd
         end
         for i = 1 : measdim
             xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
+        end
+        if detfl == 1
+        plot(deterdata(:,2),'Color',[0.6350 0.0780 0.1840],'LineWidth',1.5,'DisplayName','Deterministic')
         end
         hold off
         grid on
@@ -218,6 +243,9 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,flag,rd
         end
         for i = 1 : measdim
             xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
+        end
+        if detfl == 1
+        plot(deterdata(:,6),'Color',[0.6350 0.0780 0.1840],'LineWidth',1.5,'DisplayName','Deterministic')
         end
         hold off
         grid on
@@ -254,8 +282,13 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,flag,rd
         legend('Location','best')
 
         sgtitle(append('SEIRD-related (',Title,')'))
+        
+        F = getframe(FIGH);
+        mkdir(append(Path,'/std'))
+        imwrite(F.cdata,append(Path,'/std/std-1.jpg'),'jpg')
+        savefig(append(Path,'/std/std-1.fig'))
 
-        figure('Name','Plots2_std','NumberTitle','off')
+        FIGH = figure('Name','Plots2_std','NumberTitle','off','Position',get(0,'Screensize'));
 
         subplot(2,3,1)
         hold on
@@ -395,8 +428,12 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,flag,rd
         legend('Location','best')
 
         sgtitle(append('Testing (',Title,')'))
+        
+        F = getframe(FIGH);
+        imwrite(F.cdata,append(Path,'/std/std-2.jpg'),'jpg')
+        savefig(append(Path,'/std/std-2.fig'))
 
-        figure('Name','Plots3_std','NumberTitle','off')
+        FIGH = figure('Name','Plots3_std','NumberTitle','off','Position',get(0,'Screensize'));
 
         subplot(2,2,4)
         hold on
@@ -430,6 +467,9 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,flag,rd
         if rdata_flag
             rdata = str2double(hundata(startdate:end,20));
             funplot_realdata(rdata,numAgents,hunPopulation,w);
+        end
+        if detfl == 1
+        plot(deterdata(:,3),'Color',[0.6350 0.0780 0.1840],'LineWidth',1.5,'DisplayName','Deterministic')
         end
         hold off
         grid on
@@ -487,8 +527,12 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,flag,rd
         legend('Location','best')
 
         sgtitle(append('Hospitalization (',Title,')'))
+        
+        F = getframe(FIGH);
+        imwrite(F.cdata,append(Path,'/std/std-3.jpg'),'jpg')
+        savefig(append(Path,'/std/std-3.fig'))
 
-        figure('Name','Plots4_std','NumberTitle','off')
+        FIGH = figure('Name','Plots4_std','NumberTitle','off','Position',get(0,'Screensize'));
 
         subplot(2,2,1)
         hold on
@@ -576,7 +620,11 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,flag,rd
 
         sgtitle(append('Quarantine (',Title,')'))
         
-        figure('Name','Plots5_std','NumberTitle','off')
+        F = getframe(FIGH);
+        imwrite(F.cdata,append(Path,'/std/std-4.jpg'),'jpg')
+        savefig(append(Path,'/std/std-4.fig'))
+        
+        FIGH = figure('Name','Plots5_std','NumberTitle','off','Position',get(0,'Screensize'));
         
         subplot(1,2,1)
         hold on
@@ -620,7 +668,11 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,flag,rd
         
         sgtitle(append('Susceptible and recovered change rate (',Title,')'))
         
-        figure('Name','Plots6_std','NumberTitle','off')
+        F = getframe(FIGH);
+        imwrite(F.cdata,append(Path,'/std/std-5.jpg'),'jpg')
+        savefig(append(Path,'/std/std-5.fig'))
+        
+        FIGH = figure('Name','Plots6_std','NumberTitle','off','Position',get(0,'Screensize'));
         
         subplot(2,2,1)
         hold on
@@ -684,7 +736,11 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,flag,rd
         
         sgtitle(append('Not COVID-related results (',Title,')'))
         
-        figure('Name','PlotsX_std','NumberTitle','off')
+        F = getframe(FIGH);
+        imwrite(F.cdata,append(Path,'/std/std-6.jpg'),'jpg')
+        savefig(append(Path,'/std/std-6.fig'))
+        
+        FIGH = figure('Name','PlotsX_std','NumberTitle','off','Position',get(0,'Screensize'));
         hold on
         for i = 1 : length(data_av)
             epxosed1 = (-1*diff(mean(i).s))-diff(mean(i).do);
@@ -710,6 +766,10 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,flag,rd
         ylabel('No. of agents')
         title('New exposed and current infected ratio')
         legend('Location','best')
+        
+        F = getframe(FIGH);
+        imwrite(F.cdata,append(Path,'/std/std-X.jpg'),'jpg')
+        savefig(append(Path,'/std/std-X.fig'))
     
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Publication figures below this line %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -722,6 +782,9 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,flag,rd
         end
         for i = 1 : measdim
             xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
+        end
+        if detfl == 1
+        plot(deterdata(:,7),'Color',[0.6350 0.0780 0.1840],'LineWidth',1.5,'DisplayName','Deterministic')
         end
         hold off
         grid on
@@ -743,6 +806,9 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,flag,rd
         end
         for i = 1 : measdim
             xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
+        end
+        if detfl == 1
+        plot(deterdata(:,8),'Color',[0.6350 0.0780 0.1840],'LineWidth',1.5,'DisplayName','Deterministic')
         end
         hold off
         grid on
@@ -786,6 +852,9 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,flag,rd
         for i = 1 : measdim
             xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
         end
+        if detfl == 1
+        plot(deterdata(:,4),'Color',[0.6350 0.0780 0.1840],'LineWidth',1.5,'DisplayName','Deterministic')
+        end
         hold off
         grid on
         grid minor
@@ -802,8 +871,9 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,flag,rd
         sgtitle(append('SEIR-figures (',Title,')'))
         
         F = getframe(FIGH);
-        imwrite(F.cdata,'data/images/SEIR-fig.jpg','jpg')
-        savefig('data/images/SEIR-fig.fig')
+        mkdir(append(Path,'/pub'))
+        imwrite(F.cdata,append(Path,'/pub/pub-1.jpg'),'jpg')
+        savefig(append(Path,'/pub/pub-1.fig'))
         
         FIGH = figure('Name','Publication_figure_2','NumberTitle','off','Position',get(0,'Screensize'));
         
@@ -816,6 +886,9 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,flag,rd
         end
         for i = 1 : measdim
             xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
+        end
+        if detfl == 1
+        plot(deterdata(:,2),'Color',[0.6350 0.0780 0.1840],'LineWidth',1.5,'DisplayName','Deterministic')
         end
         hold off
         grid on
@@ -845,6 +918,9 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,flag,rd
         end
         for i = 1 : measdim
             xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
+        end
+        if detfl == 1
+        plot(deterdata(:,6),'Color',[0.6350 0.0780 0.1840],'LineWidth',1.5,'DisplayName','Deterministic')
         end
         hold off
         grid on
@@ -957,8 +1033,8 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,flag,rd
         sgtitle(append('2^n^d set of figures (',Title,')'))
         
         F = getframe(FIGH);
-        imwrite(F.cdata,'data/images/2ndset-fig.jpg','jpg')
-        savefig('data/images/2ndset-fig.fig')
+        imwrite(F.cdata,append(Path,'/pub/pub-2.jpg'),'jpg')
+        savefig(append(Path,'/pub/pub-2.fig'))
         
         FIGH = figure('Name','Publication_figure_3','NumberTitle','off','Position',get(0,'Screensize'));
         
@@ -990,6 +1066,9 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,flag,rd
         end
         for i = 1 : measdim
             xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
+        end
+        if detfl == 1
+        plot(deterdata(:,3),'Color',[0.6350 0.0780 0.1840],'LineWidth',1.5,'DisplayName','Deterministic')
         end
         hold off
         grid on
@@ -1091,8 +1170,8 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,flag,rd
         sgtitle(append('3^r^d set of figures (',Title,')'))
         
         F = getframe(FIGH);
-        imwrite(F.cdata,'data/images/3rdset-fig.jpg','jpg')
-        savefig('data/images/3rdset-fig.fig')
+        imwrite(F.cdata,append(Path,'/pub/pub-3.jpg'),'jpg')
+        savefig(append(Path,'/pub/pub-3.fig'))
     
         fprintf("Standard input successfully processed!\n")
     elseif flag == 0
