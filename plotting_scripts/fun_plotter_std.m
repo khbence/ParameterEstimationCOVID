@@ -169,7 +169,7 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,flag,rd
         dateaxis('x',2,StartDate)
         xtickangle(angle)
         ylabel('No. of agents')
-        title('Recovered (cumulative)')
+        title('Recovered')
         legend('Location','best')
 
         subplot(3,3,6)
@@ -199,7 +199,7 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,flag,rd
         dateaxis('x',2,StartDate)
         xtickangle(angle)
         ylabel('No. of agents')
-        title('Deaths (cumulative)')
+        title('Deaths')
         legend('Location','best')
 
         subplot(3,3,7)
@@ -257,7 +257,7 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,flag,rd
         dateaxis('x',2,StartDate)
         xtickangle(angle)
         ylabel('No. of agents')
-        title('Deaths (new cases)')
+        title('New deaths')
         legend('Location','best')
         
         subplot(3,3,9)
@@ -341,7 +341,7 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,flag,rd
         dateaxis('x',2,StartDate)
         xtickangle(angle)
         ylabel('No. of agents')
-        title('Number of new, positive tests')
+        title('Number of new, positive tests, diagnoses')
         legend('Location','best')
 
         subplot(2,3,[2 3])
@@ -398,8 +398,8 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,flag,rd
         xticks(xlim_def)
         dateaxis('x',2,StartDate)
         xtickangle(angle)
-        ylabel('No. of agents')
-        title('Number of tests (cumulative)')
+        ylabel('Cumulative no. of agents')
+        title('Number of tests')
         legend('Location','best')
 
         subplot(2,3,6)
@@ -423,8 +423,8 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,flag,rd
         xticks(xlim_def)
         dateaxis('x',2,StartDate)
         xtickangle(angle)
-        ylabel('No. of agents')
-        title('Number of positive tests (cumulative)')
+        ylabel('Cumulative no. of agents')
+        title('Number of positive tests')
         legend('Location','best')
 
         sgtitle(append('Testing (',Title,')'))
@@ -691,7 +691,7 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,flag,rd
         dateaxis('x',2,StartDate)
         xtickangle(angle)
         ylabel('No. of agents')
-        title('Deaths (cumulative)')
+        title('Deaths')
         legend('Location','best')
         
         subplot(2,2,2)
@@ -711,7 +711,7 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,flag,rd
         dateaxis('x',2,StartDate)
         xtickangle(angle)
         ylabel('No. of agents')
-        title('Deaths (new cases)')
+        title('New deaths')
         legend('Location','best')
         
         subplot(2,2,[3 4])
@@ -865,7 +865,7 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,flag,rd
         dateaxis('x',2,StartDate)
         xtickangle(angle)
         ylabel('No. of agents')
-        title('Recovered (cumulative)')
+        title('Recovered')
         legend('Location','best')
         
         sgtitle(append('SEIR-figures (',Title,')'))
@@ -932,7 +932,7 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,flag,rd
         dateaxis('x',2,StartDate)
         xtickangle(angle)
         ylabel('No. of agents')
-        title('Deaths (new cases)')
+        title('New deaths')
         legend('Location','best')
         
         subplot(2,3,3)
@@ -999,7 +999,7 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,flag,rd
         dateaxis('x',2,StartDate)
         xtickangle(angle)
         ylabel('No. of agents')
-        title('Number of new, positive tests')
+        title('Number of new, positive tests, diagnoses')
         legend('Location','best')
         
         subplot(2,3,6)

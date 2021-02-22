@@ -56,7 +56,7 @@ function fun_plotter_agst(jsonnames,scenarionames,Title,agents,locations,clog,sp
         legend('Location','best');
         xlabel('Age intervals [years]');
         ylabel('Number of agents (normed)');
-        title('Age group distribution (normed with category size)');
+        title('Ratio of infected agents in age groups');
 
         subplot(2,2,4)
 
@@ -67,7 +67,7 @@ function fun_plotter_agst(jsonnames,scenarionames,Title,agents,locations,clog,sp
         legend('Location','best')
         xlabel('COVID-related chronic illnesses')
         ylabel('Number of agents (normed)')
-        title('Precondition distribution (normed with category size)')
+        title('Ratio of infected agents in precondition groups')
 
         sgtitle(append(Title,' (Statistics-1 of the infected population) ',spectitle))
         
@@ -160,7 +160,7 @@ function fun_plotter_agst(jsonnames,scenarionames,Title,agents,locations,clog,sp
         h = bar(bar_locationtype,data.av.locationtype);
         set(h, {'DisplayName'}, scenarionames)
         legend('Location','best')
-        ylabel('Number of agents')
+        ylabel('Number of infections')
         set(gca,'YScale','log')
         title('Infection locations')
 
