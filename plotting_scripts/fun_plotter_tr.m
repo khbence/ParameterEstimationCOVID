@@ -24,7 +24,7 @@ function output = fun_plotter_tr(tr_ip,agst_ip,scenarionames,Title,Measures,Star
             mkdir(Path)
         end
         
-        detfl = 1;
+        detfl = 0;
         
         if detfl == 1
         deterdata = readmatrix('data/Szeged_data_determ.csv');
