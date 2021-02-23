@@ -113,11 +113,11 @@ function count = fun_agst_agentcountercount(input)
         if input(i).loc_type ~= 22 && input(i).loc_type ~= 33 && input(i).loc_type ~= 44 && input(i).loc_type ~= -1 && input(i).loc_type ~= 0
             Locationtype_counter(input(i).loc_type) = Locationtype_counter(input(i).loc_type) + 1;
         elseif input(i).loc_type == 22 && input(i).loc_type ~= 33 && input(i).loc_type ~= 44 && input(i).loc_type ~= -1 && input(i).loc_type ~= 0
-            Locationtype_counter(15) = Locationtype_counter(15) + 1;
-        elseif input(i).loc_type ~= 22 && input(i).loc_type == 33 && input(i).loc_type ~= 44 && input(i).loc_type ~= -1 && input(i).loc_type ~= 0
             Locationtype_counter(16) = Locationtype_counter(16) + 1;
-        elseif input(i).loc_type ~= 22 && input(i).loc_type ~= 33 && input(i).loc_type == 44 && input(i).loc_type ~= -1 && input(i).loc_type ~= 0
+        elseif input(i).loc_type ~= 22 && input(i).loc_type == 33 && input(i).loc_type ~= 44 && input(i).loc_type ~= -1 && input(i).loc_type ~= 0
             Locationtype_counter(17) = Locationtype_counter(17) + 1;
+        elseif input(i).loc_type ~= 22 && input(i).loc_type ~= 33 && input(i).loc_type == 44 && input(i).loc_type ~= -1 && input(i).loc_type ~= 0
+            Locationtype_counter(18) = Locationtype_counter(18) + 1;
         else
             
         end
