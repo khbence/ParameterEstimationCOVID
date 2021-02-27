@@ -205,9 +205,7 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,flag,rd
         subplot(3,3,7)
         hold on
         for i = 1 : length(data_av)
-            seg1 = (-1*diff(mean(i).s))-diff(mean(i).do);
-            seg2 = (-1*diff(standev(i).s))-diff(standev(i).do);
-            funplot(seg1,seg2,colors(i,:),w,scenarionames{i})
+            funplot(mean(i).ne,standev(i).ne,colors(i,:),w,scenarionames{i})
         end
         for i = 1 : measdim
             xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
@@ -231,15 +229,7 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,flag,rd
         subplot(3,3,8)
         hold on
         for i = 1 : length(data_av)
-            var_av = mean(i).d;
-            var_sd = standev(i).d;
-
-            for j = 2 : length(var_av)
-                var_av(j) = var_av(j) - mean(i).d(j-1);
-                var_sd(j) = var_sd(j) - standev(i).d(j-1);
-            end
-
-            funplot(var_av,var_sd,colors(i,:),w,scenarionames{i})
+            funplot(mean(i).didc,standev(i).didc,colors(i,:),w,scenarionames{i})
         end
         for i = 1 : measdim
             xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
@@ -293,9 +283,7 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,flag,rd
         subplot(2,3,1)
         hold on
         for i = 1 : length(data_av)
-            seg1 = mean(i).t+mean(i).p2;
-            seg2 = standev(i).t+standev(i).p2;
-            funplot(seg1,seg2,colors(i,:),w,scenarionames{i})
+            funplot(mean(i).nat,standev(i).nat,colors(i,:),w,scenarionames{i})
         end
         for i = 1 : measdim
             xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
@@ -320,9 +308,7 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,flag,rd
         subplot(2,3,4)
         hold on
         for i = 1 : length(data_av)
-            seg1 = mean(i).p1+mean(i).p2;
-            seg2 = standev(i).p1+standev(i).p2;
-            funplot(seg1,seg2,colors(i,:),w,scenarionames{i})
+            funplot(mean(i).npt,standev(i).npt,colors(i,:),w,scenarionames{i})
         end
         for i = 1 : measdim
             xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
@@ -345,16 +331,9 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,flag,rd
         legend('Location','best')
 
         subplot(2,3,[2 3])
-        hold on    
-        maxvar = max((mean(1).p1+mean(1).p2)./(mean(1).t+mean(1).p2));
+        hold on
         for i = 1 : length(data_av)
-            seg1 = (mean(i).p1+mean(i).p2)./(mean(i).t+mean(i).p2);
-            seg2 = (standev(i).p1+standev(i).p2)./(standev(i).t+standev(i).p2);
-            funplot(seg1,seg2,colors(i,:),w,scenarionames{i})
-
-            if maxvar < max((mean(i).p1+mean(i).p2)./(mean(i).t+mean(i).p2))
-                maxvar = max((mean(i).p1+mean(i).p2)./(mean(i).t+mean(i).p2));
-            end
+            funplot(mean(i).rpt,standev(i).rpt,colors(i,:),w,scenarionames{i})
         end
         for i = 1 : measdim
             xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
@@ -367,7 +346,7 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,flag,rd
         grid on
         grid minor
         xlim([0 length(data_av(1).s)-1])
-        ylim([0 maxvar+0.01])
+        ylim([0 inf])
         xlabel('Time [Days]')
         xticks(xlim_def)
         dateaxis('x',2,StartDate)
@@ -379,7 +358,7 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,flag,rd
         subplot(2,3,5)
         hold on
         for i = 1 : length(data_av)
-            funplot(cumsum(mean(i).t+mean(i).p2),cumsum(standev(i).t+standev(i).p2),colors(i,:),w,scenarionames{i})
+            funplot(mean(i).sat,standev(i).sat,colors(i,:),w,scenarionames{i})
         end
         for i = 1 : measdim
             xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
@@ -405,7 +384,7 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,flag,rd
         subplot(2,3,6)
         hold on
         for i = 1 : length(data_av)
-            funplot(cumsum(mean(i).p1+mean(i).p2),cumsum(standev(i).p1+standev(i).p2),colors(i,:),w,scenarionames{i})
+            funplot(mean(i).spt,standev(i).spt,colors(i,:),w,scenarionames{i})
         end
         for i = 1 : measdim
             xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
@@ -579,7 +558,7 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,flag,rd
         subplot(2,2,3)
         hold on
         for i = 1 : length(data_av)
-            funplot(mean(i).q-mean(i).qt,standev(i).q-standev(i).qt,colors(i,:),w,scenarionames{i})
+            funplot(mean(i).qni,standev(i).qni,colors(i,:),w,scenarionames{i})
         end
         for i = 1 : measdim
             xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
@@ -629,7 +608,7 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,flag,rd
         subplot(1,2,1)
         hold on
         for i = 1 : length(data_av)
-            funplot(diff(mean(i).s),diff(standev(i).s),colors(i,:),w,scenarionames{i})
+            funplot(mean(i).disu,standev(i).disu,colors(i,:),w,scenarionames{i})
         end
         for i = 1 : measdim
             xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
@@ -649,7 +628,7 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,flag,rd
         subplot(1,2,2)
         hold on
         for i = 1 : length(data_av)
-            funplot(diff(mean(i).r),diff(standev(i).r),colors(i,:),w,scenarionames{i})
+            funplot(mean(i).dirt,standev(i).dirt,colors(i,:),w,scenarionames{i})
         end
         for i = 1 : measdim
             xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
@@ -697,7 +676,7 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,flag,rd
         subplot(2,2,2)
         hold on
         for i = 1 : length(data_av)
-            funplot(diff(mean(i).do),diff(standev(i).do),colors(i,:),w,scenarionames{i})
+            funplot(mean(i).dido,standev(i).dido,colors(i,:),w,scenarionames{i})
         end
         for i = 1 : measdim
             xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
@@ -740,16 +719,10 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,flag,rd
         imwrite(F.cdata,append(Path,'/std/std-6.jpg'),'jpg')
         savefig(append(Path,'/std/std-6.fig'))
         
-        FIGH = figure('Name','PlotsX_std','NumberTitle','off','Position',get(0,'Screensize'));
+        FIGH = figure('Name','Plots7_std','NumberTitle','off','Position',get(0,'Screensize'));
         hold on
         for i = 1 : length(data_av)
-            epxosed1 = (-1*diff(mean(i).s))-diff(mean(i).do);
-            epxosed2 = (-1*diff(standev(i).s))-diff(standev(i).do);
-            ifnectious1 = mean(i).ei;
-            ifnectious2 = standev(i).ei;
-            ifnectious1(end) = [];
-            ifnectious2(end) = [];
-            funplot(epxosed1./ifnectious1,epxosed2./ifnectious2,colors(i,:),w,scenarionames{i})
+            funplot(mean(i).re,standev(i).re,colors(i,:),w,scenarionames{i})
         end
         for i = 1 : measdim
             xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
@@ -768,8 +741,8 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,flag,rd
         legend('Location','best')
         
         F = getframe(FIGH);
-        imwrite(F.cdata,append(Path,'/std/std-X.jpg'),'jpg')
-        savefig(append(Path,'/std/std-X.fig'))
+        imwrite(F.cdata,append(Path,'/std/std-7.jpg'),'jpg')
+        savefig(append(Path,'/std/std-7.fig'))
     
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Publication figures below this line %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -880,9 +853,7 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,flag,rd
         subplot(2,3,1)
         hold on
         for i = 1 : length(data_av)
-            seg1 = (-1*diff(mean(i).s))-diff(mean(i).do);
-            seg2 = (-1*diff(standev(i).s))-diff(standev(i).do);
-            funplot(seg1,seg2,colors(i,:),w,scenarionames{i})
+            funplot(mean(i).ne,standev(i).ne,colors(i,:),w,scenarionames{i})
         end
         for i = 1 : measdim
             xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
@@ -906,15 +877,7 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,flag,rd
         subplot(2,3,2)
         hold on
         for i = 1 : length(data_av)
-            var_av = mean(i).d;
-            var_sd = standev(i).d;
-
-            for j = 2 : length(var_av)
-                var_av(j) = var_av(j) - mean(i).d(j-1);
-                var_sd(j) = var_sd(j) - standev(i).d(j-1);
-            end
-
-            funplot(var_av,var_sd,colors(i,:),w,scenarionames{i})
+            funplot(mean(i).didc,standev(i).didc,colors(i,:),w,scenarionames{i})
         end
         for i = 1 : measdim
             xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
@@ -959,9 +922,7 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,flag,rd
         subplot(2,3,4)
         hold on
         for i = 1 : length(data_av)
-            seg1 = mean(i).t+mean(i).p2;
-            seg2 = standev(i).t+standev(i).p2;
-            funplot(seg1,seg2,colors(i,:),w,scenarionames{i})
+            funplot(mean(i).nat,standev(i).nat,colors(i,:),w,scenarionames{i})
         end
         for i = 1 : measdim
             xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
@@ -982,9 +943,7 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,flag,rd
         subplot(2,3,5)
         hold on
         for i = 1 : length(data_av)
-            seg1 = mean(i).p1+mean(i).p2;
-            seg2 = standev(i).p1+standev(i).p2;
-            funplot(seg1,seg2,colors(i,:),w,scenarionames{i})
+            funplot(mean(i).npt,standev(i).npt,colors(i,:),w,scenarionames{i})
         end
         for i = 1 : measdim
             xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
@@ -1003,16 +962,9 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,flag,rd
         legend('Location','best')
         
         subplot(2,3,6)
-        hold on    
-        maxvar = max((mean(1).p1+mean(1).p2)./(mean(1).t+mean(1).p2));
+        hold on
         for i = 1 : length(data_av)
-            seg1 = (mean(i).p1+mean(i).p2)./(mean(i).t+mean(i).p2);
-            seg2 = (standev(i).p1+standev(i).p2)./(standev(i).t+standev(i).p2);
-            funplot(seg1,seg2,colors(i,:),w,scenarionames{i})
-
-            if maxvar < max((mean(i).p1+mean(i).p2)./(mean(i).t+mean(i).p2))
-                maxvar = max((mean(i).p1+mean(i).p2)./(mean(i).t+mean(i).p2));
-            end
+            funplot(mean(i).rpt,standev(i).rpt,colors(i,:),w,scenarionames{i})
         end
         for i = 1 : measdim
             xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
@@ -1021,7 +973,7 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,flag,rd
         grid on
         grid minor
         xlim([0 length(data_av(1).s)-1])
-        ylim([0 maxvar+0.01])
+        ylim([0 inf])
         xlabel('Time [Days]')
         xticks(xlim_def)
         dateaxis('x',2,StartDate)
