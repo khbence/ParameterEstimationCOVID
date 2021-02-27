@@ -155,8 +155,8 @@ function fun_plotter_agst(jsonnames,scenarionames,Title,agents,locations,clog,sp
 
         subplot(2,2,[3 4])
 
-        bar_locationtype = categorical({'Public spaces','Residence','Public education','Std., full-time wp.','Small social site','Large social site','Short visiting site','Long visiting site','Weekend social sites','Recreational sites','Closed facility','Hospital','Non-std. schedule wp.','Health center','Commuters','Nursery home','Classroom','University'});
-        bar_locationtype = reordercats(bar_locationtype,{'Public spaces','Residence','Public education','Std., full-time wp.','Small social site','Large social site','Short visiting site','Long visiting site','Weekend social sites','Recreational sites','Closed facility','Hospital','Non-std. schedule wp.','Health center','Commuters','Nursery home','Classroom','University'});
+        bar_locationtype = categorical({'Public spaces','Residence','Public education','Std., full-time wp.','Small social site','Large social site','Short visiting site','Long visiting site','Weekend social sites','Recreational sites','Closed facility','Hospital','Non-std. schedule wp.','Health center','Commuters','Nursing home','Classroom','University'});
+        bar_locationtype = reordercats(bar_locationtype,{'Public spaces','Residence','Public education','Std., full-time wp.','Small social site','Large social site','Short visiting site','Long visiting site','Weekend social sites','Recreational sites','Closed facility','Hospital','Non-std. schedule wp.','Health center','Commuters','Nursing home','Classroom','University'});
         h = bar(bar_locationtype,data.av.locationtype);
         set(h, {'DisplayName'}, scenarionames)
         legend('Location','best')
