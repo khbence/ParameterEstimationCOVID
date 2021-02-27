@@ -11,7 +11,7 @@ agst_ip = {'data/fullRerun/default/outAgent/default_outagent_',
 % Trace input:
 tr_ip = {'data/data0203/dumplist_02_03/dumplist_'};
 % Legend nevek megadása:
-Scenarionames = {'Close infected classes';'Close infected schools';'Close all schools'};
+Scennames = {'Close infected classes';'Close infected schools';'Close all schools'};
 % Cím megadása:
 Title = 'Educational simulations';
 % Plot határok bejelölése:
@@ -20,9 +20,11 @@ Measures = {{'Restr.'},49;
 % Kezdődátum megadása:
 StartDate = '09/23/20'; % mm/dd/yy
 % Mentett grafikonok helye:
-Path = 'data/attempt/schooltest2';
+Path = 'data/attempt/schooltest4';
+% Vakcina frekvencia:
+VaccinationConstants = [1;2;3];
 
 % Végül a függvény hívása:
-output = fun_plotter_main(std_ip,agst_ip,tr_ip,Scenarionames,Title,Measures,StartDate,1,0,0,1,Path);
+output = fun_plotter_main(std_ip,agst_ip,tr_ip,Scennames,Title,Measures,VaccinationConstants,StartDate,1,0,0,0,Path);
 
-clearvars agst_ip Scenarionames std_ip Title tr_ip Measures StartDate Path
+clearvars agst_ip Scennames std_ip Title tr_ip Measures StartDate Path VaccinationConstants

@@ -1,6 +1,7 @@
-function output = fun_plotter_main(std_ip,agst_ip,tr_ip,scen_names,Title,Measures,StartDate,std_flag,agst_flag,tr_flag,rdata_flag,Path)
+function output = fun_plotter_main(std_ip,agst_ip,tr_ip,scen_names,Title,Measures,VaccinationConstants,StartDate,std_flag,agst_flag,tr_flag,rdata_flag,Path)
 
-    fun_plotter_std(std_ip,scen_names,Title,Measures,StartDate,std_flag,rdata_flag,Path)
+    fun_plotter_std(std_ip,scen_names,Title,Measures,StartDate,std_flag,rdata_flag,Path,'No. of Agents',VaccinationConstants)
+    fun_plotter_std(std_ip,scen_names,Title,Measures,StartDate,std_flag,rdata_flag,Path,'Ratio to Total Population (%)',VaccinationConstants)
     
     if agst_flag == 1
         locations = jsondecode(fileread('locations0.json'));
