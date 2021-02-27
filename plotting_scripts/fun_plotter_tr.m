@@ -15,7 +15,7 @@ function output = fun_plotter_tr(tr_ip,agst_ip,scenarionames,Title,Measures,Star
         
         output = fun_tr_postprocess(tr_ip,agst_ip,agents,locations);
         
-        dps = 10;
+        dps = 15;
         divnum = mod(length(output(1).tracer.average.av),dps);
         newmax = length(output(1).tracer.average.av)-divnum;
         xlim_def = 0:dps:newmax;
