@@ -1,4 +1,4 @@
-function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,flag,rdata_flag,Path,yax_string,VaccinationConstants)
+function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,flag,rdata_flag,Path,yax_string)
 
     if flag == 1
         
@@ -6,7 +6,7 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,flag,rd
             nepesseg = 1;
             nop = 'count';
         elseif strcmp(yax_string,'Ratio to Total Population (%)')
-            nepesseg = 185532/100;
+            nepesseg = 179500/100;
             nop = 'ratio';
         end
         
@@ -279,7 +279,7 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,flag,rd
         F = getframe(FIGH);
         mkdir(append(Path,'/std_',nop))
         imwrite(F.cdata,append(Path,'/std_',nop,'/std-1.jpg'),'jpg')
-        savefig(append(Path,'/std_',nop,'/std-1.fig'))
+        savefig(append(Path,'/std_',nop,'/z_std-1.fig'))
 
         FIGH = figure('Name','Plots2_std','NumberTitle','off','Position',get(0,'Screensize'));
 
@@ -413,7 +413,7 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,flag,rd
         
         F = getframe(FIGH);
         imwrite(F.cdata,append(Path,'/std_',nop,'/std-2.jpg'),'jpg')
-        savefig(append(Path,'/std_',nop,'/std-2.fig'))
+        savefig(append(Path,'/std_',nop,'/z_std-2.fig'))
 
         FIGH = figure('Name','Plots3_std','NumberTitle','off','Position',get(0,'Screensize'));
 
@@ -512,11 +512,11 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,flag,rd
         
         F = getframe(FIGH);
         imwrite(F.cdata,append(Path,'/std_',nop,'/std-3.jpg'),'jpg')
-        savefig(append(Path,'/std_',nop,'/std-3.fig'))
+        savefig(append(Path,'/std_',nop,'/z_std-3.fig'))
 
         FIGH = figure('Name','Plots4_std','NumberTitle','off','Position',get(0,'Screensize'));
 
-        subplot(2,2,1)
+        subplot(2,3,1)
         hold on
         for i = 1 : length(data_av)
             funplot(mean(i).q/nepesseg,standev(i).q/nepesseg,colors(i,:),w,scenarionames{i})
@@ -537,7 +537,7 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,flag,rd
         title('Quarantined')
         legend('Location','best')
 
-        subplot(2,2,2)
+        subplot(2,3,2)
         hold on
         for i = 1 : length(data_av)
             funplot(mean(i).nq/nepesseg,standev(i).nq/nepesseg,colors(i,:),w,scenarionames{i})
@@ -558,7 +558,7 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,flag,rd
         title('NOT Quarantined AND infected')
         legend('Location','best')
 
-        subplot(2,2,3)
+        subplot(2,3,3)
         hold on
         for i = 1 : length(data_av)
             funplot(mean(i).qni/nepesseg,standev(i).qni/nepesseg,colors(i,:),w,scenarionames{i})
@@ -579,7 +579,7 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,flag,rd
         title('Quarantined AND NOT infected')
         legend('Location','best')
 
-        subplot(2,2,4)
+        subplot(2,3,4)
         hold on
         for i = 1 : length(data_av)
             funplot(mean(i).qt/nepesseg,standev(i).qt/nepesseg,colors(i,:),w,scenarionames{i})
@@ -599,12 +599,54 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,flag,rd
         ylabel(yax_string)
         title('Quarantined AND infected')
         legend('Location','best')
+        
+        subplot(2,3,5)
+        hold on
+        for i = 1 : length(data_av)
+            funplot(mean(i).qii/nepesseg,standev(i).qii/nepesseg,colors(i,:),w,scenarionames{i})
+        end
+        for i = 1 : measdim
+            xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
+        end
+        hold off
+        grid on
+        grid minor
+        xlim([0 length(data_av(1).s)-1])
+        ylim([0 inf])
+        xlabel('Time [Days]')
+        xticks(xlim_def)
+        dateaxis('x',2,StartDate)
+        xtickangle(angle)
+        ylabel('Ratio')
+        title('Quarantined and infected to Infected ratio')
+        legend('Location','best')
+        
+        subplot(2,3,6)
+        hold on
+        for i = 1 : length(data_av)
+            funplot(mean(i).qiq/nepesseg,standev(i).qiq/nepesseg,colors(i,:),w,scenarionames{i})
+        end
+        for i = 1 : measdim
+            xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
+        end
+        hold off
+        grid on
+        grid minor
+        xlim([0 length(data_av(1).s)-1])
+        ylim([0 inf])
+        xlabel('Time [Days]')
+        xticks(xlim_def)
+        dateaxis('x',2,StartDate)
+        xtickangle(angle)
+        ylabel('Ratio')
+        title('Quarantined and infected to Quarantined ratio')
+        legend('Location','best')
 
         sgtitle(append('Quarantine (',Title,')'))
         
         F = getframe(FIGH);
         imwrite(F.cdata,append(Path,'/std_',nop,'/std-4.jpg'),'jpg')
-        savefig(append(Path,'/std_',nop,'/std-4.fig'))
+        savefig(append(Path,'/std_',nop,'/z_std-4.fig'))
         
         FIGH = figure('Name','Plots5_std','NumberTitle','off','Position',get(0,'Screensize'));
         
@@ -652,7 +694,7 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,flag,rd
         
         F = getframe(FIGH);
         imwrite(F.cdata,append(Path,'/std_',nop,'/std-5.jpg'),'jpg')
-        savefig(append(Path,'/std_',nop,'/std-5.fig'))
+        savefig(append(Path,'/std_',nop,'/z_std-5.fig'))
         
         FIGH = figure('Name','Plots6_std','NumberTitle','off','Position',get(0,'Screensize'));
         
@@ -720,14 +762,14 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,flag,rd
         
         F = getframe(FIGH);
         imwrite(F.cdata,append(Path,'/std_',nop,'/std-6.jpg'),'jpg')
-        savefig(append(Path,'/std_',nop,'/std-6.fig'))
+        savefig(append(Path,'/std_',nop,'/z_std-6.fig'))
         
         FIGH = figure('Name','Plots7_std','NumberTitle','off','Position',get(0,'Screensize'));
         
-        subplot(2,1,1)
+        subplot(2,2,1)
         hold on
         for i = 1 : length(data_av)
-            funplot(mean(i).vac,standev(i).vac,colors(i,:),w,scenarionames{i})
+            funplot(mean(i).vac/nepesseg,standev(i).vac/nepesseg,colors(i,:),w,scenarionames{i})
         end
         for i = 1 : measdim
             xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
@@ -748,14 +790,14 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,flag,rd
         xticks(xlim_def)
         dateaxis('x',2,StartDate)
         xtickangle(angle)
-        ylabel('No. of agents')
+        ylabel(yax_string)
         title('Daily vaccinations (first shot)')
         legend('Location','best')
         
-        subplot(2,1,2)
+        subplot(2,2,2)
         hold on
         for i = 1 : length(data_av)
-            funplot(cumsum(mean(i).vac)./1795,cumsum(standev(i).vac)./1795,colors(i,:),w,scenarionames{i})
+            funplot(mean(i).cvac/nepesseg,standev(i).cvac/nepesseg,colors(i,:),w,scenarionames{i})
         end
         for i = 1 : measdim
             xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
@@ -767,8 +809,7 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,flag,rd
             full(isnan(full)) = 0;
             rdata = (full-start)./hunPopulation*100;
             funplot_realdata(rdata,1,1,w);
-        end
-            
+        end  
         hold off
         grid on
         grid minor
@@ -777,19 +818,38 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,flag,rd
         xticks(xlim_def)
         dateaxis('x',2,StartDate)
         xtickangle(angle)
-        ylabel('No. of agents')
-        title('Percentage of population vaccinated (%)')
+        ylabel(yax_string)
+        title('Cumulative vaccinations')
+        legend('Location','best')
+        
+        subplot(2,2,[3 4])
+        hold on
+        for i = 1 : length(data_av)
+            funplot(mean(i).immu/nepesseg,standev(i).immu/nepesseg,colors(i,:),w,scenarionames{i})
+        end
+        for i = 1 : measdim
+            xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
+        end
+        hold off
+        grid on
+        grid minor
+        xlim([0 length(data_av(1).s)-1])
+        xlabel('Time [Days]')
+        xticks(xlim_def)
+        dateaxis('x',2,StartDate)
+        xtickangle(angle)
+        ylabel(yax_string)
+        title('Recovered and immunized')
         legend('Location','best')
         
         sgtitle(append('Immunization progress (',Title,')'))
         
         F = getframe(FIGH);
-        mkdir(append(Path,'/std/',nop))
-        imwrite(F.cdata,append(Path,'/std/std-7.jpg'),'jpg')
-        savefig(append(Path,'/std/std-7.fig'))
+        imwrite(F.cdata,append(Path,'/std_',nop,'/std-7.jpg'),'jpg')
+        savefig(append(Path,'/std_',nop,'/z_std-7.fig'))
         
         
-        FIGH = figure('Name','PlotsX_std','NumberTitle','off','Position',get(0,'Screensize'));
+        FIGH = figure('Name','Plots8_std','NumberTitle','off','Position',get(0,'Screensize'));
 
         hold on
         for i = 1 : length(data_av)
@@ -815,39 +875,8 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,flag,rd
         legend('Location','best')
         
         F = getframe(FIGH);
-        imwrite(F.cdata,append(Path,'/std_',nop,'/std-7.jpg'),'jpg')
-        savefig(append(Path,'/std_',nop,'/std-7.fig'))
-        
-        
-        FIGH = figure('Name','Plots8_std','NumberTitle','off','Position',get(0,'Screensize'));
-        hold on
-        for i = 1 : length(data_av)
-            vacc = VaccinationConstants(i);
-            immu = 1:length(data_av(1).s);
-            immu = (vacc*immu)';
-            avseg = (mean(i).r+immu)/nepesseg;
-            sdseg = (standev(i).r+immu)/nepesseg;
-            funplot(avseg,sdseg,colors(i,:),w,scenarionames{i})
-        end
-        for i = 1 : measdim
-            xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
-        end
-        hold off
-        grid on
-        grid minor
-        xlim([0 length(data_av(1).s)-1])
-        ylim([0 inf])
-        xlabel('Time [Days]')
-        xticks(xlim_def)
-        dateaxis('x',2,StartDate)
-        xtickangle(angle)
-        ylabel(yax_string)
-        title('Recovered or immunized')
-        legend('Location','best')
-        
-        F = getframe(FIGH);
         imwrite(F.cdata,append(Path,'/std_',nop,'/std-8.jpg'),'jpg')
-        savefig(append(Path,'/std_',nop,'/std-8.fig'))
+        savefig(append(Path,'/std_',nop,'/z_std-8.fig'))
     
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Publication figures below this line %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -951,7 +980,7 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,flag,rd
         F = getframe(FIGH);
         mkdir(append(Path,'/pub_',nop))
         imwrite(F.cdata,append(Path,'/pub_',nop,'/pub-1.jpg'),'jpg')
-        savefig(append(Path,'/pub_',nop,'/pub-1.fig'))
+        savefig(append(Path,'/pub_',nop,'/z_pub-1.fig'))
         
         FIGH = figure('Name','Publication_figure_2','NumberTitle','off','Position',get(0,'Screensize'));
         
@@ -1091,7 +1120,7 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,flag,rd
         
         F = getframe(FIGH);
         imwrite(F.cdata,append(Path,'/pub_',nop,'/pub-2.jpg'),'jpg')
-        savefig(append(Path,'/pub_',nop,'/pub-2.fig'))
+        savefig(append(Path,'/pub_',nop,'/z_pub-2.fig'))
         
         FIGH = figure('Name','Publication_figure_3','NumberTitle','off','Position',get(0,'Screensize'));
         
@@ -1228,7 +1257,7 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,flag,rd
         
         F = getframe(FIGH);
         imwrite(F.cdata,append(Path,'/pub_',nop,'/pub-3.jpg'),'jpg')
-        savefig(append(Path,'/pub_',nop,'/pub-3.fig'))
+        savefig(append(Path,'/pub_',nop,'/z_pub-3.fig'))
     
         fprintf("Standard input successfully processed!\n")
     elseif flag == 0
