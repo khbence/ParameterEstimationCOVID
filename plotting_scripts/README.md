@@ -3,8 +3,8 @@
 To run the scripts, and evaluate the data coming from the simulator, one should use the *fun_plotter_main(std_ip, agst_ip, tr_ip, scen_names, title, measures, startdate, std_flag, agst_flag, tr_flag, rdata_flag, path)* function. An example for its usage can be seen in the *main.m* file. Now let's list its inputs:
 
   - *std_ip* : a cell array of strings, which contains the path(s) and file name(s) of the standard outputs at given scenario(s)
-  - *agst_ip* : a cell array of strings, which contains the path(s) and file name(s) of the standard outputs at given scenario(s)
-  - *tr_ip* : a cell array of strings, which contains the path(s) and file name(s) of the standard outputs at given scenario(s)
+  - *agst_ip* : a cell array of strings, which contains the path(s) and file name(s) of the agentstat outputs at given scenario(s)
+  - *tr_ip* : a cell array of strings, which contains the path(s) and file name(s) of the contact tracing outputs at given scenario(s)
   - *scen_names* : a cell array of strings, which contains the names of the scenarios, that will be displayed on the plots
   - *title* : this is a string, which can provide additional information on the plots as a title
   - *measures* : a cell array, 1st column is a string array (name of the applied measure), second is double array (day when the measure was applied), it is for plotting vertical dashed lines to represent applied measures in the simulation
