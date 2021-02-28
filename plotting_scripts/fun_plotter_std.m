@@ -45,7 +45,7 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,flag,rd
         
         mkdir(Path)
         
-        detfl = 0;
+        detfl = rdata_flag;
         
         if detfl == 1
         deterdata = readmatrix('data/Szeged_data_20200923.csv');
