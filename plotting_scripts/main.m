@@ -1,5 +1,4 @@
 close all; clear all; clc;
-
 % Standard input:
 std_ip = {'data/fullRerun/default/default_',
           'data/fullRerun/closures_school_levels/school_closes_',
@@ -21,10 +20,8 @@ Measures = {{'Restr.'},49;
 StartDate = '09/23/20'; % mm/dd/yy
 % Mentett grafikonok helye:
 Path = 'data/attempt/schooltest4';
-% Vakcina frekvencia:
-VaccinationConstants = [1;2;3];
 
 % Végül a függvény hívása:
-output = fun_plotter_main(std_ip,agst_ip,tr_ip,Scennames,Title,Measures,VaccinationConstants,StartDate,1,0,0,0,Path);
+output = fun_plotter_main(std_ip,agst_ip,tr_ip,Scennames,Title,Measures,StartDate,1,0,0,0,Path);
 
 clearvars agst_ip Scennames std_ip Title tr_ip Measures StartDate Path VaccinationConstants
