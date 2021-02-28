@@ -1,8 +1,6 @@
 function output = fun_std_read(file)
 
     data = readmatrix(file);
-    % var = data(end-3:end,:);
-    %data(end-3:end,:) = [];
     
     [row, col] = find(isnan(data(:,1)));
 
@@ -26,13 +24,38 @@ function output = fun_std_read(file)
     output.dc = data(:,11);
     output.do = data(:,12);
     output.h = data(:,13);
-    output.t = data(:,14);
-    output.p1 = data(:,15);
-    output.p2 = data(:,16);
+    t = data(:,14);
+    p1 = data(:,15);
+    p2 = data(:,16);
     output.q = data(:,17);
     output.qt = data(:,18);
     output.nq = data(:,19);
     output.mu = data(:,20);
     output.ho = data(:,21);
     output.vac = data(:,22);
+    
+    output.nat = t+p2;
+    output.npt = p1+p2;
+    output.rpt = (p1+p2)./(t+p2);
+    output.sat = cumsum(t+p2);
+    output.spt = cumsum(p1+p2);
+    output.qni = data(:,17)-data(:,18);
+    
+    disu = diff(data(:,1));
+    output.disu = [disu;0];
+    dirt = diff(data(:,10));
+    output.dirt = [dirt;0];
+    dirh = diff(data(:,9));
+    output.dirh = [dirh;0];
+    didc = diff(data(:,11));
+    output.didc = [didc;0];
+    dido = diff(data(:,12));
+    output.dido = [dido;0];
+    
+    newexposed_seged = -1*(diff(data(:,1))+diff(data(:,12)));
+    newexposed_seged = [newexposed_seged;0];
+    alinfected_seged = data(:,2)+data(:,3)+data(:,4)+data(:,5)+data(:,6)+data(:,7)+data(:,8);
+    output.ne = newexposed_seged;
+    output.re = newexposed_seged./alinfected_seged;
+
 end

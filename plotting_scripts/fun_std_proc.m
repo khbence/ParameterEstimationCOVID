@@ -52,20 +52,30 @@ function [average, standev] = fun_std_proc(input)
     average.i6 = av;
     standev.i6 = stdev;
     
-    [av, stdev] = fun_std_avdev(input,norm,{'t'});
+    [av, stdev] = fun_std_avdev(input,norm,{'nat'});
     
-    average.t = av;
-    standev.t = stdev;
+    average.nat = av;
+    standev.nat = stdev;
     
-    [av, stdev] = fun_std_avdev(input,norm,{'p1'});
+    [av, stdev] = fun_std_avdev(input,norm,{'npt'});
     
-    average.p1 = av;
-    standev.p1 = stdev;
+    average.npt = av;
+    standev.npt = stdev;
     
-    [av, stdev] = fun_std_avdev(input,norm,{'p2'});
+    [av, stdev] = fun_std_avdev(input,norm,{'rpt'});
     
-    average.p2 = av;
-    standev.p2 = stdev;
+    average.rpt = av;
+    standev.rpt = stdev;
+    
+    [av, stdev] = fun_std_avdev(input,norm,{'sat'});
+    
+    average.sat = av;
+    standev.sat = stdev;
+    
+    [av, stdev] = fun_std_avdev(input,norm,{'spt'});
+    
+    average.spt = av;
+    standev.spt = stdev;
     
     [av, stdev] = fun_std_avdev(input,norm,{'q'});
     
@@ -81,6 +91,11 @@ function [average, standev] = fun_std_proc(input)
     
     average.nq = av;
     standev.nq = stdev;
+    
+    [av, stdev] = fun_std_avdev(input,norm,{'qni'});
+    
+    average.qni = av;
+    standev.qni = stdev;
     
     [av, stdev] = fun_std_avdev(input,norm,{'do'});
     
@@ -101,5 +116,35 @@ function [average, standev] = fun_std_proc(input)
     
     average.vac = av;
     standev.vac = stdev;
+
+    [av, stdev] = fun_std_avdev(input,norm,{'disu'});
+    
+    average.disu = av;
+    standev.disu = stdev;
+    
+    [av, stdev] = fun_std_avdev(input,norm,{'didc'});
+    
+    average.didc = av;
+    standev.didc = stdev;
+    
+    [av, stdev] = fun_std_avdev(input,norm,{'dido'});
+    
+    average.dido = av;
+    standev.dido = stdev;
+    
+    [av, stdev] = fun_std_avdev(input,norm,{'dirt','dirh'});
+    
+    average.dirt = av;
+    standev.dirt = stdev;
+    
+    [av, stdev] = fun_std_avdev(input,norm,{'ne'});
+    
+    average.ne = av;
+    standev.ne = stdev;
+    
+    [av, stdev] = fun_std_avdev(input,norm,{'re'});
+    
+    average.re = av;
+    standev.re = stdev;
     
 end
