@@ -116,6 +116,16 @@ function [average, standev] = fun_std_proc(input)
     
     average.vac = av;
     standev.vac = stdev;
+    
+    [av, stdev] = fun_std_avdev(input,norm,{'cvac'});
+    
+    average.cvac = av;
+    standev.cvac = stdev;
+    
+    [av, stdev] = fun_std_avdev(input,norm,{'rh','r','cvac'});
+    
+    average.immu = av;
+    standev.immu = stdev;
 
     [av, stdev] = fun_std_avdev(input,norm,{'disu'});
     
@@ -146,5 +156,15 @@ function [average, standev] = fun_std_proc(input)
     
     average.re = av;
     standev.re = stdev;
+    
+    [av, stdev] = fun_std_avdev(input,norm,{'qii'});
+    
+    average.qii = av;
+    standev.qii = stdev;
+    
+    [av, stdev] = fun_std_avdev(input,norm,{'qiq'});
+    
+    average.qiq = av;
+    standev.qiq = stdev;
     
 end
