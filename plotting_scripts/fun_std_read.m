@@ -33,6 +33,7 @@ function output = fun_std_read(file)
     output.mu = data(:,20);
     output.ho = data(:,21);
     output.vac = data(:,22);
+    output.cvac = cumsum(data(:,22));
     
     output.nat = t+p2;
     output.npt = p1+p2;
@@ -40,6 +41,8 @@ function output = fun_std_read(file)
     output.sat = cumsum(t+p2);
     output.spt = cumsum(p1+p2);
     output.qni = data(:,17)-data(:,18);
+    output.qii = data(:,18)./(data(:,2)+data(:,3)+data(:,4)+data(:,5)+data(:,6)+data(:,7)+data(:,8));
+    output.qiq = data(:,18)./data(:,17);
     
     disu = diff(data(:,1));
     output.disu = [disu;0];
@@ -52,8 +55,8 @@ function output = fun_std_read(file)
     dido = diff(data(:,12));
     output.dido = [dido;0];
     
-    newexposed_seged = -1*(diff(data(:,1))+diff(data(:,12)));
-    newexposed_seged = [newexposed_seged;0];
+    newexposed_seged = data(:,23);
+    %newexposed_seged = [newexposed_seged;0];
     alinfected_seged = data(:,2)+data(:,3)+data(:,4)+data(:,5)+data(:,6)+data(:,7)+data(:,8);
     output.ne = newexposed_seged;
     output.re = newexposed_seged./alinfected_seged;
