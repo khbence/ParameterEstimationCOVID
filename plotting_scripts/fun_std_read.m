@@ -34,5 +34,5 @@ function output = fun_std_read(file)
     output.nq = data(:,19);
     output.mu = data(:,20);
     output.ho = data(:,21);
-
+    output.vac = data(:,22);
 end

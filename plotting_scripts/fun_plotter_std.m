@@ -45,7 +45,6 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,flag,rd
         end
         
         fprintf('Standard input data processed!\n');
-
         FIGH = figure('Name','Plots1_std','NumberTitle','off','Position',get(0,'Screensize'));
 
         subplot(3,3,1)
@@ -739,6 +738,72 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,flag,rd
         F = getframe(FIGH);
         imwrite(F.cdata,append(Path,'/std/std-6.jpg'),'jpg')
         savefig(append(Path,'/std/std-6.fig'))
+        
+        FIGH = figure('Name','Plots7_std','NumberTitle','off','Position',get(0,'Screensize'));
+        
+        subplot(2,1,1)
+        hold on
+        for i = 1 : length(data_av)
+            funplot(mean(i).vac,standev(i).vac,colors(i,:),w,scenarionames{i})
+        end
+        for i = 1 : measdim
+            xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
+        end
+        if rdata_flag
+            start = str2double(hundata(startdate,34));
+            start(isnan(start)) = 0;
+            full = str2double(hundata(startdate:end,34));
+            full(isnan(full)) = 0;
+            rdata = full-start;
+            funplot_realdata(rdata,numAgents,hunPopulation,w);
+        end    
+        hold off
+        grid on
+        grid minor
+        xlim([0 length(data_av(1).s)-1])
+        xlabel('Time [Days]')
+        xticks(xlim_def)
+        dateaxis('x',2,StartDate)
+        xtickangle(angle)
+        ylabel('No. of agents')
+        title('Daily vaccinations (first shot)')
+        legend('Location','best')
+        
+        subplot(2,1,2)
+        hold on
+        for i = 1 : length(data_av)
+            funplot(cumsum(mean(i).vac)./1795,cumsum(standev(i).vac)./1795,colors(i,:),w,scenarionames{i})
+        end
+        for i = 1 : measdim
+            xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
+        end
+        if rdata_flag
+            start = str2double(hundata(startdate,33));
+            start(isnan(start)) = 0;
+            full = str2double(hundata(startdate:end,33));
+            full(isnan(full)) = 0;
+            rdata = (full-start)./hunPopulation*100;
+            funplot_realdata(rdata,1,1,w);
+        end
+            
+        hold off
+        grid on
+        grid minor
+        xlim([0 length(data_av(1).s)-1])
+        xlabel('Time [Days]')
+        xticks(xlim_def)
+        dateaxis('x',2,StartDate)
+        xtickangle(angle)
+        ylabel('No. of agents')
+        title('Percentage of population vaccinated (%)')
+        legend('Location','best')
+        
+        sgtitle(append('Immunization progress (',Title,')'))
+        
+        F = getframe(FIGH);
+        imwrite(F.cdata,append(Path,'/std/std-7.jpg'),'jpg')
+        savefig(append(Path,'/std/std-7.fig'))
+        
         
         FIGH = figure('Name','PlotsX_std','NumberTitle','off','Position',get(0,'Screensize'));
         hold on

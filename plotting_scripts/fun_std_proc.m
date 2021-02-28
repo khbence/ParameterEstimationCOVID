@@ -97,4 +97,9 @@ function [average, standev] = fun_std_proc(input)
     average.mu = av;
     standev.mu = stdev;
     
+    [av, stdev] = fun_std_avdev(input,norm,{'vac'});
+    
+    average.vac = av;
+    standev.vac = stdev;
+    
 end
