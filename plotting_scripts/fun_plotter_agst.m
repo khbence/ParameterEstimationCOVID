@@ -27,32 +27,56 @@ function fun_plotter_agst(jsonnames,scenarionames,Title,agents,locations,clog,sp
 
         subplot(2,2,1)
 
-        bar_age = categorical({'0-9','10-19','20-29','30-39','40-49','50-59','60-69','70-79','80-89','90-99'});
-        bar_age = reordercats(bar_age,{'0-9','10-19','20-29','30-39','40-49','50-59','60-69','70-79','80-89','90-99'});
-        h = bar(bar_age,data.av.age);
+        avmat = data.av.age;
+        sdmat = data.std.age;
+        h = bar(avmat');
+        xticklabels({'0-9','10-19','20-29','30-39','40-49','50-59','60-69','70-79','80-89','90-99'});
         set(h, {'DisplayName'}, scenarionames);
+        hold on
+        x_errorbar = zeros(1, numel(sdmat));
+        for i = 1 : size(avmat,1)
+            x_errorbar((i-1)*size(avmat,2)+1:i*size(avmat,2)) = h(i).XEndPoints;
+        end
+        h2 = errorbar(x_errorbar,reshape(avmat',1,numel(avmat)),reshape(sdmat',1,numel(sdmat)),'k','linestyle','none','HandleVisibility','off');
+        hold off
         legend('Location','best');
         xlabel('Age intervals [years]');
         ylabel('Number of agents');
         title('Age group distribution');
 
         subplot(2,2,2)
-
-        bar_precond = categorical({'Healthy','Diabetes','Cardiovascular','Kidney','Obst. pulmonary'});
-        bar_precond = reordercats(bar_precond,{'Healthy','Diabetes','Cardiovascular','Kidney','Obst. pulmonary'});
-        h = bar(bar_precond,data.av.precond);
-        set(h, {'DisplayName'}, scenarionames)
+        
+        avmat = data.av.precond;
+        sdmat = data.std.precond;
+        h = bar(avmat');
+        xticklabels({'Healthy','Diabetes','Cardiovascular','Kidney','Obst. pulmonary'});
+        set(h, {'DisplayName'}, scenarionames);
+        hold on
+        x_errorbar = zeros(1, numel(sdmat));
+        for i = 1 : size(avmat,1)
+            x_errorbar((i-1)*size(avmat,2)+1:i*size(avmat,2)) = h(i).XEndPoints;
+        end
+        h2 = errorbar(x_errorbar,reshape(avmat',1,numel(avmat)),reshape(sdmat',1,numel(sdmat)),'k','linestyle','none','HandleVisibility','off');
+        hold off
         legend('Location','best')
         xlabel('COVID-related chronic illnesses')
         ylabel('Number of agents')
         title('Precondition distribution')
 
         subplot(2,2,3)
-
-        bar_age = categorical({'0-9','10-19','20-29','30-39','40-49','50-59','60-69','70-79','80-89','90-99'});
-        bar_age = reordercats(bar_age,{'0-9','10-19','20-29','30-39','40-49','50-59','60-69','70-79','80-89','90-99'});
-        h = bar(bar_age,data.av.age./normnum.ages);
+        
+        avmat = data.av.age./normnum.ages;
+        sdmat = data.std.age./normnum.ages;
+        h = bar(avmat');
+        xticklabels({'0-9','10-19','20-29','30-39','40-49','50-59','60-69','70-79','80-89','90-99'});
         set(h, {'DisplayName'}, scenarionames);
+        hold on
+        x_errorbar = zeros(1, numel(sdmat));
+        for i = 1 : size(avmat,1)
+            x_errorbar((i-1)*size(avmat,2)+1:i*size(avmat,2)) = h(i).XEndPoints;
+        end
+        h2 = errorbar(x_errorbar,reshape(avmat',1,numel(avmat)),reshape(sdmat',1,numel(sdmat)),'k','linestyle','none','HandleVisibility','off');
+        hold off
         legend('Location','best');
         xlabel('Age intervals [years]');
         ylabel('Number of agents (normed)');
@@ -60,10 +84,18 @@ function fun_plotter_agst(jsonnames,scenarionames,Title,agents,locations,clog,sp
 
         subplot(2,2,4)
 
-        bar_precond = categorical({'Healthy','Diabetes','Cardiovascular','Kidney','Obst. pulmonary'});
-        bar_precond = reordercats(bar_precond,{'Healthy','Diabetes','Cardiovascular','Kidney','Obst. pulmonary'});
-        h = bar(bar_precond,data.av.precond./normnum.precond);
-        set(h, {'DisplayName'}, scenarionames)
+        avmat = data.av.precond./normnum.precond;
+        sdmat = data.std.precond./normnum.precond;
+        h = bar(avmat');
+        xticklabels({'Healthy','Diabetes','Cardiovascular','Kidney','Obst. pulmonary'});
+        set(h, {'DisplayName'}, scenarionames);
+        hold on
+        x_errorbar = zeros(1, numel(sdmat));
+        for i = 1 : size(avmat,1)
+            x_errorbar((i-1)*size(avmat,2)+1:i*size(avmat,2)) = h(i).XEndPoints;
+        end
+        h2 = errorbar(x_errorbar,reshape(avmat',1,numel(avmat)),reshape(sdmat',1,numel(sdmat)),'k','linestyle','none','HandleVisibility','off');
+        hold off
         legend('Location','best')
         xlabel('COVID-related chronic illnesses')
         ylabel('Number of agents (normed)')
@@ -80,23 +112,42 @@ function fun_plotter_agst(jsonnames,scenarionames,Title,agents,locations,clog,sp
 
         subplot(2,2,1)
 
-        bar_sex = categorical({'Female','Male'});
-        bar_sex = reordercats(bar_sex,{'Female','Male'});
-        h = bar(bar_sex,data.av.sex);
-        set(h, {'DisplayName'}, scenarionames)
+        avmat = data.av.sex;
+        sdmat = data.std.sex;
+        h = bar(avmat');
+        xticklabels({'Female','Male'});
+        set(h, {'DisplayName'}, scenarionames);
+        hold on
+        x_errorbar = zeros(1, numel(sdmat));
+        for i = 1 : size(avmat,1)
+            x_errorbar((i-1)*size(avmat,2)+1:i*size(avmat,2)) = h(i).XEndPoints;
+        end
+        h2 = errorbar(x_errorbar,reshape(avmat',1,numel(avmat)),reshape(sdmat',1,numel(sdmat)),'k','linestyle','none','HandleVisibility','off');
+        hold off
         legend('Location','best')
         ylabel('Number of agents')
         title('Sex distribution')
 
         subplot(2,2,2)
 
-        bar_worststate = categorical({'Exposed','Presymptomatic','Asymptomatic','Light symptomatic','Mild symptomatic','Hospitalized','Intensive care','Deceased'});
-        bar_worststate = reordercats(bar_worststate,{'Exposed','Presymptomatic','Asymptomatic','Light symptomatic','Mild symptomatic','Hospitalized','Intensive care','Deceased'});
         var = data.av.worststate;
         var(:,10) = var(:,1);
         var(:,1:2) = [];
-        h = bar(bar_worststate,var);
-        set(h, {'DisplayName'}, scenarionames)
+        avmat = var;
+        var = data.std.worststate;
+        var(:,10) = var(:,1);
+        var(:,1:2) = [];
+        sdmat = var;
+        h = bar(avmat');
+        xticklabels({'Exposed','Presymptomatic','Asymptomatic','Light symptomatic','Mild symptomatic','Hospitalized','Intensive care','Deceased'});
+        set(h, {'DisplayName'}, scenarionames);
+        hold on
+        x_errorbar = zeros(1, numel(sdmat));
+        for i = 1 : size(avmat,1)
+            x_errorbar((i-1)*size(avmat,2)+1:i*size(avmat,2)) = h(i).XEndPoints;
+        end
+        h2 = errorbar(x_errorbar,reshape(avmat',1,numel(avmat)),reshape(sdmat',1,numel(sdmat)),'k','linestyle','none','HandleVisibility','off');
+        hold off
         legend('Location','best')
         ylabel('Number of agents')
         set(gca,'YScale','log')
@@ -104,10 +155,18 @@ function fun_plotter_agst(jsonnames,scenarionames,Title,agents,locations,clog,sp
 
         subplot(2,2,3)
 
-        bar_infections = categorical({'Infected','Not infected'});
-        bar_infections = reordercats(bar_infections,{'Infected','Not infected'});
-        h = bar(bar_infections,data.av.infections);
-        set(h, {'DisplayName'}, scenarionames)
+        avmat = data.av.infections;
+        sdmat = data.std.infections;
+        h = bar(avmat');
+        xticklabels({'Infected','Not infected'});
+        set(h, {'DisplayName'}, scenarionames);
+        hold on
+        x_errorbar = zeros(1, numel(sdmat));
+        for i = 1 : size(avmat,1)
+            x_errorbar((i-1)*size(avmat,2)+1:i*size(avmat,2)) = h(i).XEndPoints;
+        end
+        h2 = errorbar(x_errorbar,reshape(avmat',1,numel(avmat)),reshape(sdmat',1,numel(sdmat)),'k','linestyle','none','HandleVisibility','off');
+        hold off
         legend('Location','best')
         ylabel('Number of agents')
         set(gca,'YScale','log')
@@ -115,10 +174,18 @@ function fun_plotter_agst(jsonnames,scenarionames,Title,agents,locations,clog,sp
 
         subplot(2,2,4)
 
-        bar_diagnosises = categorical({'Diagnosed','Not diagnosed'});
-        bar_diagnosises = reordercats(bar_diagnosises,{'Diagnosed','Not diagnosed'});
-        h = bar(bar_diagnosises,data.av.diagnoses);
-        set(h, {'DisplayName'}, scenarionames)
+        avmat = data.av.diagnoses;
+        sdmat = data.std.diagnoses;
+        h = bar(avmat');
+        xticklabels({'Diagnosed','Not diagnosed'});
+        set(h, {'DisplayName'}, scenarionames);
+        hold on
+        x_errorbar = zeros(1, numel(sdmat));
+        for i = 1 : size(avmat,1)
+            x_errorbar((i-1)*size(avmat,2)+1:i*size(avmat,2)) = h(i).XEndPoints;
+        end
+        h2 = errorbar(x_errorbar,reshape(avmat',1,numel(avmat)),reshape(sdmat',1,numel(sdmat)),'k','linestyle','none','HandleVisibility','off');
+        hold off
         legend('Location','best')
         ylabel('Number of agents')
         title('Diagnosed - Not diagnosed agents')
@@ -133,10 +200,18 @@ function fun_plotter_agst(jsonnames,scenarionames,Title,agents,locations,clog,sp
 
         subplot(2,2,1)
 
-        bar_agenttype = categorical({'Infant','Kindergarten student','Elementary school student','High school student','University student','Full-time (standard, fixed)','Afternoon shift worker','Stay-at-home schedule','Tourist'});
-        bar_agenttype = reordercats(bar_agenttype,{'Infant','Kindergarten student','Elementary school student','High school student','University student','Full-time (standard, fixed)','Afternoon shift worker','Stay-at-home schedule','Tourist'});
-        h = bar(bar_agenttype,data.av.agenttype);
-        set(h, {'DisplayName'}, scenarionames)
+        avmat = data.av.agenttype;
+        sdmat = data.std.agenttype;
+        h = bar(avmat');
+        xticklabels({'Infant','Kindergarten student','Elementary school student','High school student','University student','Full-time (standard, fixed)','Afternoon shift worker','Stay-at-home schedule','Tourist'});
+        set(h, {'DisplayName'}, scenarionames);
+        hold on
+        x_errorbar = zeros(1, numel(sdmat));
+        for i = 1 : size(avmat,1)
+            x_errorbar((i-1)*size(avmat,2)+1:i*size(avmat,2)) = h(i).XEndPoints;
+        end
+        h2 = errorbar(x_errorbar,reshape(avmat',1,numel(avmat)),reshape(sdmat',1,numel(sdmat)),'k','linestyle','none','HandleVisibility','off');
+        hold off
         legend('Location','best')
         ylabel('Number of agents')
         set(gca,'YScale','log')
@@ -144,10 +219,18 @@ function fun_plotter_agst(jsonnames,scenarionames,Title,agents,locations,clog,sp
 
         subplot(2,2,2)
 
-        bar_agenttype = categorical({'Infant','Kindergarten student','Elementary school student','High school student','University student','Full-time (standard, fixed)','Afternoon shift worker','Stay-at-home schedule','Tourist'});
-        bar_agenttype = reordercats(bar_agenttype,{'Infant','Kindergarten student','Elementary school student','High school student','University student','Full-time (standard, fixed)','Afternoon shift worker','Stay-at-home schedule','Tourist'});
-        h = bar(bar_agenttype,data.av.agenttype./normnum.typeID);
-        set(h, {'DisplayName'}, scenarionames)
+        avmat = data.av.agenttype./normnum.typeID;
+        sdmat = data.std.agenttype./normnum.typeID;
+        h = bar(avmat');
+        xticklabels({'Infant','Kindergarten student','Elementary school student','High school student','University student','Full-time (standard, fixed)','Afternoon shift worker','Stay-at-home schedule','Tourist'});
+        set(h, {'DisplayName'}, scenarionames);
+        hold on
+        x_errorbar = zeros(1, numel(sdmat));
+        for i = 1 : size(avmat,1)
+            x_errorbar((i-1)*size(avmat,2)+1:i*size(avmat,2)) = h(i).XEndPoints;
+        end
+        h2 = errorbar(x_errorbar,reshape(avmat',1,numel(avmat)),reshape(sdmat',1,numel(sdmat)),'k','linestyle','none','HandleVisibility','off');
+        hold off
         legend('Location','best')
         ylabel('Number of agents (normed)')
         set(gca,'YScale','log')
@@ -155,10 +238,18 @@ function fun_plotter_agst(jsonnames,scenarionames,Title,agents,locations,clog,sp
 
         subplot(2,2,[3 4])
 
-        bar_locationtype = categorical({'Public spaces','Residence','Public education','Std., full-time wp.','Small social site','Large social site','Short visiting site','Long visiting site','Weekend social sites','Recreational sites','Closed facility','Hospital','Non-std. schedule wp.','Health center','Commuters','Nursing home','Classroom','University'});
-        bar_locationtype = reordercats(bar_locationtype,{'Public spaces','Residence','Public education','Std., full-time wp.','Small social site','Large social site','Short visiting site','Long visiting site','Weekend social sites','Recreational sites','Closed facility','Hospital','Non-std. schedule wp.','Health center','Commuters','Nursing home','Classroom','University'});
-        h = bar(bar_locationtype,data.av.locationtype);
-        set(h, {'DisplayName'}, scenarionames)
+        avmat = data.av.locationtype;
+        sdmat = data.std.locationtype;
+        h = bar(avmat');
+        xticklabels({'Public spaces','Residence','Public education','Std., full-time wp.','Small social site','Large social site','Short visiting site','Long visiting site','Weekend social sites','Recreational sites','Closed facility','Hospital','Non-std. schedule wp.','Health center','Commuters','Nursing home','Classroom','University'});
+        set(h, {'DisplayName'}, scenarionames);
+        hold on
+        x_errorbar = zeros(1, numel(sdmat));
+        for i = 1 : size(avmat,1)
+            x_errorbar((i-1)*size(avmat,2)+1:i*size(avmat,2)) = h(i).XEndPoints;
+        end
+        h2 = errorbar(x_errorbar,reshape(avmat',1,numel(avmat)),reshape(sdmat',1,numel(sdmat)),'k','linestyle','none','HandleVisibility','off');
+        hold off
         legend('Location','best')
         ylabel('Number of infections')
         set(gca,'YScale','log')
