@@ -6,20 +6,20 @@ To run the scripts, and evaluate the data coming from the simulator, one should 
   - *agst_ip* : a cell array of strings, which contains the path(s) and file name(s) of the standard outputs at given scenario(s)
   - *tr_ip* : a cell array of strings, which contains the path(s) and file name(s) of the standard outputs at given scenario(s)
   - *scen_names* : a cell array of strings, which contains the names of the scenarios, that will be displayed on the plots
-  - *title* : this is a string, which can provide additional information on the plots in form of a title
+  - *title* : this is a string, which can provide additional information on the plots as a title
   - *measures* : a cell array, 1st column is a string array (name of the applied measure), second is double array (day when the measure was applied), it is for plotting vertical dashed lines to represent applied measures in the simulation
   - *startdate* : a string, given in mm/dd/yy format, it is for initializing the first point of the time-axis
   - *std_flag* : a binary on/off switch, it determines if the standard output should be processed
   - *agts_flag* : a binary on/off switch, it determines if the agentstat output should be processed
   - *tr_flag* : a binary on/off switch, it determines if the contact tracing output should be processed
-  - *rdata_flag*: a binary on/off switch, it determines if we want to plot the national data or not
-  - *path*: give the name and path of the folder, where you would like to save the figures
+  - *rdata_flag*: a binary on/off switch, it determines if we want to plot the national and the deterministic data or not
+  - *path*: give the name and path of the folder, where the figures should be saved
 
 **Note:** each flag is expected to be a 0 or 1 value, otherwise the user will get a "You used something other than 0 or 1 for a binary flag!" message. In case of a 0 value a "*type of input* was not requested!" message will be displayed. Also the number of scenarios are limited to 8, that can be plotted each time.
 
 There are 3 kind of inputs for the plotting scripts, the Standard input, the Agent-dependent input and the Contact tracing input. There are conventions how to name these files while running simulations. These conventions can be seen below:
 
-  - Standard input: <some arbitrary user defined name>_<simulation count>.txt --> the user defined name must contain equal number of '_' characters
-  - Agent dependent input: <some arbitrary user defined name>_<simulation count>.json --> the user defined name must contain equal number of '_' characters
-  - Contact tracing input: this is defined by a folder for each round, the folder name must be <some arbitrary user defined name>_<simulation count> --> the user defined name must contain equal number of '_' characters
+  - Standard input: <some arbitrary user defined name>_<simulation count>.txt
+  - Agent dependent input: <some arbitrary user defined name>_<simulation count>.json
+  - Contact tracing input: this is a folder for each round, the folder name must be <some arbitrary user defined name>_<simulation count>
 
