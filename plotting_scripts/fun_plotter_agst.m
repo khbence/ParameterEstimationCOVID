@@ -234,7 +234,7 @@ function fun_plotter_agst(jsonnames,scenarionames,Title,agents,locations,clog,sp
         legend('Location','best')
         ylabel('Number of agents (normed)')
         set(gca,'YScale','log')
-        title('Agent type distribution (normed with category size)')
+        title('Ratio of infected agents in agent types')
 
         subplot(2,2,[3 4])
 
