@@ -65,7 +65,7 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,flag,rd
             xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
         end
         if detfl == 1
-        plot(deterdata(:,7),'Color',[0.6350 0.0780 0.1840],'LineWidth',1.5,'DisplayName','Deterministic')
+        plot(deterdata(:,7)/nepesseg,'Color',[0.6350 0.0780 0.1840],'LineWidth',1.5,'DisplayName','Deterministic')
         end
         hold off
         grid on
@@ -89,7 +89,7 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,flag,rd
             xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
         end
         if detfl == 1
-        plot(deterdata(:,8),'Color',[0.6350 0.0780 0.1840],'LineWidth',1.5,'DisplayName','Deterministic')
+        plot(deterdata(:,8)/nepesseg,'Color',[0.6350 0.0780 0.1840],'LineWidth',1.5,'DisplayName','Deterministic')
         end
         hold off
         grid on
@@ -136,7 +136,7 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,flag,rd
             xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
         end
         if detfl == 1
-        plot(deterdata(:,1),'Color',[0.6350 0.0780 0.1840],'LineWidth',1.5,'DisplayName','Deterministic')
+        plot(deterdata(:,1)/nepesseg,'Color',[0.6350 0.0780 0.1840],'LineWidth',1.5,'DisplayName','Deterministic')
         end
         hold off
         grid on
@@ -160,7 +160,7 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,flag,rd
             xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
         end
         if detfl == 1
-        plot(deterdata(:,4),'Color',[0.6350 0.0780 0.1840],'LineWidth',1.5,'DisplayName','Deterministic')
+        plot(deterdata(:,4)/nepesseg,'Color',[0.6350 0.0780 0.1840],'LineWidth',1.5,'DisplayName','Deterministic')
         end
         hold off
         grid on
@@ -190,7 +190,7 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,flag,rd
             plot(0:szdead_len-1,szdead/nepesseg,'Color',[255/255,69/255,50/255],'LineWidth',w,'DisplayName','Szeged data');
         end
         if detfl == 1
-        plot(deterdata(:,5),'Color',[0.6350 0.0780 0.1840],'LineWidth',1.5,'DisplayName','Deterministic')
+        plot(deterdata(:,5)/nepesseg,'Color',[0.6350 0.0780 0.1840],'LineWidth',1.5,'DisplayName','Deterministic')
         end
         hold off
         grid on
@@ -214,7 +214,7 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,flag,rd
             xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
         end
         if detfl == 1
-        plot(deterdata(:,2),'Color',[0.6350 0.0780 0.1840],'LineWidth',1.5,'DisplayName','Deterministic')
+        plot(deterdata(:,2)/nepesseg,'Color',[0.6350 0.0780 0.1840],'LineWidth',1.5,'DisplayName','Deterministic')
         end
         hold off
         grid on
@@ -238,7 +238,7 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,flag,rd
             xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
         end
         if detfl == 1
-        plot(deterdata(:,6),'Color',[0.6350 0.0780 0.1840],'LineWidth',1.5,'DisplayName','Deterministic')
+        plot(deterdata(:,6)/nepesseg,'Color',[0.6350 0.0780 0.1840],'LineWidth',1.5,'DisplayName','Deterministic')
         end
         hold off
         grid on
@@ -451,7 +451,7 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,flag,rd
             funplot_realdata(rdata/nepesseg,numAgents,hunPopulation,w);
         end
         if detfl == 1
-        plot(deterdata(:,3),'Color',[0.6350 0.0780 0.1840],'LineWidth',1.5,'DisplayName','Deterministic')
+        plot(deterdata(:,3)/nepesseg,'Color',[0.6350 0.0780 0.1840],'LineWidth',1.5,'DisplayName','Deterministic')
         end
         hold off
         grid on
@@ -859,7 +859,7 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,flag,rd
             xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
         end
         if detfl == 1
-        plot(deterdata(:,10),'Color',[0.6350 0.0780 0.1840],'LineWidth',1.5,'DisplayName','Deterministic')
+        plot(deterdata(:,10)/nepesseg,'Color',[0.6350 0.0780 0.1840],'LineWidth',1.5,'DisplayName','Deterministic')
         end
         hold off
         grid on
@@ -891,7 +891,7 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,flag,rd
             xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
         end
         if detfl == 1
-        plot(deterdata(:,7),'Color',[0.6350 0.0780 0.1840],'LineWidth',1.5,'DisplayName','Deterministic')
+        plot(deterdata(:,7)/nepesseg,'Color',[0.6350 0.0780 0.1840],'LineWidth',1.5,'DisplayName','Deterministic')
         end
         hold off
         grid on
@@ -915,7 +915,7 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,flag,rd
             xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
         end
         if detfl == 1
-        plot(deterdata(:,8),'Color',[0.6350 0.0780 0.1840],'LineWidth',1.5,'DisplayName','Deterministic')
+        plot(deterdata(:,8)/nepesseg,'Color',[0.6350 0.0780 0.1840],'LineWidth',1.5,'DisplayName','Deterministic')
         end
         hold off
         grid on
@@ -960,7 +960,7 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,flag,rd
             xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
         end
         if detfl == 1
-        plot(deterdata(:,4),'Color',[0.6350 0.0780 0.1840],'LineWidth',1.5,'DisplayName','Deterministic')
+        plot(deterdata(:,4)/nepesseg,'Color',[0.6350 0.0780 0.1840],'LineWidth',1.5,'DisplayName','Deterministic')
         end
         hold off
         grid on
@@ -993,7 +993,7 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,flag,rd
             xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
         end
         if detfl == 1
-        plot(deterdata(:,2),'Color',[0.6350 0.0780 0.1840],'LineWidth',1.5,'DisplayName','Deterministic')
+        plot(deterdata(:,2)/nepesseg,'Color',[0.6350 0.0780 0.1840],'LineWidth',1.5,'DisplayName','Deterministic')
         end
         hold off
         grid on
@@ -1017,7 +1017,7 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,flag,rd
             xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
         end
         if detfl == 1
-        plot(deterdata(:,6),'Color',[0.6350 0.0780 0.1840],'LineWidth',1.5,'DisplayName','Deterministic')
+        plot(deterdata(:,6)/nepesseg,'Color',[0.6350 0.0780 0.1840],'LineWidth',1.5,'DisplayName','Deterministic')
         end
         hold off
         grid on
@@ -1154,7 +1154,7 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,flag,rd
             xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
         end
         if detfl == 1
-        plot(deterdata(:,3),'Color',[0.6350 0.0780 0.1840],'LineWidth',1.5,'DisplayName','Deterministic')
+        plot(deterdata(:,3)/nepesseg,'Color',[0.6350 0.0780 0.1840],'LineWidth',1.5,'DisplayName','Deterministic')
         end
         hold off
         grid on
