@@ -83,7 +83,7 @@ function output = fun_plotter_tr(tr_ip,agst_ip,scenarionames,Title,Measures,Star
         F = getframe(FIGH);
         mkdir(append(Path,'/ctr'))
         imwrite(F.cdata,append(Path,'/ctr/ctr-1.jpg'),'jpg')
-        savefig(append(Path,'/ctr/ctr-1.fig'))
+        savefig(append(Path,'/ctr/z_ctr-1.fig'))
         
         for i = 1 : length(output)
             FIGH = figure('Name',append('Plots',num2str(i+1),'_tr'),'NumberTitle','off','Position',get(0,'Screensize'));
@@ -96,7 +96,7 @@ function output = fun_plotter_tr(tr_ip,agst_ip,scenarionames,Title,Measures,Star
             title(append('Mean infection event distribution of the ',scenarionames{i},' scenario'))
             F = getframe(FIGH);
             imwrite(F.cdata,append(Path,'/std/std-',num2str(i+1),'.jpg'),'jpg')
-            savefig(append(Path,'/std/std-',num2str(i+1),'.fig'))
+            savefig(append(Path,'/std/z_std-',num2str(i+1),'.fig'))
         end
         
         output = output.r0fun;

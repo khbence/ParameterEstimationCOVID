@@ -106,7 +106,7 @@ function fun_plotter_agst(jsonnames,scenarionames,Title,agents,locations,clog,sp
         F = getframe(FIGH);
         mkdir(append(Path,'/ags'))
         imwrite(F.cdata,append(Path,'/ags/ags_',spectitle,'-1.jpg'),'jpg')
-        savefig(append(Path,'/ags/ags_',spectitle,'-1.fig'))
+        savefig(append(Path,'/ags/z_ags_',spectitle,'-1.fig'))
 
         FIGH = figure('Name','Plots2_agst','NumberTitle','off','Position',get(0,'Screensize'));
 
@@ -194,7 +194,7 @@ function fun_plotter_agst(jsonnames,scenarionames,Title,agents,locations,clog,sp
         
         F = getframe(FIGH);
         imwrite(F.cdata,append(Path,'/ags/ags_',spectitle,'-2.jpg'),'jpg')
-        savefig(append(Path,'/ags/ags_',spectitle,'-2.fig'))
+        savefig(append(Path,'/ags/z_ags_',spectitle,'-2.fig'))
 
         FIGH = figure('Name','Plots3_agst','NumberTitle','off','Position',get(0,'Screensize'));
 
@@ -259,7 +259,7 @@ function fun_plotter_agst(jsonnames,scenarionames,Title,agents,locations,clog,sp
         
         F = getframe(FIGH);
         imwrite(F.cdata,append(Path,'/ags/ags_',spectitle,'-3.jpg'),'jpg')
-        savefig(append(Path,'/ags/ags_',spectitle,'-3.fig'))
+        savefig(append(Path,'/ags/z_ags_',spectitle,'-3.fig'))
 
         fprintf(append("Agent statistics input successfully processed! (",spectitle,")\n"))
     else
