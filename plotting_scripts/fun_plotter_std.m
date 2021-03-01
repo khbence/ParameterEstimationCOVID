@@ -780,7 +780,7 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,flag,rd
             full = str2double(hundata(startdate:end,34));
             full(isnan(full)) = 0;
             rdata = full-start;
-            funplot_realdata(rdata,numAgents,hunPopulation,w);
+            funplot_realdata(rdata/nepesseg,numAgents,hunPopulation,w);
         end    
         hold off
         grid on
@@ -808,7 +808,7 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,flag,rd
             full = str2double(hundata(startdate:end,33));
             full(isnan(full)) = 0;
             rdata = (full-start)./hunPopulation*100;
-            funplot_realdata(rdata,1,1,w);
+            funplot_realdata(rdata/nepesseg,1,1,w);
         end  
         hold off
         grid on
@@ -859,7 +859,7 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,flag,rd
             xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
         end
         if detfl == 1
-        plot(deterdata(:,10)/nepesseg,'Color',[0.6350 0.0780 0.1840],'LineWidth',1.5,'DisplayName','Deterministic')
+        plot(deterdata(:,10),'Color',[0.6350 0.0780 0.1840],'LineWidth',1.5,'DisplayName','Deterministic')
         end
         hold off
         grid on

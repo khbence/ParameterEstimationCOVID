@@ -22,6 +22,8 @@ function fun_plotter_agst(jsonnames,scenarionames,Title,agents,locations,clog,sp
         end
 
         scenarionames(indeces2bedeleted) = [];
+        
+        angle = 45;
 
         FIGH = figure('Name','Plots1_agst','NumberTitle','off','Position',get(0,'Screensize'));
 
@@ -40,6 +42,7 @@ function fun_plotter_agst(jsonnames,scenarionames,Title,agents,locations,clog,sp
         h2 = errorbar(x_errorbar,reshape(avmat',1,numel(avmat)),reshape(sdmat',1,numel(sdmat)),'k','linestyle','none','HandleVisibility','off');
         hold off
         legend('Location','best');
+        xtickangle(angle)
         xlabel('Age intervals [years]');
         ylabel('Number of agents');
         title('Age group distribution');
@@ -59,6 +62,7 @@ function fun_plotter_agst(jsonnames,scenarionames,Title,agents,locations,clog,sp
         h2 = errorbar(x_errorbar,reshape(avmat',1,numel(avmat)),reshape(sdmat',1,numel(sdmat)),'k','linestyle','none','HandleVisibility','off');
         hold off
         legend('Location','best')
+        xtickangle(angle)
         xlabel('COVID-related chronic illnesses')
         ylabel('Number of agents')
         title('Precondition distribution')
@@ -78,6 +82,7 @@ function fun_plotter_agst(jsonnames,scenarionames,Title,agents,locations,clog,sp
         h2 = errorbar(x_errorbar,reshape(avmat',1,numel(avmat)),reshape(sdmat',1,numel(sdmat)),'k','linestyle','none','HandleVisibility','off');
         hold off
         legend('Location','best');
+        xtickangle(angle)
         xlabel('Age intervals [years]');
         ylabel('Number of agents (normed)');
         title('Ratio of infected agents in age groups');
@@ -97,6 +102,7 @@ function fun_plotter_agst(jsonnames,scenarionames,Title,agents,locations,clog,sp
         h2 = errorbar(x_errorbar,reshape(avmat',1,numel(avmat)),reshape(sdmat',1,numel(sdmat)),'k','linestyle','none','HandleVisibility','off');
         hold off
         legend('Location','best')
+        xtickangle(angle)
         xlabel('COVID-related chronic illnesses')
         ylabel('Number of agents (normed)')
         title('Ratio of infected agents in precondition groups')
@@ -125,6 +131,7 @@ function fun_plotter_agst(jsonnames,scenarionames,Title,agents,locations,clog,sp
         h2 = errorbar(x_errorbar,reshape(avmat',1,numel(avmat)),reshape(sdmat',1,numel(sdmat)),'k','linestyle','none','HandleVisibility','off');
         hold off
         legend('Location','best')
+        xtickangle(angle)
         ylabel('Number of agents')
         title('Sex distribution')
 
@@ -149,6 +156,7 @@ function fun_plotter_agst(jsonnames,scenarionames,Title,agents,locations,clog,sp
         h2 = errorbar(x_errorbar,reshape(avmat',1,numel(avmat)),reshape(sdmat',1,numel(sdmat)),'k','linestyle','none','HandleVisibility','off');
         hold off
         legend('Location','best')
+        xtickangle(angle)
         ylabel('Number of agents')
         set(gca,'YScale','log')
         title('Worst state distribution')
@@ -168,6 +176,7 @@ function fun_plotter_agst(jsonnames,scenarionames,Title,agents,locations,clog,sp
         h2 = errorbar(x_errorbar,reshape(avmat',1,numel(avmat)),reshape(sdmat',1,numel(sdmat)),'k','linestyle','none','HandleVisibility','off');
         hold off
         legend('Location','best')
+        xtickangle(angle)
         ylabel('Number of agents')
         set(gca,'YScale','log')
         title('Infected - Not infected agents')
@@ -187,6 +196,7 @@ function fun_plotter_agst(jsonnames,scenarionames,Title,agents,locations,clog,sp
         h2 = errorbar(x_errorbar,reshape(avmat',1,numel(avmat)),reshape(sdmat',1,numel(sdmat)),'k','linestyle','none','HandleVisibility','off');
         hold off
         legend('Location','best')
+        xtickangle(angle)
         ylabel('Number of agents')
         title('Diagnosed - Not diagnosed agents')
 
@@ -213,6 +223,7 @@ function fun_plotter_agst(jsonnames,scenarionames,Title,agents,locations,clog,sp
         h2 = errorbar(x_errorbar,reshape(avmat',1,numel(avmat)),reshape(sdmat',1,numel(sdmat)),'k','linestyle','none','HandleVisibility','off');
         hold off
         legend('Location','best')
+        xtickangle(angle)
         ylabel('Number of agents')
         set(gca,'YScale','log')
         title('Agent type distribution')
@@ -232,6 +243,7 @@ function fun_plotter_agst(jsonnames,scenarionames,Title,agents,locations,clog,sp
         h2 = errorbar(x_errorbar,reshape(avmat',1,numel(avmat)),reshape(sdmat',1,numel(sdmat)),'k','linestyle','none','HandleVisibility','off');
         hold off
         legend('Location','best')
+        xtickangle(angle)
         ylabel('Number of agents (normed)')
         set(gca,'YScale','log')
         title('Ratio of infected agents in agent types')
@@ -251,6 +263,7 @@ function fun_plotter_agst(jsonnames,scenarionames,Title,agents,locations,clog,sp
         h2 = errorbar(x_errorbar,reshape(avmat',1,numel(avmat)),reshape(sdmat',1,numel(sdmat)),'k','linestyle','none','HandleVisibility','off');
         hold off
         legend('Location','best')
+        xtickangle(angle)
         ylabel('Number of infections')
         set(gca,'YScale','log')
         title('Infection locations')
