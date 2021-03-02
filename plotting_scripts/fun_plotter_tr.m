@@ -95,8 +95,8 @@ function output = fun_plotter_tr(tr_ip,agst_ip,scenarionames,Title,Measures,Star
             set(gca,'YScale','log')
             title(append('Mean infection event distribution of the ',scenarionames{i},' scenario'))
             F = getframe(FIGH);
-            imwrite(F.cdata,append(Path,'/std/std-',num2str(i+1),'.jpg'),'jpg')
-            savefig(append(Path,'/std/z_std-',num2str(i+1),'.fig'))
+            imwrite(F.cdata,append(Path,'/ctr/ctr-',num2str(i+1),'.jpg'),'jpg')
+            savefig(append(Path,'/ctr/z_ctr-',num2str(i+1),'.fig'))
         end
         
         output = output.r0fun;
