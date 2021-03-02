@@ -185,7 +185,7 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,flag,rd
         end
         if rdata_flag
             rdata = str2double(hundata(startdate:end,4))-str2double(hundata(startdate,4));
-            funplot_realdata(rdata/nepesseg,numAgents,hunPopulation,w);
+            funplot_realdata(rdata,numAgents,hunPopulation,w,nepesseg);
             szdead_len = numel(szdead);
             plot(0:szdead_len-1,szdead/nepesseg,'Color',[255/255,69/255,50/255],'LineWidth',w,'DisplayName','Szeged data');
         end
@@ -293,7 +293,7 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,flag,rd
         end
         if rdata_flag
             rdata = str2double(hundata(startdate:end,16));
-            funplot_realdata(rdata/nepesseg,numAgents,hunPopulation,w);
+            funplot_realdata(rdata,numAgents,hunPopulation,w,nepesseg);
         end
         hold off
         grid on
@@ -318,7 +318,7 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,flag,rd
         end
         if rdata_flag
             rdata = str2double(hundata(startdate:end,3));
-            funplot_realdata(rdata/nepesseg,numAgents,hunPopulation,w);
+            funplot_realdata(rdata,numAgents,hunPopulation,w,nepesseg);
         end
         hold off
         grid on
@@ -343,7 +343,7 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,flag,rd
         end
         if rdata_flag
             rdata = str2double(hundata(startdate:end,3))./str2double(hundata(startdate:end,16));
-            funplot_realdata(rdata/nepesseg,1,1,w);
+            funplot_realdata(rdata,1,1,w,nepesseg);
         end
         hold off
         grid on
@@ -368,7 +368,7 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,flag,rd
         end
         if rdata_flag
             rdata = cumsum(str2double(hundata(startdate:end,16)));
-            funplot_realdata(rdata/nepesseg,numAgents,hunPopulation,w);
+            funplot_realdata(rdata,numAgents,hunPopulation,w,nepesseg);
         end
         
         hold off
@@ -394,7 +394,7 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,flag,rd
         end
         if rdata_flag
             rdata = cumsum(str2double(hundata(startdate:end,3)));
-            funplot_realdata(rdata/nepesseg,numAgents,hunPopulation,w);
+            funplot_realdata(rdata,numAgents,hunPopulation,w,nepesseg);
         end
         hold off
         grid on
@@ -448,7 +448,7 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,flag,rd
         end
         if rdata_flag
             rdata = str2double(hundata(startdate:end,20));
-            funplot_realdata(rdata/nepesseg,numAgents,hunPopulation,w);
+            funplot_realdata(rdata,numAgents,hunPopulation,w,nepesseg);
         end
         if detfl == 1
         plot(deterdata(:,3)/nepesseg,'Color',[0.6350 0.0780 0.1840],'LineWidth',1.5,'DisplayName','Deterministic')
@@ -780,7 +780,7 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,flag,rd
             full = str2double(hundata(startdate:end,34));
             full(isnan(full)) = 0;
             rdata = full-start;
-            funplot_realdata(rdata/nepesseg,numAgents,hunPopulation,w);
+            funplot_realdata(rdata,numAgents,hunPopulation,w,nepesseg);
         end    
         hold off
         grid on
@@ -807,8 +807,9 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,flag,rd
             start(isnan(start)) = 0;
             full = str2double(hundata(startdate:end,33));
             full(isnan(full)) = 0;
-            rdata = (full-start)./hunPopulation*100;
-            funplot_realdata(rdata/nepesseg,1,1,w);
+            %rdata = (full-start)./hunPopulation*100;
+            rdata = full-start;
+            funplot_realdata(rdata,numAgents,hunPopulation,w,nepesseg);
         end  
         hold off
         grid on
