@@ -1,25 +1,21 @@
 close all; clear all; clc;
 % Standard input:
-std_ip = {'data/fullRerun/default/default_',
-          'data/fullRerun/closures_school_levels/school_closes_',
-          'data/fullRerun/closures_school_levels/no_school_'}; std_flag = 1;
+std_ip = {'data/fullRerun/default/default_'}; std_flag = 0;
 % Agentstat input:
-agst_ip = {'data/fullRerun/default/outAgent/default_outagent_',
-           'data/fullRerun/closures_school_levels/outAgent/school_closes_outagent_',
-           'data/fullRerun/closures_school_levels/outAgent/no_school_outagent_'}; agst_flag = 0;
+agst_ip = {'data/defcont/datad/outAgent/default_outagent_'}; agst_flag = 0;
 % Trace input:
-tr_ip = {'data/data0203/dumplist_02_03/dumplist_'}; tr_flag = 0;
+tr_ip = {'data/defcont/datad/dumplist_'}; tr_flag = 1;
 % Legend nevek megadása:
-Scennames = {'Close infected classes';'Close infected schools';'Close all schools'};
+Scennames = {'Default'};
 % Cím megadása:
-title = 'Educational simulations';
+title = 'Realistic simulation';
 % Plot határok bejelölése:
 measures = {{'Restr.'},49;
-            {'Vacci.'},96};
+            {'Vacci.'},100};
 % Kezdődátum megadása:
 startd = '09/23/20'; % mm/dd/yy
 % Mentett grafikonok helye:
-path = 'data/attempt/schooltest4';
+path = 'data/defcont/res/default';
 % Mérési adat flag:
 m_flag = 0;
 % Végül a függvény hívása:
