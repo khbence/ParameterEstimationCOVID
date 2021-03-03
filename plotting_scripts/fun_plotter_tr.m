@@ -1,4 +1,4 @@
-function output = fun_plotter_tr(tr_ip,agst_ip,scenarionames,Title,Measures,StartDate,flag,agents,locations,Path)
+function output = fun_plotter_tr(tr_ip,agst_ip,scenarionames,Title,Measures,StartDate,flag,agents,locations,Path,colors)
 
     if flag == 1
         
@@ -9,9 +9,6 @@ function output = fun_plotter_tr(tr_ip,agst_ip,scenarionames,Title,Measures,Star
         
         measdim = size(Measures);
         measdim = measdim(1);
-
-        colors = [[1 0 0];[0 1 0];[0 0 1];[0 0 0];[1 0 1];[0 1 1];[0 0.4470 0.7410];[0.9290 0.6940 0.1250]];
-        
         
         output = fun_tr_postprocess(tr_ip,agst_ip,agents,locations);
         

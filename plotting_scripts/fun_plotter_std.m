@@ -1,4 +1,4 @@
-function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,flag,rdata_flag,Path,yax_string)
+function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,flag,rdata_flag,Path,yax_string,colors)
 
     if flag == 1
         
@@ -31,8 +31,6 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,flag,rd
         
         w = 1.5; % line width
         angle = 60;
-
-        colors = [[1 0 0];[0 1 0];[0 0 1];[0 0 0];[1 0 1];[0 1 1];[0 0.4470 0.7410];[0.9290 0.6940 0.1250];[0.4490 0.9240 0.1250]];
 
         [mean,standev] = fun_std_organize(txtnames);
 
