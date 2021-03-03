@@ -18,6 +18,8 @@ startd = '09/23/20'; % mm/dd/yy
 path = 'data/defcont/res/default';
 % Mérési adat flag:
 m_flag = 0;
+% Színek:
+colors = [[1 0 0];[0 1 0];[0 0 1];[0 0 0];[1 0 1];[0 1 1];[0 0.4470 0.7410];[0.9290 0.6940 0.1250];[0.4490 0.9240 0.1250]];
 % Végül a függvény hívása:
-output = fun_plotter_main(std_ip,agst_ip,tr_ip,Scennames,title,measures,startd,std_flag,agst_flag,tr_flag,m_flag,path);
+output = fun_plotter_main(std_ip,agst_ip,tr_ip,Scennames,title,measures,startd,std_flag,agst_flag,tr_flag,m_flag,path,colors);
 clearvars agst_ip Scennames std_ip title tr_ip measures startd path std_flag agst_flag tr_flag m_flag
