@@ -253,7 +253,7 @@ function fun_plotter_agst(jsonnames,scenarionames,Title,agents,locations,clog,sp
         avmat = data.av.locationtype;
         sdmat = data.std.locationtype;
         h = bar(avmat');
-        xticklabels({'Public spaces','Residence','Public education','Std., full-time wp.','Small social site','Large social site','Short visiting site','Long visiting site','Weekend social sites','Recreational sites','Closed facility','Hospital','Non-std. schedule wp.','Health center','Commuters','Nursing home','Classroom','University'});
+        xticklabels({'Public spaces','Residence','Public edu.','Std. workplace','Small soc. event','Large soc. event','Short stay POI','Long stay POI','Weekend activity','Recreational sites','Closed facility','Hospital','Non-std. schedule wp.','Health center','Commuters','Nursing home','Classroom','University'});
         set(h, {'DisplayName'}, scenarionames);
         hold on
         x_errorbar = zeros(1, numel(sdmat));
@@ -263,7 +263,7 @@ function fun_plotter_agst(jsonnames,scenarionames,Title,agents,locations,clog,sp
         h2 = errorbar(x_errorbar,reshape(avmat',1,numel(avmat)),reshape(sdmat',1,numel(sdmat)),'k','linestyle','none','HandleVisibility','off');
         hold off
         legend('Location','best')
-        xtickangle(angle)
+        xtickangle(angle-15)
         ylabel('Number of infections')
         set(gca,'YScale','log')
         title('Infection locations')
