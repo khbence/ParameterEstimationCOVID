@@ -82,6 +82,10 @@ function output = fun_agst_statreadprocfun(stat_name,agents,locations)
         end
     end
     
+    AgentStat = struct2table(AgentStat);
+    AgentStat = sortrows(AgentStat, 'infectionTime');
+    AgentStat = table2struct(AgentStat);
+    
     output = AgentStat;
 
 end
