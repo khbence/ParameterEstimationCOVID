@@ -2,9 +2,9 @@ close all; clear all; clc;
 % Standard input:
 std_ip = {'data/fullRerun/default/default_'}; std_flag = 0;
 % Agentstat input:
-agst_ip = {'data/defcont/datad/outAgent/default_outagent_'}; agst_flag = 0;
+agst_ip = {'data/defcont/datad/outAgent/default_outagent_'}; agst_flag = 1;
 % Trace input:
-tr_ip = {'data/defcont/datad/dumplist_'}; tr_flag = 1;
+tr_ip = {'data/defcont/datad/dumplist_'}; tr_flag = 0;
 % Legend nevek megadása:
 Scennames = {'Default'};
 % Cím megadása:
