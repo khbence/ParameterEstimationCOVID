@@ -6,6 +6,7 @@ function fun_plotter_agstorg(agst_ip,scen_names,Title,agst_flag,agents,locations
         fun_plotter_agst(agst_ip,scen_names,Title,agents,locations,1,'deceased portion',Path,LocMap)
         fun_plotter_agst(agst_ip,scen_names,Title,agents,locations,2,'quarantined portion',Path,LocMap)
         fun_plotter_agst(agst_ip,scen_names,Title,agents,locations,3,'pensioner portion',Path,LocMap)
+        fun_plotter_agst(agst_ip,scen_names,Title,agents,locations,4,'hospitalized portion',Path,LocMap)
     
     elseif agst_flag == 0
         fprintf("Agentstat input processing was not requested!\n")
