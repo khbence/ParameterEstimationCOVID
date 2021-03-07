@@ -32,6 +32,11 @@ function output = fun_agst_dqeextractor(AgentStat,agents,clog,LocMap)
                 elders(p) = AgentStat(i);
                 p = p + 1;
             end
+        elseif clog == 4
+            if strcmp(AgentStat(i).worstState_name,'I5_h') || strcmp(AgentStat(i).worstState_name,'I6_h') || strcmp(AgentStat(i).worstState_name,'D1')
+                hospitalized(p) = AgentStat(i);
+                p = p + 1;
+            end
         end
         
     end
@@ -48,6 +53,10 @@ function output = fun_agst_dqeextractor(AgentStat,agents,clog,LocMap)
         if exist('elders','var') == 0
             elders = 0;
         end
+    elseif clog == 4
+        if exist('hospitalized','var') == 0
+            hospitalized = 0;
+        end
     end
     
     if clog == 1
@@ -56,5 +65,7 @@ function output = fun_agst_dqeextractor(AgentStat,agents,clog,LocMap)
         output = quarantined;
     elseif clog == 3
         output = elders;
+    elseif clog == 4
+        output = hospitalized;
     end
 end
