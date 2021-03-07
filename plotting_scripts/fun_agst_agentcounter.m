@@ -1,29 +1,18 @@
-function count = fun_agst_agentcounter(input,agents,locations,clog)
+function count = fun_agst_agentcounter(input,agents,locations,clog,LocMap)
 
     AgentStat = fun_agst_statreadprocfun(input,agents,locations);
-    
-    [deceased,quarantined,elders] = fun_agst_dqeextractor(AgentStat,agents);
 
     if clog == 0
         count = fun_agst_agentcountercount(AgentStat);
     end
     
-    if clog == 1 && ~(isequaln(deceased,0))
-        count = fun_agst_agentcountercount(deceased);
-    elseif clog == 1 && isequaln(deceased,0)
-        count = 0;
-    end
-    
-    if clog == 2 && ~(isequaln(quarantined,0))
-        count = fun_agst_agentcountercount(quarantined);
-    elseif clog == 2 && isequaln(quarantined,0)
-        count = 0;
-    end
-    
-    if clog == 3 && ~(isequaln(elders,0))
-        count = fun_agst_agentcountercount(elders);
-    elseif clog == 3 && isequaln(elders,0)
-        count = 0;
+    if clog ~= 0
+        output = fun_agst_dqeextractor(AgentStat,agents,clog,LocMap);
+        if ~(isequaln(output,0))
+            count = fun_agst_agentcountercount(output);
+        elseif isequaln(output,0)
+            count = 0;
+        end
     end
     
 end
