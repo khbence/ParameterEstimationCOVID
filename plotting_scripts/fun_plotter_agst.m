@@ -1,8 +1,8 @@
-function fun_plotter_agst(jsonnames,scenarionames,Title,agents,locations,clog,spectitle,Path)
+function fun_plotter_agst(jsonnames,scenarionames,Title,agents,locations,clog,spectitle,Path,LocMap)
         
     scennum = length(scenarionames);
 
-    [data,agents,itbool] = fun_agst_organize(jsonnames,agents,locations,clog);
+    [data,agents,itbool] = fun_agst_organize(jsonnames,agents,locations,clog,LocMap);
     
     if ~exist(Path, 'dir')
         mkdir(Path)
@@ -32,6 +32,7 @@ function fun_plotter_agst(jsonnames,scenarionames,Title,agents,locations,clog,sp
         avmat = data.av.age;
         sdmat = data.std.age;
         h = bar(avmat');
+        xticks(1:size(avmat,2));
         xticklabels({'0-9','10-19','20-29','30-39','40-49','50-59','60-69','70-79','80-89','90-99'});
         set(h, {'DisplayName'}, scenarionames);
         hold on
@@ -52,6 +53,7 @@ function fun_plotter_agst(jsonnames,scenarionames,Title,agents,locations,clog,sp
         avmat = data.av.precond;
         sdmat = data.std.precond;
         h = bar(avmat');
+        xticks(1:size(avmat,2));
         xticklabels({'Healthy','Diabetes','Cardiovascular','Kidney','Obst. pulmonary'});
         set(h, {'DisplayName'}, scenarionames);
         hold on
@@ -72,6 +74,7 @@ function fun_plotter_agst(jsonnames,scenarionames,Title,agents,locations,clog,sp
         avmat = data.av.age./normnum.ages;
         sdmat = data.std.age./normnum.ages;
         h = bar(avmat');
+        xticks(1:size(avmat,2));
         xticklabels({'0-9','10-19','20-29','30-39','40-49','50-59','60-69','70-79','80-89','90-99'});
         set(h, {'DisplayName'}, scenarionames);
         hold on
@@ -92,6 +95,7 @@ function fun_plotter_agst(jsonnames,scenarionames,Title,agents,locations,clog,sp
         avmat = data.av.precond./normnum.precond;
         sdmat = data.std.precond./normnum.precond;
         h = bar(avmat');
+        xticks(1:size(avmat,2));
         xticklabels({'Healthy','Diabetes','Cardiovascular','Kidney','Obst. pulmonary'});
         set(h, {'DisplayName'}, scenarionames);
         hold on
@@ -121,6 +125,7 @@ function fun_plotter_agst(jsonnames,scenarionames,Title,agents,locations,clog,sp
         avmat = data.av.sex;
         sdmat = data.std.sex;
         h = bar(avmat');
+        xticks(1:size(avmat,2));
         xticklabels({'Female','Male'});
         set(h, {'DisplayName'}, scenarionames);
         hold on
@@ -146,6 +151,7 @@ function fun_plotter_agst(jsonnames,scenarionames,Title,agents,locations,clog,sp
         var(:,1:2) = [];
         sdmat = var;
         h = bar(avmat');
+        xticks(1:size(avmat,2));
         xticklabels({'Exposed','Presymptomatic','Asymptomatic','Light symptomatic','Mild symptomatic','Hospitalized','Intensive care','Deceased'});
         set(h, {'DisplayName'}, scenarionames);
         hold on
@@ -166,6 +172,7 @@ function fun_plotter_agst(jsonnames,scenarionames,Title,agents,locations,clog,sp
         avmat = data.av.infections;
         sdmat = data.std.infections;
         h = bar(avmat');
+        xticks(1:size(avmat,2));
         xticklabels({'Infected','Not infected'});
         set(h, {'DisplayName'}, scenarionames);
         hold on
@@ -186,6 +193,7 @@ function fun_plotter_agst(jsonnames,scenarionames,Title,agents,locations,clog,sp
         avmat = data.av.diagnoses;
         sdmat = data.std.diagnoses;
         h = bar(avmat');
+        xticks(1:size(avmat,2));
         xticklabels({'Diagnosed','Not diagnosed'});
         set(h, {'DisplayName'}, scenarionames);
         hold on
@@ -213,6 +221,7 @@ function fun_plotter_agst(jsonnames,scenarionames,Title,agents,locations,clog,sp
         avmat = data.av.agenttype;
         sdmat = data.std.agenttype;
         h = bar(avmat');
+        xticks(1:size(avmat,2));
         xticklabels({'Infant','Kindergarten student','Elementary school student','High school student','University student','Full-time (standard, fixed)','Afternoon shift worker','Stay-at-home schedule','Tourist'});
         set(h, {'DisplayName'}, scenarionames);
         hold on
@@ -233,6 +242,7 @@ function fun_plotter_agst(jsonnames,scenarionames,Title,agents,locations,clog,sp
         avmat = data.av.agenttype./normnum.typeID;
         sdmat = data.std.agenttype./normnum.typeID;
         h = bar(avmat');
+        xticks(1:size(avmat,2));
         xticklabels({'Infant','Kindergarten student','Elementary school student','High school student','University student','Full-time (standard, fixed)','Afternoon shift worker','Stay-at-home schedule','Tourist'});
         set(h, {'DisplayName'}, scenarionames);
         hold on
@@ -253,6 +263,7 @@ function fun_plotter_agst(jsonnames,scenarionames,Title,agents,locations,clog,sp
         avmat = data.av.locationtype;
         sdmat = data.std.locationtype;
         h = bar(avmat');
+        xticks(1:size(avmat,2));
         xticklabels({'Public spaces','Residence','Public edu.','Std. workplace','Small soc. event','Large soc. event','Short stay POI','Long stay POI','Weekend activity','Recreational sites','Closed facility','Hospital','Non-std. schedule wp.','Health center','Commuters','Nursing home','Classroom','University'});
         set(h, {'DisplayName'}, scenarionames);
         hold on

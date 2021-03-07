@@ -1,11 +1,11 @@
-function fun_plotter_agstorg(agst_ip,scen_names,Title,agst_flag,agents,locations,Path)
+function fun_plotter_agstorg(agst_ip,scen_names,Title,agst_flag,agents,locations,Path,LocMap)
 
     if agst_flag == 1
 
-        fun_plotter_agst(agst_ip,scen_names,Title,agents,locations,0,'general',Path)
-        fun_plotter_agst(agst_ip,scen_names,Title,agents,locations,1,'deceased portion',Path)
-        fun_plotter_agst(agst_ip,scen_names,Title,agents,locations,2,'quarantined portion',Path)
-        fun_plotter_agst(agst_ip,scen_names,Title,agents,locations,3,'pensioner portion',Path)
+        fun_plotter_agst(agst_ip,scen_names,Title,agents,locations,0,'general',Path,LocMap)
+        fun_plotter_agst(agst_ip,scen_names,Title,agents,locations,1,'deceased portion',Path,LocMap)
+        fun_plotter_agst(agst_ip,scen_names,Title,agents,locations,2,'quarantined portion',Path,LocMap)
+        fun_plotter_agst(agst_ip,scen_names,Title,agents,locations,3,'pensioner portion',Path,LocMap)
     
     elseif agst_flag == 0
         fprintf("Agentstat input processing was not requested!\n")
