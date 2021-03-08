@@ -1,8 +1,8 @@
-function fun_plotter_agst(jsonnames,scenarionames,Title,agents,locations,clog,spectitle,Path,LocMap)
+function fun_plotter_agst(jsonnames,scenarionames,Title,agents,clog,spectitle,Path,LocMap)
         
     scennum = length(scenarionames);
 
-    [data,agents,itbool] = fun_agst_organize(jsonnames,agents,locations,clog,LocMap);
+    [data,agents,itbool] = fun_agst_organize(jsonnames,agents,clog,LocMap);
     
     if ~exist(Path, 'dir')
         mkdir(Path)

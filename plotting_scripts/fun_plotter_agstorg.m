@@ -1,12 +1,13 @@
-function fun_plotter_agstorg(agst_ip,scen_names,Title,agst_flag,agents,locations,Path,LocMap)
+function fun_plotter_agstorg(agst_ip,scen_names,Title,agst_flag,agents,Path,LocMap)
 
     if agst_flag == 1
-
-        fun_plotter_agst(agst_ip,scen_names,Title,agents,locations,0,'general',Path,LocMap)
-        fun_plotter_agst(agst_ip,scen_names,Title,agents,locations,1,'deceased portion',Path,LocMap)
-        fun_plotter_agst(agst_ip,scen_names,Title,agents,locations,2,'quarantined portion',Path,LocMap)
-        fun_plotter_agst(agst_ip,scen_names,Title,agents,locations,3,'pensioner portion',Path,LocMap)
-        fun_plotter_agst(agst_ip,scen_names,Title,agents,locations,4,'hospitalized portion',Path,LocMap)
+        
+        fun_agst_preread(agst_ip);
+        fun_plotter_agst(agst_ip,scen_names,Title,agents,0,'general',Path,LocMap)
+        fun_plotter_agst(agst_ip,scen_names,Title,agents,1,'deceased portion',Path,LocMap)
+        fun_plotter_agst(agst_ip,scen_names,Title,agents,2,'quarantined portion',Path,LocMap)
+        fun_plotter_agst(agst_ip,scen_names,Title,agents,3,'pensioner portion',Path,LocMap)
+        fun_plotter_agst(agst_ip,scen_names,Title,agents,4,'hospitalized portion',Path,LocMap)
     
     elseif agst_flag == 0
         fprintf("Agentstat input processing was not requested!\n")
