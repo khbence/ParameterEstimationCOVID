@@ -1,6 +1,6 @@
-function count = fun_agst_agentcounter(input,agents,locations,clog,LocMap)
+function count = fun_agst_agentcounter(input,agents,clog,LocMap)
 
-    AgentStat = fun_agst_statreadprocfun(input,agents,locations);
+    AgentStat = fun_agst_statreadprocfun(input);
 
     if clog == 0
         count = fun_agst_agentcountercount(AgentStat);
