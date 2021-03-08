@@ -1,4 +1,4 @@
-function output = fun_agst_process(samplename,agents,locations,clog,LocMap)
+function output = fun_agst_process(samplename,agents,clog,LocMap)
 
     list = dir(append(samplename,'*'));
     list = (extractfield(list,'name'))';
@@ -13,7 +13,7 @@ function output = fun_agst_process(samplename,agents,locations,clog,LocMap)
 
     for i = 1 : length(list)
 
-        countvar = fun_agst_agentcounter(append(samplename,num2str(list(i)),'.json'),agents,locations,clog,LocMap);
+        countvar = fun_agst_agentcounter(append(samplename,num2str(list(i)),'.json'),agents,clog,LocMap);
         
         if ~(isequaln(countvar,0))
             struct_ar = [struct_ar countvar];
