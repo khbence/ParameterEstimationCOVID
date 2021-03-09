@@ -1,6 +1,4 @@
-function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,flag,rdata_flag,Path,yax_string,colors)
-
-    if flag == 1
+function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,rdata_flag,Path,yax_string,colors)
         
         if strcmp(yax_string,'No. of Agents')
             nepesseg = 1;
@@ -1277,12 +1275,5 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,flag,rd
         F = getframe(FIGH);
         imwrite(F.cdata,append(Path,'/pub_',nop,'/pub-3.jpg'),'jpg')
         savefig(append(Path,'/pub_',nop,'/z_pub-3.fig'))
-    
-        fprintf("Standard input successfully processed!\n")
-    elseif flag == 0
-        fprintf("Standard input processing was not requested!\n")
-    else
-        fprintf("You used something other than 0 or 1 for a binary flag!\n")
-    end
     
 end
