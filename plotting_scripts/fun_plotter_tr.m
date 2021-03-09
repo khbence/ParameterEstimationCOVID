@@ -95,12 +95,6 @@ function output = fun_plotter_tr(tr_ip,agst_ip,scenarionames,Title,Measures,Star
             imwrite(F.cdata,append(Path,'/ctr/ctr-',num2str(i+1),'.jpg'),'jpg')
             savefig(append(Path,'/ctr/z_ctr-',num2str(i+1),'.fig'))
         end
-        
-        output = output.r0fun;
-        atadas = output;
-        output = [];
-        output.r0 = atadas.r0;
-        output.r0mod = atadas.r0mod;
 
         fprintf(append("Contact tracing input successfully processed!\n"))
         
