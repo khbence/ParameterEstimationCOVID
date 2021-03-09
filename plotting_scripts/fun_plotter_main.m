@@ -1,4 +1,4 @@
-function output = fun_plotter_main(std_ip,agst_ip,tr_ip,scen_names,Title,Measures,StartDate,std_flag,agst_flag,tr_flag,rdata_flag,Path,colors)
+function output = fun_plotter_main(std_ip,agst_ip,tr_ip,scen_names,Title,Measures,StartDate,std_flag,agst_flag,tr_flag,rdata_flag,Path,colors,intervals)
 
     colors = colors/255;
 
@@ -16,7 +16,7 @@ function output = fun_plotter_main(std_ip,agst_ip,tr_ip,scen_names,Title,Measure
         locations = [];
     end
     
-    fun_plotter_agstorg(agst_ip,scen_names,Title,agst_flag,agents,Path,LocMap)
+    fun_plotter_agstit(agst_ip,scen_names,Title,agst_flag,agents,Path,LocMap,intervals)
     
     if agst_flag ~= 1 && tr_flag == 1
         locations = jsondecode(fileread('locations0.json'));
