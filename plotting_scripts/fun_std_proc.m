@@ -167,4 +167,14 @@ function [average, standev] = fun_std_proc(input)
     average.qiq = av;
     standev.qiq = stdev;
     
+    [av, stdev] = fun_std_avdev(input,norm,{'spec1'});
+    
+    average.spec1 = av;
+    standev.spec1 = stdev;
+    
+    [av, stdev] = fun_std_avdev(input,norm,{'spec2'});
+    
+    average.spec2 = av;
+    standev.spec2 = stdev;
+    
 end
