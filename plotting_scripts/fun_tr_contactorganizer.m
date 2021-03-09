@@ -24,7 +24,7 @@ function output = fun_tr_contactorganizer(input)
 
         cell_ar{i,2} = var;
         
-        cell_ar{i,3} = fun_tr_cutter(cell_ar{i,1});
+        cell_ar{i,3} = funcutter(cell_ar{i,1});
 
     end
     
@@ -48,7 +48,7 @@ function output = fun_tr_contactorganizer(input)
 
         cell_ar2{i,2} = var2;
         
-        cell_ar2{i,3} = fun_tr_cutter(cell_ar2{i,1});
+        cell_ar2{i,3} = funcutter(cell_ar2{i,1});
 
     end
     
