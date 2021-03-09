@@ -2,11 +2,9 @@ covid
 paramsEnv/
 .vscode
 plotting_scripts/data/
-plotting_scripts/tester_contact.m
-plotting_scripts/tester_outagentstat.m
+plotting_scripts/tester_*.m
 plotting_scripts/agents0.json
 plotting_scripts/locations0.json
-plotting_scripts/tester_std.m
 plotting_scripts/agentTypes.json
 plotting_scripts/locationTypes.json
 plotting_scripts/main_*.m
