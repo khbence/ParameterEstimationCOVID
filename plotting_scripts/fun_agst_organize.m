@@ -1,4 +1,4 @@
-function [output,agents,itbool] = fun_agst_organize(samplenames,agents,clog,LocMap)
+function [output,agents,itbool] = fun_agst_organize(samplenames,agents,clog,LocMap,interval)
 
     N = length(samplenames);
     
@@ -7,7 +7,7 @@ function [output,agents,itbool] = fun_agst_organize(samplenames,agents,clog,LocM
     
     for i = 1 : N
         
-        finvar_seged = fun_agst_process(samplenames{i},agents,clog,LocMap);
+        finvar_seged = fun_agst_process(samplenames{i},agents,clog,LocMap,interval);
         
         if sum(finvar_seged.av.age) ~= 0
             finvar = [finvar finvar_seged];
