@@ -2,8 +2,15 @@ function output = fun_plotter_main(std_ip,agst_ip,tr_ip,scen_names,Title,Measure
 
     colors = colors/255;
 
-    fun_plotter_std(std_ip,scen_names,Title,Measures,StartDate,std_flag,rdata_flag,Path,'No. of Agents',colors)
-    fun_plotter_std(std_ip,scen_names,Title,Measures,StartDate,std_flag,rdata_flag,Path,'Ratio to Total Population (%)',colors)
+    if std_flag == 1
+        fun_plotter_std(std_ip,scen_names,Title,Measures,StartDate,rdata_flag,Path,'No. of Agents',colors)
+        fun_plotter_std(std_ip,scen_names,Title,Measures,StartDate,rdata_flag,Path,'Ratio to Total Population (%)',colors)
+        fprintf("Standard input successfully processed!\n")
+    elseif std_flag == 0
+        fprintf("Standard input processing was not requested!\n")
+    else
+        fprintf("You used something other than 0 or 1 for a binary flag!\n")
+    end
     
     if agst_flag == 1
         locations = jsondecode(fileread('locations0.json'));
