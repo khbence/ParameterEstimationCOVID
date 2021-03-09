@@ -60,5 +60,8 @@ function output = fun_std_read(file)
     alinfected_seged = data(:,2)+data(:,3)+data(:,4)+data(:,5)+data(:,6)+data(:,7)+data(:,8);
     output.ne = newexposed_seged;
     output.re = newexposed_seged./alinfected_seged;
+    
+    output.spec1 = (t+p2)/(179500/100);
+    output.spec2 = (data(:,18)./(data(:,2)+data(:,3)+data(:,4)+data(:,5)+data(:,6)+data(:,7)+data(:,8)))*100;
 
 end
