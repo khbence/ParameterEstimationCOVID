@@ -876,6 +876,26 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,flag,rd
         F = getframe(FIGH);
         imwrite(F.cdata,append(Path,'/std_',nop,'/std-8.jpg'),'jpg')
         savefig(append(Path,'/std_',nop,'/z_std-8.fig'))
+        
+        FIGH = figure('Name','Plots9_std','NumberTitle','off','Position',get(0,'Screensize'));
+
+        hold on
+        for i = 1 : length(data_av)
+            %funplot(smoothdata(mean(i).re,'movmedian',14),smoothdata(standev(i).re,'movmedian',14),colors(i,:),w,scenarionames{i})
+            plot3(mean(i).spec1,mean(i).spec2,0:length(data_av(1).s)-1,'-o','Color',colors(i,:),'LineWidth',w,'DisplayName',scenarionames{i},'MarkerFaceColor',[0.5 0.5 0.5]);
+        end
+        hold off
+        grid on
+        grid minor
+        xlabel('% of population tested daily')
+        ylabel('% of infected portion being in quaratine')
+        zlabel('Time [days]')
+        title('% of infected portion being in quaratine as a function of the % of population tested daily')
+        legend('Location','best')
+        
+        F = getframe(FIGH);
+        imwrite(F.cdata,append(Path,'/std_',nop,'/std-9.jpg'),'jpg')
+        savefig(append(Path,'/std_',nop,'/z_std-9.fig'))
     
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Publication figures below this line %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
