@@ -1,6 +1,7 @@
-function count = fun_agst_agentcounter(input,agents,clog,LocMap)
+function count = fun_agst_agentcounter(input,agents,clog,LocMap,interval)
 
     AgentStat = fun_agst_statreadprocfun(input);
+    AgentStat = fun_agst_ivsplitter(AgentStat,interval);
 
     if clog == 0
         count = fun_agst_agentcountercount(AgentStat);
