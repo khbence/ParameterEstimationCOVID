@@ -223,10 +223,6 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,rdata_f
         for i = 1 : measdim
             xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
         end
-        if rdata_flag
-            szcase_len = numel(szcase);
-            plot(0:szcase_len-1,szcase/nepesseg,'Color',[255/255,69/255,50/255],'LineWidth',w,'DisplayName','Szeged data');
-        end
         if detfl == 1
         plot(deterdata(begintint:end,2)/nepesseg,'Color',[0.6350 0.0780 0.1840],'LineWidth',1.5,'DisplayName','Deterministic')
         end
@@ -333,6 +329,8 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,rdata_f
         if rdata_flag
             rdata = str2double(hundata(startdate:end,3));
             funplot_realdata(rdata,numAgents,hunPopulation,w,nepesseg);
+            szcase_len = numel(szcase);
+            plot(0:szcase_len-1,szcase/nepesseg,'Color',[255/255,69/255,50/255],'LineWidth',w,'DisplayName','Szeged data');
         end
         hold off
         grid on
