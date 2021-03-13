@@ -1,5 +1,10 @@
 function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,rdata_flag,Path,yax_string,colors,begintint)
         
+        begintint = begintint + 1;
+        for i = 1 : length(Measures)
+            Measures{i,2} = Measures{i,2} + begintint;
+        end
+
         if strcmp(yax_string,'No. of Agents')
             nepesseg = 1;
             nop = 'count';
@@ -18,7 +23,16 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,rdata_f
             dates = datetime(hundata(2:end,1),'InputFormat','yyyy-MM-dd');
             startdate = find(dates==datestr('2020-09-23'))+1;
             %Cumulative dead in Szeged, starting sept 23
-            szdead = [1,1,3,3,3,4,4,4,4,5,6,6,7,8,8,8,8,10,10,10,11,11,11,12,12,12,14,14,16,16,16,17,17,18,19,20,21,22,23,23,23,26,27,28,28,30,31,32,32,33,33,34,35,37,38,40,40,40,41,41,43,45,47,52,56,59,62,65,68,70,71,73,75,76,79,82,85,88,89,91,93,94,96,98,99,103,104,108,112,117,118,123,126,127,129,131,134,140,142,144,148,149,150,152,155,157,158,160,166,168,169,172,174,174,176,178,180,181,183,184,185,185,186,186,191,192,193,193,193,193,195,196,196,197,197,198,200,202,202];
+            szdead = readmatrix('data/aszh.xlsx')';
+            szcase = readmatrix('data/asze.xlsx')';
+            szdead(2,:) = 0;
+            szcase(2,:) = 0;
+            szdead = (179500/160766)*(szdead(1,:) + szdead(2,:));
+            szcase = (179500/160766)*(szcase(1,:) + szcase(2,:));
+            szdead = cumsum(szdead);
+            %szcase = cumsum(szcase);
+            szdead(1:begintint-1) = [];
+            szcase(1:begintint-1) = [];
             fprintf('Done.\n')
         end
         
@@ -61,7 +75,7 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,rdata_f
             xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
         end
         if detfl == 1
-        plot(deterdata(:,7)/nepesseg,'Color',[0.6350 0.0780 0.1840],'LineWidth',1.5,'DisplayName','Deterministic')
+        plot(deterdata(begintint:end,7)/nepesseg,'Color',[0.6350 0.0780 0.1840],'LineWidth',1.5,'DisplayName','Deterministic')
         end
         hold off
         grid on
@@ -85,7 +99,7 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,rdata_f
             xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
         end
         if detfl == 1
-        plot(deterdata(:,8)/nepesseg,'Color',[0.6350 0.0780 0.1840],'LineWidth',1.5,'DisplayName','Deterministic')
+        plot(deterdata(begintint:end,8)/nepesseg,'Color',[0.6350 0.0780 0.1840],'LineWidth',1.5,'DisplayName','Deterministic')
         end
         hold off
         grid on
@@ -132,7 +146,7 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,rdata_f
             xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
         end
         if detfl == 1
-        plot(deterdata(:,1)/nepesseg,'Color',[0.6350 0.0780 0.1840],'LineWidth',1.5,'DisplayName','Deterministic')
+        plot(deterdata(begintint:end,1)/nepesseg,'Color',[0.6350 0.0780 0.1840],'LineWidth',1.5,'DisplayName','Deterministic')
         end
         hold off
         grid on
@@ -156,7 +170,7 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,rdata_f
             xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
         end
         if detfl == 1
-        plot(deterdata(:,4)/nepesseg,'Color',[0.6350 0.0780 0.1840],'LineWidth',1.5,'DisplayName','Deterministic')
+        plot(deterdata(begintint:end,4)/nepesseg,'Color',[0.6350 0.0780 0.1840],'LineWidth',1.5,'DisplayName','Deterministic')
         end
         hold off
         grid on
@@ -186,7 +200,7 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,rdata_f
             plot(0:szdead_len-1,szdead/nepesseg,'Color',[255/255,69/255,50/255],'LineWidth',w,'DisplayName','Szeged data');
         end
         if detfl == 1
-        plot(deterdata(:,5)/nepesseg,'Color',[0.6350 0.0780 0.1840],'LineWidth',1.5,'DisplayName','Deterministic')
+        plot(deterdata(begintint:end,5)/nepesseg,'Color',[0.6350 0.0780 0.1840],'LineWidth',1.5,'DisplayName','Deterministic')
         end
         hold off
         grid on
@@ -209,8 +223,12 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,rdata_f
         for i = 1 : measdim
             xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
         end
+        if rdata_flag
+            szcase_len = numel(szcase);
+            plot(0:szcase_len-1,szcase/nepesseg,'Color',[255/255,69/255,50/255],'LineWidth',w,'DisplayName','Szeged data');
+        end
         if detfl == 1
-        plot(deterdata(:,2)/nepesseg,'Color',[0.6350 0.0780 0.1840],'LineWidth',1.5,'DisplayName','Deterministic')
+        plot(deterdata(begintint:end,2)/nepesseg,'Color',[0.6350 0.0780 0.1840],'LineWidth',1.5,'DisplayName','Deterministic')
         end
         hold off
         grid on
@@ -234,7 +252,7 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,rdata_f
             xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
         end
         if detfl == 1
-        plot(deterdata(:,6)/nepesseg,'Color',[0.6350 0.0780 0.1840],'LineWidth',1.5,'DisplayName','Deterministic')
+        plot(deterdata(begintint:end,6)/nepesseg,'Color',[0.6350 0.0780 0.1840],'LineWidth',1.5,'DisplayName','Deterministic')
         end
         hold off
         grid on
@@ -447,7 +465,7 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,rdata_f
             funplot_realdata(rdata,numAgents,hunPopulation,w,nepesseg);
         end
         if detfl == 1
-        plot(deterdata(:,3)/nepesseg,'Color',[0.6350 0.0780 0.1840],'LineWidth',1.5,'DisplayName','Deterministic')
+        plot(deterdata(begintint:end,3)/nepesseg,'Color',[0.6350 0.0780 0.1840],'LineWidth',1.5,'DisplayName','Deterministic')
         end
         hold off
         grid on
@@ -856,7 +874,7 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,rdata_f
             xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
         end
         if detfl == 1
-        plot(deterdata(:,10),'Color',[0.6350 0.0780 0.1840],'LineWidth',1.5,'DisplayName','Deterministic')
+        plot(deterdata(begintint:end,10),'Color',[0.6350 0.0780 0.1840],'LineWidth',1.5,'DisplayName','Deterministic')
         end
         hold off
         grid on
@@ -908,7 +926,7 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,rdata_f
             xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
         end
         if detfl == 1
-        plot(deterdata(:,7)/nepesseg,'Color',[0.6350 0.0780 0.1840],'LineWidth',1.5,'DisplayName','Deterministic')
+        plot(deterdata(begintint:end,7)/nepesseg,'Color',[0.6350 0.0780 0.1840],'LineWidth',1.5,'DisplayName','Deterministic')
         end
         hold off
         grid on
@@ -932,7 +950,7 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,rdata_f
             xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
         end
         if detfl == 1
-        plot(deterdata(:,8)/nepesseg,'Color',[0.6350 0.0780 0.1840],'LineWidth',1.5,'DisplayName','Deterministic')
+        plot(deterdata(begintint:end,8)/nepesseg,'Color',[0.6350 0.0780 0.1840],'LineWidth',1.5,'DisplayName','Deterministic')
         end
         hold off
         grid on
@@ -977,7 +995,7 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,rdata_f
             xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
         end
         if detfl == 1
-        plot(deterdata(:,4)/nepesseg,'Color',[0.6350 0.0780 0.1840],'LineWidth',1.5,'DisplayName','Deterministic')
+        plot(deterdata(begintint:end,4)/nepesseg,'Color',[0.6350 0.0780 0.1840],'LineWidth',1.5,'DisplayName','Deterministic')
         end
         hold off
         grid on
@@ -1010,7 +1028,7 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,rdata_f
             xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
         end
         if detfl == 1
-        plot(deterdata(:,2)/nepesseg,'Color',[0.6350 0.0780 0.1840],'LineWidth',1.5,'DisplayName','Deterministic')
+        plot(deterdata(begintint:end,2)/nepesseg,'Color',[0.6350 0.0780 0.1840],'LineWidth',1.5,'DisplayName','Deterministic')
         end
         hold off
         grid on
@@ -1034,7 +1052,7 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,rdata_f
             xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
         end
         if detfl == 1
-        plot(deterdata(:,6)/nepesseg,'Color',[0.6350 0.0780 0.1840],'LineWidth',1.5,'DisplayName','Deterministic')
+        plot(deterdata(begintint:end,6)/nepesseg,'Color',[0.6350 0.0780 0.1840],'LineWidth',1.5,'DisplayName','Deterministic')
         end
         hold off
         grid on
@@ -1171,7 +1189,7 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,rdata_f
             xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
         end
         if detfl == 1
-        plot(deterdata(:,3)/nepesseg,'Color',[0.6350 0.0780 0.1840],'LineWidth',1.5,'DisplayName','Deterministic')
+        plot(deterdata(begintint:end,3)/nepesseg,'Color',[0.6350 0.0780 0.1840],'LineWidth',1.5,'DisplayName','Deterministic')
         end
         hold off
         grid on
