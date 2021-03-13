@@ -16,6 +16,8 @@ To run the scripts, and evaluate the data coming from the simulator, one should 
   - *path*: give the name and path of the folder, where the figures should be saved
   - *colors*: color of the time series plot for each scenario
   - *intervals*: a N×2 array, where N is the number of intervals in time, that should be investigated by the AgentStat analysis, in each row a pair of values is given, where the first value is the beginning of a given interval, and the second value is the end of that interval
+  - *begintint*: no. of elements to be discarded from the beginning of the time series
+ 
 
 **Note:** each flag is expected to be a 0 or 1 value, otherwise the user will get a "You used something other than 0 or 1 for a binary flag!" message. In case of a 0 value a "*type of input* was not requested!" message will be displayed. Also the number of scenarios are limited to 8, that can be plotted each time.
 
