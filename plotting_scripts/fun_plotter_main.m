@@ -1,10 +1,10 @@
-function output = fun_plotter_main(std_ip,agst_ip,tr_ip,scen_names,Title,Measures,StartDate,std_flag,agst_flag,tr_flag,rdata_flag,Path,colors,intervals)
+function output = fun_plotter_main(std_ip,agst_ip,tr_ip,scen_names,Title,Measures,StartDate,std_flag,agst_flag,tr_flag,rdata_flag,Path,colors,intervals,begintint)
 
     colors = colors/255;
 
     if std_flag == 1
-        fun_plotter_std(std_ip,scen_names,Title,Measures,StartDate,rdata_flag,Path,'No. of Agents',colors)
-        fun_plotter_std(std_ip,scen_names,Title,Measures,StartDate,rdata_flag,Path,'Ratio to Total Population (%)',colors)
+        fun_plotter_std(std_ip,scen_names,Title,Measures,StartDate,rdata_flag,Path,'No. of Agents',colors,begintint)
+        fun_plotter_std(std_ip,scen_names,Title,Measures,StartDate,rdata_flag,Path,'Ratio to Total Population (%)',colors,begintint)
         fprintf("Standard input successfully processed!\n")
     elseif std_flag == 0
         fprintf("Standard input processing was not requested!\n")
