@@ -1,5 +1,9 @@
 function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,rdata_flag,Path,yax_string,colors,begintint)
         
+        % Mátrix a kimeneti CSV-hez: 1->összhalott, 2->kórházmax,
+        % 3->kórházössz, 4->intenzívmax, 5->intenzívössz
+        matrix4csv = zeros(length(scenarionames),5);
+
         begintint = begintint + 1;
         for i = 1 : length(Measures)
             Measures{i,2} = Measures{i,2} + begintint;
@@ -189,6 +193,7 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,rdata_f
         hold on
         for i = 1 : length(data_av)
             funplot(mean(i).d(begintint:end)/nepesseg,standev(i).d(begintint:end)/nepesseg,colors(i,:),w,scenarionames{i})
+            matrix4csv(i,1) = mean(i).d(end);
         end
         for i = 1 : measdim
             xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
@@ -454,6 +459,8 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,rdata_f
         hold on
         for i = 1 : length(data_av)
             funplot(mean(i).kt(begintint:end)/nepesseg,standev(i).kt(begintint:end)/nepesseg,colors(i,:),w,scenarionames{i})
+            matrix4csv(i,2) = max(mean(i).kt);
+            matrix4csv(i,3) = sum(mean(i).kt);
         end
         for i = 1 : measdim
             xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
@@ -503,6 +510,8 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,rdata_f
         hold on
         for i = 1 : length(data_av)
             funplot(mean(i).i6(begintint:end)/nepesseg,standev(i).i6(begintint:end)/nepesseg,colors(i,:),w,scenarionames{i})
+            matrix4csv(i,4) = max(mean(i).i6);
+            matrix4csv(i,5) = sum(mean(i).i6);
         end
         for i = 1 : measdim
             xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
@@ -1291,5 +1300,11 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,rdata_f
         F = getframe(FIGH);
         imwrite(F.cdata,append(Path,'/pub_',nop,'/pub-3.jpg'),'jpg')
         savefig(append(Path,'/pub_',nop,'/z_pub-3.fig'))
+        
+        if strcmp(yax_string,'No. of Agents')
+            matrix4csv = array2table(matrix4csv,'VariableNames',{'Deceasedsum','Hospitalmax','Hospitalsum','Intensivemax','Intensivesum'});
+            matrix4csv = addvars(matrix4csv,scenarionames,'Before','Deceasedsum');
+            writetable(matrix4csv,append(Path,'/',Title,'.csv'),'Delimiter','|')
+        end
     
 end
