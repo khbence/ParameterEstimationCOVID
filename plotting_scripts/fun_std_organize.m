@@ -1,6 +1,6 @@
 function [mean,standev] = fun_std_organize(names)
 
-    N = length(names(1,:));
+    N = length(names(:,1));
     
     mean = [];
     standev = [];
