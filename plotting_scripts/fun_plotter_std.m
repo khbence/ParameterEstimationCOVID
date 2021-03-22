@@ -27,8 +27,8 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,rdata_f
             dates = datetime(hundata(2:end,1),'InputFormat','yyyy-MM-dd');
             startdate = find(dates==datestr('2020-09-23'))+1;
             %Cumulative dead in Szeged, starting sept 23
-            szdead = readmatrix('data/aszh.xlsx')';
-            szcase = readmatrix('data/asze.xlsx')';
+            szdead = readmatrix('szeged_data/aszh.xlsx')';
+            szcase = readmatrix('szeged_data/asze.xlsx')';
             szdead(2,:) = 0;
             szcase(2,:) = 0;
             szdead = (179500/160766)*(szdead(1,:) + szdead(2,:));
@@ -62,7 +62,7 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,rdata_f
         detfl = rdata_flag;
         
         if detfl == 1
-        deterdata = readmatrix('data/Szeged_data_20200923.csv');
+        deterdata = readmatrix('szeged_data/Szeged_data_20200923.csv');
         % 1->infected 2->newexposed 3->I56(Rh) 4->R 5->D 6->newD 7->S 8->exposed 9->R0 10->Rc
         end
         
