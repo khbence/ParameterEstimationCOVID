@@ -25,7 +25,7 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,rdata_f
             numAgents = 179530;
             hunPopulation = 9770000;
             dates = datetime(hundata(2:end,1),'InputFormat','yyyy-MM-dd');
-            startdate = find(dates==datestr('2020-10-01'))+1;
+            startdate = find(dates==datestr('2020-09-23'))+1;
             %Cumulative dead in Szeged, starting sept 23
             szdead = readmatrix('szeged_data/aszh.xlsx')';
             szcase = readmatrix('szeged_data/asze.xlsx')';
