@@ -24,7 +24,7 @@ function output = fun_plotter_main(std_ip,agst_ip,tr_ip,scen_names,Title,Measure
         LocMap = [];
     end
     
-    fun_plotter_agstit(agst_ip,scen_names,Title,agst_flag,agents,Path,LocMap,intervals)
+    fun_plotter_agstit(agst_ip,scen_names,Title,agst_flag,agents,Path,LocMap,intervals,locations)
     
     if agst_flag ~= 1 && tr_flag == 1
         locations = jsondecode(fileread('locations0.json'));

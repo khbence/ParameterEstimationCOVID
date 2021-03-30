@@ -1,8 +1,8 @@
-function fun_plotter_agstit(agst_ip,scen_names,Title,agst_flag,agents,Path,LocMap,intervals)
+function fun_plotter_agstit(agst_ip,scen_names,Title,agst_flag,agents,Path,LocMap,intervals,locations)
 
     if agst_flag == 1
         
-        fun_agst_preread(agst_ip);
+        fun_agst_preread(agst_ip,agents,locations);
         
         boundaries_2_run = size(intervals);
         

@@ -1,8 +1,9 @@
 function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,rdata_flag,Path,yax_string,colors,begintint)
-        
+
+        saveimg_flag = 0
         % Mátrix a kimeneti CSV-hez: 1->összhalott, 2->kórházmax,
-        % 3->kórházössz, 4->intenzívmax, 5->intenzívössz
-        matrix4csv = zeros(length(scenarionames),5);
+        % 3->kórházössz, 4->intenzívmax, 5->intenzívössz, 6->kórház>200
+        matrix4csv = zeros(length(scenarionames),6);
 
         begintint = begintint + 1;
         for i = 1 : length(Measures)
@@ -253,6 +254,10 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,rdata_f
         for i = 1 : measdim
             xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
         end
+        if rdata_flag
+            rdata = str2double(hundata(startdate:end,18));
+            funplot_realdata(rdata,numAgents,hunPopulation,w,nepesseg);
+        end
         if detfl == 1
         plot(deterdata(begintint:end,6)/nepesseg,'Color',[0.6350 0.0780 0.1840],'LineWidth',1.5,'DisplayName','Deterministic')
         end
@@ -294,8 +299,10 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,rdata_f
         
         F = getframe(FIGH);
         mkdir(append(Path,'/std_',nop))
-        imwrite(F.cdata,append(Path,'/std_',nop,'/std-1.jpg'),'jpg')
-        savefig(append(Path,'/std_',nop,'/z_std-1.fig'))
+        if saveimg_flag
+            imwrite(F.cdata,append(Path,'/std_',nop,'/std-1.jpg'),'jpg')
+            savefig(append(Path,'/std_',nop,'/z_std-1.fig'))
+        end
 
         FIGH = figure('Name','Plots2_std','NumberTitle','off','Position',get(0,'Screensize'));
 
@@ -430,8 +437,10 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,rdata_f
         sgtitle(append('Testing (',Title,')'))
         
         F = getframe(FIGH);
+        if saveimg_flag
         imwrite(F.cdata,append(Path,'/std_',nop,'/std-2.jpg'),'jpg')
         savefig(append(Path,'/std_',nop,'/z_std-2.fig'))
+        end
 
         FIGH = figure('Name','Plots3_std','NumberTitle','off','Position',get(0,'Screensize'));
 
@@ -462,6 +471,7 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,rdata_f
             funplot(mean(i).kt(begintint:end)/nepesseg,standev(i).kt(begintint:end)/nepesseg,colors(i,:),w,scenarionames{i})
             matrix4csv(i,2) = max(mean(i).kt);
             matrix4csv(i,3) = sum(mean(i).kt);
+            matrix4csv(i,6) = sum(mean(i).kt(mean(i).kt>200));
         end
         for i = 1 : measdim
             xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
@@ -533,8 +543,10 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,rdata_f
         sgtitle(append('Hospitalization (',Title,')'))
         
         F = getframe(FIGH);
+        if saveimg_flag
         imwrite(F.cdata,append(Path,'/std_',nop,'/std-3.jpg'),'jpg')
         savefig(append(Path,'/std_',nop,'/z_std-3.fig'))
+        end
 
         FIGH = figure('Name','Plots4_std','NumberTitle','off','Position',get(0,'Screensize'));
 
@@ -667,8 +679,10 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,rdata_f
         sgtitle(append('Quarantine (',Title,')'))
         
         F = getframe(FIGH);
+        if saveimg_flag
         imwrite(F.cdata,append(Path,'/std_',nop,'/std-4.jpg'),'jpg')
         savefig(append(Path,'/std_',nop,'/z_std-4.fig'))
+        end
         
         FIGH = figure('Name','Plots5_std','NumberTitle','off','Position',get(0,'Screensize'));
         
@@ -715,8 +729,10 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,rdata_f
         sgtitle(append('Susceptible and recovered change rate (',Title,')'))
         
         F = getframe(FIGH);
+        if saveimg_flag
         imwrite(F.cdata,append(Path,'/std_',nop,'/std-5.jpg'),'jpg')
         savefig(append(Path,'/std_',nop,'/z_std-5.fig'))
+        end
         
         FIGH = figure('Name','Plots6_std','NumberTitle','off','Position',get(0,'Screensize'));
         
@@ -783,8 +799,10 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,rdata_f
         sgtitle(append('Not COVID-related results (',Title,')'))
         
         F = getframe(FIGH);
+        if saveimg_flag
         imwrite(F.cdata,append(Path,'/std_',nop,'/std-6.jpg'),'jpg')
         savefig(append(Path,'/std_',nop,'/z_std-6.fig'))
+        end
         
         FIGH = figure('Name','Plots7_std','NumberTitle','off','Position',get(0,'Screensize'));
         
@@ -868,8 +886,10 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,rdata_f
         sgtitle(append('Immunization progress (',Title,')'))
         
         F = getframe(FIGH);
+        if saveimg_flag
         imwrite(F.cdata,append(Path,'/std_',nop,'/std-7.jpg'),'jpg')
         savefig(append(Path,'/std_',nop,'/z_std-7.fig'))
+        end
         
         
         FIGH = figure('Name','Plots8_std','NumberTitle','off','Position',get(0,'Screensize'));
@@ -898,8 +918,10 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,rdata_f
         legend('Location','best')
         
         F = getframe(FIGH);
+        if saveimg_flag
         imwrite(F.cdata,append(Path,'/std_',nop,'/std-8.jpg'),'jpg')
         savefig(append(Path,'/std_',nop,'/z_std-8.fig'))
+        end
         
         FIGH = figure('Name','Plots9_std','NumberTitle','off','Position',get(0,'Screensize'));
 
@@ -918,8 +940,10 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,rdata_f
         legend('Location','best')
         
         F = getframe(FIGH);
+        if saveimg_flag
         imwrite(F.cdata,append(Path,'/std_',nop,'/std-9.jpg'),'jpg')
         savefig(append(Path,'/std_',nop,'/z_std-9.fig'))
+        end
     
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Publication figures below this line %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -1022,8 +1046,10 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,rdata_f
         
         F = getframe(FIGH);
         mkdir(append(Path,'/pub_',nop))
+        if saveimg_flag
         imwrite(F.cdata,append(Path,'/pub_',nop,'/pub-1.jpg'),'jpg')
         savefig(append(Path,'/pub_',nop,'/z_pub-1.fig'))
+        end
         
         FIGH = figure('Name','Publication_figure_2','NumberTitle','off','Position',get(0,'Screensize'));
         
@@ -1162,8 +1188,10 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,rdata_f
         sgtitle(append('2^n^d set of figures (',Title,')'))
         
         F = getframe(FIGH);
+        if saveimg_flag
         imwrite(F.cdata,append(Path,'/pub_',nop,'/pub-2.jpg'),'jpg')
         savefig(append(Path,'/pub_',nop,'/z_pub-2.fig'))
+        end
         
         FIGH = figure('Name','Publication_figure_3','NumberTitle','off','Position',get(0,'Screensize'));
         
@@ -1299,11 +1327,13 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,rdata_f
         sgtitle(append('3^r^d set of figures (',Title,')'))
         
         F = getframe(FIGH);
+        if saveimg_flag
         imwrite(F.cdata,append(Path,'/pub_',nop,'/pub-3.jpg'),'jpg')
         savefig(append(Path,'/pub_',nop,'/z_pub-3.fig'))
+        end
         
         if strcmp(yax_string,'No. of Agents')
-            matrix4csv = array2table(matrix4csv,'VariableNames',{'Deceasedsum','Hospitalmax','Hospitalsum','Intensivemax','Intensivesum'});
+            matrix4csv = array2table(matrix4csv,'VariableNames',{'Deceasedsum','Hospitalmax','Hospitalsum','Intensivemax','Intensivesum','Hospitalthres'});
             matrix4csv = addvars(matrix4csv,scenarionames,'Before','Deceasedsum');
             writetable(matrix4csv,append(Path,'/',Title,'.csv'),'Delimiter','|')
         end
