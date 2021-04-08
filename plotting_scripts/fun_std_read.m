@@ -37,12 +37,12 @@ function output = fun_std_read(file)
     
     output.nat = t+p2;
     output.npt = p1+p2;
-    output.rpt = (p1+p2)./(t+p2);
+    output.rpt = funNaNeraser((p1+p2)./(t+p2));
     output.sat = cumsum(t+p2);
     output.spt = cumsum(p1+p2);
     output.qni = data(:,17)-data(:,18);
-    output.qii = data(:,18)./(data(:,2)+data(:,3)+data(:,4)+data(:,5)+data(:,6)+data(:,7)+data(:,8));
-    output.qiq = data(:,18)./data(:,17);
+    output.qii = funNaNeraser(data(:,18)./(data(:,2)+data(:,3)+data(:,4)+data(:,5)+data(:,6)+data(:,7)+data(:,8)));
+    output.qiq = funNaNeraser(data(:,18)./data(:,17));
     
     disu = diff(data(:,1));
     output.disu = [disu;0];
@@ -59,9 +59,9 @@ function output = fun_std_read(file)
     %newexposed_seged = [newexposed_seged;0];
     alinfected_seged = data(:,2)+data(:,3)+data(:,4)+data(:,5)+data(:,6)+data(:,7)+data(:,8);
     output.ne = newexposed_seged;
-    output.re = newexposed_seged./alinfected_seged;
+    output.re = funNaNeraser(newexposed_seged./alinfected_seged);
     
-    output.spec1 = (t+p2)/(179500/100);
-    output.spec2 = (data(:,18)./(data(:,2)+data(:,3)+data(:,4)+data(:,5)+data(:,6)+data(:,7)+data(:,8)))*100;
+    output.spec1 = funNaNeraser((t+p2)/(179500/100));
+    output.spec2 = funNaNeraser((data(:,18)./(data(:,2)+data(:,3)+data(:,4)+data(:,5)+data(:,6)+data(:,7)+data(:,8)))*100);
 
 end
