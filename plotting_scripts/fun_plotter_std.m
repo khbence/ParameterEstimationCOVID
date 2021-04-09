@@ -1,6 +1,6 @@
 function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,rdata_flag,Path,yax_string,colors,begintint)
 
-        saveimg_flag = 0
+        saveimg_flag = 1
         % Mátrix a kimeneti CSV-hez: 1->összhalott, 2->kórházmax,
         % 3->kórházössz, 4->intenzívmax, 5->intenzívössz, 6->kórház>200
         matrix4csv = zeros(length(scenarionames),6);
@@ -355,7 +355,7 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,rdata_f
         dateaxis('x',2,StartDate)
         xtickangle(angle)
         ylabel(yax_string)
-        title('Number of new, positive tests, diagnoses')
+        title('Number of new, positive tests')
         legend('Location','best')
 
         subplot(2,3,[2 3])
@@ -1161,7 +1161,7 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,rdata_f
         dateaxis('x',2,StartDate)
         xtickangle(angle)
         ylabel(yax_string)
-        title('Number of new, positive tests, diagnoses')
+        title('Number of new, positive tests')
         legend('Location','best')
         
         subplot(2,3,6)
