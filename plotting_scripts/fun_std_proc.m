@@ -169,12 +169,12 @@ function [average, standev] = fun_std_proc(input)
     
     [av, stdev] = fun_std_avdev(input,norm,{'spec1'});
     
-    average.spec1 = av;
-    standev.spec1 = stdev;
+    average.spec1 = mean(av(11:end));
+    standev.spec1 = mean(stdev(11:end));
     
     [av, stdev] = fun_std_avdev(input,norm,{'spec2'});
     
-    average.spec2 = av;
-    standev.spec2 = stdev;
+    average.spec2 = mean(av(11:end));
+    standev.spec2 = mean(stdev(11:end));
     
 end
