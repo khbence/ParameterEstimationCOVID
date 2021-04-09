@@ -68,10 +68,41 @@ std_grp_2 = [0.0232    0.0118    0.0121    0.0123    0.0154    0.0144    0.0111 
         %ylim([0, 70]);
         title('Infections by location type')
         
+        %fig4B categories
+        oldgrp_avg = avmat;
+        oldgrp_std = sdmat;
+        figure
+        newcats = {'Residence','Education','Workplace','Services','Social events','Healthcare','Elderly home'};
+        newcat_grps = {[2,11],[3,17,18],[4,13],[7,8,9,10,1],[5,6],[12,14],[16]};
+        avmat = zeros(length(scenarionames),size(newcats,2));
+        sdmat = zeros(length(scenarionames),size(newcats,2));
+        for i = 1:size(avmat,2)
+            avmat(:,i) = sum(oldgrp_avg(:,newcat_grps{i}),2);
+            sdmat(:,i) = sum(oldgrp_std(:,newcat_grps{i}),2);
+        end
+        h = bar(avmat');
+        xticks(1:size(avmat,2));
+        xticklabels(newcats);
+        set(h, {'DisplayName'}, scenarionames);
+        hold on
+        x_errorbar = zeros(1, numel(sdmat));
+        for i = 1 : size(avmat,1)
+            x_errorbar((i-1)*size(avmat,2)+1:i*size(avmat,2)) = h(i).XEndPoints;
+        end
+        h2 = errorbar(x_errorbar,reshape(avmat',1,numel(avmat)),reshape(sdmat',1,numel(sdmat)),'k','linestyle','none','HandleVisibility','off');
+        hold off
+        legend('Location','best')
+        xtickangle(angle-15)
+        ylabel('Number of infections')
+        set(gca,'YScale','log')
+        %ylim([0, 70]);
+        title('Infections by location type')
+        
+        
 
         figure;%4C
-        avmat = [avg_grp_1;avg_grp_2];%[avg_age_1./sum(avg_age_1);avg_age_2./sum(avg_age_2)].*100;
-		sdmat = [std_grp_2;std_grp_2];%[std_age_1./sum(avg_age_1);std_age_2./sum(avg_age_2)].*100;
+        avmat = [avg_grp_1;avg_grp_2]*100;%[avg_age_1./sum(avg_age_1);avg_age_2./sum(avg_age_2)].*100;
+		sdmat = [std_grp_2;std_grp_2]*100;%[std_age_1./sum(avg_age_1);std_age_2./sum(avg_age_2)].*100;
         %avmat = [avg_age_1./sum(avg_age_1);avg_age_2./sum(avg_age_2)].*100;
 		%sdmat = [std_age_1./sum(avg_age_1);std_age_2./sum(avg_age_2)].*100;
         h = bar(avmat');
@@ -88,5 +119,5 @@ std_grp_2 = [0.0232    0.0118    0.0121    0.0123    0.0154    0.0144    0.0111 
         legend('Location','best');
         xtickangle(angle)
         xlabel('Age intervals [years]');
-        ylabel('Number of agents');
+        ylabel('Percentage of agents infected');
         title('Age group distribution');

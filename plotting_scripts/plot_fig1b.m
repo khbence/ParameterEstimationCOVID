@@ -23,15 +23,31 @@ std_loc_2 =    1.0e+03 * [0.0019    1.3493    0.1682    0.0286    0.0025    0.01
 bothwaves_avg = flip(avg_loc_1+avg_loc_2);
 bothwaves_std = flip((std_loc_1+std_loc_2)./2);
 
-	
         figure; %3B
-		scenarionames = {'Free spread';'Restrictions'};
+		scenarionames = {'Free spread';'Default restrictions'};
         angle = 45;
 		avmat = bothwaves_avg;%./sum(bothwaves_avg,2).*100;%[avg_loc_1./sum(avg_loc_1);avg_loc_2./sum(avg_loc_2)].*100;
 		sdmat = bothwaves_std;%./sum(bothwaves_avg,2).*100;
 		h = bar(avmat');
         xticks(1:size(avmat,2));
-        xticklabels({'Public spaces','Residence','Public edu.','Std. workplace','Small soc. event','Large soc. event','Short stay POI','Long stay POI','Weekend activity','Recreational sites','Closed facility','Hospital','Non-std. schedule wp.','Health center','Commuters','Nursing home','Classroom','University'});
+        xticklabels({'Public spaces', %1
+                    'Residence', %2
+                    'Public edu.', %3
+                    'Std. workplace',%4 
+                    'Small soc. event',%5
+                    'Large soc. event',%6
+                    'Short stay POI',%7
+                    'Long stay POI',%8
+                    'Weekend activity',%9
+                    'Recreational sites',%10
+                    'Closed facility',%11
+                    'Hospital',%12
+                    'Non-std. schedule wp.',%13
+                    'Health center',%14
+                    'Commuters',%15
+                    'Nursing home',%16
+                    'Classroom',%17
+                    'University'});%18
         set(h, {'DisplayName'}, scenarionames);
         hold on
         x_errorbar = zeros(1, numel(sdmat));
@@ -46,4 +62,32 @@ bothwaves_std = flip((std_loc_1+std_loc_2)./2);
         set(gca,'YScale','log')
         %ylim([0, 70]);
         title('Infections by location type')
+        
+        figure
+        newcats = {'Residence','Education','Workplace','Services','Social events','Healthcare','Elderly home'};
+        newcat_grps = {[2,11],[3,17,18],[4,13],[7,8,9,10,1],[5,6],[12,14],[16]};
+        avmat = zeros(length(scenarionames),size(newcats,2));
+        sdmat = zeros(length(scenarionames),size(newcats,2));
+        for i = 1:size(avmat,2)
+            avmat(:,i) = sum(bothwaves_avg(:,newcat_grps{i}),2);
+            sdmat(:,i) = sum(bothwaves_std(:,newcat_grps{i}),2);
+        end
+        h = bar(avmat');
+        xticks(1:size(avmat,2));
+        xticklabels(newcats);
+        set(h, {'DisplayName'}, scenarionames);
+        hold on
+        x_errorbar = zeros(1, numel(sdmat));
+        for i = 1 : size(avmat,1)
+            x_errorbar((i-1)*size(avmat,2)+1:i*size(avmat,2)) = h(i).XEndPoints;
+        end
+        h2 = errorbar(x_errorbar,reshape(avmat',1,numel(avmat)),reshape(sdmat',1,numel(sdmat)),'k','linestyle','none','HandleVisibility','off');
+        hold off
+        legend('Location','best')
+        xtickangle(angle-15)
+        ylabel('Number of infections')
+        set(gca,'YScale','log')
+        %ylim([0, 70]);
+        title('Infections by location type')
+        
         
