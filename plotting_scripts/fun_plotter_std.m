@@ -3,7 +3,7 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,rdata_f
         saveimg_flag = 1;
         % Mátrix a kimeneti CSV-hez: 1->összhalott, 2->kórházmax,
         % 3->kórházössz, 4->intenzívmax, 5->intenzívössz, 6->kórház>200
-        matrix4csv = zeros(length(scenarionames),6);
+        matrix4csv = zeros(length(scenarionames),12);
 
         begintint = begintint + 1;
         for i = 1 : length(Measures)
@@ -52,6 +52,21 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,rdata_f
         [mean,standev] = fun_std_organize(txtnames);
 
         data_av = mean;
+        
+        for i = 1 : length(data_av)
+            matrix4csv(i,1) = mean(i).CSVdm;
+            matrix4csv(i,2) = standev(i).CSVdm;
+            matrix4csv(i,3) = mean(i).CSVkm;
+            matrix4csv(i,4) = standev(i).CSVkm;
+            matrix4csv(i,5) = mean(i).CSVko;
+            matrix4csv(i,6) = standev(i).CSVko;
+            matrix4csv(i,7) = mean(i).CSVim;
+            matrix4csv(i,8) = standev(i).CSVim;
+            matrix4csv(i,9) = mean(i).CSVio;
+            matrix4csv(i,10) = standev(i).CSVio;
+            matrix4csv(i,11) = mean(i).CSVki;
+            matrix4csv(i,12) = standev(i).CSVki;
+        end
         
         dps = 15;
         divnum = mod(length(data_av(1).s),dps);
@@ -195,7 +210,6 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,rdata_f
         hold on
         for i = 1 : length(data_av)
             funplot(mean(i).d(begintint:end)/nepesseg,standev(i).d(begintint:end)/nepesseg,colors(i,:),w,scenarionames{i})
-            matrix4csv(i,1) = mean(i).d(end);
         end
         for i = 1 : measdim
             xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
@@ -469,9 +483,6 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,rdata_f
         hold on
         for i = 1 : length(data_av)
             funplot(mean(i).kt(begintint:end)/nepesseg,standev(i).kt(begintint:end)/nepesseg,colors(i,:),w,scenarionames{i})
-            matrix4csv(i,2) = max(mean(i).kt);
-            matrix4csv(i,3) = sum(mean(i).kt);
-            matrix4csv(i,6) = sum(mean(i).kt(mean(i).kt>200));
         end
         for i = 1 : measdim
             xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
@@ -521,8 +532,6 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,rdata_f
         hold on
         for i = 1 : length(data_av)
             funplot(mean(i).i6(begintint:end)/nepesseg,standev(i).i6(begintint:end)/nepesseg,colors(i,:),w,scenarionames{i})
-            matrix4csv(i,4) = max(mean(i).i6);
-            matrix4csv(i,5) = sum(mean(i).i6);
         end
         for i = 1 : measdim
             xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
@@ -1333,8 +1342,11 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,rdata_f
         end
         
         if strcmp(yax_string,'No. of Agents')
-            matrix4csv = array2table(matrix4csv,'VariableNames',{'Deceasedsum','Hospitalmax','Hospitalsum','Intensivemax','Intensivesum','Hospitalthres'});
-            matrix4csv = addvars(matrix4csv,scenarionames,'Before','Deceasedsum');
+            colnames = {'Deceasedsum_av','Deceasedsum_std','Hospitalmax_av','Hospitalmax_std',
+                        'Hospitalsum_av','Hospitalsum_std','Intensivmax_av','Intensivmax_std',
+                        'Intensivsum_av','Intensivsum_std','Hospitalthr_av','Hospitalthr_std'};
+            matrix4csv = array2table(matrix4csv,'VariableNames',colnames);
+            matrix4csv = addvars(matrix4csv,scenarionames,'Before','Deceasedsum_av');
             writetable(matrix4csv,append(Path,'/',Title,'.csv'),'Delimiter','|')
         end
     

@@ -177,4 +177,46 @@ function [average, standev] = fun_std_proc(input)
     average.spec2 = mean(av(11:end));
     standev.spec2 = mean(stdev(11:end));
     
+    segvar = extractfield(input,'CSVdm');
+    av = mean(segvar);
+    stdev = std(segvar,norm);
+    
+    average.CSVdm = av;
+    standev.CSVdm = stdev;
+    
+    segvar = extractfield(input,'CSVkm');
+    av = mean(segvar);
+    stdev = std(segvar,norm);
+    
+    average.CSVkm = av;
+    standev.CSVkm = stdev;
+    
+    segvar = extractfield(input,'CSVko');
+    av = mean(segvar);
+    stdev = std(segvar,norm);
+    
+    average.CSVko = av;
+    standev.CSVko = stdev;
+    
+    segvar = extractfield(input,'CSVim');
+    av = mean(segvar);
+    stdev = std(segvar,norm);
+    
+    average.CSVim = av;
+    standev.CSVim = stdev;
+    
+    segvar = extractfield(input,'CSVio');
+    av = mean(segvar);
+    stdev = std(segvar,norm);
+    
+    average.CSVio = av;
+    standev.CSVio = stdev;
+    
+    segvar = extractfield(input,'CSVki');
+    av = mean(segvar);
+    stdev = std(segvar,norm);
+    
+    average.CSVki = av;
+    standev.CSVki = stdev;
+    
 end
