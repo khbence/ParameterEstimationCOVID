@@ -20,7 +20,7 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,rdata_f
         
         if rdata_flag
             fprintf('Getting Hungarian data (korona_hun)...')
-            hundata = GetGoogleSpreadsheet('1e4VEZL1xvsALoOIq9V2SQuICeQrT5MtWfBm32ad7i8Q');
+            hundata = funGetGoogleSpreadsheet('1e4VEZL1xvsALoOIq9V2SQuICeQrT5MtWfBm32ad7i8Q');
             %col 20: number of ppl in hospital
             %col 21: number of ppl on ventilators
             numAgents = 179530;
