@@ -78,7 +78,8 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,rdata_f
         detfl = rdata_flag;
         
         if detfl == 1
-        deterdata = readmatrix('szeged_data/Szeged_data_20200923.csv');
+        deterdata = readmatrix('szeged_data/Szeged_inversion_20200923.xlsx');
+        deterdata(:,1) = [];
         deterdata(1:begintint-1,:) = [];
         % 1->infected 2->newexposed 3->I56(Rh) 4->R 5->D 6->newD 7->S 8->exposed 9->R0 10->Rc
         end
