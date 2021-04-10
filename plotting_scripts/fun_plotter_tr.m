@@ -2,6 +2,8 @@ function output = fun_plotter_tr(tr_ip,agst_ip,scenarionames,Title,Measures,Star
 
     if flag == 1
         
+        fun_agst_preread(agst_ip,agents,locations);
+        
         av_mu = 1;
         
         w = 1.5;
