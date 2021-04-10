@@ -1,6 +1,6 @@
 function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,rdata_flag,Path,yax_string,colors,begintint)
 
-        saveimg_flag = 1
+        saveimg_flag = 1;
         % Mátrix a kimeneti CSV-hez: 1->összhalott, 2->kórházmax,
         % 3->kórházössz, 4->intenzívmax, 5->intenzívössz, 6->kórház>200
         matrix4csv = zeros(length(scenarionames),6);
