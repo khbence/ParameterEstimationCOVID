@@ -1,10 +1,10 @@
-function output = funNaNeraser(input)
+function output = funNaNorInferaser(input)
 
     N = length(input);
     
     for i = 1 : N
         
-        if isnan(input(i))
+        if isnan(input(i)) || isinf(input(i))
             
             input(i) = 0;
             
