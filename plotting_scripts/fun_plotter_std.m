@@ -55,6 +55,7 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,rdata_f
         if strcmp(yax_string,'Ratio to Total Population (%)') && ctw_flag
             
             avdays = zeros(length(data_av(1).s),length(scenarionames));
+            sddays = zeros(length(data_av(1).s),length(scenarionames));
             
             for it = 1 : length(scenarionames)
                 
@@ -117,6 +118,7 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,rdata_f
                     end
                     
                     avdays(i,it) = mean(avdayvec);
+                    sddays(i,it) = std(avdayvec,0);
                     
                 end
                 
