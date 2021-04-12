@@ -1,4 +1,5 @@
-function output = fun_plotter_tr(tr_ip,agst_ip,scenarionames,Title,Measures,StartDate,flag,agents,locations,Path,colors)
+function output = fun_plotter_tr(tr_ip,agst_ip,scenarionames,Title,Measures,...
+                                 StartDate,flag,agents,locations,Path,colors)
 
     if flag == 1
         
@@ -35,7 +36,8 @@ function output = fun_plotter_tr(tr_ip,agst_ip,scenarionames,Title,Measures,Star
         subplot(1,2,1)
         hold on
         for i = 1 : length(output)
-            funplot(av_mu*output(i).tracer.average.av,av_mu*output(i).tracer.average.std,colors(i,:),w,scenarionames{i})
+            funplot(av_mu*output(i).tracer.average.av,av_mu*output(i).tracer.average.std,...
+                    colors(i,:),w,scenarionames{i})
         end
         for i = 1 : measdim
             xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
@@ -59,7 +61,8 @@ function output = fun_plotter_tr(tr_ip,agst_ip,scenarionames,Title,Measures,Star
         subplot(1,2,2)
         hold on
         for i = 1 : length(output)
-            funplot(av_mu*output(i).tracer.maximum.av,av_mu*output(i).tracer.maximum.std,colors(i,:),w,scenarionames{i})
+            funplot(av_mu*output(i).tracer.maximum.av,av_mu*output(i).tracer.maximum.std,...
+                    colors(i,:),w,scenarionames{i})
         end
         for i = 1 : measdim
             xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
@@ -85,7 +88,8 @@ function output = fun_plotter_tr(tr_ip,agst_ip,scenarionames,Title,Measures,Star
         savefig(append(Path,'/ctr/z_ctr-1.fig'))
         
         for i = 1 : length(output)
-            FIGH = figure('Name',append('Plots',num2str(i+1),'_tr'),'NumberTitle','off','Position',get(0,'Screensize'));
+            FIGH = figure('Name',append('Plots',num2str(i+1),'_tr'),'NumberTitle','off',...
+                          'Position',get(0,'Screensize'));
             histogram('BinCounts',output(i).r0fun.eloszlas,'BinEdges',output(i).r0fun.eloszlasX)
             grid on
             grid minor

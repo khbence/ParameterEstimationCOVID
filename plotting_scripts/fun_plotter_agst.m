@@ -1,4 +1,5 @@
-function fun_plotter_agst(jsonnames,scenarionames,Title,agents,clog,spectitle,Path,LocMap,runflag,interval)
+function fun_plotter_agst(jsonnames,scenarionames,Title,agents,clog,spectitle,...
+                          Path,LocMap,runflag,interval)
         
     scennum = length(scenarionames);
 
@@ -25,7 +26,8 @@ function fun_plotter_agst(jsonnames,scenarionames,Title,agents,clog,spectitle,Pa
         
         angle = 45;
 
-        FIGH = figure('Name',append('IV-',num2str(runflag),'-plots1_agst'),'NumberTitle','off','Position',get(0,'Screensize'));
+        FIGH = figure('Name',append('IV-',num2str(runflag),'-plots1_agst'),'NumberTitle','off',...
+                      'Position',get(0,'Screensize'));
 
         subplot(2,2,1)
 
@@ -40,7 +42,8 @@ function fun_plotter_agst(jsonnames,scenarionames,Title,agents,clog,spectitle,Pa
         for i = 1 : size(avmat,1)
             x_errorbar((i-1)*size(avmat,2)+1:i*size(avmat,2)) = h(i).XEndPoints;
         end
-        h2 = errorbar(x_errorbar,reshape(avmat',1,numel(avmat)),reshape(sdmat',1,numel(sdmat)),'k','linestyle','none','HandleVisibility','off');
+        h2 = errorbar(x_errorbar,reshape(avmat',1,numel(avmat)),reshape(sdmat',1,numel(sdmat)),...
+                      'k','linestyle','none','HandleVisibility','off');
         hold off
         legend('Location','best');
         xtickangle(angle)
@@ -61,7 +64,8 @@ function fun_plotter_agst(jsonnames,scenarionames,Title,agents,clog,spectitle,Pa
         for i = 1 : size(avmat,1)
             x_errorbar((i-1)*size(avmat,2)+1:i*size(avmat,2)) = h(i).XEndPoints;
         end
-        h2 = errorbar(x_errorbar,reshape(avmat',1,numel(avmat)),reshape(sdmat',1,numel(sdmat)),'k','linestyle','none','HandleVisibility','off');
+        h2 = errorbar(x_errorbar,reshape(avmat',1,numel(avmat)),reshape(sdmat',1,numel(sdmat)),...
+                      'k','linestyle','none','HandleVisibility','off');
         hold off
         legend('Location','best')
         xtickangle(angle)
@@ -82,7 +86,8 @@ function fun_plotter_agst(jsonnames,scenarionames,Title,agents,clog,spectitle,Pa
         for i = 1 : size(avmat,1)
             x_errorbar((i-1)*size(avmat,2)+1:i*size(avmat,2)) = h(i).XEndPoints;
         end
-        h2 = errorbar(x_errorbar,reshape(avmat',1,numel(avmat)),reshape(sdmat',1,numel(sdmat)),'k','linestyle','none','HandleVisibility','off');
+        h2 = errorbar(x_errorbar,reshape(avmat',1,numel(avmat)),reshape(sdmat',1,numel(sdmat)),...
+                      'k','linestyle','none','HandleVisibility','off');
         hold off
         legend('Location','best');
         xtickangle(angle)
@@ -103,7 +108,8 @@ function fun_plotter_agst(jsonnames,scenarionames,Title,agents,clog,spectitle,Pa
         for i = 1 : size(avmat,1)
             x_errorbar((i-1)*size(avmat,2)+1:i*size(avmat,2)) = h(i).XEndPoints;
         end
-        h2 = errorbar(x_errorbar,reshape(avmat',1,numel(avmat)),reshape(sdmat',1,numel(sdmat)),'k','linestyle','none','HandleVisibility','off');
+        h2 = errorbar(x_errorbar,reshape(avmat',1,numel(avmat)),reshape(sdmat',1,numel(sdmat)),...
+                      'k','linestyle','none','HandleVisibility','off');
         hold off
         legend('Location','best')
         xtickangle(angle)
@@ -111,14 +117,16 @@ function fun_plotter_agst(jsonnames,scenarionames,Title,agents,clog,spectitle,Pa
         ylabel('Number of agents (normed)')
         title('Ratio of infected agents in precondition groups')
 
-        sgtitle(append(Title,' (Statistics-1 of the infected population) ',spectitle,' -- ',num2str(interval(1)),'-',num2str(interval(2)),' interval'))
+        sgtitle(append(Title,' (Statistics-1 of the infected population) ',spectitle,' -- ',...
+                       num2str(interval(1)),'-',num2str(interval(2)),' interval'))
         
         F = getframe(FIGH);
         mkdir(append(Path,'/ags'))
         imwrite(F.cdata,append(Path,'/ags/IV-',num2str(runflag),'-ags_',spectitle,'-1.jpg'),'jpg')
         savefig(append(Path,'/ags/z_IV-',num2str(runflag),'-ags_',spectitle,'-1.fig'))
 
-        FIGH = figure('Name',append('IV-',num2str(runflag),'-plots2_agst'),'NumberTitle','off','Position',get(0,'Screensize'));
+        FIGH = figure('Name',append('IV-',num2str(runflag),'-plots2_agst'),'NumberTitle','off',...
+                      'Position',get(0,'Screensize'));
 
         subplot(2,2,1)
 
@@ -133,7 +141,8 @@ function fun_plotter_agst(jsonnames,scenarionames,Title,agents,clog,spectitle,Pa
         for i = 1 : size(avmat,1)
             x_errorbar((i-1)*size(avmat,2)+1:i*size(avmat,2)) = h(i).XEndPoints;
         end
-        h2 = errorbar(x_errorbar,reshape(avmat',1,numel(avmat)),reshape(sdmat',1,numel(sdmat)),'k','linestyle','none','HandleVisibility','off');
+        h2 = errorbar(x_errorbar,reshape(avmat',1,numel(avmat)),reshape(sdmat',1,numel(sdmat)),...
+                      'k','linestyle','none','HandleVisibility','off');
         hold off
         legend('Location','best')
         xtickangle(angle)
@@ -152,14 +161,16 @@ function fun_plotter_agst(jsonnames,scenarionames,Title,agents,clog,spectitle,Pa
         sdmat = var;
         h = bar(avmat');
         xticks(1:size(avmat,2));
-        xticklabels({'Exposed','Presymptomatic','Asymptomatic','Light symptomatic','Mild symptomatic','Hospitalized','Intensive care','Deceased'});
+        xticklabels({'Exposed','Presymptomatic','Asymptomatic','Light symptomatic','Mild symptomatic',...
+                     'Hospitalized','Intensive care','Deceased'});
         set(h, {'DisplayName'}, scenarionames);
         hold on
         x_errorbar = zeros(1, numel(sdmat));
         for i = 1 : size(avmat,1)
             x_errorbar((i-1)*size(avmat,2)+1:i*size(avmat,2)) = h(i).XEndPoints;
         end
-        h2 = errorbar(x_errorbar,reshape(avmat',1,numel(avmat)),reshape(sdmat',1,numel(sdmat)),'k','linestyle','none','HandleVisibility','off');
+        h2 = errorbar(x_errorbar,reshape(avmat',1,numel(avmat)),reshape(sdmat',1,numel(sdmat)),...
+                      'k','linestyle','none','HandleVisibility','off');
         hold off
         legend('Location','best')
         xtickangle(angle)
@@ -180,7 +191,8 @@ function fun_plotter_agst(jsonnames,scenarionames,Title,agents,clog,spectitle,Pa
         for i = 1 : size(avmat,1)
             x_errorbar((i-1)*size(avmat,2)+1:i*size(avmat,2)) = h(i).XEndPoints;
         end
-        h2 = errorbar(x_errorbar,reshape(avmat',1,numel(avmat)),reshape(sdmat',1,numel(sdmat)),'k','linestyle','none','HandleVisibility','off');
+        h2 = errorbar(x_errorbar,reshape(avmat',1,numel(avmat)),reshape(sdmat',1,numel(sdmat)),...
+                      'k','linestyle','none','HandleVisibility','off');
         hold off
         legend('Location','best')
         xtickangle(angle)
@@ -201,20 +213,23 @@ function fun_plotter_agst(jsonnames,scenarionames,Title,agents,clog,spectitle,Pa
         for i = 1 : size(avmat,1)
             x_errorbar((i-1)*size(avmat,2)+1:i*size(avmat,2)) = h(i).XEndPoints;
         end
-        h2 = errorbar(x_errorbar,reshape(avmat',1,numel(avmat)),reshape(sdmat',1,numel(sdmat)),'k','linestyle','none','HandleVisibility','off');
+        h2 = errorbar(x_errorbar,reshape(avmat',1,numel(avmat)),reshape(sdmat',1,numel(sdmat)),...
+                      'k','linestyle','none','HandleVisibility','off');
         hold off
         legend('Location','best')
         xtickangle(angle)
         ylabel('Number of agents')
         title('Diagnosed - Not diagnosed agents')
 
-        sgtitle(append(Title,' (Statistics-2 of the infected population) ',spectitle,' -- ',num2str(interval(1)),'-',num2str(interval(2)),' interval'))
+        sgtitle(append(Title,' (Statistics-2 of the infected population) ',spectitle,' -- ',...
+                       num2str(interval(1)),'-',num2str(interval(2)),' interval'))
         
         F = getframe(FIGH);
         imwrite(F.cdata,append(Path,'/ags/IV-',num2str(runflag),'-ags_',spectitle,'-2.jpg'),'jpg')
         savefig(append(Path,'/ags/z_IV-',num2str(runflag),'-ags_',spectitle,'-2.fig'))
 
-        FIGH = figure('Name',append('IV-',num2str(runflag),'-plots3_agst'),'NumberTitle','off','Position',get(0,'Screensize'));
+        FIGH = figure('Name',append('IV-',num2str(runflag),'-plots3_agst'),'NumberTitle','off',...
+                      'Position',get(0,'Screensize'));
 
         subplot(2,2,1)
 
@@ -222,14 +237,17 @@ function fun_plotter_agst(jsonnames,scenarionames,Title,agents,clog,spectitle,Pa
         sdmat = data.std.agenttype;
         h = bar(avmat');
         xticks(1:size(avmat,2));
-        xticklabels({'Infant','Kindergarten student','Elementary school student','High school student','University student','Full-time (standard, fixed)','Afternoon shift worker','Stay-at-home schedule','Tourist'});
+        xticklabels({'Infant','Kindergarten student','Elementary school student','High school student',...
+                     'University student','Full-time (standard, fixed)','Afternoon shift worker',...
+                     'Stay-at-home schedule','Tourist'});
         set(h, {'DisplayName'}, scenarionames);
         hold on
         x_errorbar = zeros(1, numel(sdmat));
         for i = 1 : size(avmat,1)
             x_errorbar((i-1)*size(avmat,2)+1:i*size(avmat,2)) = h(i).XEndPoints;
         end
-        h2 = errorbar(x_errorbar,reshape(avmat',1,numel(avmat)),reshape(sdmat',1,numel(sdmat)),'k','linestyle','none','HandleVisibility','off');
+        h2 = errorbar(x_errorbar,reshape(avmat',1,numel(avmat)),reshape(sdmat',1,numel(sdmat)),...
+                      'k','linestyle','none','HandleVisibility','off');
         hold off
         legend('Location','best')
         xtickangle(angle)
@@ -243,14 +261,17 @@ function fun_plotter_agst(jsonnames,scenarionames,Title,agents,clog,spectitle,Pa
         sdmat = data.std.agenttype./normnum.typeID;
         h = bar(avmat');
         xticks(1:size(avmat,2));
-        xticklabels({'Infant','Kindergarten student','Elementary school student','High school student','University student','Full-time (standard, fixed)','Afternoon shift worker','Stay-at-home schedule','Tourist'});
+        xticklabels({'Infant','Kindergarten student','Elementary school student','High school student',...
+                     'University student','Full-time (standard, fixed)','Afternoon shift worker',
+                     'Stay-at-home schedule','Tourist'});
         set(h, {'DisplayName'}, scenarionames);
         hold on
         x_errorbar = zeros(1, numel(sdmat));
         for i = 1 : size(avmat,1)
             x_errorbar((i-1)*size(avmat,2)+1:i*size(avmat,2)) = h(i).XEndPoints;
         end
-        h2 = errorbar(x_errorbar,reshape(avmat',1,numel(avmat)),reshape(sdmat',1,numel(sdmat)),'k','linestyle','none','HandleVisibility','off');
+        h2 = errorbar(x_errorbar,reshape(avmat',1,numel(avmat)),reshape(sdmat',1,numel(sdmat)),...
+                      'k','linestyle','none','HandleVisibility','off');
         hold off
         legend('Location','best')
         xtickangle(angle)
@@ -264,14 +285,19 @@ function fun_plotter_agst(jsonnames,scenarionames,Title,agents,clog,spectitle,Pa
         sdmat = data.std.locationtype;
         h = bar(avmat');
         xticks(1:size(avmat,2));
-        xticklabels({'Public spaces','Residence','Public edu.','Std. workplace','Small soc. event','Large soc. event','Short stay POI','Long stay POI','Weekend activity','Recreational sites','Closed facility','Hospital','Non-std. schedule wp.','Health center','Commuters','Nursing home','Classroom','University'});
+        xticklabels({'Public spaces','Residence','Public edu.','Std. workplace',...
+                     'Small soc. event','Large soc. event','Short stay POI','Long stay POI',...
+                     'Weekend activity','Recreational sites','Closed facility','Hospital',...
+                     'Non-std. schedule wp.','Health center','Commuters',...
+                     'Nursing home','Classroom','University'});
         set(h, {'DisplayName'}, scenarionames);
         hold on
         x_errorbar = zeros(1, numel(sdmat));
         for i = 1 : size(avmat,1)
             x_errorbar((i-1)*size(avmat,2)+1:i*size(avmat,2)) = h(i).XEndPoints;
         end
-        h2 = errorbar(x_errorbar,reshape(avmat',1,numel(avmat)),reshape(sdmat',1,numel(sdmat)),'k','linestyle','none','HandleVisibility','off');
+        h2 = errorbar(x_errorbar,reshape(avmat',1,numel(avmat)),reshape(sdmat',1,numel(sdmat)),...
+                      'k','linestyle','none','HandleVisibility','off');
         hold off
         legend('Location','best')
         xtickangle(angle-15)
@@ -279,7 +305,8 @@ function fun_plotter_agst(jsonnames,scenarionames,Title,agents,clog,spectitle,Pa
         set(gca,'YScale','log')
         title('Infection locations')
 
-        sgtitle(append(Title,' (Statistics-3 of the infected population) ',spectitle,' -- ',num2str(interval(1)),'-',num2str(interval(2)),' interval'))
+        sgtitle(append(Title,' (Statistics-3 of the infected population) ',spectitle,' -- ',...
+                       num2str(interval(1)),'-',num2str(interval(2)),' interval'))
         
         F = getframe(FIGH);
         imwrite(F.cdata,append(Path,'/ags/IV-',num2str(runflag),'-ags_',spectitle,'-3.jpg'),'jpg')
@@ -287,7 +314,8 @@ function fun_plotter_agst(jsonnames,scenarionames,Title,agents,clog,spectitle,Pa
 
         fprintf(append("Agent statistics input successfully processed! (",spectitle,")\n"))
     else
-        fprintf(append('Agent statistics cannot be processed for the ',spectitle,', because there were no agents to start with!\n'));
+        fprintf(append('Agent statistics cannot be processed for the ',spectitle,...
+                       ', because there were no agents to start with!\n'));
     end
     
 end

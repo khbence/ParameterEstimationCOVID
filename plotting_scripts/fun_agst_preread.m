@@ -90,7 +90,8 @@ function fun_agst_preread(samplename,agents,locations)
                 for k = 1 : length(AgentStat)
                     segvar = length(agents(AgentStat(k).ID+1).locations);
                     for l = 1 : segvar
-                        if agents(AgentStat(k).ID+1).locations(l).typeID == 4 || agents(AgentStat(k).ID+1).locations(l).typeID == 13
+                        if agents(AgentStat(k).ID+1).locations(l).typeID == 4 ||...
+                           agents(AgentStat(k).ID+1).locations(l).typeID == 13
                             AgentStat(k).WorkPlace = agents(AgentStat(k).ID+1).locations(l).locID;
                         end
                     end

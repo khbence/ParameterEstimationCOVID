@@ -1,4 +1,5 @@
-function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,rdata_flag,Path,yax_string,colors,begintint,agst_ip,ctw_flag)
+function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,rdata_flag,Path,...
+                         yax_string,colors,begintint,agst_ip,ctw_flag)
 
         saveimg_flag = 1;
         % Mátrix a kimeneti CSV-hez: 1,2->összhalott, 3,4->kórházmax,
@@ -168,13 +169,15 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,rdata_f
         subplot(3,3,1)
         hold on
         for i = 1 : length(data_av)
-            funplot(meany(i).s(begintint:end)/nepesseg,standev(i).s(begintint:end)/nepesseg,colors(i,:),w,scenarionames{i})
+            funplot(meany(i).s(begintint:end)/nepesseg,standev(i).s(begintint:end)/nepesseg,...
+                    colors(i,:),w,scenarionames{i})
         end
         for i = 1 : measdim
             xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
         end
         if detfl == 1
-        plot(deterdata(begintint:end,7)/nepesseg,'Color',[0.6350 0.0780 0.1840],'LineWidth',1.5,'DisplayName','Deterministic')
+        plot(deterdata(begintint:end,7)/nepesseg,'Color',[0.6350 0.0780 0.1840],...
+             'LineWidth',1.5,'DisplayName','Deterministic')
         end
         hold off
         grid on
@@ -192,13 +195,15 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,rdata_f
         subplot(3,3,2)
         hold on
         for i = 1 : length(data_av)
-            funplot(meany(i).e(begintint:end)/nepesseg,standev(i).e(begintint:end)/nepesseg,colors(i,:),w,scenarionames{i})
+            funplot(meany(i).e(begintint:end)/nepesseg,standev(i).e(begintint:end)/nepesseg,...
+                    colors(i,:),w,scenarionames{i})
         end
         for i = 1 : measdim
             xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
         end
         if detfl == 1
-        plot(deterdata(begintint:end,8)/nepesseg,'Color',[0.6350 0.0780 0.1840],'LineWidth',1.5,'DisplayName','Deterministic')
+        plot(deterdata(begintint:end,8)/nepesseg,'Color',[0.6350 0.0780 0.1840],...
+             'LineWidth',1.5,'DisplayName','Deterministic')
         end
         hold off
         grid on
@@ -216,7 +221,8 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,rdata_f
         subplot(3,3,3)
         hold on
         for i = 1 : length(data_av)
-            funplot(meany(i).i(begintint:end)/nepesseg,standev(i).i(begintint:end)/nepesseg,colors(i,:),w,scenarionames{i})
+            funplot(meany(i).i(begintint:end)/nepesseg,standev(i).i(begintint:end)/nepesseg,...
+                    colors(i,:),w,scenarionames{i})
         end
         for i = 1 : measdim
             xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
@@ -239,13 +245,15 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,rdata_f
         subplot(3,3,4)
         hold on
         for i = 1 : length(data_av)
-            funplot(meany(i).ei(begintint:end)/nepesseg,standev(i).ei(begintint:end)/nepesseg,colors(i,:),w,scenarionames{i})
+            funplot(meany(i).ei(begintint:end)/nepesseg,standev(i).ei(begintint:end)/nepesseg,...
+                    colors(i,:),w,scenarionames{i})
         end
         for i = 1 : measdim
             xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
         end
         if detfl == 1
-        plot(deterdata(begintint:end,1)/nepesseg,'Color',[0.6350 0.0780 0.1840],'LineWidth',1.5,'DisplayName','Deterministic')
+        plot(deterdata(begintint:end,1)/nepesseg,'Color',[0.6350 0.0780 0.1840],...
+             'LineWidth',1.5,'DisplayName','Deterministic')
         end
         hold off
         grid on
@@ -263,13 +271,15 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,rdata_f
         subplot(3,3,5)
         hold on
         for i = 1 : length(data_av)
-            funplot(meany(i).r(begintint:end)/nepesseg,standev(i).r(begintint:end)/nepesseg,colors(i,:),w,scenarionames{i})
+            funplot(meany(i).r(begintint:end)/nepesseg,standev(i).r(begintint:end)/nepesseg,...
+                    colors(i,:),w,scenarionames{i})
         end
         for i = 1 : measdim
             xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
         end
         if detfl == 1
-        plot(deterdata(begintint:end,4)/nepesseg,'Color',[0.6350 0.0780 0.1840],'LineWidth',1.5,'DisplayName','Deterministic')
+        plot(deterdata(begintint:end,4)/nepesseg,'Color',[0.6350 0.0780 0.1840],...
+             'LineWidth',1.5,'DisplayName','Deterministic')
         end
         hold off
         grid on
@@ -287,7 +297,8 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,rdata_f
         subplot(3,3,6)
         hold on
         for i = 1 : length(data_av)
-            funplot(meany(i).d(begintint:end)/nepesseg,standev(i).d(begintint:end)/nepesseg,colors(i,:),w,scenarionames{i})
+            funplot(meany(i).d(begintint:end)/nepesseg,standev(i).d(begintint:end)/nepesseg,...
+                    colors(i,:),w,scenarionames{i})
         end
         for i = 1 : measdim
             xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
@@ -296,10 +307,12 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,rdata_f
             rdata = str2double(hundata(startdate:end,4))-str2double(hundata(startdate,4));
             funplot_realdata(rdata(begintint:end),numAgents,hunPopulation,w,nepesseg);
             szdead_len = numel(szdead(begintint:end));
-            plot(0:szdead_len-1,szdead(begintint:end)/nepesseg,'Color',[255/255,69/255,50/255],'LineWidth',w,'DisplayName','Szeged data');
+            plot(0:szdead_len-1,szdead(begintint:end)/nepesseg,...
+                 'Color',[255/255,69/255,50/255],'LineWidth',w,'DisplayName','Szeged data');
         end
         if detfl == 1
-        plot(deterdata(begintint:end,5)/nepesseg,'Color',[0.6350 0.0780 0.1840],'LineWidth',1.5,'DisplayName','Deterministic')
+        plot(deterdata(begintint:end,5)/nepesseg,'Color',[0.6350 0.0780 0.1840],...
+             'LineWidth',1.5,'DisplayName','Deterministic')
         end
         hold off
         grid on
@@ -317,13 +330,15 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,rdata_f
         subplot(3,3,7)
         hold on
         for i = 1 : length(data_av)
-            funplot(meany(i).ne(begintint:end)/nepesseg,standev(i).ne(begintint:end)/nepesseg,colors(i,:),w,scenarionames{i})
+            funplot(meany(i).ne(begintint:end)/nepesseg,standev(i).ne(begintint:end)/nepesseg,...
+                    colors(i,:),w,scenarionames{i})
         end
         for i = 1 : measdim
             xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
         end
         if detfl == 1
-        plot(deterdata(begintint:end,2)/nepesseg,'Color',[0.6350 0.0780 0.1840],'LineWidth',1.5,'DisplayName','Deterministic')
+        plot(deterdata(begintint:end,2)/nepesseg,'Color',[0.6350 0.0780 0.1840],...
+             'LineWidth',1.5,'DisplayName','Deterministic')
         end
         hold off
         grid on
@@ -341,7 +356,8 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,rdata_f
         subplot(3,3,8)
         hold on
         for i = 1 : length(data_av)
-            funplot(meany(i).didc(begintint:end)/nepesseg,standev(i).didc(begintint:end)/nepesseg,colors(i,:),w,scenarionames{i})
+            funplot(meany(i).didc(begintint:end)/nepesseg,standev(i).didc(begintint:end)/nepesseg,...
+                    colors(i,:),w,scenarionames{i})
         end
         for i = 1 : measdim
             xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
@@ -351,7 +367,8 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,rdata_f
             funplot_realdata(rdata,numAgents,hunPopulation,w,nepesseg);
         end
         if detfl == 1
-        plot(deterdata(begintint:end,6)/nepesseg,'Color',[0.6350 0.0780 0.1840],'LineWidth',1.5,'DisplayName','Deterministic')
+        plot(deterdata(begintint:end,6)/nepesseg,'Color',[0.6350 0.0780 0.1840],...
+             'LineWidth',1.5,'DisplayName','Deterministic')
         end
         hold off
         grid on
@@ -401,7 +418,8 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,rdata_f
         subplot(2,3,1)
         hold on
         for i = 1 : length(data_av)
-            funplot(meany(i).nat(begintint:end)/nepesseg,standev(i).nat(begintint:end)/nepesseg,colors(i,:),w,scenarionames{i})
+            funplot(meany(i).nat(begintint:end)/nepesseg,standev(i).nat(begintint:end)/nepesseg,...
+                    colors(i,:),w,scenarionames{i})
         end
         for i = 1 : measdim
             xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
@@ -426,7 +444,8 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,rdata_f
         subplot(2,3,4)
         hold on
         for i = 1 : length(data_av)
-            funplot(meany(i).npt(begintint:end)/nepesseg,standev(i).npt(begintint:end)/nepesseg,colors(i,:),w,scenarionames{i})
+            funplot(meany(i).npt(begintint:end)/nepesseg,standev(i).npt(begintint:end)/nepesseg,...
+                    colors(i,:),w,scenarionames{i})
         end
         for i = 1 : measdim
             xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
@@ -435,7 +454,8 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,rdata_f
             rdata = str2double(hundata(startdate:end,3));
             funplot_realdata(rdata(begintint:end),numAgents,hunPopulation,w,nepesseg);
             szcase_len = numel(szcase(begintint:end));
-            plot(0:szcase_len-1,szcase(begintint:end)/nepesseg,'Color',[255/255,69/255,50/255],'LineWidth',w,'DisplayName','Szeged data');
+            plot(0:szcase_len-1,szcase(begintint:end)/nepesseg,...
+                 'Color',[255/255,69/255,50/255],'LineWidth',w,'DisplayName','Szeged data');
         end
         hold off
         grid on
@@ -478,7 +498,8 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,rdata_f
         subplot(2,3,5)
         hold on
         for i = 1 : length(data_av)
-            funplot(meany(i).sat(begintint:end)/nepesseg,standev(i).sat(begintint:end)/nepesseg,colors(i,:),w,scenarionames{i})
+            funplot(meany(i).sat(begintint:end)/nepesseg,standev(i).sat(begintint:end)/nepesseg,...
+                    colors(i,:),w,scenarionames{i})
         end
         for i = 1 : measdim
             xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
@@ -504,7 +525,8 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,rdata_f
         subplot(2,3,6)
         hold on
         for i = 1 : length(data_av)
-            funplot(meany(i).spt(begintint:end)/nepesseg,standev(i).spt(begintint:end)/nepesseg,colors(i,:),w,scenarionames{i})
+            funplot(meany(i).spt(begintint:end)/nepesseg,standev(i).spt(begintint:end)/nepesseg,...
+                    colors(i,:),w,scenarionames{i})
         end
         for i = 1 : measdim
             xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
@@ -539,7 +561,8 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,rdata_f
         subplot(2,2,4)
         hold on
         for i = 1 : length(data_av)
-            funplot(meany(i).ktnc(begintint:end)/nepesseg,standev(i).ktnc(begintint:end)/nepesseg,colors(i,:),w,scenarionames{i})
+            funplot(meany(i).ktnc(begintint:end)/nepesseg,standev(i).ktnc(begintint:end)/nepesseg,...
+                    colors(i,:),w,scenarionames{i})
         end
         for i = 1 : measdim
             xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
@@ -560,7 +583,8 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,rdata_f
         subplot(2,2,3)
         hold on
         for i = 1 : length(data_av)
-            funplot(meany(i).kt(begintint:end)/nepesseg,standev(i).kt(begintint:end)/nepesseg,colors(i,:),w,scenarionames{i})
+            funplot(meany(i).kt(begintint:end)/nepesseg,standev(i).kt(begintint:end)/nepesseg,...
+                    colors(i,:),w,scenarionames{i})
         end
         for i = 1 : measdim
             xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
@@ -570,7 +594,8 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,rdata_f
             funplot_realdata(rdata(begintint:end),numAgents,hunPopulation,w,nepesseg);
         end
         if detfl == 1
-        plot(deterdata(begintint:end,3)/nepesseg,'Color',[0.6350 0.0780 0.1840],'LineWidth',1.5,'DisplayName','Deterministic')
+        plot(deterdata(begintint:end,3)/nepesseg,'Color',[0.6350 0.0780 0.1840],...
+             'LineWidth',1.5,'DisplayName','Deterministic')
         end
         hold off
         grid on
@@ -588,7 +613,8 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,rdata_f
         subplot(2,2,2)
         hold on
         for i = 1 : length(data_av)
-            funplot(meany(i).k(begintint:end)/nepesseg,standev(i).k(begintint:end)/nepesseg,colors(i,:),w,scenarionames{i})
+            funplot(meany(i).k(begintint:end)/nepesseg,standev(i).k(begintint:end)/nepesseg,...
+                    colors(i,:),w,scenarionames{i})
         end
         for i = 1 : measdim
             xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
@@ -609,7 +635,8 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,rdata_f
         subplot(2,2,1)
         hold on
         for i = 1 : length(data_av)
-            funplot(meany(i).i6(begintint:end)/nepesseg,standev(i).i6(begintint:end)/nepesseg,colors(i,:),w,scenarionames{i})
+            funplot(meany(i).i6(begintint:end)/nepesseg,standev(i).i6(begintint:end)/nepesseg,...
+                    colors(i,:),w,scenarionames{i})
         end
         for i = 1 : measdim
             xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
@@ -640,7 +667,8 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,rdata_f
         subplot(2,3,1)
         hold on
         for i = 1 : length(data_av)
-            funplot(meany(i).q(begintint:end)/nepesseg,standev(i).q(begintint:end)/nepesseg,colors(i,:),w,scenarionames{i})
+            funplot(meany(i).q(begintint:end)/nepesseg,standev(i).q(begintint:end)/nepesseg,...
+                    colors(i,:),w,scenarionames{i})
         end
         for i = 1 : measdim
             xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
@@ -661,7 +689,8 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,rdata_f
         subplot(2,3,2)
         hold on
         for i = 1 : length(data_av)
-            funplot(meany(i).nq(begintint:end)/nepesseg,standev(i).nq(begintint:end)/nepesseg,colors(i,:),w,scenarionames{i})
+            funplot(meany(i).nq(begintint:end)/nepesseg,standev(i).nq(begintint:end)/nepesseg,...
+                    colors(i,:),w,scenarionames{i})
         end
         for i = 1 : measdim
             xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
@@ -682,7 +711,8 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,rdata_f
         subplot(2,3,3)
         hold on
         for i = 1 : length(data_av)
-            funplot(meany(i).qni(begintint:end)/nepesseg,standev(i).qni(begintint:end)/nepesseg,colors(i,:),w,scenarionames{i})
+            funplot(meany(i).qni(begintint:end)/nepesseg,standev(i).qni(begintint:end)/nepesseg,...
+                    colors(i,:),w,scenarionames{i})
         end
         for i = 1 : measdim
             xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
@@ -703,7 +733,8 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,rdata_f
         subplot(2,3,4)
         hold on
         for i = 1 : length(data_av)
-            funplot(meany(i).qt(begintint:end)/nepesseg,standev(i).qt(begintint:end)/nepesseg,colors(i,:),w,scenarionames{i})
+            funplot(meany(i).qt(begintint:end)/nepesseg,standev(i).qt(begintint:end)/nepesseg,...
+                    colors(i,:),w,scenarionames{i})
         end
         for i = 1 : measdim
             xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
@@ -724,7 +755,8 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,rdata_f
         subplot(2,3,5)
         hold on
         for i = 1 : length(data_av)
-            funplot(meany(i).qii(begintint:end)/nepesseg,standev(i).qii(begintint:end)/nepesseg,colors(i,:),w,scenarionames{i})
+            funplot(meany(i).qii(begintint:end)/nepesseg,standev(i).qii(begintint:end)/nepesseg,...
+                    colors(i,:),w,scenarionames{i})
         end
         for i = 1 : measdim
             xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
@@ -745,7 +777,8 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,rdata_f
         subplot(2,3,6)
         hold on
         for i = 1 : length(data_av)
-            funplot(meany(i).qiq(begintint:end)/nepesseg,standev(i).qiq(begintint:end)/nepesseg,colors(i,:),w,scenarionames{i})
+            funplot(meany(i).qiq(begintint:end)/nepesseg,standev(i).qiq(begintint:end)/nepesseg,...
+                    colors(i,:),w,scenarionames{i})
         end
         for i = 1 : measdim
             xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
@@ -776,7 +809,8 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,rdata_f
         subplot(1,2,1)
         hold on
         for i = 1 : length(data_av)
-            funplot(meany(i).disu(begintint:end)/nepesseg,standev(i).disu(begintint:end)/nepesseg,colors(i,:),w,scenarionames{i})
+            funplot(meany(i).disu(begintint:end)/nepesseg,standev(i).disu(begintint:end)/nepesseg,...
+                    colors(i,:),w,scenarionames{i})
         end
         for i = 1 : measdim
             xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
@@ -796,7 +830,8 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,rdata_f
         subplot(1,2,2)
         hold on
         for i = 1 : length(data_av)
-            funplot(meany(i).dirt(begintint:end)/nepesseg,standev(i).dirt(begintint:end)/nepesseg,colors(i,:),w,scenarionames{i})
+            funplot(meany(i).dirt(begintint:end)/nepesseg,standev(i).dirt(begintint:end)/nepesseg,...
+                    colors(i,:),w,scenarionames{i})
         end
         for i = 1 : measdim
             xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
@@ -826,7 +861,8 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,rdata_f
         subplot(2,2,1)
         hold on
         for i = 1 : length(data_av)
-            funplot(meany(i).do(begintint:end)/nepesseg,standev(i).do(begintint:end)/nepesseg,colors(i,:),w,scenarionames{i})
+            funplot(meany(i).do(begintint:end)/nepesseg,standev(i).do(begintint:end)/nepesseg,...
+                    colors(i,:),w,scenarionames{i})
         end
         for i = 1 : measdim
             xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
@@ -846,7 +882,8 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,rdata_f
         subplot(2,2,2)
         hold on
         for i = 1 : length(data_av)
-            funplot(meany(i).dido(begintint:end)/nepesseg,standev(i).dido(begintint:end)/nepesseg,colors(i,:),w,scenarionames{i})
+            funplot(meany(i).dido(begintint:end)/nepesseg,standev(i).dido(begintint:end)/nepesseg,...
+                    colors(i,:),w,scenarionames{i})
         end
         for i = 1 : measdim
             xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
@@ -866,7 +903,8 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,rdata_f
         subplot(2,2,[3 4])
         hold on
         for i = 1 : length(data_av)
-            funplot(meany(i).h(begintint:end)/nepesseg,standev(i).h(begintint:end)/nepesseg,colors(i,:),w,scenarionames{i})
+            funplot(meany(i).h(begintint:end)/nepesseg,standev(i).h(begintint:end)/nepesseg,...
+                    colors(i,:),w,scenarionames{i})
         end
         for i = 1 : measdim
             xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
@@ -896,7 +934,8 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,rdata_f
         subplot(2,2,1)
         hold on
         for i = 1 : length(data_av)
-            funplot(meany(i).vac(begintint:end)/nepesseg,standev(i).vac(begintint:end)/nepesseg,colors(i,:),w,scenarionames{i})
+            funplot(meany(i).vac(begintint:end)/nepesseg,standev(i).vac(begintint:end)/nepesseg,...
+                    colors(i,:),w,scenarionames{i})
         end
         for i = 1 : measdim
             xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
@@ -924,7 +963,8 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,rdata_f
         subplot(2,2,2)
         hold on
         for i = 1 : length(data_av)
-            funplot(meany(i).cvac(begintint:end)/nepesseg,standev(i).cvac(begintint:end)/nepesseg,colors(i,:),w,scenarionames{i})
+            funplot(meany(i).cvac(begintint:end)/nepesseg,standev(i).cvac(begintint:end)/nepesseg,...
+                    colors(i,:),w,scenarionames{i})
         end
         for i = 1 : measdim
             xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
@@ -953,7 +993,8 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,rdata_f
         subplot(2,2,[3 4])
         hold on
         for i = 1 : length(data_av)
-            funplot(meany(i).immu(begintint:end)/nepesseg,standev(i).immu(begintint:end)/nepesseg,colors(i,:),w,scenarionames{i})
+            funplot(meany(i).immu(begintint:end)/nepesseg,standev(i).immu(begintint:end)/nepesseg,...
+                    colors(i,:),w,scenarionames{i})
         end
         for i = 1 : measdim
             xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
@@ -991,7 +1032,8 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,rdata_f
             xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
         end
         if detfl == 1
-        plot(deterdata(begintint:end,10),'Color',[0.6350 0.0780 0.1840],'LineWidth',1.5,'DisplayName','Deterministic')
+        plot(deterdata(begintint:end,10),'Color',[0.6350 0.0780 0.1840],...
+             'LineWidth',1.5,'DisplayName','Deterministic')
         end
         hold off
         grid on
@@ -1016,8 +1058,8 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,rdata_f
 
         hold on
         for i = 1 : length(data_av)
-            %funplot(smoothdata(mean(i).re,'movmedian',14),smoothdata(standev(i).re,'movmedian',14),colors(i,:),w,scenarionames{i})
-            plot(meany(i).spec1,meany(i).spec2,'o','Color',colors(i,:),'LineWidth',w,'DisplayName',scenarionames{i},'MarkerFaceColor',[0.5 0.5 0.5]);
+            plot(meany(i).spec1,meany(i).spec2,'o','Color',colors(i,:),...
+                 'LineWidth',w,'DisplayName',scenarionames{i},'MarkerFaceColor',[0.5 0.5 0.5]);
         end
         hold off
         grid on
@@ -1034,20 +1076,22 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,rdata_f
         savefig(append(Path,'/std_',nop,'/z_std-9.fig'))
         end
     
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Publication figures below this line %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Publication figures below this line %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
         FIGH = figure('Name','Publication_figure_1','NumberTitle','off','Position',get(0,'Screensize'));
         
         subplot(2,2,1)
         hold on
         for i = 1 : length(data_av)
-            funplot(meany(i).s(begintint:end)/nepesseg,standev(i).s(begintint:end)/nepesseg,colors(i,:),w,scenarionames{i})
+            funplot(meany(i).s(begintint:end)/nepesseg,standev(i).s(begintint:end)/nepesseg,...
+                    colors(i,:),w,scenarionames{i})
         end
         for i = 1 : measdim
             xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
         end
         if detfl == 1
-        plot(deterdata(begintint:end,7)/nepesseg,'Color',[0.6350 0.0780 0.1840],'LineWidth',1.5,'DisplayName','Deterministic')
+        plot(deterdata(begintint:end,7)/nepesseg,'Color',[0.6350 0.0780 0.1840],...
+             'LineWidth',1.5,'DisplayName','Deterministic')
         end
         hold off
         grid on
@@ -1065,13 +1109,15 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,rdata_f
         subplot(2,2,2)
         hold on
         for i = 1 : length(data_av)
-            funplot(meany(i).e(begintint:end)/nepesseg,standev(i).e(begintint:end)/nepesseg,colors(i,:),w,scenarionames{i})
+            funplot(meany(i).e(begintint:end)/nepesseg,standev(i).e(begintint:end)/nepesseg,...
+                    colors(i,:),w,scenarionames{i})
         end
         for i = 1 : measdim
             xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
         end
         if detfl == 1
-        plot(deterdata(begintint:end,8)/nepesseg,'Color',[0.6350 0.0780 0.1840],'LineWidth',1.5,'DisplayName','Deterministic')
+        plot(deterdata(begintint:end,8)/nepesseg,'Color',[0.6350 0.0780 0.1840],...
+             'LineWidth',1.5,'DisplayName','Deterministic')
         end
         hold off
         grid on
@@ -1089,7 +1135,8 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,rdata_f
         subplot(2,2,3)
         hold on
         for i = 1 : length(data_av)
-            funplot(meany(i).i(begintint:end)/nepesseg,standev(i).i(begintint:end)/nepesseg,colors(i,:),w,scenarionames{i})
+            funplot(meany(i).i(begintint:end)/nepesseg,standev(i).i(begintint:end)/nepesseg,...
+                    colors(i,:),w,scenarionames{i})
         end
         for i = 1 : measdim
             xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
@@ -1110,13 +1157,15 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,rdata_f
         subplot(2,2,4)
         hold on
         for i = 1 : length(data_av)
-            funplot(meany(i).r(begintint:end)/nepesseg,standev(i).r(begintint:end)/nepesseg,colors(i,:),w,scenarionames{i})
+            funplot(meany(i).r(begintint:end)/nepesseg,standev(i).r(begintint:end)/nepesseg,...
+                    colors(i,:),w,scenarionames{i})
         end
         for i = 1 : measdim
             xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
         end
         if detfl == 1
-        plot(deterdata(begintint:end,4)/nepesseg,'Color',[0.6350 0.0780 0.1840],'LineWidth',1.5,'DisplayName','Deterministic')
+        plot(deterdata(begintint:end,4)/nepesseg,'Color',[0.6350 0.0780 0.1840],...
+             'LineWidth',1.5,'DisplayName','Deterministic')
         end
         hold off
         grid on
@@ -1145,13 +1194,15 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,rdata_f
         subplot(2,3,1)
         hold on
         for i = 1 : length(data_av)
-            funplot(meany(i).ne(begintint:end)/nepesseg,standev(i).ne(begintint:end)/nepesseg,colors(i,:),w,scenarionames{i})
+            funplot(meany(i).ne(begintint:end)/nepesseg,standev(i).ne(begintint:end)/nepesseg,...
+                    colors(i,:),w,scenarionames{i})
         end
         for i = 1 : measdim
             xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
         end
         if detfl == 1
-        plot(deterdata(begintint:end,2)/nepesseg,'Color',[0.6350 0.0780 0.1840],'LineWidth',1.5,'DisplayName','Deterministic')
+        plot(deterdata(begintint:end,2)/nepesseg,'Color',[0.6350 0.0780 0.1840],...
+             'LineWidth',1.5,'DisplayName','Deterministic')
         end
         hold off
         grid on
@@ -1169,13 +1220,15 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,rdata_f
         subplot(2,3,2)
         hold on
         for i = 1 : length(data_av)
-            funplot(meany(i).didc(begintint:end)/nepesseg,standev(i).didc(begintint:end)/nepesseg,colors(i,:),w,scenarionames{i})
+            funplot(meany(i).didc(begintint:end)/nepesseg,standev(i).didc(begintint:end)/nepesseg,...
+                    colors(i,:),w,scenarionames{i})
         end
         for i = 1 : measdim
             xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
         end
         if detfl == 1
-        plot(deterdata(begintint:end,6)/nepesseg,'Color',[0.6350 0.0780 0.1840],'LineWidth',1.5,'DisplayName','Deterministic')
+        plot(deterdata(begintint:end,6)/nepesseg,'Color',[0.6350 0.0780 0.1840],...
+             'LineWidth',1.5,'DisplayName','Deterministic')
         end
         hold off
         grid on
@@ -1193,7 +1246,8 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,rdata_f
         subplot(2,3,3)
         hold on
         for i = 1 : length(data_av)
-            funplot(meany(i).k(begintint:end)/nepesseg,standev(i).k(begintint:end)/nepesseg,colors(i,:),w,scenarionames{i})
+            funplot(meany(i).k(begintint:end)/nepesseg,standev(i).k(begintint:end)/nepesseg,...
+                    colors(i,:),w,scenarionames{i})
         end
         for i = 1 : measdim
             xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
@@ -1214,7 +1268,8 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,rdata_f
         subplot(2,3,4)
         hold on
         for i = 1 : length(data_av)
-            funplot(meany(i).nat(begintint:end)/nepesseg,standev(i).nat(begintint:end)/nepesseg,colors(i,:),w,scenarionames{i})
+            funplot(meany(i).nat(begintint:end)/nepesseg,standev(i).nat(begintint:end)/nepesseg,...
+                    colors(i,:),w,scenarionames{i})
         end
         for i = 1 : measdim
             xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
@@ -1235,7 +1290,8 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,rdata_f
         subplot(2,3,5)
         hold on
         for i = 1 : length(data_av)
-            funplot(meany(i).npt(begintint:end)/nepesseg,standev(i).npt(begintint:end)/nepesseg,colors(i,:),w,scenarionames{i})
+            funplot(meany(i).npt(begintint:end)/nepesseg,standev(i).npt(begintint:end)/nepesseg,...
+                    colors(i,:),w,scenarionames{i})
         end
         for i = 1 : measdim
             xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
@@ -1287,7 +1343,8 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,rdata_f
         subplot(2,3,1)
         hold on
         for i = 1 : length(data_av)
-            funplot(meany(i).ktnc(begintint:end)/nepesseg,standev(i).ktnc(begintint:end)/nepesseg,colors(i,:),w,scenarionames{i})
+            funplot(meany(i).ktnc(begintint:end)/nepesseg,standev(i).ktnc(begintint:end)/nepesseg,...
+                    colors(i,:),w,scenarionames{i})
         end
         for i = 1 : measdim
             xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
@@ -1308,13 +1365,15 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,rdata_f
         subplot(2,3,2)
         hold on
         for i = 1 : length(data_av)
-            funplot(meany(i).kt(begintint:end)/nepesseg,standev(i).kt(begintint:end)/nepesseg,colors(i,:),w,scenarionames{i})
+            funplot(meany(i).kt(begintint:end)/nepesseg,standev(i).kt(begintint:end)/nepesseg,...
+                    colors(i,:),w,scenarionames{i})
         end
         for i = 1 : measdim
             xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
         end
         if detfl == 1
-        plot(deterdata(begintint:end,3)/nepesseg,'Color',[0.6350 0.0780 0.1840],'LineWidth',1.5,'DisplayName','Deterministic')
+        plot(deterdata(begintint:end,3)/nepesseg,'Color',[0.6350 0.0780 0.1840],...
+             'LineWidth',1.5,'DisplayName','Deterministic')
         end
         hold off
         grid on
@@ -1332,7 +1391,8 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,rdata_f
         subplot(2,3,3)
         hold on
         for i = 1 : length(data_av)
-            funplot(meany(i).i6(begintint:end)/nepesseg,standev(i).i6(begintint:end)/nepesseg,colors(i,:),w,scenarionames{i})
+            funplot(meany(i).i6(begintint:end)/nepesseg,standev(i).i6(begintint:end)/nepesseg,...
+                    colors(i,:),w,scenarionames{i})
         end
         for i = 1 : measdim
             xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
@@ -1353,7 +1413,8 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,rdata_f
         subplot(2,3,4)
         hold on
         for i = 1 : length(data_av)
-            funplot(meany(i).q(begintint:end)/nepesseg,standev(i).q(begintint:end)/nepesseg,colors(i,:),w,scenarionames{i})
+            funplot(meany(i).q(begintint:end)/nepesseg,standev(i).q(begintint:end)/nepesseg,...
+                    colors(i,:),w,scenarionames{i})
         end
         for i = 1 : measdim
             xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
@@ -1374,7 +1435,8 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,rdata_f
         subplot(2,3,5)
         hold on
         for i = 1 : length(data_av)
-            funplot(meany(i).nq(begintint:end)/nepesseg,standev(i).nq(begintint:end)/nepesseg,colors(i,:),w,scenarionames{i})
+            funplot(meany(i).nq(begintint:end)/nepesseg,standev(i).nq(begintint:end)/nepesseg,...
+                    colors(i,:),w,scenarionames{i})
         end
         for i = 1 : measdim
             xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
@@ -1395,7 +1457,8 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,rdata_f
         subplot(2,3,6)
         hold on
         for i = 1 : length(data_av)
-            funplot(meany(i).qt(begintint:end)/nepesseg,standev(i).qt(begintint:end)/nepesseg,colors(i,:),w,scenarionames{i})
+            funplot(meany(i).qt(begintint:end)/nepesseg,standev(i).qt(begintint:end)/nepesseg,...
+                    colors(i,:),w,scenarionames{i})
         end
         for i = 1 : measdim
             xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');

@@ -33,7 +33,9 @@ function output = fun_agst_dqeextractor(AgentStat,agents,clog,LocMap)
                 p = p + 1;
             end
         elseif clog == 4
-            if strcmp(AgentStat(i).worstState_name,'I5_h') || strcmp(AgentStat(i).worstState_name,'I6_h') || strcmp(AgentStat(i).worstState_name,'D1')
+            if strcmp(AgentStat(i).worstState_name,'I5_h') ||...
+               strcmp(AgentStat(i).worstState_name,'I6_h') ||...
+               strcmp(AgentStat(i).worstState_name,'D1')
                 hospitalized(p) = AgentStat(i);
                 p = p + 1;
             end

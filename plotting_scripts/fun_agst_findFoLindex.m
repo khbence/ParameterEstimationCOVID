@@ -22,7 +22,8 @@ function output = fun_agst_findFoLindex(agentstat,index,FoL)
         while ~exist('output','var')
             for i = 1 : length(agentstat)
 
-                if funcutter(agentstat(i).infectionTime) == index && fun_tr_cutter(agentstat(i+1).infectionTime) ~= index
+                if funcutter(agentstat(i).infectionTime) == index &&...
+                   fun_tr_cutter(agentstat(i+1).infectionTime) ~= index
 
                     output = i;
                     break;

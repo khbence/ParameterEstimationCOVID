@@ -13,7 +13,8 @@ function output = fun_agst_process(samplename,agents,clog,LocMap,interval)
 
     for i = 1 : length(list)
 
-        countvar = fun_agst_agentcounter(append(samplename,num2str(list(i)),'.json'),agents,clog,LocMap,interval);
+        countvar = fun_agst_agentcounter(append(samplename,num2str(list(i)),'.json'),...
+                                         agents,clog,LocMap,interval);
         
         if ~(isequaln(countvar,0))
             struct_ar = [struct_ar countvar];
