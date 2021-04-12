@@ -70,6 +70,7 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,rdata_f
                 list = split(list,'.');
                 list(:,2) = [];
                 list = str2double(list);
+                list(1:2:end) = [];
 
                 final_ar = [];
 

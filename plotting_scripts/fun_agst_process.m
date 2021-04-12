@@ -8,6 +8,7 @@ function output = fun_agst_process(samplename,agents,clog,LocMap,interval)
     list = split(list,'.');
     list(:,2) = [];
     list = str2double(list);
+    list(1:2:end) = [];
     
     struct_ar = [];
 
