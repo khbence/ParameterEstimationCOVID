@@ -15,6 +15,7 @@ function output = fun_tr_process(samplename,samplename2,agents,locations)
     list2 = split(list2,'.');
     list2(:,2) = [];
     list2 = str2double(list2);
+    list2(1:2:end) = [];
     
     struct_ar1 = [];
     struct_ar2 = [];
