@@ -95,19 +95,19 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,rdata_f
                             
                             if final_ar(j,2) > final_ar(j,3)
                                 
-                                if ismember(i-1,final_ar(j,1):final_ar(j,3))
+                                if sum(i-1==final_ar(j,1):final_ar(j,3))
                                     avdayvec = [avdayvec final_ar(j,3)-final_ar(j,1)];
                                 end
                                 
                             elseif final_ar(j,3) == -1
                                 
-                                if ismember(i-1,final_ar(j,1):final_ar(j,2))
+                                if sum(i-1==final_ar(j,1):final_ar(j,2))
                                     avdayvec = [avdayvec final_ar(j,2)-final_ar(j,1)];
                                 end
                                 
                             elseif final_ar(j,1) < final_ar(j,2) && final_ar(j,2) < final_ar(j,3)
                                 
-                                if ismember(i-1,final_ar(j,1):final_ar(j,3))
+                                if sum(i-1==final_ar(j,1):final_ar(j,3))
                                     avdayvec = [avdayvec final_ar(j,3)-final_ar(j,1)];
                                 end
                                 
