@@ -1036,6 +1036,7 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,rdata_f
         for i = 1 : measdim
             xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
         end
+        yline(1,'HandleVisibility','off');
         if detfl == 1
         plot(deterdata(begintint:end,10),'Color',[0.6350 0.0780 0.1840],...
              'LineWidth',1.5,'DisplayName','Deterministic')
