@@ -56,11 +56,14 @@ function output = fun_std_read(file)
     dido = diff(data(:,12));
     output.dido = [dido;0];
     
-    newexposed_seged = data(:,23);
-    %newexposed_seged = [newexposed_seged;0];
-    alinfected_seged = data(:,2)+data(:,3)+data(:,4)+data(:,5)+data(:,6)+data(:,7)+data(:,8);
-    output.ne = newexposed_seged;
-    output.re = funNaNorInferaser(newexposed_seged./alinfected_seged);
+    output.ne = data(:,23);
+    
+    seged4re = zeros(length(data),1);
+    for i = 11 : length(data)-9 % sum(E(10:19))/sum(E(1:9))
+        iteratorvar = data(:,23);
+        seged4re(i) = sum((iteratorvar(i:i+9))/(sum(iteratorvar(i-10:i-1))));
+    end
+    output.re = funNaNorInferaser(seged4re);
     
     output.spec1 = funNaNorInferaser((t+p2)/(179500/100));
     output.spec2 = funNaNorInferaser((data(:,18)./(data(:,2)+data(:,3)+data(:,4)+...

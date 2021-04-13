@@ -1,7 +1,11 @@
 function [mean, standev] = fun_std_avdev(input,norm,varname)
 
     N = length(input);
-    M = length(input(1).s);
+    if ismember('re',varname)
+        M = length(input(1).re);
+    else
+        M = length(input(1).s);
+    end
     ip = input;
     
     av = zeros(M,1);

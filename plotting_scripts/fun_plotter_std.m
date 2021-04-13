@@ -1,6 +1,8 @@
 function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,rdata_flag,Path,...
                          yax_string,colors,begintint,agst_ip,ctw_flag)
 
+        daymul = 1;
+                     
         saveimg_flag = 1;
         % Mátrix a kimeneti CSV-hez: 1,2->összhalott, 3,4->kórházmax,
         % 5,6->kórházössz, 7,8->intenzívmax, 9,10->intenzívössz, 11,12->kórház>200
@@ -58,73 +60,73 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,rdata_f
             avdays = zeros(length(data_av(1).s),length(scenarionames));
             sddays = zeros(length(data_av(1).s),length(scenarionames));
             
-            for it = 1 : length(scenarionames)
-                
-                samplename = agst_ip{it};
-            
-                list = dir(append(samplename,'*'));
-                list = (extractfield(list,'name'))';
-                list = string(list);
-                list = split(list,'_');
-                list(:,1:end-1) = [];
-                list = split(list,'.');
-                list(:,2) = [];
-                list = str2double(list);
-                list(1:2:end) = [];
-
-                final_ar = [];
-
-                for i = 1 : length(list)
-
-                    AgentStatseg = fun_agst_statreadprocfun(append(samplename,num2str(list(i)),'.json'));
-                    inftimeseg = extractfield(AgentStatseg,'infectionTime')';
-                    begtimeseg = extractfield(AgentStatseg,'worstState_begin')';
-                    endtimeseg = extractfield(AgentStatseg,'worstState_end')';
-                    
-                    finagstinf = [inftimeseg begtimeseg endtimeseg];
-                    
-                    final_ar = [final_ar; finagstinf];
-
-                end
-                
-                for i = 1 : length(data_av(1).s)
-                    
-                    avdayvec = [];
-                    
-                    for j = 1 : length(final_ar)
-                        
-                        if final_ar(j,1) < 100000
-                            
-                            if final_ar(j,2) > final_ar(j,3)
-                                
-                                if sum(i-1==final_ar(j,1):final_ar(j,3))
-                                    avdayvec = [avdayvec final_ar(j,3)-final_ar(j,1)];
-                                end
-                                
-                            elseif final_ar(j,3) == -1
-                                
-                                if sum(i-1==final_ar(j,1):final_ar(j,2))
-                                    avdayvec = [avdayvec final_ar(j,2)-final_ar(j,1)];
-                                end
-                                
-                            elseif final_ar(j,1) < final_ar(j,2) && final_ar(j,2) < final_ar(j,3)
-                                
-                                if sum(i-1==final_ar(j,1):final_ar(j,3))
-                                    avdayvec = [avdayvec final_ar(j,3)-final_ar(j,1)];
-                                end
-                                
-                            end
-                            
-                        end
-                        
-                    end
-                    
-                    avdays(i,it) = mean(avdayvec);
-                    sddays(i,it) = std(avdayvec,0);
-                    
-                end
-                
-            end
+%             for it = 1 : length(scenarionames)
+%                 
+%                 samplename = agst_ip{it};
+%             
+%                 list = dir(append(samplename,'*'));
+%                 list = (extractfield(list,'name'))';
+%                 list = string(list);
+%                 list = split(list,'_');
+%                 list(:,1:end-1) = [];
+%                 list = split(list,'.');
+%                 list(:,2) = [];
+%                 list = str2double(list);
+%                 list(1:2:end) = [];
+% 
+%                 final_ar = [];
+% 
+%                 for i = 1 : length(list)
+% 
+%                     AgentStatseg = fun_agst_statreadprocfun(append(samplename,num2str(list(i)),'.json'));
+%                     inftimeseg = extractfield(AgentStatseg,'infectionTime')';
+%                     begtimeseg = extractfield(AgentStatseg,'worstState_begin')';
+%                     endtimeseg = extractfield(AgentStatseg,'worstState_end')';
+%                     
+%                     finagstinf = [inftimeseg begtimeseg endtimeseg];
+%                     
+%                     final_ar = [final_ar; finagstinf];
+% 
+%                 end
+%                 
+%                 for i = 1 : length(data_av(1).s)
+%                     
+%                     avdayvec = [];
+%                     
+%                     for j = 1 : length(final_ar)
+%                         
+%                         if final_ar(j,1) < 100000
+%                             
+%                             if final_ar(j,2) > final_ar(j,3)
+%                                 
+%                                 if sum(i-1==final_ar(j,1):final_ar(j,3))
+%                                     avdayvec = [avdayvec final_ar(j,3)-final_ar(j,1)];
+%                                 end
+%                                 
+%                             elseif final_ar(j,3) == -1
+%                                 
+%                                 if sum(i-1==final_ar(j,1):final_ar(j,2))
+%                                     avdayvec = [avdayvec final_ar(j,2)-final_ar(j,1)];
+%                                 end
+%                                 
+%                             elseif final_ar(j,1) < final_ar(j,2) && final_ar(j,2) < final_ar(j,3)
+%                                 
+%                                 if sum(i-1==final_ar(j,1):final_ar(j,3))
+%                                     avdayvec = [avdayvec final_ar(j,3)-final_ar(j,1)];
+%                                 end
+%                                 
+%                             end
+%                             
+%                         end
+%                         
+%                     end
+%                     
+%                     avdays(i,it) = mean(avdayvec);
+%                     sddays(i,it) = std(avdayvec,0);
+%                     
+%                 end
+%                 
+%             end
             
         else
             
@@ -1025,8 +1027,10 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,rdata_f
 
         hold on
         for i = 1 : length(data_av)
-            funplot(avdays(begintint:end,i).*smoothdata(meany(i).re(begintint:end),'movmedian',14),...
-                    avdays(begintint:end,i).*smoothdata(standev(i).re(begintint:end),'movmedian',14),...
+            proba1 = meany(i).re(begintint:end-9);
+            proba2 = standev(i).re(begintint:end-9);
+            funplot(daymul*smoothdata(proba1,'movmedian',14),...
+                    daymul*smoothdata(proba2,'movmedian',14),...
                     colors(i,:),w,scenarionames{i})
         end
         for i = 1 : measdim
