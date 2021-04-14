@@ -59,6 +59,7 @@ function output = fun_std_read(file)
     output.ne = data(:,23);
     
     seged4re = zeros(length(data),1);
+    windowvar = 9;
     for i = 11 : length(data)-9 % sum(E(10:19))/sum(E(1:9))
         iteratorvar = data(:,23);
         seged4re(i) = sum((iteratorvar(i:i+9))/(sum(iteratorvar(i-10:i-1))));
@@ -77,6 +78,8 @@ function output = fun_std_read(file)
     output.CSVim = max(data(:,8));
     output.CSVio = sum(data(:,8));
     segvar = data(:,7)+data(:,8)+data(:,9);
-    output.CSVki = sum(segvar(segvar>200));
+    segvar = segvar(segvar>200);
+    segvar = segvar-200;
+    output.CSVki = sum(segvar);
     
 end
