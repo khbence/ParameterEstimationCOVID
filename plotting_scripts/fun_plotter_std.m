@@ -1040,6 +1040,9 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,rdata_f
         if detfl == 1
         plot(deterdata(begintint:end,10),'Color',[0.6350 0.0780 0.1840],...
              'LineWidth',1.5,'DisplayName','Deterministic')
+        Rtmeasdata = funGetSzegedRt();
+        plot(smoothdata(Rtmeasdata(begintint:end-9),'movmedian',14),'Color',[0.4470 0.7410 0],...
+             'LineWidth',1.5,'DisplayName','National data')
         end
         hold off
         grid on
