@@ -1494,8 +1494,8 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,rdata_f
         end
         
         if strcmp(yax_string,'No. of Agents')
-            colnames = {'Deceasedsum_av','Deceasedsum_std','Hospitalmax_av','Hospitalmax_std',
-                        'Hospitalsum_av','Hospitalsum_std','Intensivmax_av','Intensivmax_std',
+            colnames = {'Deceasedsum_av','Deceasedsum_std','Hospitalmax_av','Hospitalmax_std',...
+                        'Hospitalsum_av','Hospitalsum_std','Intensivmax_av','Intensivmax_std',...
                         'Intensivsum_av','Intensivsum_std','Hospitalthr_av','Hospitalthr_std'};
             matrix4csv = array2table(matrix4csv,'VariableNames',colnames);
             matrix4csv = addvars(matrix4csv,scenarionames,'Before','Deceasedsum_av');
