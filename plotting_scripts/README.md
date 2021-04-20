@@ -25,6 +25,6 @@ To run the scripts, and evaluate the data coming from the simulator, one should 
 There are 3 kind of inputs for the plotting scripts, the Standard input, the Agent-dependent input and the Contact tracing input. There are conventions how to name these files while running simulations. These conventions can be seen below:
 
   - Standard input: \<some arbitrary user defined name\>_\<simulation count\>.txt
-  - Agent dependent input: <some arbitrary user defined name>_<simulation count>.json
-  - Contact tracing input: under development. This is a folder for each round, the folder name must be <some arbitrary user defined name>_<simulation count>
+  - Agent dependent input: \<some arbitrary user defined name\>_\<simulation count\>.json
+  - Contact tracing input: under development. This is a folder for each round, the folder name must be \<some arbitrary user defined name\>_\<simulation count\>
 
