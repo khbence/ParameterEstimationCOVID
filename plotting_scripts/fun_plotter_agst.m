@@ -35,7 +35,7 @@ function fun_plotter_agst(jsonnames,scenarionames,Title,agents,clog,spectitle,..
         sdmat = data.std.age;
         h = bar(avmat');
         xticks(1:size(avmat,2));
-        xticklabels({'0-9','10-19','20-29','30-39','40-49','50-59','60-69','70-79','80-89','90-99'});
+        xticklabels({'0-5','6-14','15-18','19-30','31-62','63-70','71-80','81-99'});
         set(h, {'DisplayName'}, scenarionames);
         hold on
         x_errorbar = zeros(1, numel(sdmat));
@@ -79,7 +79,7 @@ function fun_plotter_agst(jsonnames,scenarionames,Title,agents,clog,spectitle,..
         sdmat = data.std.age./normnum.ages;
         h = bar(avmat');
         xticks(1:size(avmat,2));
-        xticklabels({'0-9','10-19','20-29','30-39','40-49','50-59','60-69','70-79','80-89','90-99'});
+        xticklabels({'0-5','6-14','15-18','19-30','31-62','63-70','71-80','81-99'});
         set(h, {'DisplayName'}, scenarionames);
         hold on
         x_errorbar = zeros(1, numel(sdmat));

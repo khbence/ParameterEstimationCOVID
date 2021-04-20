@@ -4,22 +4,35 @@ function count = fun_agst_agentcountercount(input)
 
     % Age:
     
-    Agevec = [0 1 2 3 4 5 6 7 8 9];
+    Age_counter = zeros(8,1);
     
-    Agemat = zeros(10);
-    
-    for i = 1 : 10
-        Agemat(i,:) = (i-1)*10 + Agevec;
-    end
-    
-    Age_counter = zeros(10,1);
+%     1. 0-5 (otthon lévő gyerek, ovis) (0-2, 3-5 ha ezeket is külön akarnánk nézni, de ez most nem szükséges talán...)
+%     2. 6-14 (általános iskola)
+%     3. 15-18 (középiskola)
+%     4. 19-30 (egyetem + fiatal)
+%     5. 31-62 (aktív főleg dolgozó)
+%     6. 63-70 (idős nyugdíjas főleg)
+%     7. 71-80 (idős2)
+%     8. 81- (idős3)
     
     for i = 1 : N
-        for j = 1 : 10
-            if sum(input(i).age == Agemat(j,:)) ~= 0
-                Age_counter(j) = Age_counter(j) + 1;
-            end
-        end 
+        if sum(input(i).age == 0:5)
+            Age_counter(1) = Age_counter(1) + 1;
+        elseif sum(input(i).age == 6:14)
+            Age_counter(2) = Age_counter(2) + 1;
+        elseif sum(input(i).age == 15:18)
+            Age_counter(3) = Age_counter(3) + 1;
+        elseif sum(input(i).age == 19:30)
+            Age_counter(4) = Age_counter(4) + 1;
+        elseif sum(input(i).age == 31:62)
+            Age_counter(5) = Age_counter(5) + 1;
+        elseif sum(input(i).age == 63:70)
+            Age_counter(6) = Age_counter(6) + 1;
+        elseif sum(input(i).age == 71:80)
+            Age_counter(7) = Age_counter(7) + 1;
+        elseif sum(input(i).age == 81:150)
+            Age_counter(8) = Age_counter(8) + 1;
+        end
     end
     
     count.age = Age_counter;
