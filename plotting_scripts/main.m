@@ -1,8 +1,8 @@
 close all; clear all; clc;
 % Standard input:
-std_ip = {'data/defdata/default_'}; std_flag = 0;
+std_ip = {'data/defdata/default_'}; std_flag = 1;
 % Agentstat input:
-agst_ip = {'data/defdata/outAgent/default_'}; agst_flag = 1;
+agst_ip = {'data/defdata/outAgent/default_'}; agst_flag = 0;
 % Trace input:
 tr_ip = {'data/data0203/dumplist_02_03/dumplist_'}; tr_flag = 0;
 % Legend nevek megadása:
