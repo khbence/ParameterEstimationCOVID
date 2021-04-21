@@ -2,9 +2,7 @@
 
 **For the script to run, it requires internet connection in order to download up-to-date measurement data, which is then used to compare it to our results.**
 
-*For the code to function properly, two files are needed: agents0.json, location0.json. Due to restrictions to size, it cannot be uploaded to the repository, therefore here we provide the links for the two files:*
-  - *agents0.json:* 
-  - *locations0.json:* 
+*For the code to function properly, two files are needed: agents0.json, location0.json. Due to restrictions to size, it cannot be uploaded to the repository, therefore here we provide the link for the two files: http://mad.itk.ppke.hu/covid/20201212_r1/*
 
 To run the scripts, and evaluate the data coming from the simulator, one should use the *fun_plotter_main(std_ip, agst_ip, tr_ip, scen_names, title, measures, startdate, std_flag, agst_flag, tr_flag, rdata_flag, path, colors)* function. An example for its usage can be seen in the *main.m* file. Now let's list its inputs:
 
