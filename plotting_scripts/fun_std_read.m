@@ -1,6 +1,6 @@
 function output = fun_std_read(file)
 
-    data = readmatrix(file);
+    data = fun_std_import(file);
     
     [row, col] = find(isnan(data(:,1)));
 
@@ -31,6 +31,8 @@ function output = fun_std_read(file)
     output.qt = data(:,18);
     output.nq = data(:,19);
     output.mu = data(:,20);
+    output.mu2 = data(:,31);
+    output.mu3 = data(:,32);
     output.ho = data(:,21);
     output.vac = data(:,22);
     output.cvac = cumsum(data(:,22));
@@ -70,6 +72,16 @@ function output = fun_std_read(file)
     output.spec2 = funNaNorInferaser((data(:,18)./(data(:,2)+data(:,3)+data(:,4)+...
                                       data(:,5)+data(:,6)+data(:,7)+data(:,8)))*100);
 
+    output.INF = data(:,24);
+    output.RPI = data(:,24)+data(:,25);
+
+    output.boos = data(:,26);
+
+    output.immu1 = data(:,27);
+    output.immu2 = data(:,28);
+    output.immu3 = data(:,29);
+    output.immu4 = data(:,30);
+
     % CSV data points
     
     output.CSVdm = data(end,11);
@@ -81,5 +93,5 @@ function output = fun_std_read(file)
     segvar = segvar(segvar>200);
     segvar = segvar-200;
     output.CSVki = sum(segvar);
-    
+
 end
