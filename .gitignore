@@ -6,3 +6,4 @@ plotting_scripts/tester_*.m
 plotting_scripts/agents0.json
 plotting_scripts/locations0.json
 plotting_scripts/main_*.m
+plotting_scripts/sample_data/
