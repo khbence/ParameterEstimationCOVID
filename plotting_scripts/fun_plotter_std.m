@@ -172,32 +172,6 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,rdata_f
         subplot(3,3,1)
         hold on
         for i = 1 : length(data_av)
-            funplot(meany(i).s(begintint:end)/nepesseg,standev(i).s(begintint:end)/nepesseg,...
-                    colors(i,:),w,scenarionames{i})
-        end
-        for i = 1 : measdim
-            xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
-        end
-        if detfl == 1
-        plot(deterdata(begintint:end,7)/nepesseg,'Color',[0.6350 0.0780 0.1840],...
-             'LineWidth',1.5,'DisplayName','Deterministic')
-        end
-        hold off
-        grid on
-        grid minor
-        xlim([0 length(data_av(1).s)-1])
-        ylim([(186000/2)/nepesseg 186000/nepesseg])
-        xlabel('Time [Days]')
-        xticks(xlim_def)
-        dateaxis('x',2,StartDate)
-        xtickangle(angle)
-        ylabel(yax_string)
-        title('Susceptible')
-        legend('Location','best')
-
-        subplot(3,3,2)
-        hold on
-        for i = 1 : length(data_av)
             funplot(meany(i).e(begintint:end)/nepesseg,standev(i).e(begintint:end)/nepesseg,...
                     colors(i,:),w,scenarionames{i})
         end
@@ -245,7 +219,7 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,rdata_f
         title('Infectious')
         legend('Location','best')
 
-        subplot(3,3,4)
+        subplot(3,3,2)
         hold on
         for i = 1 : length(data_av)
             funplot(meany(i).ei(begintint:end)/nepesseg,standev(i).ei(begintint:end)/nepesseg,...
@@ -271,18 +245,14 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,rdata_f
         title('Infected')
         legend('Location','best')
 
-        subplot(3,3,5)
+        subplot(3,3,4)
         hold on
         for i = 1 : length(data_av)
-            funplot(meany(i).r(begintint:end)/nepesseg,standev(i).r(begintint:end)/nepesseg,...
+            funplot(meany(i).INF(begintint:end)/nepesseg,standev(i).INF(begintint:end)/nepesseg,...
                     colors(i,:),w,scenarionames{i})
         end
         for i = 1 : measdim
             xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
-        end
-        if detfl == 1
-        plot(deterdata(begintint:end,4)/nepesseg,'Color',[0.6350 0.0780 0.1840],...
-             'LineWidth',1.5,'DisplayName','Deterministic')
         end
         hold off
         grid on
@@ -294,7 +264,29 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,rdata_f
         dateaxis('x',2,StartDate)
         xtickangle(angle)
         ylabel(yax_string)
-        title('Recovered')
+        title('Cumulative infected')
+        legend('Location','best')
+
+        subplot(3,3,5)
+        hold on
+        for i = 1 : length(data_av)
+            funplot(meany(i).RPI(begintint:end)/nepesseg,standev(i).RPI(begintint:end)/nepesseg,...
+                    colors(i,:),w,scenarionames{i})
+        end
+        for i = 1 : measdim
+            xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
+        end
+        hold off
+        grid on
+        grid minor
+        xlim([0 length(data_av(1).s)-1])
+        ylim([0 inf])
+        xlabel('Time [Days]')
+        xticks(xlim_def)
+        dateaxis('x',2,StartDate)
+        xtickangle(angle)
+        ylabel(yax_string)
+        title('Cumulative infections')
         legend('Location','best')
 
         subplot(3,3,6)
@@ -389,7 +381,9 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,rdata_f
         subplot(3,3,9)
         hold on
         for i = 1 : length(data_av)
-            funplot(meany(i).mu(begintint:end),standev(i).mu(begintint:end),colors(i,:),w,scenarionames{i})
+            funplot2(meany(i).mu(begintint:end),standev(i).mu(begintint:end),colors(i,:),w,append(scenarionames{i},' - m1'),'-')
+            funplot2(meany(i).mu2(begintint:end),standev(i).mu2(begintint:end),colors(i,:),w,append(scenarionames{i},' - m2'),'--')
+            funplot2(meany(i).mu3(begintint:end),standev(i).mu3(begintint:end),colors(i,:),w,append(scenarionames{i},' - m3'),'-.')
         end
         for i = 1 : measdim
             xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
@@ -996,7 +990,7 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,rdata_f
         subplot(2,2,[3 4])
         hold on
         for i = 1 : length(data_av)
-            funplot(meany(i).immu(begintint:end)/nepesseg,standev(i).immu(begintint:end)/nepesseg,...
+            funplot(meany(i).boos(begintint:end)/nepesseg,standev(i).boos(begintint:end)/nepesseg,...
                     colors(i,:),w,scenarionames{i})
         end
         for i = 1 : measdim
@@ -1011,7 +1005,7 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,rdata_f
         dateaxis('x',2,StartDate)
         xtickangle(angle)
         ylabel(yax_string)
-        title('Recovered and immunized')
+        title('Booster shots administered')
         legend('Location','best')
         
         sgtitle(append('Immunization progress (',Title,')'))
@@ -1084,67 +1078,65 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,rdata_f
         imwrite(F.cdata,append(Path,'/std_',nop,'/std-9.jpg'),'jpg')
         savefig(append(Path,'/std_',nop,'/z_std-9.fig'))
         end
-    
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Publication figures below this line %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-        FIGH = figure('Name','Publication_figure_1','NumberTitle','off','Position',get(0,'Screensize'));
-        
+        FIGH = figure('Name','Plots10_std','NumberTitle','off','Position',get(0,'Screensize'));
+
         subplot(2,2,1)
         hold on
         for i = 1 : length(data_av)
-            funplot(meany(i).s(begintint:end)/nepesseg,standev(i).s(begintint:end)/nepesseg,...
+            funplot(meany(i).immu1(begintint:end)/nepesseg,standev(i).immu1(begintint:end)/nepesseg,...
                     colors(i,:),w,scenarionames{i})
         end
         for i = 1 : measdim
             xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
         end
-        if detfl == 1
-        plot(deterdata(begintint:end,7)/nepesseg,'Color',[0.6350 0.0780 0.1840],...
-             'LineWidth',1.5,'DisplayName','Deterministic')
-        end
         hold off
         grid on
         grid minor
         xlim([0 length(data_av(1).s)-1])
-        ylim([(186000/2)/nepesseg 186000/nepesseg])
+        if nepesseg == 1
+        ylim([0 179500])
+        else
+        ylim([0 100])
+        end
         xlabel('Time [Days]')
         xticks(xlim_def)
         dateaxis('x',2,StartDate)
         xtickangle(angle)
         ylabel(yax_string)
-        title('Susceptible')
+        title('Wild')
         legend('Location','best')
-        
+
         subplot(2,2,2)
         hold on
         for i = 1 : length(data_av)
-            funplot(meany(i).e(begintint:end)/nepesseg,standev(i).e(begintint:end)/nepesseg,...
+            funplot(meany(i).immu2(begintint:end)/nepesseg,standev(i).immu2(begintint:end)/nepesseg,...
                     colors(i,:),w,scenarionames{i})
         end
         for i = 1 : measdim
             xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
         end
-        if detfl == 1
-        plot(deterdata(begintint:end,8)/nepesseg,'Color',[0.6350 0.0780 0.1840],...
-             'LineWidth',1.5,'DisplayName','Deterministic')
-        end
         hold off
         grid on
         grid minor
         xlim([0 length(data_av(1).s)-1])
-        ylim([0 inf])
+        if nepesseg == 1
+        ylim([0 179500])
+        else
+        ylim([0 100])
+        end
         xlabel('Time [Days]')
         xticks(xlim_def)
         dateaxis('x',2,StartDate)
         xtickangle(angle)
         ylabel(yax_string)
-        title('Exposed')
+        title('Alpha')
         legend('Location','best')
-        
+
         subplot(2,2,3)
         hold on
         for i = 1 : length(data_av)
-            funplot(meany(i).i(begintint:end)/nepesseg,standev(i).i(begintint:end)/nepesseg,...
+            funplot(meany(i).immu3(begintint:end)/nepesseg,standev(i).immu3(begintint:end)/nepesseg,...
                     colors(i,:),w,scenarionames{i})
         end
         for i = 1 : measdim
@@ -1154,108 +1146,23 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,rdata_f
         grid on
         grid minor
         xlim([0 length(data_av(1).s)-1])
-        ylim([0 inf])
+        if nepesseg == 1
+        ylim([0 179500])
+        else
+        ylim([0 100])
+        end
         xlabel('Time [Days]')
         xticks(xlim_def)
         dateaxis('x',2,StartDate)
         xtickangle(angle)
         ylabel(yax_string)
-        title('Infectious')
+        title('Delta')
         legend('Location','best')
-        
+
         subplot(2,2,4)
         hold on
         for i = 1 : length(data_av)
-            funplot(meany(i).r(begintint:end)/nepesseg,standev(i).r(begintint:end)/nepesseg,...
-                    colors(i,:),w,scenarionames{i})
-        end
-        for i = 1 : measdim
-            xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
-        end
-        if detfl == 1
-        plot(deterdata(begintint:end,4)/nepesseg,'Color',[0.6350 0.0780 0.1840],...
-             'LineWidth',1.5,'DisplayName','Deterministic')
-        end
-        hold off
-        grid on
-        grid minor
-        xlim([0 length(data_av(1).s)-1])
-        ylim([0 inf])
-        xlabel('Time [Days]')
-        xticks(xlim_def)
-        dateaxis('x',2,StartDate)
-        xtickangle(angle)
-        ylabel(yax_string)
-        title('Recovered')
-        legend('Location','best')
-        
-        sgtitle(append('SEIR-figures (',Title,')'))
-        
-        F = getframe(FIGH);
-        mkdir(append(Path,'/pub_',nop))
-        if saveimg_flag
-        imwrite(F.cdata,append(Path,'/pub_',nop,'/pub-1.jpg'),'jpg')
-        savefig(append(Path,'/pub_',nop,'/z_pub-1.fig'))
-        end
-        
-        FIGH = figure('Name','Publication_figure_2','NumberTitle','off','Position',get(0,'Screensize'));
-        
-        subplot(2,3,1)
-        hold on
-        for i = 1 : length(data_av)
-            funplot(meany(i).ne(begintint:end)/nepesseg,standev(i).ne(begintint:end)/nepesseg,...
-                    colors(i,:),w,scenarionames{i})
-        end
-        for i = 1 : measdim
-            xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
-        end
-        if detfl == 1
-        plot(deterdata(begintint:end,2)/nepesseg,'Color',[0.6350 0.0780 0.1840],...
-             'LineWidth',1.5,'DisplayName','Deterministic')
-        end
-        hold off
-        grid on
-        grid minor
-        xlim([0 length(data_av(1).s)-1])
-        ylim([0 inf])
-        xlabel('Time [Days]')
-        xticks(xlim_def)
-        dateaxis('x',2,StartDate)
-        xtickangle(angle)
-        ylabel(yax_string)
-        title('New exposed')
-        legend('Location','best')
-        
-        subplot(2,3,2)
-        hold on
-        for i = 1 : length(data_av)
-            funplot(meany(i).didc(begintint:end)/nepesseg,standev(i).didc(begintint:end)/nepesseg,...
-                    colors(i,:),w,scenarionames{i})
-        end
-        for i = 1 : measdim
-            xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
-        end
-        if detfl == 1
-        plot(deterdata(begintint:end,6)/nepesseg,'Color',[0.6350 0.0780 0.1840],...
-             'LineWidth',1.5,'DisplayName','Deterministic')
-        end
-        hold off
-        grid on
-        grid minor
-        xlim([0 length(data_av(1).s)-1])
-        ylim([0 inf])
-        xlabel('Time [Days]')
-        xticks(xlim_def)
-        dateaxis('x',2,StartDate)
-        xtickangle(angle)
-        ylabel(yax_string)
-        title('New deaths')
-        legend('Location','best')
-        
-        subplot(2,3,3)
-        hold on
-        for i = 1 : length(data_av)
-            funplot(meany(i).k(begintint:end)/nepesseg,standev(i).k(begintint:end)/nepesseg,...
+            funplot(meany(i).immu4(begintint:end)/nepesseg,standev(i).immu4(begintint:end)/nepesseg,...
                     colors(i,:),w,scenarionames{i})
         end
         for i = 1 : measdim
@@ -1265,234 +1172,28 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,rdata_f
         grid on
         grid minor
         xlim([0 length(data_av(1).s)-1])
-        ylim([0 inf])
+        if nepesseg == 1
+        ylim([0 179500])
+        else
+        ylim([0 100])
+        end
         xlabel('Time [Days]')
         xticks(xlim_def)
         dateaxis('x',2,StartDate)
         xtickangle(angle)
         ylabel(yax_string)
-        title('Number of infectious people in hospital due to COVID-19')
+        title('Omicron')
         legend('Location','best')
-        
-        subplot(2,3,4)
-        hold on
-        for i = 1 : length(data_av)
-            funplot(meany(i).nat(begintint:end)/nepesseg,standev(i).nat(begintint:end)/nepesseg,...
-                    colors(i,:),w,scenarionames{i})
-        end
-        for i = 1 : measdim
-            xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
-        end
-        hold off
-        grid on
-        grid minor
-        xlim([0 length(data_av(1).s)-1])
-        ylim([0 inf])
-        xlabel('Time [Days]')
-        xticks(xlim_def)
-        dateaxis('x',2,StartDate)
-        xtickangle(angle)
-        ylabel(yax_string)
-        title('Number of new tests')
-        legend('Location','best')
-        
-        subplot(2,3,5)
-        hold on
-        for i = 1 : length(data_av)
-            funplot(meany(i).npt(begintint:end)/nepesseg,standev(i).npt(begintint:end)/nepesseg,...
-                    colors(i,:),w,scenarionames{i})
-        end
-        for i = 1 : measdim
-            xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
-        end
-        hold off
-        grid on
-        grid minor
-        xlim([0 length(data_av(1).s)-1])
-        ylim([0 inf])
-        xlabel('Time [Days]')
-        xticks(xlim_def)
-        dateaxis('x',2,StartDate)
-        xtickangle(angle)
-        ylabel(yax_string)
-        title('Number of new, positive tests')
-        legend('Location','best')
-        
-        subplot(2,3,6)
-        hold on
-        for i = 1 : length(data_av)
-            funplot(meany(i).rpt(begintint:end),standev(i).rpt(begintint:end),colors(i,:),w,scenarionames{i})
-        end
-        for i = 1 : measdim
-            xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
-        end
-        hold off
-        grid on
-        grid minor
-        xlim([0 length(data_av(1).s)-1])
-        ylim([0 inf])
-        xlabel('Time [Days]')
-        xticks(xlim_def)
-        dateaxis('x',2,StartDate)
-        xtickangle(angle)
-        ylabel('Ratio')
-        title('Ratio of new, positive tests')
-        legend('Location','best')
-        
-        sgtitle(append('2^n^d set of figures (',Title,')'))
+
+        sgtitle(append('Immunization for different variants (',Title,')'))
         
         F = getframe(FIGH);
         if saveimg_flag
-        imwrite(F.cdata,append(Path,'/pub_',nop,'/pub-2.jpg'),'jpg')
-        savefig(append(Path,'/pub_',nop,'/z_pub-2.fig'))
+        imwrite(F.cdata,append(Path,'/std_',nop,'/std-10.jpg'),'jpg')
+        savefig(append(Path,'/std_',nop,'/z_std-10.fig'))
         end
-        
-        FIGH = figure('Name','Publication_figure_3','NumberTitle','off','Position',get(0,'Screensize'));
-        
-        subplot(2,3,1)
-        hold on
-        for i = 1 : length(data_av)
-            funplot(meany(i).ktnc(begintint:end)/nepesseg,standev(i).ktnc(begintint:end)/nepesseg,...
-                    colors(i,:),w,scenarionames{i})
-        end
-        for i = 1 : measdim
-            xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
-        end
-        hold off
-        grid on
-        grid minor
-        xlim([0 length(data_av(1).s)-1])
-        ylim([0 inf])
-        xlabel('Time [Days]')
-        xticks(xlim_def)
-        dateaxis('x',2,StartDate)
-        xtickangle(angle)
-        ylabel(yax_string)
-        title('Total number of people in hospital')
-        legend('Location','best')
-        
-        subplot(2,3,2)
-        hold on
-        for i = 1 : length(data_av)
-            funplot(meany(i).kt(begintint:end)/nepesseg,standev(i).kt(begintint:end)/nepesseg,...
-                    colors(i,:),w,scenarionames{i})
-        end
-        for i = 1 : measdim
-            xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
-        end
-        if detfl == 1
-        plot(deterdata(begintint:end,3)/nepesseg,'Color',[0.6350 0.0780 0.1840],...
-             'LineWidth',1.5,'DisplayName','Deterministic')
-        end
-        hold off
-        grid on
-        grid minor
-        xlim([0 length(data_av(1).s)-1])
-        ylim([0 inf])
-        xlabel('Time [Days]')
-        xticks(xlim_def)
-        dateaxis('x',2,StartDate)
-        xtickangle(angle)
-        ylabel(yax_string)
-        title('Number of people in hospital due to COVID-19')
-        legend('Location','best')
-        
-        subplot(2,3,3)
-        hold on
-        for i = 1 : length(data_av)
-            funplot(meany(i).i6(begintint:end)/nepesseg,standev(i).i6(begintint:end)/nepesseg,...
-                    colors(i,:),w,scenarionames{i})
-        end
-        for i = 1 : measdim
-            xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
-        end
-        hold off
-        grid on
-        grid minor
-        xlim([0 length(data_av(1).s)-1])
-        ylim([0 inf])
-        xlabel('Time [Days]')
-        xticks(xlim_def)
-        dateaxis('x',2,StartDate)
-        xtickangle(angle)
-        ylabel(yax_string)
-        title('Number of people in intensive care due to COVID-19')
-        legend('Location','best')
-        
-        subplot(2,3,4)
-        hold on
-        for i = 1 : length(data_av)
-            funplot(meany(i).q(begintint:end)/nepesseg,standev(i).q(begintint:end)/nepesseg,...
-                    colors(i,:),w,scenarionames{i})
-        end
-        for i = 1 : measdim
-            xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
-        end
-        hold off
-        grid on
-        grid minor
-        xlim([0 length(data_av(1).s)-1])
-        ylim([0 inf])
-        xlabel('Time [Days]')
-        xticks(xlim_def)
-        dateaxis('x',2,StartDate)
-        xtickangle(angle)
-        ylabel(yax_string)
-        title('Quarantined')
-        legend('Location','best')
-        
-        subplot(2,3,5)
-        hold on
-        for i = 1 : length(data_av)
-            funplot(meany(i).nq(begintint:end)/nepesseg,standev(i).nq(begintint:end)/nepesseg,...
-                    colors(i,:),w,scenarionames{i})
-        end
-        for i = 1 : measdim
-            xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
-        end
-        hold off
-        grid on
-        grid minor
-        xlim([0 length(data_av(1).s)-1])
-        ylim([0 inf])
-        xlabel('Time [Days]')
-        xticks(xlim_def)
-        dateaxis('x',2,StartDate)
-        xtickangle(angle)
-        ylabel(yax_string)
-        title('NOT Quarantined AND infected')
-        legend('Location','best')
-        
-        subplot(2,3,6)
-        hold on
-        for i = 1 : length(data_av)
-            funplot(meany(i).qt(begintint:end)/nepesseg,standev(i).qt(begintint:end)/nepesseg,...
-                    colors(i,:),w,scenarionames{i})
-        end
-        for i = 1 : measdim
-            xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
-        end
-        hold off
-        grid on
-        grid minor
-        xlim([0 length(data_av(1).s)-1])
-        ylim([0 inf])
-        xlabel('Time [Days]')
-        xticks(xlim_def)
-        dateaxis('x',2,StartDate)
-        xtickangle(angle)
-        ylabel(yax_string)
-        title('Quarantined AND infected')
-        legend('Location','best')
-        
-        sgtitle(append('3^r^d set of figures (',Title,')'))
-        
-        F = getframe(FIGH);
-        if saveimg_flag
-        imwrite(F.cdata,append(Path,'/pub_',nop,'/pub-3.jpg'),'jpg')
-        savefig(append(Path,'/pub_',nop,'/z_pub-3.fig'))
-        end
-        
+
+
         if strcmp(yax_string,'No. of Agents')
             colnames = {'Deceasedsum_av','Deceasedsum_std','Hospitalmax_av','Hospitalmax_std',...
                         'Hospitalsum_av','Hospitalsum_std','Intensivmax_av','Intensivmax_std',...
