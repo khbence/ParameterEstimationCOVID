@@ -111,6 +111,31 @@ function [average, standev] = fun_std_proc(input)
     
     average.mu = av;
     standev.mu = stdev;
+
+    [av, stdev] = fun_std_avdev(input,norm,{'mu2'});
+    
+    average.mu2 = av;
+    standev.mu2 = stdev;
+
+    [av, stdev] = fun_std_avdev(input,norm,{'mu3'});
+    
+    average.mu3 = av;
+    standev.mu3 = stdev;
+
+    [av, stdev] = fun_std_avdev(input,norm,{'boos'});
+    
+    average.boos = av;
+    standev.boos = stdev;
+
+    [av, stdev] = fun_std_avdev(input,norm,{'INF'});
+    
+    average.INF = av;
+    standev.INF = stdev;
+
+    [av, stdev] = fun_std_avdev(input,norm,{'RPI'});
+    
+    average.RPI = av;
+    standev.RPI = stdev;
     
     [av, stdev] = fun_std_avdev(input,norm,{'vac'});
     
@@ -122,10 +147,25 @@ function [average, standev] = fun_std_proc(input)
     average.cvac = av;
     standev.cvac = stdev;
     
-    [av, stdev] = fun_std_avdev(input,norm,{'rh','r','cvac'});
+    [av, stdev] = fun_std_avdev(input,norm,{'immu1'});
     
-    average.immu = av;
-    standev.immu = stdev;
+    average.immu1 = av;
+    standev.immu1 = stdev;
+
+    [av, stdev] = fun_std_avdev(input,norm,{'immu2'});
+    
+    average.immu2 = av;
+    standev.immu2 = stdev;
+
+    [av, stdev] = fun_std_avdev(input,norm,{'immu3'});
+    
+    average.immu3 = av;
+    standev.immu3 = stdev;
+
+    [av, stdev] = fun_std_avdev(input,norm,{'immu4'});
+    
+    average.immu4 = av;
+    standev.immu4 = stdev;
 
     [av, stdev] = fun_std_avdev(input,norm,{'disu'});
     
