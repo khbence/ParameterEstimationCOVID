@@ -33,7 +33,13 @@ function output = fun_std_read(file)
     output.mu = data(:,20);
     output.mu2 = data(:,31);
     output.mu3 = data(:,32);
+    if size(data,2)<21
+        data(:,21) = 0;
+    end
     output.ho = data(:,21);
+    if size(data,2)<22
+        data(:,22) = 0;
+    end
     output.vac = data(:,22);
     output.cvac = cumsum(data(:,22));
     
@@ -57,7 +63,9 @@ function output = fun_std_read(file)
     output.didc = [didc;0];
     dido = diff(data(:,12));
     output.dido = [dido;0];
-    
+    if size(data,2)<23
+        data(:,23) = 0;
+    end
     output.ne = data(:,23);
     
     seged4re = zeros(length(data),1);

@@ -16,8 +16,8 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,rdata_f
         if strcmp(yax_string,'No. of Agents')
             nepesseg = 1;
             nop = 'count';
-        elseif strcmp(yax_string,'Ratio to Total Population (%)')
-            nepesseg = 179500/100;
+        elseif strcmp(yax_string,'Ratio to Total Population (%)') % %'Emberek száma'
+            nepesseg = 179500/100; %0.01837256909;
             nop = 'ratio';
         end
         
@@ -55,7 +55,7 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,rdata_f
         [meany,standev] = fun_std_organize(txtnames);
         data_av = meany;
 
-        if strcmp(yax_string,'Ratio to Total Population (%)') && ctw_flag
+        if strcmp(yax_string,'Ratio to Total Population (%)') && ctw_flag %Emberek száma
             
             avdays = zeros(length(data_av(1).s),length(scenarionames));
             sddays = zeros(length(data_av(1).s),length(scenarionames));
@@ -156,7 +156,7 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,rdata_f
         
         mkdir(Path)
         
-        detfl = rdata_flag;
+        detfl = 0;
         
         if detfl == 1
         deterdata = readmatrix('szeged_data/Szeged_inversion_20200923.xlsx');
@@ -167,6 +167,12 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,rdata_f
         
         
         fprintf('Standard input data processed!\n');
+        
+        %=========================================================================================================
+        %======================================FIG 1  ============================================================
+        %=========================================================================================================
+        %=========================================================================================================
+        
         FIGH = figure('Name','Plots1_std','NumberTitle','off','Position',get(0,'Screensize'));
 
         subplot(3,3,1)
@@ -359,7 +365,7 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,rdata_f
         end
         if rdata_flag
             rdata = str2double(hundata(startdate:end,18));
-            funplot_realdata(rdata,numAgents,hunPopulation,w,nepesseg);
+            funplot_realdata(rdata(begintint:end),numAgents,hunPopulation,w,nepesseg);
         end
         if detfl == 1
         plot(deterdata(begintint:end,6)/nepesseg,'Color',[0.6350 0.0780 0.1840],...
@@ -409,6 +415,93 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,rdata_f
             imwrite(F.cdata,append(Path,'/std_',nop,'/std-1.jpg'),'jpg')
             savefig(append(Path,'/std_',nop,'/z_std-1.fig'))
         end
+        
+        %=========================================================================================================
+        %======================================FIG DEATH==========================================================
+        %=========================================================================================================
+        %=========================================================================================================
+        
+        FIGH = figure('Name','Halálozás','NumberTitle','off','Position',get(0,'Screensize'));
+        subplot(1,2,1)
+        hold on
+        for i = 1 : length(data_av)
+            funplot(meany(i).d(begintint:end)/nepesseg,standev(i).d(begintint:end)/nepesseg,...
+                    colors(i,:),w,scenarionames{i})
+        end
+        for i = 1 : measdim
+            xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
+        end
+        if rdata_flag
+            rdata = str2double(hundata(startdate:end,4))-str2double(hundata(startdate,4));
+            funplot_realdata(rdata(begintint:end),numAgents,hunPopulation,w,nepesseg);
+        end
+        hold off
+        grid on
+        grid minor
+        xlim([0 length(data_av(1).s)-1])
+        ylim([0 inf])
+%         xlabel('Idő [Days]')
+        xticks(xlim_def)
+        dateaxis('x',2,StartDate)
+        xtickangle(angle)
+        ylabel(yax_string)
+        title('Összes halottak száma')
+        legend('Location','best')
+        
+        subplot(1,2,2)
+        hold on
+        for i = 1 : length(data_av)
+            funplot(meany(i).didc(begintint:end)/nepesseg,standev(i).didc(begintint:end)/nepesseg,...
+                    colors(i,:),w,scenarionames{i})
+        end
+        for i = 1 : measdim
+            xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
+        end
+        if rdata_flag
+            rdata = str2double(hundata(startdate:end,18));
+            firstnan = -1;
+            for j = 1:length(rdata)-1
+                if isnan(rdata(j))
+                    if firstnan == -1
+                        firstnan = j;
+                    end
+                    if ~isnan(rdata(j+1))
+                        rdata(firstnan:j+1) = rdata(j+1)/(j-firstnan+2);
+                        firstnan=-1;
+                    end
+                end
+            end
+            funplot_realdata(rdata(begintint:end),numAgents,hunPopulation,w,nepesseg);
+        end
+        hold off
+        grid on
+        grid minor
+        xlim([0 length(data_av(1).s)-1])
+        ylim([0 inf])
+%         xlabel('Time [Days]')
+        xticks(xlim_def)
+        dateaxis('x',2,StartDate)
+        xtickangle(angle)
+        ylabel(yax_string)
+        title('Új halottak száma')
+        legend('Location','best')
+        
+        sgtitle(append('Halálozás (',Title,')'))
+        
+        F = getframe(FIGH);
+        mkdir(append(Path,'/std_',nop))
+        if saveimg_flag
+            imwrite(F.cdata,append(Path,'/std_',nop,'/halottak.jpg'),'jpg')
+%             savefig(append(Path,'/std_',nop,'/z_std-1.fig'))
+        end
+        
+        
+        
+        %=========================================================================================================
+        %======================================FIG 2  ============================================================
+        %=========================================================================================================
+        %=========================================================================================================
+        
 
         FIGH = figure('Name','Plots2_std','NumberTitle','off','Position',get(0,'Screensize'));
 
@@ -477,7 +570,7 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,rdata_f
         end
         if rdata_flag
             rdata = str2double(hundata(startdate:end,3))./str2double(hundata(startdate:end,16));
-            funplot_realdata(rdata(begintint:end),1,1,w,nepesseg);
+            funplot_realdata(rdata(begintint:end),1,1,w,1);
         end
         hold off
         grid on
@@ -502,7 +595,10 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,rdata_f
             xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
         end
         if rdata_flag
-            rdata = cumsum(str2double(hundata(startdate:end,16)));
+            %rdata = cumsum(str2double(hundata(startdate:end,16)));
+            Q = str2double(hundata(startdate:end,16));
+            Q(isnan(Q))=0;
+            rdata = cumsum(Q);
             funplot_realdata(rdata(begintint:end),numAgents,hunPopulation,w,nepesseg);
         end
         
@@ -529,7 +625,9 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,rdata_f
             xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
         end
         if rdata_flag
-            rdata = cumsum(str2double(hundata(startdate:end,3)));
+            Q = str2double(hundata(startdate:end,3));
+            Q(isnan(Q))=0;
+            rdata = cumsum(Q);
             funplot_realdata(rdata(begintint:end),numAgents,hunPopulation,w,nepesseg);
         end
         hold off
@@ -552,6 +650,97 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,rdata_f
         imwrite(F.cdata,append(Path,'/std_',nop,'/std-2.jpg'),'jpg')
         savefig(append(Path,'/std_',nop,'/z_std-2.fig'))
         end
+        
+        %=========================================================================================================
+        %====================================== TESZT  ============================================================
+        %=========================================================================================================
+        %=========================================================================================================
+        
+        FIGH = figure('Name','teszteles','NumberTitle','off','Position',get(0,'Screensize'));
+
+        
+        subplot(1,2,1)
+        hold on
+        for i = 1 : length(data_av)
+            funplot(meany(i).npt(begintint:end)/nepesseg.*0.78,standev(i).npt(begintint:end)/nepesseg,...
+                    colors(i,:),w,scenarionames{i})
+        end
+        for i = 1 : measdim
+            xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
+        end
+        if rdata_flag
+            rdata = str2double(hundata(startdate:end,3));
+            firstnan = -1;
+            for j = 1:length(rdata)-1
+                if isnan(rdata(j))
+                    if firstnan == -1
+                        firstnan = j;
+                    end
+                    if ~isnan(rdata(j+1))
+                        rdata(firstnan:j+1) = rdata(j+1)/(j-firstnan+2);
+                        firstnan=-1;
+                    end
+                end
+            end
+            rdata = movmean(rdata,[7 0]);
+            funplot_realdata(rdata(begintint:end),numAgents,hunPopulation,w,nepesseg);
+        end
+        hold off
+        grid on
+        grid minor
+        xlim([0 length(data_av(1).s)-1])
+        ylim([0 inf])
+%         xlabel('Time [Days]')
+        xticks(xlim_def)
+        dateaxis('x',2,StartDate)
+        xtickangle(angle)
+        ylabel(yax_string)
+        title('Új esetek száma')
+        legend('Location','best')
+        
+        
+        subplot(1,2,2)
+        hold on
+        for i = 1 : length(data_av)
+            funplot(meany(i).spt(begintint:end)/nepesseg.*0.78,standev(i).spt(begintint:end)/nepesseg,...
+                    colors(i,:),w,scenarionames{i})
+        end
+        for i = 1 : measdim
+            xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
+        end
+        if rdata_flag
+            Q = str2double(hundata(startdate:end,3));
+            Q(isnan(Q))=0;
+            rdata = cumsum(Q);
+            funplot_realdata(rdata(begintint:end),numAgents,hunPopulation,w,nepesseg);
+        end
+        hold off
+        grid on
+        grid minor
+        xlim([0 length(data_av(1).s)-1])
+        ylim([0 inf])
+%         xlabel('Time [Days]')
+        xticks(xlim_def)
+        dateaxis('x',2,StartDate)
+        xtickangle(angle)
+        ylabel(append('Kumulatív ',yax_string))
+        title('Kumulatív esetszám')
+        legend('Location','best')
+
+        sgtitle(append('Tesztelés (',Title,')'))
+        
+        F = getframe(FIGH);
+        if saveimg_flag
+        imwrite(F.cdata,append(Path,'/std_',nop,'/teszt.jpg'),'jpg')
+        end
+        
+        
+        %=========================================================================================================
+        %====================================== FIG 3  ============================================================
+        %=========================================================================================================
+        %=========================================================================================================
+        
+     
 
         FIGH = figure('Name','Plots3_std','NumberTitle','off','Position',get(0,'Screensize'));
 
@@ -659,6 +848,68 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,rdata_f
         savefig(append(Path,'/std_',nop,'/z_std-3.fig'))
         end
 
+        
+        %=========================================================================================================
+        %====================================== Kórház  ============================================================
+        %=========================================================================================================
+        %=========================================================================================================
+        
+     
+
+        FIGH = figure('Name','Korhaz','NumberTitle','off','Position',get(0,'Screensize'));
+        
+        subplot(1,1,1)
+        hold on
+        for i = 1 : length(data_av)
+            funplot(meany(i).kt(begintint:end)/nepesseg,standev(i).kt(begintint:end)/nepesseg,...
+                    colors(i,:),w,scenarionames{i})
+        end
+        for i = 1 : measdim
+            xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
+        end
+        if rdata_flag
+            rdata = str2double(hundata(startdate:end,20));
+            firstnan = -1;
+            for j = 1:length(rdata)-1
+                if isnan(rdata(j))
+                    if firstnan == -1
+                        firstnan = j;
+                    end
+                    if ~isnan(rdata(j+1))
+                        rdata(firstnan:j+1) = rdata(j+1);
+                        firstnan=-1;
+                    end
+                end
+            end
+            funplot_realdata(rdata(begintint:end),numAgents,hunPopulation,w,nepesseg);
+        end
+        hold off
+        grid on
+        grid minor
+        xlim([0 length(data_av(1).s)-1])
+        ylim([0 inf])
+%         xlabel('Time [Days]')
+        xticks(xlim_def)
+        dateaxis('x',2,StartDate)
+        xtickangle(angle)
+        ylabel(yax_string)
+        title('Kórházi ápoltak száma')
+        legend('Location','best')
+        
+        sgtitle(append('Kórházi terhelés (',Title,')'))
+        
+        F = getframe(FIGH);
+        if saveimg_flag
+        imwrite(F.cdata,append(Path,'/std_',nop,'/korhaz.jpg'),'jpg')
+        end
+        
+        %=========================================================================================================
+        %====================================== FIG 4  ============================================================
+        %=========================================================================================================
+        %=========================================================================================================
+        
+     
+        
         FIGH = figure('Name','Plots4_std','NumberTitle','off','Position',get(0,'Screensize'));
 
         subplot(2,3,1)
@@ -801,130 +1052,130 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,rdata_f
         savefig(append(Path,'/std_',nop,'/z_std-4.fig'))
         end
         
-        FIGH = figure('Name','Plots5_std','NumberTitle','off','Position',get(0,'Screensize'));
+%         FIGH = figure('Name','Plots5_std','NumberTitle','off','Position',get(0,'Screensize'));
+%         
+%         subplot(1,2,1)
+%         hold on
+%         for i = 1 : length(data_av)
+%             funplot(meany(i).disu(begintint:end)/nepesseg,standev(i).disu(begintint:end)/nepesseg,...
+%                     colors(i,:),w,scenarionames{i})
+%         end
+%         for i = 1 : measdim
+%             xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
+%         end
+%         hold off
+%         grid on
+%         grid minor
+%         xlim([0 length(data_av(1).s)-1])
+%         xlabel('Time [Days]')
+%         xticks(xlim_def)
+%         dateaxis('x',2,StartDate)
+%         xtickangle(angle)
+%         ylabel(yax_string)
+%         title('Susceptible (derivative)')
+%         legend('Location','best')
+%         
+%         subplot(1,2,2)
+%         hold on
+%         for i = 1 : length(data_av)
+%             funplot(meany(i).dirt(begintint:end)/nepesseg,standev(i).dirt(begintint:end)/nepesseg,...
+%                     colors(i,:),w,scenarionames{i})
+%         end
+%         for i = 1 : measdim
+%             xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
+%         end
+%         hold off
+%         grid on
+%         grid minor
+%         xlim([0 length(data_av(1).s)-1])
+%         xlabel('Time [Days]')
+%         xticks(xlim_def)
+%         dateaxis('x',2,StartDate)
+%         xtickangle(angle)
+%         ylabel(yax_string)
+%         title('Recovered (derivative)')
+%         legend('Location','best')
+%         
+%         sgtitle(append('Susceptible and recovered change rate (',Title,')'))
+%         
+%         F = getframe(FIGH);
+%         if saveimg_flag
+%         imwrite(F.cdata,append(Path,'/std_',nop,'/std-5.jpg'),'jpg')
+%         savefig(append(Path,'/std_',nop,'/z_std-5.fig'))
+%         end
         
-        subplot(1,2,1)
-        hold on
-        for i = 1 : length(data_av)
-            funplot(meany(i).disu(begintint:end)/nepesseg,standev(i).disu(begintint:end)/nepesseg,...
-                    colors(i,:),w,scenarionames{i})
-        end
-        for i = 1 : measdim
-            xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
-        end
-        hold off
-        grid on
-        grid minor
-        xlim([0 length(data_av(1).s)-1])
-        xlabel('Time [Days]')
-        xticks(xlim_def)
-        dateaxis('x',2,StartDate)
-        xtickangle(angle)
-        ylabel(yax_string)
-        title('Susceptible (derivative)')
-        legend('Location','best')
-        
-        subplot(1,2,2)
-        hold on
-        for i = 1 : length(data_av)
-            funplot(meany(i).dirt(begintint:end)/nepesseg,standev(i).dirt(begintint:end)/nepesseg,...
-                    colors(i,:),w,scenarionames{i})
-        end
-        for i = 1 : measdim
-            xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
-        end
-        hold off
-        grid on
-        grid minor
-        xlim([0 length(data_av(1).s)-1])
-        xlabel('Time [Days]')
-        xticks(xlim_def)
-        dateaxis('x',2,StartDate)
-        xtickangle(angle)
-        ylabel(yax_string)
-        title('Recovered (derivative)')
-        legend('Location','best')
-        
-        sgtitle(append('Susceptible and recovered change rate (',Title,')'))
-        
-        F = getframe(FIGH);
-        if saveimg_flag
-        imwrite(F.cdata,append(Path,'/std_',nop,'/std-5.jpg'),'jpg')
-        savefig(append(Path,'/std_',nop,'/z_std-5.fig'))
-        end
-        
-        FIGH = figure('Name','Plots6_std','NumberTitle','off','Position',get(0,'Screensize'));
-        
-        subplot(2,2,1)
-        hold on
-        for i = 1 : length(data_av)
-            funplot(meany(i).do(begintint:end)/nepesseg,standev(i).do(begintint:end)/nepesseg,...
-                    colors(i,:),w,scenarionames{i})
-        end
-        for i = 1 : measdim
-            xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
-        end
-        hold off
-        grid on
-        grid minor
-        xlim([0 length(data_av(1).s)-1])
-        xlabel('Time [Days]')
-        xticks(xlim_def)
-        dateaxis('x',2,StartDate)
-        xtickangle(angle)
-        ylabel(yax_string)
-        title('Deaths')
-        legend('Location','best')
-        
-        subplot(2,2,2)
-        hold on
-        for i = 1 : length(data_av)
-            funplot(meany(i).dido(begintint:end)/nepesseg,standev(i).dido(begintint:end)/nepesseg,...
-                    colors(i,:),w,scenarionames{i})
-        end
-        for i = 1 : measdim
-            xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
-        end
-        hold off
-        grid on
-        grid minor
-        xlim([0 length(data_av(1).s)-1])
-        xlabel('Time [Days]')
-        xticks(xlim_def)
-        dateaxis('x',2,StartDate)
-        xtickangle(angle)
-        ylabel(yax_string)
-        title('New deaths')
-        legend('Location','best')
-        
-        subplot(2,2,[3 4])
-        hold on
-        for i = 1 : length(data_av)
-            funplot(meany(i).h(begintint:end)/nepesseg,standev(i).h(begintint:end)/nepesseg,...
-                    colors(i,:),w,scenarionames{i})
-        end
-        for i = 1 : measdim
-            xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
-        end
-        hold off
-        grid on
-        grid minor
-        xlim([0 length(data_av(1).s)-1])
-        xlabel('Time [Days]')
-        xticks(xlim_def)
-        dateaxis('x',2,StartDate)
-        xtickangle(angle)
-        ylabel(yax_string)
-        title('Hospitalization')
-        legend('Location','best')
-        
-        sgtitle(append('Not COVID-related results (',Title,')'))
-        
-        F = getframe(FIGH);
-        if saveimg_flag
-        imwrite(F.cdata,append(Path,'/std_',nop,'/std-6.jpg'),'jpg')
-        savefig(append(Path,'/std_',nop,'/z_std-6.fig'))
-        end
+%         FIGH = figure('Name','Plots6_std','NumberTitle','off','Position',get(0,'Screensize'));
+%         
+%         subplot(2,2,1)
+%         hold on
+%         for i = 1 : length(data_av)
+%             funplot(meany(i).do(begintint:end)/nepesseg,standev(i).do(begintint:end)/nepesseg,...
+%                     colors(i,:),w,scenarionames{i})
+%         end
+%         for i = 1 : measdim
+%             xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
+%         end
+%         hold off
+%         grid on
+%         grid minor
+%         xlim([0 length(data_av(1).s)-1])
+%         xlabel('Time [Days]')
+%         xticks(xlim_def)
+%         dateaxis('x',2,StartDate)
+%         xtickangle(angle)
+%         ylabel(yax_string)
+%         title('Deaths')
+%         legend('Location','best')
+%         
+%         subplot(2,2,2)
+%         hold on
+%         for i = 1 : length(data_av)
+%             funplot(meany(i).dido(begintint:end)/nepesseg,standev(i).dido(begintint:end)/nepesseg,...
+%                     colors(i,:),w,scenarionames{i})
+%         end
+%         for i = 1 : measdim
+%             xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
+%         end
+%         hold off
+%         grid on
+%         grid minor
+%         xlim([0 length(data_av(1).s)-1])
+%         xlabel('Time [Days]')
+%         xticks(xlim_def)
+%         dateaxis('x',2,StartDate)
+%         xtickangle(angle)
+%         ylabel(yax_string)
+%         title('New deaths')
+%         legend('Location','best')
+%         
+%         subplot(2,2,[3 4])
+%         hold on
+%         for i = 1 : length(data_av)
+%             funplot(meany(i).h(begintint:end)/nepesseg,standev(i).h(begintint:end)/nepesseg,...
+%                     colors(i,:),w,scenarionames{i})
+%         end
+%         for i = 1 : measdim
+%             xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
+%         end
+%         hold off
+%         grid on
+%         grid minor
+%         xlim([0 length(data_av(1).s)-1])
+%         xlabel('Time [Days]')
+%         xticks(xlim_def)
+%         dateaxis('x',2,StartDate)
+%         xtickangle(angle)
+%         ylabel(yax_string)
+%         title('Hospitalization')
+%         legend('Location','best')
+%         
+%         sgtitle(append('Not COVID-related results (',Title,')'))
+%         
+%         F = getframe(FIGH);
+%         if saveimg_flag
+%         imwrite(F.cdata,append(Path,'/std_',nop,'/std-6.jpg'),'jpg')
+%         savefig(append(Path,'/std_',nop,'/z_std-6.fig'))
+%         end
         
         FIGH = figure('Name','Plots7_std','NumberTitle','off','Position',get(0,'Screensize'));
         
@@ -973,6 +1224,7 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,rdata_f
             full(isnan(full)) = 0;
             %rdata = (full-start)./hunPopulation*100;
             rdata = full-start;
+            rdata(rdata==0) = nan;
             funplot_realdata(rdata(begintint:end),numAgents,hunPopulation,w,nepesseg);
         end  
         hold off
@@ -1031,11 +1283,17 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,rdata_f
             xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
         end
         yline(1,'HandleVisibility','off');
-        if detfl == 1 && 0
-        plot(deterdata(begintint:end,10),'Color',[0.6350 0.0780 0.1840],...
-             'LineWidth',1.5,'DisplayName','Deterministic')
-        Rtmeasdata = funGetSzegedRt();
-        plot(smoothdata(Rtmeasdata(begintint:end-9),'movmedian',14),'Color',[0.4470 0.7410 0],...
+        if rdata_flag
+        %plot(deterdata(begintint:end,10),'Color',[0.6350 0.0780 0.1840],...
+        %     'LineWidth',1.5,'DisplayName','Deterministic')
+        %Rtmeasdata = funGetSzegedRt();
+            rdata = str2double(hundata(startdate:end,3));
+            data_fin = zeros(length(rdata),1);
+            for i = 11 : length(rdata)-9
+                data_fin(i) = sum((rdata(i:i+9))/(sum(rdata(i-10:i-1))));
+            end
+            data_fin = funNaNorInferaser(data_fin);
+            plot(smoothdata(data_fin(begintint:end-9),'movmedian',14),'Color',[0.4470 0.7410 0],...
              'LineWidth',1.5,'DisplayName','National data')
         end
         hold off
@@ -1057,27 +1315,27 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,rdata_f
         savefig(append(Path,'/std_',nop,'/z_std-8.fig'))
         end
         
-        FIGH = figure('Name','Plots9_std','NumberTitle','off','Position',get(0,'Screensize'));
-
-        hold on
-        for i = 1 : length(data_av)
-            plot(meany(i).spec1,meany(i).spec2,'o','Color',colors(i,:),...
-                 'LineWidth',w,'DisplayName',scenarionames{i},'MarkerFaceColor',[0.5 0.5 0.5]);
-        end
-        hold off
-        grid on
-        grid minor
-        xlabel('% of population tested daily')
-        ylabel('% of infected portion being in quaratine')
-        zlabel('Time [days]')
-        title('% of infected portion being in quaratine as a function of the % of population tested daily')
-        legend('Location','best')
-        
-        F = getframe(FIGH);
-        if saveimg_flag
-        imwrite(F.cdata,append(Path,'/std_',nop,'/std-9.jpg'),'jpg')
-        savefig(append(Path,'/std_',nop,'/z_std-9.fig'))
-        end
+%         FIGH = figure('Name','Plots9_std','NumberTitle','off','Position',get(0,'Screensize'));
+% 
+%         hold on
+%         for i = 1 : length(data_av)
+%             plot(meany(i).spec1,meany(i).spec2,'o','Color',colors(i,:),...
+%                  'LineWidth',w,'DisplayName',scenarionames{i},'MarkerFaceColor',[0.5 0.5 0.5]);
+%         end
+%         hold off
+%         grid on
+%         grid minor
+%         xlabel('% of population tested daily')
+%         ylabel('% of infected portion being in quaratine')
+%         zlabel('Time [days]')
+%         title('% of infected portion being in quaratine as a function of the % of population tested daily')
+%         legend('Location','best')
+%         
+%         F = getframe(FIGH);
+%         if saveimg_flag
+%         imwrite(F.cdata,append(Path,'/std_',nop,'/std-9.jpg'),'jpg')
+%         savefig(append(Path,'/std_',nop,'/z_std-9.fig'))
+%         end
 
         FIGH = figure('Name','Plots10_std','NumberTitle','off','Position',get(0,'Screensize'));
 
@@ -1201,6 +1459,6 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,rdata_f
             matrix4csv = array2table(matrix4csv,'VariableNames',colnames);
             matrix4csv = addvars(matrix4csv,scenarionames,'Before','Deceasedsum_av');
             writetable(matrix4csv,append(Path,'/',Title,'.csv'),'Delimiter','|')
-        end
+         end
     
 end

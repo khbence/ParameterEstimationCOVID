@@ -11,21 +11,49 @@ function output = fun_std_import(file)
 
     temp = zeros(dims(1),32);
 
-    for i = 1 : N
-        for j = 1 : M
-            if j ~= 20 && j ~= 27
-                temp(i,j) = output{i,j};
-            elseif j == 20
-                seg = str2double(split(output{i,20}{1},','));
-                temp(i,j) = seg(1);
-                temp(i,31) = seg(2);
-                temp(i,32) = seg(3);
+   
+    for j = 1 : M
+        if j ~= 20 && j ~= 27
+                temp(:,j) = output{:,j};
+        else
+            if j == 20
+                if iscell(output{1,20})
+                    for i = 1 : N
+                        seg = str2double(split(output{i,20}{1},','));
+                        temp(i,j) = seg(1);
+                        if length(seg)>1
+                            temp(i,31) = seg(2);
+                        end
+                        if length(seg)>2
+                            temp(i,32) = seg(3);
+                        end
+                    end
+                else
+                    temp(:,j) = output{:,j};
+                    temp(:,31) = 0;
+                    temp(:,32) = 0;
+                end
             elseif j == 27
-                seg = str2double(split(output{i,27}{1},','));
-                temp(i,j) = seg(1);
-                temp(i,28) = seg(2);
-                temp(i,29) = seg(3);
-                temp(i,30) = seg(4);
+                if iscell(output{1,27})
+                    for i = 1 : N
+                        seg = str2double(split(output{i,27}{1},','));
+                        temp(i,j) = seg(1);
+                        if length(seg)>1
+                            temp(i,28) = seg(2);
+                        end
+                        if length(seg)>2
+                            temp(i,29) = seg(3);
+                        end
+                        if length(seg)>3
+                            temp(i,30) = seg(4);
+                        end
+                    end
+                else
+                    temp(:,j) = output{:,j};
+                    temp(:,28) = 0;
+                    temp(:,29) = 0;
+                    temp(:,30) = 0;
+                end
             end
         end
     end

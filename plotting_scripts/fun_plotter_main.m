@@ -17,10 +17,10 @@ function output = fun_plotter_main(std_ip,agst_ip,tr_ip,scen_names,Title,Measure
     end
     
     if std_flag == 1
+        %fun_plotter_std(std_ip,scen_names,Title,Measures,StartDate,rdata_flag,Path,...
+        %                'No. of Agents',colors,begintint,agst_ip,ctw_flag)
         fun_plotter_std(std_ip,scen_names,Title,Measures,StartDate,rdata_flag,Path,...
-                        'No. of Agents',colors,begintint,agst_ip,ctw_flag)
-        fun_plotter_std(std_ip,scen_names,Title,Measures,StartDate,rdata_flag,Path,...
-                        'Ratio to Total Population (%)',colors,begintint,agst_ip,ctw_flag)
+                        'Ratio to Total Population (%)',colors,begintint,agst_ip,ctw_flag) %Emberek száma
         fprintf("Standard input successfully processed!\n")
     elseif std_flag == 0
         fprintf("Standard input processing was not requested!\n")

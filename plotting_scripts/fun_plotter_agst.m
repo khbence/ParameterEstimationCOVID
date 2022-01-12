@@ -50,6 +50,9 @@ function fun_plotter_agst(jsonnames,scenarionames,Title,agents,clog,spectitle,..
         xlabel('Age intervals [years]');
         ylabel('Number of agents');
         title('Age group distribution');
+        'Age group distribution'
+        reshape(avmat',1,numel(avmat))
+        reshape(sdmat',1,numel(sdmat))
 
         subplot(2,2,2)
         
@@ -72,6 +75,9 @@ function fun_plotter_agst(jsonnames,scenarionames,Title,agents,clog,spectitle,..
         xlabel('COVID-related chronic illnesses')
         ylabel('Number of agents')
         title('Precondition distribution')
+        'Precondition distribution'
+        reshape(avmat',1,numel(avmat))
+        reshape(sdmat',1,numel(sdmat))
 
         subplot(2,2,3)
         
@@ -94,6 +100,9 @@ function fun_plotter_agst(jsonnames,scenarionames,Title,agents,clog,spectitle,..
         xlabel('Age intervals [years]');
         ylabel('Number of agents (normed)');
         title('Ratio of infected agents in age groups');
+        'Ratio of infected agents in age groups'
+        reshape(avmat',1,numel(avmat))
+        reshape(sdmat',1,numel(sdmat))
 
         subplot(2,2,4)
 
@@ -262,7 +271,7 @@ function fun_plotter_agst(jsonnames,scenarionames,Title,agents,clog,spectitle,..
         h = bar(avmat');
         xticks(1:size(avmat,2));
         xticklabels({'Infant','Kindergarten student','Elementary school student','High school student',...
-                     'University student','Full-time (standard, fixed)','Afternoon shift worker',
+                     'University student','Full-time (standard, fixed)','Afternoon shift worker',...
                      'Stay-at-home schedule','Tourist'});
         set(h, {'DisplayName'}, scenarionames);
         hold on
@@ -304,6 +313,9 @@ function fun_plotter_agst(jsonnames,scenarionames,Title,agents,clog,spectitle,..
         ylabel('Number of infections')
         set(gca,'YScale','log')
         title('Infection locations')
+        'Infection locations'
+        reshape(avmat',1,numel(avmat))
+        reshape(sdmat',1,numel(sdmat))
 
         sgtitle(append(Title,' (Statistics-3 of the infected population) ',spectitle,' -- ',...
                        num2str(interval(1)),'-',num2str(interval(2)),' interval'))
