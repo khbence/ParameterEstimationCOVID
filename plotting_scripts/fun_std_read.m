@@ -33,6 +33,7 @@ function output = fun_std_read(file)
     output.mu = data(:,20);
     output.mu2 = data(:,31);
     output.mu3 = data(:,32);
+    output.mu4 = data(:,33);
     if size(data,2)<21
         data(:,21) = 0;
     end

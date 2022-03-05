@@ -121,6 +121,11 @@ function [average, standev] = fun_std_proc(input)
     
     average.mu3 = av;
     standev.mu3 = stdev;
+    
+    [av, stdev] = fun_std_avdev(input,norm,{'mu4'});
+    
+    average.mu4 = av;
+    standev.mu4 = stdev;
 
     [av, stdev] = fun_std_avdev(input,norm,{'boos'});
     

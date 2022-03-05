@@ -27,11 +27,15 @@ function output = fun_std_import(file)
                         if length(seg)>2
                             temp(i,32) = seg(3);
                         end
+                        if length(seg)>3
+                            temp(i,33) = seg(3);
+                        end
                     end
                 else
                     temp(:,j) = output{:,j};
                     temp(:,31) = 0;
                     temp(:,32) = 0;
+                    temp(:,33) = 0;
                 end
             elseif j == 27
                 if iscell(output{1,27})
