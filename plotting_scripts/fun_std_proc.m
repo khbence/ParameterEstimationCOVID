@@ -212,6 +212,16 @@ function [average, standev] = fun_std_proc(input)
     average.qiq = av;
     standev.qiq = stdev;
     
+    [av, stdev] = fun_std_avdev(input,norm,{'hci'});
+    
+    average.hci = av;
+    standev.hci = stdev;
+    
+    [av, stdev] = fun_std_avdev(input,norm,{'hce'});
+    
+    average.hce = av;
+    standev.hce = stdev;
+    
     [av, stdev] = fun_std_avdev(input,norm,{'spec1'});
     
     average.spec1 = mean(av(11:end));

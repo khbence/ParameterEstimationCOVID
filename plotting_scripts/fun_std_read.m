@@ -31,9 +31,9 @@ function output = fun_std_read(file)
     output.qt = data(:,18);
     output.nq = data(:,19);
     output.mu = data(:,20);
-    output.mu2 = data(:,31);
-    output.mu3 = data(:,32);
-    output.mu4 = data(:,33);
+    output.mu2 = data(:,33);
+    output.mu3 = data(:,34);
+    output.mu4 = data(:,35);
     if size(data,2)<21
         data(:,21) = 0;
     end
@@ -87,9 +87,12 @@ function output = fun_std_read(file)
     output.boos = data(:,26);
 
     output.immu1 = data(:,27);
-    output.immu2 = data(:,28);
-    output.immu3 = data(:,29);
-    output.immu4 = data(:,30);
+    output.immu2 = data(:,30);
+    output.immu3 = data(:,31);
+    output.immu4 = data(:,32);
+    
+    output.hci = data(:,28);
+    output.hce = data(:,29);
 
     % CSV data points
     

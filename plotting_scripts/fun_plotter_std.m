@@ -390,6 +390,7 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,rdata_f
             funplot2(meany(i).mu(begintint:end),standev(i).mu(begintint:end),colors(i,:),w,append(scenarionames{i},' - m1'),'-')
             funplot2(meany(i).mu2(begintint:end),standev(i).mu2(begintint:end),colors(i,:),w,append(scenarionames{i},' - m2'),'--')
             funplot2(meany(i).mu3(begintint:end),standev(i).mu3(begintint:end),colors(i,:),w,append(scenarionames{i},' - m3'),'-.')
+            funplot2(meany(i).mu4(begintint:end),standev(i).mu4(begintint:end),colors(i,:),w,append(scenarionames{i},' - m4'),':')
         end
         for i = 1 : measdim
             xline(Measures{i,2},'--',Measures{i,1},'HandleVisibility','off');
@@ -451,7 +452,9 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,rdata_f
         subplot(1,2,2)
         hold on
         for i = 1 : length(data_av)
-            funplot(meany(i).didc(begintint:end)/nepesseg,standev(i).didc(begintint:end)/nepesseg,...
+            thisdata = movmean(meany(i).didc(begintint:end),[7 0]);
+            thisdatadev = movmean(standev(i).didc(begintint:end),[7 0]);
+            funplot(thisdata/nepesseg,thisdatadev/nepesseg,...
                     colors(i,:),w,scenarionames{i})
         end
         for i = 1 : measdim
@@ -471,6 +474,7 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,rdata_f
                     end
                 end
             end
+            rdata = movmean(rdata,[7 0]);
             funplot_realdata(rdata(begintint:end),numAgents,hunPopulation,w,nepesseg);
         end
         hold off
@@ -487,7 +491,24 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,rdata_f
         legend('Location','best')
         
         sgtitle(append('Halálozás (',Title,')'))
-        
+        if rdata_flag
+            data4emmi = zeros(length(meany(1).d(begintint:end)),13);
+            rdatacum = str2double(hundata(startdate:end,4))-str2double(hundata(startdate,4));
+            numdays = length(rdatacum(begintint:end));
+            %cumulative dead
+            data4emmi(1:numdays,1) = rdatacum(begintint:end);
+            data4emmi(:,2) = meany(1).d(begintint:end)*(9750000/(100*nepesseg));
+            data4emmi(:,3) = standev(1).d(begintint:end)*(9750000/(100*nepesseg));
+
+            %new dead
+            data4emmi(1:numdays,4) = rdata(begintint:end);
+            data4emmi(:,5) = meany(1).didc(begintint:end)*(9750000/(100*nepesseg));
+            data4emmi(:,6) = standev(1).didc(begintint:end)*(9750000/(100*nepesseg));
+
+            %new exposed
+            data4emmi(:,7) = meany(1).ne(begintint:end)*(9750000/(100*nepesseg));
+            data4emmi(:,8) = standev(1).ne(begintint:end)*(9750000/(100*nepesseg));
+        end
         F = getframe(FIGH);
         mkdir(append(Path,'/std_',nop))
         if saveimg_flag
@@ -698,6 +719,13 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,rdata_f
         title('Új esetek száma')
         legend('Location','best')
         
+        if rdata_flag
+            %new diagnosed
+            data4emmi(1:numdays,9) = rdata(begintint:end);
+            data4emmi(:,10) = meany(1).npt(begintint:end)*(9750000/(100*nepesseg));
+            data4emmi(:,11) = standev(1).npt(begintint:end)*(9750000/(100*nepesseg));
+        end
+        
         
         subplot(1,2,2)
         hold on
@@ -897,6 +925,23 @@ function fun_plotter_std(txtnames,scenarionames,Title,Measures,StartDate,rdata_f
         legend('Location','best')
         
         sgtitle(append('Kórházi terhelés (',Title,')'))
+        
+        if rdata_flag
+            %new diagnosed
+            data4emmi(1:numdays,12) = rdata(begintint:end);
+            data4emmi(:,13) = meany(1).kt(begintint:end)*(9750000/(100*nepesseg));
+            data4emmi(:,14) = standev(1).kt(begintint:end)*(9750000/(100*nepesseg));
+            
+            data4emmi(:,15) = meany(1).hci(begintint:end);
+            data4emmi(:,16) = standev(1).hci(begintint:end);
+            
+            data4emmi(:,17) = meany(1).hce(begintint:end)*(9750000/(100*nepesseg));
+            data4emmi(:,18) = standev(1).hce(begintint:end)*(9750000/(100*nepesseg));
+            
+            colnames = {'Kumulatív halottak valós adat', 'Kumulatív halottak szimuláció', 'Kumulatív halottak szimuláció szórás', 'Új halottak valós adat', 'Új halottak szimuláció', 'Új halottak szimuláció szórás', 'Becsült fertőzések szimuláció', 'Becsült fertőzések szimuláció szórás', 'Új esetek száma valós adat', 'Új esetek száma szimuláció', 'Új esetek száma szimuláció szórás', 'Kórházi ápoltak száma valós adat', 'Kórházi ápoltak száma szimuláció', 'Kórházi ápoltak száma szimuláció szórás', 'Egészségügyi dolgozók átfertőzöttsége szimuláció', 'Egészségügyi dolgozók átfertőzöttsége szimuláció szórás', 'Egészségügyi dolgozók új fertőzöttek szimuláció', 'Egészségügyi dolgozók új fertőzöttek szimuláció szórás'};
+            matrix4csv = array2table(data4emmi,'VariableNames',colnames);
+            writetable(matrix4csv,append(Path,'/data_emmi.xlsx'))
+        end
         
         F = getframe(FIGH);
         if saveimg_flag

@@ -22,20 +22,20 @@ function output = fun_std_import(file)
                         seg = str2double(split(output{i,20}{1},','));
                         temp(i,j) = seg(1);
                         if length(seg)>1
-                            temp(i,31) = seg(2);
+                            temp(i,33) = seg(2);
                         end
                         if length(seg)>2
-                            temp(i,32) = seg(3);
+                            temp(i,34) = seg(3);
                         end
                         if length(seg)>3
-                            temp(i,33) = seg(3);
+                            temp(i,35) = seg(4);
                         end
                     end
                 else
                     temp(:,j) = output{:,j};
-                    temp(:,31) = 0;
-                    temp(:,32) = 0;
                     temp(:,33) = 0;
+                    temp(:,34) = 0;
+                    temp(:,35) = 0;
                 end
             elseif j == 27
                 if iscell(output{1,27})
@@ -43,20 +43,20 @@ function output = fun_std_import(file)
                         seg = str2double(split(output{i,27}{1},','));
                         temp(i,j) = seg(1);
                         if length(seg)>1
-                            temp(i,28) = seg(2);
+                            temp(i,30) = seg(2);
                         end
                         if length(seg)>2
-                            temp(i,29) = seg(3);
+                            temp(i,31) = seg(3);
                         end
                         if length(seg)>3
-                            temp(i,30) = seg(4);
+                            temp(i,32) = seg(4);
                         end
                     end
                 else
                     temp(:,j) = output{:,j};
-                    temp(:,28) = 0;
-                    temp(:,29) = 0;
                     temp(:,30) = 0;
+                    temp(:,31) = 0;
+                    temp(:,32) = 0;
                 end
             end
         end
